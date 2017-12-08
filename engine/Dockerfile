@@ -1,4 +1,3 @@
-# Use an official Python runtime as a parent image
 FROM ubuntu:17.04
 
 RUN apt-get update && apt-get install -y \
@@ -20,11 +19,21 @@ WORKDIR luarocks-2.4.3
 RUN ./configure && make build && make install
 RUN luarocks install lsqlite3
 
-CMD ["lua",  "-e", "l = require \"lsqlite3\"; print(l)"]
-
 WORKDIR /usr/local/src
 RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar xzf install-tl-unx.tar.gz \
     && mv install-tl-20* install-tl
 WORKDIR install-tl
-COPY texlive.profile .
-RUN ./install-tl -profile /usr/local/src/tl-install/texlive.profile
+COPY texlive.profile /usr/local/src/tl-install/texlive.profile
+RUN ./install-tl -profile=/usr/local/src/tl-install/texlive.profile
+ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
+RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install koma-script csquotes \
+  etoolbox minibox l3kernel booktabs enumitem pgf xcolor adjustbox xkeyval \
+  collectbox relsize xifthen ifmtarg biblatex biber\
+  logreq xstring fontspec gnu-freefont tocloft latexmk \
+  glossaries mfirstuc textcase xfor  datatool substr fp \
+  babel  babel-german babel-english ulem \
+  luapackageloader luacode luatexbase ctablestack gnu-freefont \
+  ec lm luaotfload latexmk tracklang
+
+WORKDIR /data
+VOLUME ["/data"]
