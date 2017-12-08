@@ -7,7 +7,6 @@ TEXMFSYSCONFIG /usr/local/texlive/2017/texmf-config
 TEXMFSYSVAR /usr/local/texlive/2017/texmf-var
 TEXMFVAR ~/.texlive2017/texmf-var
 binary_i386-linux 1
-binary_x86_64-darwin 1
 binary_x86_64-linux 1
 instopt_adjustpath 0
 instopt_adjustrepo 1
