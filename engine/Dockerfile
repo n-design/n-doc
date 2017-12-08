@@ -36,4 +36,4 @@ RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install koma-script csquotes \
   ec lm luaotfload latexmk tracklang
 
 WORKDIR /data
-VOLUME ["/data"]
+VOLUME /deliverables
