@@ -35,5 +35,10 @@ RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install koma-script csquotes \
   luapackageloader luacode luatexbase ctablestack gnu-freefont \
   ec lm luaotfload latexmk tracklang
 
+WORKDIR /usr/local/texlive/texmf-local/tex/latex/local
+RUN wget http://perso.ensta-paristech.fr/~kielbasi/tikzuml/var/files/src/tikzuml-v1.0-2016-03-29.tbz \
+    && tar xjf tikzuml-v1.0-2016-03-29.tbz \
+    && texhash
+
 WORKDIR /data
 VOLUME /deliverables
