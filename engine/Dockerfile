@@ -43,15 +43,7 @@ RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install koma-script csquotes \
   glossaries mfirstuc textcase xfor  datatool substr fp \
   babel  babel-german babel-english ulem \
   luapackageloader luacode luatexbase ctablestack gnu-freefont \
-  ec lm luaotfload latexmk tracklang
-
-# Installiere zusätzliche LaTeX-Pakete, die nicht
-# in TeXLive enthalten oder über CTAN verfügbar sind.
-
-WORKDIR /usr/local/texlive/texmf-local/tex/latex/local
-RUN wget http://perso.ensta-paristech.fr/~kielbasi/tikzuml/var/files/src/tikzuml-v1.0-2016-03-29.tbz \
-    && tar xjf tikzuml-v1.0-2016-03-29.tbz \
-    && texhash
+  ec lm luaotfload latexmk tracklang pgf-umlsd
 
 WORKDIR /data
 VOLUME /deliverables
