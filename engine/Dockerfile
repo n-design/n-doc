@@ -1,3 +1,6 @@
+# Dockerfile zum Erstellen der n-doc Umgebung,
+# bestehend aus TeXLive, sqlite und lua
+
 FROM ubuntu:17.04
 
 RUN apt-get update && apt-get install -y \
@@ -12,12 +15,19 @@ RUN apt-get update && apt-get install -y \
     libsqlite3-dev \
 && rm -rf /var/lib/apt/lists/*
 
+
+# Installiere den Lua Package-Manager aus den Quellen.
+
 WORKDIR /usr/local/src
 RUN wget http://luarocks.github.io/luarocks/releases/luarocks-2.4.3.tar.gz \
     && tar xzf luarocks-2.4.3.tar.gz
 WORKDIR luarocks-2.4.3
 RUN ./configure && make build && make install
 RUN luarocks install lsqlite3
+
+
+# Installiere eine minimale Variante von TeXLive von CTAN
+# und ergänze sie durch die Pakete, die für n-doc notwendig sind.
 
 WORKDIR /usr/local/src
 RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar xzf install-tl-unx.tar.gz \
@@ -34,6 +44,9 @@ RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install koma-script csquotes \
   babel  babel-german babel-english ulem \
   luapackageloader luacode luatexbase ctablestack gnu-freefont \
   ec lm luaotfload latexmk tracklang
+
+# Installiere zusätzliche LaTeX-Pakete, die nicht
+# in TeXLive enthalten oder über CTAN verfügbar sind.
 
 WORKDIR /usr/local/texlive/texmf-local/tex/latex/local
 RUN wget http://perso.ensta-paristech.fr/~kielbasi/tikzuml/var/files/src/tikzuml-v1.0-2016-03-29.tbz \
