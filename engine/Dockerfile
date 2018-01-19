@@ -23,8 +23,8 @@ RUN wget http://luarocks.github.io/luarocks/releases/luarocks-2.4.3.tar.gz \
     && tar xzf luarocks-2.4.3.tar.gz
 WORKDIR luarocks-2.4.3
 RUN ./configure && make build && make install
-RUN luarocks install lsqlite3
-
+RUN luarocks install lsqlite3 
+RUN luarocks install luaunit
 
 # Installiere eine minimale Variante von TeXLive von CTAN
 # und ergänze sie durch die Pakete, die für n-doc notwendig sind.
