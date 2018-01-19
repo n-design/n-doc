@@ -36,14 +36,50 @@ WORKDIR install-tl
 COPY texlive.profile /usr/local/src/tl-install/texlive.profile
 RUN ./install-tl -profile=/usr/local/src/tl-install/texlive.profile
 ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
-RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install koma-script csquotes \
-  etoolbox minibox l3kernel booktabs enumitem pgf xcolor adjustbox xkeyval \
-  collectbox relsize xifthen ifmtarg biblatex biber\
-  logreq xstring fontspec gnu-freefont tocloft latexmk \
-  glossaries mfirstuc textcase xfor  datatool substr fp \
-  babel  babel-german babel-english ulem \
-  luapackageloader luacode luatexbase ctablestack gnu-freefont \
-  ec lm luaotfload latexmk tracklang pgf-umlsd
+RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install \
+  adjustbox \
+  babel-german \
+  biber\
+  biblatex \
+  booktabs \
+  collectbox \
+  csquotes \
+  ctablestack \
+  datatool \
+  ec \
+  enumitem \
+  etoolbox \
+  fontspec \
+  fp \
+  glossaries \
+  gnu-freefont \
+  gnu-freefont \
+  ifmtarg \
+  koma-script \
+  l3kernel \
+  latexmk \
+  latexmk \
+  lm \
+  logreq \
+  luacode \
+  luaotfload \
+  luapackageloader \
+  luatexbase \
+  mfirstuc \
+  minibox \
+  pgf \
+  pgf-umlsd \
+  relsize \
+  substr \
+  textcase \
+  tocloft \
+  tracklang \
+  ulem \
+  xcolor \
+  xfor \
+  xifthen \
+  xkeyval \
+  xstring
 
 WORKDIR /data
 VOLUME /deliverables
