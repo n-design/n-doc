@@ -70,6 +70,7 @@ RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install \
   minibox \
   pgf \
   pgf-umlsd \
+  placeins \
   relsize \
   substr \
   textcase \
