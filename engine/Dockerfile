@@ -85,5 +85,7 @@ RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install \
   xkeyval \
   xstring
 
+RUN /usr/local/texlive/2017/bin/x86_64-linux/luaotfload-tool --update -vv
+
 WORKDIR /data
 VOLUME /deliverables
