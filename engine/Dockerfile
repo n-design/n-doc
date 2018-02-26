@@ -56,7 +56,6 @@ RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install \
   fp \
   glossaries \
   gnu-freefont \
-  gnu-freefont \
   ifmtarg \
   koma-script \
   l3kernel \
