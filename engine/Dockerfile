@@ -36,6 +36,7 @@ WORKDIR install-tl
 COPY texlive.profile /usr/local/src/tl-install/texlive.profile
 RUN ./install-tl -profile=/usr/local/src/tl-install/texlive.profile
 ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
+RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr update --self
 RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install \
   adjustbox \
   babel-german \
@@ -69,6 +70,7 @@ RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install \
   luatexbase \
   mfirstuc \
   minibox \
+  nimbus15 \
   pgf \
   pgf-umlsd \
   placeins \
