@@ -39,50 +39,28 @@ ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
 RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr update --self
 RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install \
   adjustbox \
-  babel-german \
   biber\
   biblatex \
-  booktabs \
   caption \
   collectbox \
   csquotes \
-  ctablestack \
   datatool \
-  dirtree \
-  ec \
   enumitem \
-  etoolbox \
-  fontspec \
-  fp \
   glossaries \
   gnu-freefont \
   ifmtarg \
-  koma-script \
-  l3kernel \
-  latexmk \
-  latexmk \
   lm \
   logreq \
-  luacode \
-  luaotfload \
-  luapackageloader \
-  luatexbase \
   mfirstuc \
   minibox \
   nimbus15 \
-  pgf \
   pgf-umlsd \
   placeins \
   relsize \
   substr \
-  textcase \
   tocloft \
-  tracklang \
-  ulem \
-  xcolor \
   xfor \
   xifthen \
-  xkeyval \
   xstring
 
 RUN /usr/local/texlive/2017/bin/x86_64-linux/luaotfload-tool --update -vv
