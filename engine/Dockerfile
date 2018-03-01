@@ -55,6 +55,7 @@ RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install \
   pgf-umlsd \
   placeins \
   relsize \
+  roboto \
   substr \
   tocloft \
   xfor \
