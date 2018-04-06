@@ -58,6 +58,7 @@ RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install \
   placeins \
   relsize \
   roboto \
+  splitindex \
   substr \
   tocloft \
   xfor \
