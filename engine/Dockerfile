@@ -1,20 +1,39 @@
 # Dockerfile zum Erstellen der n-doc Umgebung,
 # bestehend aus TeXLive, sqlite und lua
 
+# Die Reihenfolge der Blöcke basiert auf der
+# Veränderungshäufigkeit der jeweils installierten
+# Pakete:
+# Ubuntu-Basis -> TeXLive -> Verschiedene Dev-Tools ->
+# plantuml -> zusätzliche TeXLive Pakete
+
 FROM ubuntu:17.10
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y wget perl
+
+# Installiere eine reduzierte Variante von TeXLive von CTAN
+# und ergänze sie durch die Pakete, die für n-doc notwendig sind.
+
+WORKDIR /usr/local/src
+RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar xzf install-tl-unx.tar.gz \
+    && mv install-tl-20* install-tl
+WORKDIR install-tl
+COPY texlive.profile /usr/local/src/tl-install/texlive.profile
+RUN ./install-tl -profile=/usr/local/src/tl-install/texlive.profile
+ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
+
+RUN apt-get install -y \
     git \
     curl \
-    wget \
     unzip \
     lua5.2 \
     liblua5.2-dev \
     sqlite3 \
     libsqlite3-0 \
     libsqlite3-dev \
+    openjdk-8-jre \
+    graphviz \
 && rm -rf /var/lib/apt/lists/*
-
 
 # Installiere den Lua Package-Manager aus den Quellen.
 
@@ -31,18 +50,9 @@ RUN luarocks install luaunit
 COPY plantuml.tar.gz /usr/local/src
 RUN tar x -z -C / -f /usr/local/src/plantuml.tar.gz
 
-# Installiere eine minimale Variante von TeXLive von CTAN
-# und ergänze sie durch die Pakete, die für n-doc notwendig sind.
-
-WORKDIR /usr/local/src
-RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar xzf install-tl-unx.tar.gz \
-    && mv install-tl-20* install-tl
-WORKDIR install-tl
-COPY texlive.profile /usr/local/src/tl-install/texlive.profile
-RUN ./install-tl -profile=/usr/local/src/tl-install/texlive.profile
-ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
-RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr update --self
-RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr install \
+# Installiere zusätzliche TeXLive Pakete
+RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr update --self && \
+/usr/local/texlive/2017/bin/i386-linux/tlmgr install \
   adjustbox \
   biber\
   biblatex \
