@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install -y \
     sqlite3 \
     libsqlite3-0 \
     libsqlite3-dev \
-    plantuml \
 && rm -rf /var/lib/apt/lists/*
 
 
@@ -26,6 +25,11 @@ WORKDIR luarocks-2.4.3
 RUN ./configure && make build && make install
 RUN luarocks install lsqlite3 
 RUN luarocks install luaunit
+
+
+# Installiere plantuml
+COPY plantuml.tar.gz /usr/local/src
+RUN tar x -z -C / -f /usr/local/src/plantuml.tar.gz
 
 # Installiere eine minimale Variante von TeXLive von CTAN
 # und ergänze sie durch die Pakete, die für n-doc notwendig sind.
