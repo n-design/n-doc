@@ -20,7 +20,7 @@ RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && t
 WORKDIR install-tl
 COPY texlive.profile /usr/local/src/tl-install/texlive.profile
 RUN ./install-tl -profile=/usr/local/src/tl-install/texlive.profile
-ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
+ENV PATH /usr/local/texlive/2018/bin/x86_64-linux:$PATH
 
 RUN apt-get install -y \
     git \
@@ -51,8 +51,8 @@ COPY plantuml.tar.gz /usr/local/src
 RUN tar x -z -C / -f /usr/local/src/plantuml.tar.gz
 
 # Installiere zusätzliche TeXLive Pakete
-RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr update --self && \
-/usr/local/texlive/2017/bin/i386-linux/tlmgr install \
+RUN /usr/local/texlive/2018/bin/i386-linux/tlmgr update --self && \
+/usr/local/texlive/2018/bin/i386-linux/tlmgr install \
   adjustbox \
   biber\
   biblatex \
@@ -79,7 +79,7 @@ RUN /usr/local/texlive/2017/bin/i386-linux/tlmgr update --self && \
   xifthen \
   xstring
 
-RUN /usr/local/texlive/2017/bin/x86_64-linux/luaotfload-tool --update -vv
+RUN /usr/local/texlive/2018/bin/x86_64-linux/luaotfload-tool --update -vv
 
 WORKDIR /data
 VOLUME /deliverables
