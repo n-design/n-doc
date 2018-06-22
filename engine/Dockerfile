@@ -65,6 +65,7 @@ RUN /usr/local/texlive/2018/bin/i386-linux/tlmgr update --self && \
   gnu-freefont \
   ifmtarg \
   logreq \
+  ltablex \
   mfirstuc \
   minibox \
   nimbus15 \
