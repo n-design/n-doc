@@ -7,7 +7,7 @@
 # Ubuntu-Basis -> TeXLive -> Verschiedene Dev-Tools ->
 # plantuml -> zusätzliche TeXLive Pakete
 
-FROM ubuntu:17.10
+FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y wget perl
 
