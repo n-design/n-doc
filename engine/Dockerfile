@@ -82,5 +82,7 @@ RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --self && \
 
 RUN /usr/local/texlive/2018/bin/x86_64-linux/luaotfload-tool --update -vv
 
+RUN groupadd -g 1000 cc-autor && useradd -m -u 1000 -g 1000 cc-autor
+
 WORKDIR /data
 VOLUME /deliverables
