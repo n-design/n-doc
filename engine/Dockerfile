@@ -51,8 +51,8 @@ COPY plantuml.tar.gz /usr/local/src
 RUN tar x -z -C / -f /usr/local/src/plantuml.tar.gz
 
 # Installiere zusätzliche TeXLive Pakete
-RUN /usr/local/texlive/2018/bin/i386-linux/tlmgr update --self && \
-/usr/local/texlive/2018/bin/i386-linux/tlmgr install \
+RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --self && \
+/usr/local/texlive/2018/bin/x86_64-linux/tlmgr install \
   adjustbox \
   biber\
   biblatex \
