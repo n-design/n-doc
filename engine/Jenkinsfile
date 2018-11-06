@@ -1,0 +1,14 @@
+pipeline {
+  stages {
+    stage("Docker") {
+      steps {
+	echo "Publish as Docker-Image"
+	withCredentials([usernamePassword(credentialsId: 'Jenkins-LDAP', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+	  sh 'docker login --username=${DOCKER_USERNAME} --password=${DOCKER_PASSWORD} dockerregistry.n-design.de'
+	  sh 'make image'
+	  sh 'make publish'
+	}
+      }
+    }
+  }
+}
