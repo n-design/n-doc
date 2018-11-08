@@ -64,6 +64,7 @@ RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --self && \
   glossaries \
   gnu-freefont \
   ifmtarg \
+  imakeidx \
   logreq \
   ltablex \
   mfirstuc \
