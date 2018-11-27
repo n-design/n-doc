@@ -9,7 +9,9 @@
 
 FROM ubuntu:18.04
 
-RUN apt-get update && apt-get install -y wget perl
+RUN apt-get update && apt-get upgrade -y
+
+RUN apt-get install -y wget perl
 
 # Installiere eine reduzierte Variante von TeXLive von CTAN
 # und ergänze sie durch die Pakete, die für n-doc notwendig sind.
@@ -33,6 +35,7 @@ RUN apt-get install -y \
     libsqlite3-dev \
     openjdk-8-jre \
     graphviz \
+    python-pygments \
 && rm -rf /var/lib/apt/lists/*
 
 # Installiere den Lua Package-Manager aus den Quellen.
@@ -60,15 +63,19 @@ RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --self && \
   csquotes \
   datatool \
   enumitem \
+  framed \
+  fvextra \
   gitinfo2 \
   glossaries \
   gnu-freefont \
   ifmtarg \
+  ifplatform \
   imakeidx \
   logreq \
   ltablex \
   mfirstuc \
   minibox \
+  minted \
   nimbus15 \
   pgf-umlsd \
   placeins \
@@ -77,6 +84,7 @@ RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --self && \
   splitindex \
   substr \
   tocloft \
+  upquote \
   xfor \
   xifthen \
   xstring
