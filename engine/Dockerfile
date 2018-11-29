@@ -1,29 +1,7 @@
-# Dockerfile zum Erstellen der n-doc Umgebung,
-# bestehend aus TeXLive, sqlite und lua
+FROM ubuntu as buildbase
+LABEL maintainer="alexander.krumeich@n-design.de"
 
-# Die Reihenfolge der Blöcke basiert auf der
-# Veränderungshäufigkeit der jeweils installierten
-# Pakete:
-# Ubuntu-Basis -> TeXLive -> Verschiedene Dev-Tools ->
-# plantuml -> zusätzliche TeXLive Pakete
-
-FROM ubuntu:18.04
-
-RUN apt-get update && apt-get upgrade -y
-
-RUN apt-get install -y wget perl
-
-# Installiere eine reduzierte Variante von TeXLive von CTAN
-# und ergänze sie durch die Pakete, die für n-doc notwendig sind.
-
-WORKDIR /usr/local/src
-RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar xzf install-tl-unx.tar.gz \
-    && mv install-tl-20* install-tl
-WORKDIR install-tl
-COPY texlive.profile /usr/local/src/tl-install/texlive.profile
-RUN ./install-tl -profile=/usr/local/src/tl-install/texlive.profile
-ENV PATH /usr/local/texlive/2018/bin/x86_64-linux:$PATH
-
+RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y \
     git \
     curl \
@@ -33,65 +11,100 @@ RUN apt-get install -y \
     sqlite3 \
     libsqlite3-0 \
     libsqlite3-dev \
-    openjdk-8-jre \
-    graphviz \
-    python-pygments \
 && rm -rf /var/lib/apt/lists/*
 
-# Installiere den Lua Package-Manager aus den Quellen.
+FROM buildbase as ndocbuild
 
-WORKDIR /usr/local/src
-RUN wget http://luarocks.github.io/luarocks/releases/luarocks-2.4.3.tar.gz \
-    && tar xzf luarocks-2.4.3.tar.gz
-WORKDIR luarocks-2.4.3
-RUN ./configure && make build && make install
-RUN luarocks install lsqlite3 
-RUN luarocks install luaunit
+RUN curl http://luarocks.github.io/luarocks/releases/luarocks-2.4.3.tar.gz | tar xz
 
+WORKDIR /luarocks-2.4.3
 
-# Installiere plantuml
-COPY plantuml.tar.gz /usr/local/src
-RUN tar x -z -C / -f /usr/local/src/plantuml.tar.gz
+RUN ./configure && make build && make install && \
+    luarocks install lsqlite3 && \
+    luarocks install luaunit
 
-# Installiere zusätzliche TeXLive Pakete
-RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr update --self && \
-/usr/local/texlive/2018/bin/x86_64-linux/tlmgr install \
+WORKDIR /
+
+FROM ubuntu
+
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get install -y make git sqlite perl openjdk-8-jre graphviz curl python-pygments
+
+COPY --from=ndocbuild /usr/local/lib/lua/5.2 /usr/local/lib/lua/5.2
+COPY --from=ndocbuild /usr/local/share/lua/5.2/ /usr/local/share/lua/5.2/
+
+COPY plantuml.tar.gz /
+
+RUN tar x -C / -f /plantuml.tar.gz
+
+RUN curl -L http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xz
+RUN mv install-tl-20* install-tl
+
+COPY texlive.profile /install-tl
+
+WORKDIR /install-tl
+
+RUN ./install-tl -profile=texlive.profile -repository=http://ftp.fau.de/ctan/systems/texlive/tlnet
+
+RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install \
+  biber \
+  gnu-freefont \
+  lm \
+  nimbus15 \
+  roboto \
+  koma-script \
+  xindy
+
+RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install latexmk \
   adjustbox \
-  biber\
+  booktabs \
   biblatex \
+  booktabs \
+  caption \
   collectbox \
   csquotes \
   datatool \
+  dirtree \
   enumitem \
+  eso-pic \
+  etoolbox \
+  fancyvrb \
+  float \
+  fontspec \
   framed \
   fvextra \
+  l3kernel \
   gitinfo2 \
-  glossaries \
-  gnu-freefont \
   ifmtarg \
   ifplatform \
   imakeidx \
+  lineno \
   logreq \
   ltablex \
+  latexmk \
+  listings \
   mfirstuc \
   minibox \
   minted \
-  nimbus15 \
   pgf-umlsd \
   placeins \
   relsize \
-  roboto \
   splitindex \
   substr \
+  pgf \
   tocloft \
+  ulem \
   upquote \
+  xcolor \
   xfor \
   xifthen \
+  xkeyval \
   xstring
 
-RUN /usr/local/texlive/2018/bin/x86_64-linux/luaotfload-tool --update -vv
 
-RUN groupadd -g 1000 cc-autor && useradd -m -u 1000 -g 1000 cc-autor
+
+
+ENV PATH=/usr/local/texlive/2018/bin/x86_64-linux:$PATH
 
 WORKDIR /data
-VOLUME /deliverables
+VOLUME ["/data"]
