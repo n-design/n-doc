@@ -99,6 +99,7 @@ RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install latexmk \
   xfor \
   xifthen \
   xkeyval \
+  xltabular \
   xstring
 
 
