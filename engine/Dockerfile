@@ -68,6 +68,7 @@ RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install latexmk \
   enumitem \
   eso-pic \
   etoolbox \
+  fancybox \
   fancyvrb \
   float \
   fontspec \
