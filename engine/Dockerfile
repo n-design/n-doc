@@ -76,6 +76,7 @@ RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install latexmk \
   fvextra \
   l3kernel \
   gitinfo2 \
+  graphics \
   ifmtarg \
   ifplatform \
   imakeidx \
@@ -84,6 +85,7 @@ RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install latexmk \
   ltablex \
   latexmk \
   listings \
+  mdwtools \
   mfirstuc \
   minibox \
   minted \
