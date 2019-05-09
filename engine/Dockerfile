@@ -89,6 +89,8 @@ RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install latexmk \
   mfirstuc \
   minibox \
   minted \
+  multirow \
+  makecell \ 
   pgf-umlsd \
   placeins \
   relsize \
