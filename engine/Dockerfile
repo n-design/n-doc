@@ -13,8 +13,6 @@ RUN apt-get install -y \
     libsqlite3-dev \
 && rm -rf /var/lib/apt/lists/*
 
-FROM buildbase as ndocbuild
-
 RUN curl http://luarocks.github.io/luarocks/releases/luarocks-3.1.2.tar.gz | tar xz
 
 WORKDIR /luarocks-3.1.2
@@ -30,8 +28,8 @@ FROM ubuntu
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y make git sqlite perl openjdk-8-jre graphviz curl python-pygments
 
-COPY --from=ndocbuild /luarocks-3.1.2/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
-COPY --from=ndocbuild /luarocks-3.1.2/lua_modules/share/lua/5.3/ /usr/local/share/lua/5.3
+COPY --from=buildbase /luarocks-3.1.2/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
+COPY --from=buildbase /luarocks-3.1.2/lua_modules/share/lua/5.3/ /usr/local/share/lua/5.3
 
 COPY plantuml.tar.gz /
 
