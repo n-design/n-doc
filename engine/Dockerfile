@@ -6,8 +6,8 @@ RUN apt-get install -y \
     git \
     curl \
     unzip \
-    lua5.2 \
-    liblua5.2-dev \
+    lua5.3 \
+    liblua5.3-dev \
     sqlite3 \
     libsqlite3-0 \
     libsqlite3-dev \
@@ -15,9 +15,9 @@ RUN apt-get install -y \
 
 FROM buildbase as ndocbuild
 
-RUN curl http://luarocks.github.io/luarocks/releases/luarocks-2.4.3.tar.gz | tar xz
+RUN curl http://luarocks.github.io/luarocks/releases/luarocks-3.1.2.tar.gz | tar xz
 
-WORKDIR /luarocks-2.4.3
+WORKDIR /luarocks-3.1.2
 
 RUN ./configure && make build && make install && \
     luarocks install lsqlite3 && \
@@ -30,8 +30,8 @@ FROM ubuntu
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y make git sqlite perl openjdk-8-jre graphviz curl python-pygments
 
-COPY --from=ndocbuild /usr/local/lib/lua/5.2 /usr/local/lib/lua/5.2
-COPY --from=ndocbuild /usr/local/share/lua/5.2/ /usr/local/share/lua/5.2/
+COPY --from=ndocbuild /luarocks-3.1.2/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
+COPY --from=ndocbuild /luarocks-3.1.2/lua_modules/share/lua/5.3/ /usr/local/share/lua/5.3
 
 COPY plantuml.tar.gz /
 
