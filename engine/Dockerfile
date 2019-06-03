@@ -46,7 +46,7 @@ WORKDIR /install-tl
 
 RUN ./install-tl -profile=texlive.profile -repository=http://ftp.fau.de/ctan/systems/texlive/tlnet
 
-RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install \
+RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install \
   biber \
   gnu-freefont \
   lm \
@@ -55,7 +55,7 @@ RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install \
   koma-script \
   xindy
 
-RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install latexmk \
+RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install latexmk \
   adjustbox \
   booktabs \
   biblatex \
@@ -108,9 +108,7 @@ RUN /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install latexmk \
   xstring
 
 
-
-
-ENV PATH=/usr/local/texlive/2018/bin/x86_64-linux:$PATH
+ENV PATH=/usr/local/texlive/bin/x86_64-linux:$PATH
 
 WORKDIR /data
 VOLUME ["/data"]
