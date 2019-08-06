@@ -103,6 +103,7 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install latexmk \
   xifthen \
   xkeyval \
   xltabular \
+  xpatch \
   xstring
 
 
