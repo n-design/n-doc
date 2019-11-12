@@ -47,7 +47,6 @@ RUN ./install-tl -profile=texlive.profile -repository=http://ftp.fau.de/ctan/sys
 RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install \
   biber \
   gnu-freefont \
-  lm \
   nimbus15 \
   roboto \
   koma-script \
@@ -65,7 +64,6 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install latexmk \
   dirtree \
   enumitem \
   eso-pic \
-  etoolbox \
   fancybox \
   fancyvrb \
   float \
@@ -74,9 +72,8 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install latexmk \
   fvextra \
   l3kernel \
   gitinfo2 \
-  graphics \
+  grffile \
   ifmtarg \
-  ifplatform \
   imakeidx \
   lineno \
   logreq \
