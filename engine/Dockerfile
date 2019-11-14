@@ -63,6 +63,7 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install latexmk \
   datatool \
   dirtree \
   enumitem \
+  environ \
   eso-pic \
   fancybox \
   fancyvrb \
@@ -92,6 +93,7 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install latexmk \
   substr \
   pgf \
   tocloft \
+  trimspaces \
   ulem \
   upquote \
   xcolor \
