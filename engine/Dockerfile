@@ -72,7 +72,6 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install latexmk \
   fvextra \
   l3kernel \
   gitinfo2 \
-  grffile \
   ifmtarg \
   imakeidx \
   lineno \
