@@ -71,6 +71,7 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install latexmk \
   fontspec \
   framed \
   fvextra \
+  grffile \
   l3kernel \
   gitinfo2 \
   ifmtarg \
