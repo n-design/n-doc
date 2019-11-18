@@ -44,9 +44,12 @@ WORKDIR /install-tl
 
 RUN ./install-tl -profile=texlive.profile -repository=http://ftp.fau.de/ctan/systems/texlive/tlnet
 
+RUN /usr/local/texlive/bin/x86_64-linux/tlmgr update --self
+
 RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install \
   biber \
   gnu-freefont \
+  lm \
   nimbus15 \
   roboto \
   koma-script \
@@ -101,7 +104,6 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install latexmk \
   xfor \
   xifthen \
   xkeyval \
-  xltabular \
   xpatch \
   xstring
 
