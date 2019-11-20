@@ -1,4 +1,4 @@
-FROM debian as buildbase
+FROM ubuntu as buildbase
 LABEL maintainer="alexander.krumeich@n-design.de"
 
 RUN apt-get update && apt-get -y upgrade
@@ -24,7 +24,7 @@ RUN ./configure && make build && make install && \
 
 WORKDIR /
 
-FROM debian
+FROM ubuntu
 
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y make git sqlite perl openjdk-11-jre-headless graphviz curl python3-pygments libncurses5
