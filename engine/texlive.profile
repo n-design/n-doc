@@ -1,7 +1,7 @@
-# texlive.profile written on Tue Nov 13 14:21:24 2018 UTC
+# texlive.profile written on Wed Nov 20 13:35:05 2019 UTC
 # It will NOT be updated and reflects only the
 # installation profile at installation time.
-selected_scheme scheme-custom
+selected_scheme scheme-basic
 TEXDIR /usr/local/texlive/
 TEXMFCONFIG $TEXMFSYSCONFIG
 TEXMFHOME $TEXMFLOCAL
@@ -10,14 +10,10 @@ TEXMFSYSCONFIG /usr/local/texlive/texmf-config
 TEXMFSYSVAR /usr/local/texlive/texmf-var
 TEXMFVAR $TEXMFSYSVAR
 binary_x86_64-linux 1
-collection-basic 1
-collection-langgerman 1
-collection-latex 1
-collection-luatex 1
-instopt_adjustpath 1
+instopt_adjustpath 0
 instopt_adjustrepo 1
-instopt_letter 0
-instopt_portable 1
+instopt_letter 1
+instopt_portable 0
 instopt_write18_restricted 1
 tlpdbopt_autobackup 1
 tlpdbopt_backupdir tlpkg/backups

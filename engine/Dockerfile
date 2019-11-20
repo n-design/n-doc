@@ -27,7 +27,7 @@ WORKDIR /
 FROM debian
 
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get install -y make git sqlite perl openjdk-11-jre-headless graphviz curl python3-pygments
+RUN apt-get install -y make git sqlite perl openjdk-11-jre-headless graphviz curl python3-pygments libncurses5
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 COPY --from=buildbase /luarocks-3.1.2/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
@@ -41,76 +41,18 @@ RUN curl -L http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz |
 RUN mv install-tl-20* install-tl
 
 COPY texlive.profile /install-tl
+COPY texlive.packages /
 
 WORKDIR /install-tl
 
-RUN ./install-tl -profile=texlive.profile -repository=http://ftp.fau.de/ctan/systems/texlive/tlnet
+RUN ./install-tl -profile=texlive.profile -repository=http://ftp.fau.de/ctan/systems/texlive/tlnet && cd .. && rm -r install-tl
 
 RUN /usr/local/texlive/bin/x86_64-linux/tlmgr update --self
 
-RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install \
-  biber \
-  gnu-freefont \
-  lm \
-  nimbus15 \
-  roboto \
-  koma-script \
-  xindy
-
-RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install latexmk \
-  adjustbox \
-  booktabs \
-  biblatex \
-  booktabs \
-  caption \
-  collectbox \
-  csquotes \
-  datatool \
-  dirtree \
-  enumitem \
-  environ \
-  eso-pic \
-  fancybox \
-  fancyvrb \
-  float \
-  fontspec \
-  framed \
-  fvextra \
-  grffile \
-  l3kernel \
-  gitinfo2 \
-  ifmtarg \
-  imakeidx \
-  lineno \
-  logreq \
-  ltablex \
-  latexmk \
-  listings \
-  mdwtools \
-  mfirstuc \
-  minibox \
-  minted \
-  multirow \
-  makecell \ 
-  pgf-umlsd \
-  placeins \
-  relsize \
-  splitindex \
-  substr \
-  pgf \
-  tocloft \
-  trimspaces \
-  ulem \
-  upquote \
-  xcolor \
-  xfor \
-  xifthen \
-  xkeyval \
-  xpatch \
-  xstring
-
+RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install $(cat /texlive.packages) && rm /texlive.packages
 
 ENV PATH=/usr/local/texlive/bin/x86_64-linux:$PATH
 
 WORKDIR /data
+
 VOLUME ["/data"]
