@@ -27,8 +27,7 @@ WORKDIR /
 FROM ubuntu
 
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get install -y make git sqlite perl openjdk-11-jre-headless graphviz curl python3-pygments libncurses5
-RUN ln -s /usr/bin/python3 /usr/bin/python
+RUN apt-get install -y make git sqlite perl openjdk-11-jre-headless graphviz curl python-pygments
 
 COPY --from=buildbase /luarocks-3.1.2/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
 COPY --from=buildbase /luarocks-3.1.2/lua_modules/share/lua/5.3/ /usr/local/share/lua/5.3
