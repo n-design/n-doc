@@ -12,6 +12,8 @@ datatool
 dirtree
 enumitem
 environ
+epstopdf
+epstopdf-pkg
 eso-pic
 etoolbox
 fancybox
@@ -49,6 +51,7 @@ minted
 multirow
 nimbus15
 oberdiek
+pdftexcmds
 pgf
 pgf-umlsd
 placeins
