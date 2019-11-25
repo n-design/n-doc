@@ -1,4 +1,6 @@
-FROM ubuntu as buildbase
+ARG baseimage=ubuntu
+
+FROM ${baseimage} as buildbase
 LABEL maintainer="alexander.krumeich@n-design.de"
 
 RUN apt-get update && apt-get -y upgrade
@@ -24,10 +26,11 @@ RUN ./configure && make build && make install && \
 
 WORKDIR /
 
-FROM ubuntu
+FROM ${baseimage}
+ARG ctanmirror=http://mirrors.ctan.org
 
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get install -y make git sqlite perl openjdk-11-jre-headless graphviz curl python-pygments
+RUN apt-get install -y make git sqlite perl openjdk-11-jre-headless graphviz curl python3 python3-pygments
 
 COPY --from=buildbase /luarocks-3.1.2/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
 COPY --from=buildbase /luarocks-3.1.2/lua_modules/share/lua/5.3/ /usr/local/share/lua/5.3
@@ -44,7 +47,7 @@ COPY texlive.packages /
 
 WORKDIR /install-tl
 
-RUN ./install-tl -profile=texlive.profile -repository=http://ftp.fau.de/ctan/systems/texlive/tlnet && cd .. && rm -r install-tl
+RUN ./install-tl -profile=texlive.profile -repository=${ctanmirror} && cd .. && rm -r install-tl
 
 RUN /usr/local/texlive/bin/x86_64-linux/tlmgr update --self
 
