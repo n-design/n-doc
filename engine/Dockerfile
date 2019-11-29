@@ -22,7 +22,8 @@ WORKDIR /luarocks-3.1.2
 
 RUN ./configure && make build && make install && \
     luarocks install lsqlite3 && \
-    luarocks install luaunit
+    luarocks install luaunit && \
+    luarocks install ftcsv
 
 WORKDIR /
 
