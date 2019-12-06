@@ -4,6 +4,7 @@ amsmath
 babel-german
 biber
 biblatex
+bookmark
 booktabs
 caption
 collectbox
@@ -22,6 +23,7 @@ float
 fontspec
 framed
 fvextra
+geometry
 gitinfo2
 gnu-freefont
 graphics
@@ -31,10 +33,13 @@ hyphen-german
 ifmtarg
 ifplatform
 imakeidx
+infwarerr
 koma-script
+kvoptions
 l3kernel
 latex-bin
 latexmk
+letltxmacro
 lineno
 listings
 logreq
@@ -58,6 +63,7 @@ placeins
 relsize
 roboto
 splitindex
+stringenc
 substr
 tocloft
 tools
