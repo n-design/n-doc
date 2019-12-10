@@ -5,7 +5,7 @@ pipeline {
   stages {
     stage("BuildImage") {
       steps {
-	sh 'make image'
+	sh 'baseimage=n-design/ubuntu ctanmirror=https://mirror.n-design.de/ctan/systems/texlive/tlnet/ make image'
       }
     }
     stage("Publish") {
