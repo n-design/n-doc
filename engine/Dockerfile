@@ -56,6 +56,9 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install $(cat /texlive.packages) &
 
 ENV PATH=/usr/local/texlive/bin/x86_64-linux:$PATH
 
+COPY RobotoCondensed*.ttf /usr/local/texlive/texmf-local/fonts/type1/local/RobotoCondensed/
+RUN texhash
+
 WORKDIR /data
 
 VOLUME ["/data"]
