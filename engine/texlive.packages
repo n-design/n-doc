@@ -6,9 +6,11 @@ atveryend
 babel-german
 biber
 biblatex
+bitset
 bookmark
 booktabs
 caption
+catchfile
 collectbox
 csquotes
 datatool
@@ -58,8 +60,9 @@ minted
 multirow
 nimbus15
 oberdiek
-pdftexcmds
+pdfescape
 pdflscape
+pdftexcmds
 pgf
 pgf-umlsd
 placeins
