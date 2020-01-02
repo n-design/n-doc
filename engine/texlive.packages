@@ -3,9 +3,11 @@ amsfonts
 amsmath
 atbegshi
 atveryend
+auxhook
 babel-german
 biber
 biblatex
+bigintcalc
 bitset
 bookmark
 booktabs
@@ -20,6 +22,7 @@ environ
 epstopdf
 epstopdf-pkg
 eso-pic
+etexcmds
 etoolbox
 fancybox
 fancyvrb
@@ -28,18 +31,23 @@ fontspec
 framed
 fvextra
 geometry
+gettitlestring
 gitinfo2
 gnu-freefont
 graphics
 grffile
+hycolor
 hyperref
 hyphen-german
 ifmtarg
 ifplatform
 imakeidx
 infwarerr
+intcalc
 koma-script
+kvdefinekeys
 kvoptions
+kvsetkeys
 l3kernel
 latex-bin
 latexmk
@@ -48,6 +56,7 @@ lineno
 listings
 logreq
 ltablex
+ltxcmds
 luacode
 luapackageloader
 luatexbase
@@ -66,6 +75,7 @@ pdftexcmds
 pgf
 pgf-umlsd
 placeins
+refcount
 relsize
 rerunfilecheck
 roboto
@@ -76,6 +86,7 @@ tocloft
 tools
 trimspaces
 ulem
+uniquecounter
 upquote
 url
 xcolor
