@@ -28,7 +28,7 @@ RUN ./configure && make build && make install && \
 WORKDIR /
 
 FROM ${baseimage}
-ARG ctanmirror=http://mirror.ctan.org
+ARG ctanmirror=http://ftp.fau.de/ctan
 
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y make git sqlite perl openjdk-11-jre-headless graphviz curl python-pygments
@@ -39,6 +39,8 @@ COPY --from=buildbase /luarocks-3.1.2/lua_modules/share/lua/5.3/ /usr/local/shar
 COPY plantuml.tar.gz /
 
 RUN tar x -C / -f /plantuml.tar.gz
+
+RUN echo ${ctanmirror}
 
 RUN curl -L ${ctanmirror}/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xz
 RUN mv install-tl-20* install-tl
