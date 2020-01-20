@@ -28,7 +28,7 @@ RUN ./configure && make build && make install && \
 WORKDIR /
 
 FROM ${baseimage}
-ARG ctanmirror=http://mirrors.ctan.org
+ARG ctanmirror=http://mirror.ctan.org
 
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y make git sqlite perl openjdk-11-jre-headless graphviz curl python-pygments
@@ -40,7 +40,7 @@ COPY plantuml.tar.gz /
 
 RUN tar x -C / -f /plantuml.tar.gz
 
-RUN curl -L http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xz
+RUN curl -L ${ctanmirror}/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xz
 RUN mv install-tl-20* install-tl
 
 COPY texlive.profile /install-tl
@@ -48,7 +48,7 @@ COPY texlive.packages /
 
 WORKDIR /install-tl
 
-RUN ./install-tl -profile=texlive.profile -repository=${ctanmirror} && cd .. && rm -r install-tl
+RUN ./install-tl -profile=texlive.profile -repository=${ctanmirror}/systems/texlive/tlnet/ && cd .. && rm -r install-tl
 
 RUN /usr/local/texlive/bin/x86_64-linux/tlmgr update --self
 
