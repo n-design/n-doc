@@ -58,6 +58,7 @@ logreq
 ltablex
 ltxcmds
 luacode
+lualatex-truncate
 luapackageloader
 luatexbase
 makecell
@@ -85,6 +86,7 @@ substr
 tocloft
 tools
 trimspaces
+truncate
 ulem
 uniquecounter
 upquote
