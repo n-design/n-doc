@@ -159,7 +159,7 @@ end
 
 function test_cc_core.test_Module2Sfr() local mod = "mod.tls.core"
    lu.assertEquals(cc_core.generate_table_module_to_sfr(mod, "enf"),
-		   {"fcs_cop.1/tls.aes", "fcs_cop.1/tls.auth", "ftp_itc.1/tls"})
+		   {"fcs_ckm.2", "fcs_cop.1/tls.aes", "fcs_cop.1/tls.auth", "ftp_itc.1/tls"})
    supportingsfr = {"ftp_trp.1/admin"}
    lu.assertEquals(cc_core.generate_table_module_to_sfr("mod.vpn.core", "sup"), supportingsfr)
 end

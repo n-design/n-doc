@@ -48,7 +48,7 @@ Der Ablauf baut die Verbindung zum VPN-Konzentrator auf. Das Zertifikat des
 Konzentrators wird über die Schnittstelle \tdslink[fq]{int.vpn.cert.checkcert}
 geprüft.
 
-\umgesetztesfr{\sfrlink{ftp_itc.1/vpn}}
+\umgesetztesfr{\sfrlink{ftp_itc.1/vpn} & \sfrlink{fcs_ckm.2}}
 
 %% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
 %% sollte nicht zu lang, aber ausreichend verständlich sein.
@@ -83,6 +83,17 @@ Der Ablauf baut die Verbindung zum VPN-Konzentrator ab.
 
 Die Schnittstelle \tdslink[fq]{int.vpn.cert.checkcert} wird
 verwendet, um das Zertifikat des VPN-Konzentrators zu prüfen.
+
+\modulSchnittstelleRequired{int.cryptsystem.keymgmt.createkey}
+
+Die Schnittstelle \tdslink[fq]{int.cryptsystem.keymgmt.createkey} wird
+verwendet, um einen Verbindungsschlüssel zu erzeugen.
+
+\modulSchnittstelleRequired{int.cryptsystem.keymgmt.destroykey}
+
+Die Schnittstelle \tdslink[fq]{int.cryptsystem.keymgmt.destroykey} wird
+verwendet, um einen Verbindungsschlüssel zu zerstören.
+
 
 % !TEX root = "../../adv_tds"
 %%% Local Variables:
