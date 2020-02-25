@@ -7,6 +7,28 @@ Dieses Repository enthält die Herstellerdokumente des CC Verfahrens für den
 Mauve VPN Client. Dieses Dokument und die verlinkten Anleitungen beschreiben das
 Dokumentationsverfahren und die verwendeten Werkzeuge.
 
+== Übersetzen der Dokumente
+
+Zum Übersetzen der Dokumente nach PDF wird das Docker Image
+link:https://github.com/n-design/n-doc[n-doc] verwendet. Die Quellen der
+Dokumente müssen im aktuellen Verzeichnis liegen und das Verzeichnis muss unter
+dem Pfad `/data` in den Container gemountet werden (`runmake.sh` enthält diesen
+Aufruf):
+
+----
+docker run --rm  --volume $(pwd):/data ndesign/n-doc make -j4 delivery
+----
+
+Statt `delivery` kann auch ein Dokumenttyp (`st`, `tds` etc) verwendet
+werden. Der Parameter `-j` steuert die Anzahl der Threads (jobs), die GNU Make
+gleichzeitig startet. Hier muss eine Zahl angegeben werden: Die Anzahl der
+Builder in der CI-Plattform oder die Anzahl der Cores des Arbeitsplatzrechners.
+
+WARNING: Ohne eine Zahl hinter `-j` verwendet GNU Make die maximalen Ressourcen
+des Rechners und startet alle Jobs gleichzeitig. Das führt häufig zum Stillstand
+des Systems, weil die simultan laufenden PlantUML Prozesse den Speicher komplett
+auslasten.
+
 == Arbeit an den Dokumenten / Struktur des Repositories
 
 Jedes Herstellerdokument hat sein eigenes Unterverzeichnis. Die
@@ -130,16 +152,12 @@ Das Erstellen von Releases der Dokumente wird in einer link:doku/creating-releas
 
 === LaTeX
 
-Zum Schreiben an den Dokumenten ist eine TeX-Installation
-erforderlich. Da LaTeX quelloffen ist, gibt es verschiedene
-Implementierungen und Distributionen. Der zentrale Ort für alle Dinge
-rund um LaTeX ist das Comprehensive TeX Archive Network (CTAN,
-https://ctan.org).
 
-Eine sehr umfassende LaTeX Installation ist TeXLive
-(https://ctan.org/pkg/texlive). Der Download ist zwar groß, aber dafür
-umfasst die Distribution alles, was für die Arbeit an den
-CC-Dokumenten notwendig ist.
+
+Zum Schreiben an den Dokumenten ist eine TeX-Installation erforderlich. Es gibt
+verschiedene Implementierungen und Distributionen. Der zentrale Ort für alle
+Dinge rund um LaTeX ist das Comprehensive TeX Archive Network (CTAN,
+https://ctan.org).
 
 Zum Übersetzen der CC-Dokumente ist zwingend die LuaLaTeX
 Implementierung zu verwenden. Hintergrund ist, dass für die Behandlung
