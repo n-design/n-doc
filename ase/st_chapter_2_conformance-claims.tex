@@ -1,0 +1,80 @@
+\hrefchapter{conf}{Postulat der Übereinstimmung} %{Conformance Claims}
+
+\hrefsection{conf.cc}{Konformität zu Common
+  Criteria} %{Common Criteria Conformance Claim}
+
+Das Security Target wurde gemäß Common Criteria, Version~3.1, Revision~5, erstellt und ist
+
+\begin{itemize}
+\item CC Part 2 \autocite{CCPart2} erweitert (extended) und
+\item CC Part 3 \autocite{CCPart3} konform (conformant).
+\end{itemize}
+
+\hrefsection{conf.pp}{Konformität zu Schutzprofilen}
+
+Dieses Security Target behauptet strikte Konformität zu:
+
+\begin{itemize}
+\item "`\citetitle{\thispp}"' \autocite{\thispp}
+\end{itemize}
+
+\noindent{}Dieses Security Target behauptet keine Konformität zu weiteren Schutzprofilen.
+
+\hrefsection{conf.package}{Konformität zu Paketen} %{Package Conformance Claim}
+
+Das Schutzprofil fordert die Vertrauenswürdigkeitsstufe EAL3, erweitert um die
+Komponenten in \tableref{tab:conf.eal3plus}. Dieses Security Target behauptet
+Konformität zu genau diesen Paketen. Diese Konformität wird als „EAL3+“
+bezeichnet und ist somit „package-augmented“ gegenüber EAL3.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{0.7\textwidth}{@{}lY@{}}
+    \toprule
+    Paket & Erläuterung \\
+    \midrule
+    \formatsfr{AVA\_VAN.5} & Resistenz gegen Angriffspotential „Enhanced-Basic“\\
+    \formatsfr{ADV\_FSP.4} & Vollständige Funktionale Spezifikation\\
+    \formatsfr{ADV\_TDS.3} & Einfaches Modulares Design\\
+    \formatsfr{ADV\_IMP.1} & TSF-Implementierung\\
+    \formatsfr{ALC\_TAT.1} & Wohldefinierte Entwicklungswerkzeuge\\
+    \formatsfr{ALC\_FLR.2} & Verfahren für Problemreports\\
+    \bottomrule
+  \end{tabularx}
+  \caption{Ergänzungen zur Vertrauenswürdigkeit EAL3}
+  \label{tab:conf.eal3plus}
+\end{table}
+
+\hrefsection{conf.rationale}{Erklärung der Konformität} %{Conformance Rationale}
+
+Dieses Security Target behauptet strikte Konformität zu \autocite{\thispp}. Durch diese
+Feststellung sind Widersprüche und Inkonsistenzen zu anderen Schutzprofilen
+ausgeschlossen. Diese Behauptung basiert auf der Betrachtung des TOE Typs, der
+Definition des Sicherheitsproblems und schließlich der Sicherheitsziele sowie
+der Sicherheitsanforderungen. Weiterhin behauptet dieses Security Target
+Konformität zu allen Security Assurance Requirements (SARs), die von
+\autocite{\thispp} gefordert werden.
+
+\begin{description}
+
+\item[TOE Typ] Das Schutzprofil fordert, dass der TOE ein \dots ist. Der vorliegende TOE ist ein\dots
+  
+\item[Definition des Sicherheitsproblems] Die Definition des
+  Sicherheitsproblems, d.\,h. die Bedrohungen, Annahmen und die
+  organisatorischen Sicherheitspolitiken sind direkt aus dem Schutzprofil
+  \citepp{} übernommen.
+  
+\item[Sicherheitsziele und Sicherheitsanforderungen] Die Sicherheitsziele und
+  Sicherheitsanforderungen sind dem Schutzprofil \citepp{}
+  entnommen. Die Operationen an den SFR sind deutlich gekennzeichnet.
+\end{description}
+
+\chapterref{comp} bescheibt die über CC~Teil~2 \autocite{CCPart2} hinausgehenden
+funktionalen Anforderungen an die Vertrauenswürdigkeit. Es werden keine
+Anforderungen definiert, die über CC~Teil~3 \autocite{CCPart3} hinausgehen.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: shared
+%%% TeX-engine: luatex
+%%% End:

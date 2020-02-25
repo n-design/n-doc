@@ -1,0 +1,152 @@
+\hrefchapter{intro}{Einführung in das Security Target}
+
+Der TOE, der in diesem Dokument beschrieben wird, ist der \emph{\thisTOE{}}. Der
+TOE ist eine sichere Komponente, die als \thisproduct{} eingesetzt wird.
+
+Dieses Dokument ist das \emph{Security Target}, in dem die funktionalen und
+organisatorischen Sicherheitsanforderungen des TOE und seiner Einsatzumgebung
+beschrieben werden.  Dieses Dokument findet seine formale Grundlage in:
+
+\begin{itemize}
+\item \citetitle{\thispp} \autocite{\thispp}
+\end{itemize}
+
+\hrefsection{intro.refst}{ST Referenz}
+
+\begin{tabularx}{1\textwidth}{@{}p{0.3\textwidth}X@{}}
+  \toprule
+  Titel des Dokuments & Security Target / \thisproduct\\
+  Version des Dokuments & \documentversion{\thisdocument}\\
+  Datum des Dokuments & \documentdate{\thisdocument}\\
+  Allgemeiner Status: & \\
+  Autor  &  \thisdeveloper{}\\
+  Editor &  \\
+  \bottomrule
+\end{tabularx}
+
+\hrefsection{intro.reftoe}{TOE Referenz}
+
+\begin{tabularx}{1\textwidth}{@{}p{0.3\textwidth}X@{}}
+  \toprule
+  Evaluierungsgegenstand & \thisTOE{}\\
+  Version des EVG & \toeversion{} \\
+  Hersteller & \thisdeveloper{} \\
+  Vertrauenswürdigkeitsstufe &
+  \secitemformat{EAL3} erweitert um
+  \secitemformat{AVA\_VAN.3}, \secitemformat{ADV\_IMP.1}, %
+  \secitemformat{ADV\_TDS.3}, \secitemformat{ADV\_FSP.4}, %
+  \secitemformat{ALC\_TAT.1}, and \secitemformat{ALC\_FLR.2} %
+  (Kurzbezeichnung „\secitemformat{EAL3+}“)\\
+  CC Version &  3.1 Release 5\\
+  \bottomrule
+\end{tabularx}
+
+\cleardoublepage{}
+
+\hrefsection{intro.overview}{Überblick über den TOE}
+
+Der Evaluierungsgegenstand ist der \thisTOE{}.
+
+Der Lieferumfang des TOE umfasst ebenfalls die Betriebsdokumentation für
+\thisproduct{}. Somit entspricht der TOE dem im Schutzprofil \autocite{\thispp}
+genannten Umfang und Aufbau.
+
+\hrefsubsection{intro.overview.toetype}{TOE Typ}
+
+\thisproduct{} implementiert -- konform zu \citepp{} -- den Produkttyp eines
+VPN-Routers.
+
+\hrefsubsection{intro.overview.usage}{Verwendung und Hauptfunktionalität des
+  TOE}
+
+\hrefsubsection{intro.overview.nontoe}{Erforderliche Non-TOE
+  Hardware/Software/Firmware}
+
+
+\hrefsection{intro.desc}{Beschreibung des TOE}
+
+\hrefsubsection{intro.desc.goals}{Hauptziele des TOE}
+
+\hrefsubsection{intro.desc.aufbau}{Aufbau des TOE}
+
+% \begin{figure}[tb]
+%   \centering{}
+%   \hypertarget{fig:intro.desc.case}{%
+%     \includegraphics[width=0.8\columnwidth,keepaspectratio]%
+%     {../common/media/thetoe_front_1.jpg}
+%     \includegraphics[width=0.8\columnwidth,keepaspectratio]%
+%     {../common/media/thetoe_back_1.jpg}
+%     \caption{Abbildung des \thisproduct}
+%     \label{fig:intro.desc.case}}
+% \end{figure}
+
+Das Betriebssystem des \thisproduct{} ist GNU/Linux. Teile des Betriebssystems
+setzen Sicherheitsanforderungen an den TOE um und sind somit SFR-enforcing.
+
+\hrefsubsection{intro.desc.env}{Einsatzumgebung des TOE}
+
+\hrefsubsection{intro.desc.hardware}{Hardware des \thisproduct}
+
+\hrefsubsection{intro.desc.intf}{Schnittstellen des \thisproduct}
+
+\hrefsubsubsection{intro.desc.intf.phys}{Physische Schnittstellen}
+
+Alle Schnittstellen des thisproduct{} sind physisch am Gehäuse des Geräts
+untergebracht. Die außen sichtbaren Schnittstellen sind auf dem Foto des TOE in
+\figureref{fig:intro.desc.case} zu erkennen.
+
+\begin{description}
+\item[\intf{PS.LAN}] ist die Schnittstelle ins LAN\dots
+\item[\intf{PS.WAN}] ist die Schnittstelle ins WAN\dots
+\item[\intf{PS.LED}] repräsentiert die LEDs an der Außenseite des Geräts.
+\end{description}
+
+\hrefsubsubsection{intro.desc.intf.log}{Logische Schnittstellen}
+
+\input{../common/tsfi.tex} % Wird auch in anderen Dokumenten verwendet
+
+\clearpage
+
+\hrefsubsection{intro.desc.physdiff}{Aufbau und physische Abgrenzung des TOE}
+
+Der TOE besteht aus folgenden Subsystemen:
+
+\begin{description}
+\item[\tds{sub.vpn}] enthält die VPN-Funktionen wie IPSec und IKE.
+\item[\tds{sub.ntpclient}] synchronisiert die Systemzeit mit einem Zeitserver.
+\item[\tds{sub.selfprotect}] enthält Schutzmechanismen für den TOE.
+\item[\tds{sub.adminsystem}] wird für die Administration des TOE verwendet.
+\item[\tds{sub.cryptsystem}] bietet kryptografische Basisfunktionen.
+\item[\tds{sub.tls}] erstellt TLS-Verbindungen für die Administrationsschnittstelle.
+\end{description}
+
+
+
+\hrefsubsection{intro.desc.secservices}{Logische Abgrenzung: Vom TOE
+  erbrachte Sicherheitsdienste}
+
+\hrefsubsection{intro.desc.scope}{Physischer Umfang des TOE}
+
+Der physische Umfang des TOE umfasst die in \tableref{tab:intro.desc.scope} aufgelisteten Komponenten.
+
+
+\renewcommand{\arraystretch}{1.5}
+\begin{table}[htb]
+  \centering
+  \begin{tabularx}{0.95\linewidth}{@{}p{7cm}Xl@{}}
+    \toprule
+    Komponente & Beschreibung & Version\\ \midrule
+    Firmware Image & Die Firmware  des TOE & \toeversion{} \\
+    Guidance Documentation („Administrationshandbuch“) & Die Guidance Documentation beschreibt die sichere Verwendung des TOE & \toeversion{} \\
+    Benutzerhandbuch ("`Allgemeine Gebrauchsanleitung \thisproduct{}"') & Das Benutzerhandbuch beschreibt die allgemeine Verwendung, sowohl dessen TOE Anteile als auch die nicht-TOE Anteile & \toeversion\\
+    \bottomrule
+  \end{tabularx}
+  \caption{Physischer Umfang des TOE}
+  \label{tab:intro.desc.scope}
+\end{table}
+\renewcommand{\arraystretch}{1.0}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../ase"
+%%% End:

@@ -1,0 +1,17 @@
+\begin{luacode}
+
+  bridge_tls = require "bridge_tls"
+
+  function printTlsConnectionTable()
+    bridge_tls.printTlsConnectionTable(tex)
+  end
+
+  function getTlsConnectionTableRow(key, document)
+    bridge_tls.getTlsConnectionTableRow(key, document, tex)
+  end
+
+  function printTlsParametersForModule(key)
+    bridge_tls.printTlsParametersForModule(key, tex)
+  end
+
+\end{luacode}

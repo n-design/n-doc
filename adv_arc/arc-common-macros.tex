@@ -1,0 +1,28 @@
+% Anpassung des Hyperlink-Ankers, um die richtige Zeile zu treffen
+\makeatletter
+ \newcommand{\linkdest}[1]{\Hy@raisedlink{\hypertarget{#1}{}\sindex[sfr]{\sfrplain{#1}@\sfrlink{#1}}}}
+\makeatother
+
+
+
+\newcommand{\generateTsfiToSfrTable}{
+  \begin{longtable}{@{}ll@{\hskip 5mm}p{10cm}@{}}
+    \toprule
+    \textbf{\secitem{TSFI}} & \textbf{\secitem{SFR}} & Verwendung\\ \endfirsthead
+    \toprule \textbf{\secitem{TSFI}} & \textbf{\secitem{SFR}} & Verwendung \\ \midrule \endhead
+    \multicolumn{3}{r}{\rule{0pt}{3ex}\emph{Weiter auf der nächsten Seite}} \endfoot
+    \bottomrule \caption{Zuordnung von TSFI zu SFR} \label{tab:tsfi2sfr} \endlastfoot
+    \printSfrForTsfiRows{}
+  \end{longtable}
+}
+
+\newcommand{\printSfrForTsfiRows}{\directlua{print_sfr_for_tsfi_rows()}}
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "adv_arc"
+%%% TeX-engine: luatex
+%%% End:

@@ -1,0 +1,242 @@
+\hrefsection{sfr.def}{Funktionale Sicherheitsanforderungen}
+
+\hrefsubsection{sfr.def.vpnclient}{VPN Client}
+
+\sfrsubsection{ftp_itc.1/vpn}
+\sfrdefinition{ftp_itc.1.1/vpn}{\sfrunmodifiedfrompp{6.2.1}}
+\sfrdefinition{ftp_itc.1.2/vpn}{\sfrunmodifiedfrompp{6.2.1}}
+\sfrdefinition{ftp_itc.1.3/vpn}{\sfrunmodifiedfrompp{6.2.1}}
+
+\hrefsubsection{sfr.def.net}{Netzdienste}
+
+\sfrsubsection{fpt_stm.1}
+
+\sfrdefinition{fpt_stm.1.1}{\sfrunmodifiedfrompp{6.2.3}}
+
+\refinement{Die Zuverlässigkeit (reliable) des Zeitstempels wird durch
+  Zeitsynchronisation der Echtzeituhr (gemäß \objlink{oe.echtzeituhr}) mit
+  Zeitservern unter Verwendung des Protokolls NTPv4 \cite{rfc5905} erreicht.
+  Der EVG verwendet den verlässlichen Zeitstempel für sich selbst.}
+
+
+\sfrsubsection{fpt_tdc.1/zert}
+\sfrdefinition{fpt_tdc.1.1/zert}{\sfrunmodifiedfrompp{6.2.3}}
+\sfrdefinition{fpt_tdc.1.2/zert}{The TSF shall use \ppselected{interpretation
+    rules} when interpreting the TSF data from another trusted IT
+  product.\par{}\strefined{The interpretation rules are defined in \dots{}}}
+
+\applicationnote{\sfr{fpt_tdc.1/zert}}{}
+
+\hrefsubsection{sfr.def.packetinspection}{Stateful Packet Inspection}
+
+\intentionallyleftblank{}
+
+\hrefsubsection{sfr.def.selfprot}{Selbstschutz}
+
+\sfrsubsection{fdp_rip.1}
+
+\sfrdefinition{fdp_rip.1.1}{The TSF shall ensure that any previous information
+  content of a resource is made unavailable upon the \ppselected{deallocation of
+    the resource from} the following objects: \ppassigned{cryptographic keys
+    (and session keys) used for the VPN or for TLS-connections},
+  \stassigned[list of objects]{no other objects}.}
+
+\refinement{Die sensitive Daten müssen mit konstanten oder zufälligen Werten
+  überschrieben werden, sobald sie nicht mehr verwendet werden.\par
+  \strefined{These sensitive objects are overwritten with constant or
+    pseudo-random values.}}
+
+\sfrsubsection{fpt_tst.1}
+
+\sfrdefinition{fpt_tst.1.1}{The TSF shall run a suite of self tests
+  \stselected[during initial start-up, periodically during normal
+  operation, at the request of the authorised user, at the conditions
+  {[}assignment: conditions under which self test should
+  occur{]}]{during initial start-up, at the request of the authorised
+    user} to demonstrate the correct operation of
+  \stselected[{[}assignment: parts of TSF{]}, the TSF]{stored TSF
+    executable code}.}
+
+\sfrdefinition{fpt_tst.1.2}{The TSF shall provide authorised users
+  with the capability to verify the integrity of \ppassigned{TSF
+    data}.}
+
+\sfrdefinition{fpt_tst.1.3}{The TSF shall provide authorised users
+  with the capability to verify the integrity of
+  \stselected[{[}assignment: parts of TSF{]}, the TSF]{stored TSF
+      executable code}.}
+
+
+\sfrsubsection{ftp_trp.1/admin}
+
+\sfrdefinition{ftp_trp.1.1/admin}{The TSF shall provide a
+  communication path between itself and \stselected[remote,
+  local]{local} users that is logically distinct from other
+  communication paths and provides assured identification of its end
+  points and protection of the communicated data from
+  \stselected[modification, disclosure, {[}assignment: other types of
+  integrity or confidentiality violation{]}]{modification,
+    disclosure}.}
+
+\sfrdefinition{ftp_trp.1.2/admin}{The TSF shall permit
+  \stselected[the TSF, local users, remote users]{the TSF,
+    local users} to initiate communication via the trusted path.}
+
+\sfrdefinition{ftp_trp.1.3/admin}{\sfrunmodifiedfrompp{6.2.6}}
+
+
+\hrefsubsection{sfr.def.crypto}{Kryptographische Basisdienste}
+
+\sfrsubsection{fcs_cop.1/hash}
+
+\sfrdefinition{fcs_cop.1.1/hash}{The TSF shall perform
+  \ppassigned{hash value calculation} in accordance with a specified
+  cryptographic algorithm \ppassigned{SHA-1, SHA-256,}
+  \stassigned[list of SHA-2 Algorithms with more than 256 bit
+  size]{SHA-512} and cryptographic key sizes \ppassigned{none} that
+  meet the following: \ppassigned{FIPS PUB 180-4
+    \autocite{FIPS180-4}}.}
+
+\sfrsubsection{fcs_cop.1/hmac}
+\sfrdefinition{fcs_cop.1.1/hmac}{The TSF shall perform
+  \ppassigned{HMAC value generation and verification} in accordance
+  with a specified cryptographic algorithm \ppassigned{HMAC with
+    SHA-1,} \stassigned[list of SHA-2 Algorithms with 256bit size or
+  more]{SHA-256} and cryptographic key sizes \stassigned[cryptographic
+  key sizes]{160 and 256 bit} that meet the following:
+  \ppassigned{FIPS PUB 180-4 \autocite{FIPS180-4},
+    RFC~2404 \autocite{rfc2404}, RFC~4868 \autocite{rfc4868}, RFC~5996
+    \autocite{rfc5996}}.}
+
+
+
+\sfrsubsection{fcs_ckm.1}
+
+\sfrdefinition{fcs_ckm.1.1}{The TSF shall generate cryptographic keys in
+  accordance with a specified cryptographic key generation algorithm
+  \stassigned[cryptographic key generation algorithm]{PRF-HMAC-SHA1,
+    PRF-HMAC-SHA256} and specified cryptographic key sizes
+  \stassigned[cryptographic key sizes]{256~bit} that meet the following:
+  \ppassigned{TR-03116 \autocite{TR03116}}.\par
+  \strefined{The following algorithms and preferences are supported for TLS key
+    negotiation}
+  \begin{sfritemize}
+  \item \strefined{Diffie-Hellman Group 14 according to \rfc{3526}
+      \cite{rfc3526} for key establishment during TLS}
+  \item \strefined{DH exponent shall have a minimum length of 384
+      bits}
+  \item \strefined{Forward secrecy shall be provided}
+  \item \strefined{Ephemeral elliptic curve DH key exchange supports
+      the \mbox{P-256} and the \mbox{P-384} curves according to FIPS186-4
+      \cite{FIPS186-4} as well as the brainpoolP256r1 and the
+      brainpoolP384r1 curves according to \rfc{5639} and \rfc{7027}
+      \cite{rfc5639,rfc7027}}
+  \item \strefined{Peer authentication (if required): X.509
+      certificate with RSA 2048 bit keys}
+  \end{sfritemize}
+}
+
+
+\sfrsubsection{fcs_ckm.2}
+\sfrdefinition{fcs_ckm.2.1}{\sfrunmodifiedfrompp{6.2.7}}
+
+\sfrsubsection{fcs_ckm.4}
+
+\sfrdefinition{fcs_ckm.4.1}{The TSF shall destroy cryptographic
+  keys in accordance with a specified cryptographic key destruction
+  method \stassigned[cryptographic key destruction method]{by
+    overwriting with zeros} that meets the following: \stassigned[list
+  of standards]{none}.}
+
+
+\hrefsubsection{sfr.def.cryptotls}{TLS-Kanäle unter Nutzung sicherer
+  kryptographischer Algorithmen}
+
+\sfrsubsection{ftp_itc.1/tls}
+\sfrdefinition{ftp_itc.1.1/tls}{\sfrunmodifiedfrompp{6.2.8}}
+\sfrdefinition{ftp_itc.1.2/tls}{\sfrunmodifiedfrompp{6.2.8}}
+
+\sfrdefinition{ftp_itc.1.3/tls}{The TSF shall initiate
+  communication via the trusted channel for \ppassigned{communication
+    required by the administration interface} \stassigned[list of other
+  functions for which a trusted channel is required]{any
+    connection specified in Table~\ref{tab:tlsconnections}.}}
+
+\sfrsubsection{fpt_tdc.1/tls.zert}
+
+\sfrdefinition{fpt_tdc.1.1/tls.zert}{The TSF shall provide the
+  capability to consistently interpret
+  
+  \begin{sfrenumeration}
+  \item \ppassigned{X.509-Zertifikate für TLS-Verbindungen}
+  \item \ppassigned{eine Liste gültiger CA-Zertifikate (Trust-Service Status List
+    TSL)}
+  \item \ppassigned{Sperrinformationen zu Zertifikaten für TLS-Verbindungen, die
+    via OCSP erhalten werden}
+  \item \stassigned[additional list of data types]{no other data types}
+  \end{sfrenumeration}
+
+  when shared between the TSF and another trusted IT product.}
+
+ 
+\sfrdefinition{fpt_tdc.1.2/tls.zert}{The TSF shall use
+  \ppselected{interpretation rules} when interpreting the TSF data from another
+  trusted IT product.}
+
+\sfrsubsection{fcs_cop.1/tls.aes}
+
+\sfrdefinition{fcs_cop.1.1/tls.aes}{\sfrunmodifiedfrompp{6.2.8}}
+
+\sfrsubsection{fcs_cop.1/tls.auth}
+
+\sfrdefinition{fcs_cop.1.1/tls.auth}{\sfrunmodifiedfrompp{6.2.8}}
+
+
+\hrefsubsection{sfr.def.additional}{Zusätzliche Sicherheitsanforderungen}
+
+Dieser Abschnitt enthält Sicherheitsanforderungen, die zusätzlich zu denen des
+Schutzprofils definiert werden. Die Anforderungen werden hier um die in Kapitel
+\ref{comp.pp-fcsrng} definierte Anforderung \sfr{fcs_rng.1/hashdrbg}
+erweitert. 
+
+\sfrsubsection{fcs_rng.1/hashdrbg}
+
+\hierarchicalto{No other components}
+\dependencies{No dependencies}
+
+\sfrdefinition{fcs_rng.1.1/hashdrbg}{The TSF shall provide a
+  \stselected[physical, non-physical true, deterministic, hybrid
+  physical, hybrid deterministic]{deterministic} random number
+  generator that implements: \stassigned[list of security
+  capabilities]{}
+  \begin{sfrenumeration}
+  \item[\stassigned{(1)}] \stassigned{If initialized with a random
+      seed using PTRNG of class PTG.2 as random source, the internal
+      state of the RNG shall have at least 100 bits min-entropy.}
+  \item[\stassigned{(2)}] \stassigned{The RNG provides forward
+      secrecy.}
+  \item[\stassigned{(3)}] \stassigned{The RNG provides backward
+      secrecy even if the current internal state is known.}
+  \end{sfrenumeration}
+}
+
+\sfrdefinition{fcs_rng.1.2/hashdrbg}{The TSF shall provide random numbers that
+  meet: \stassigned[a defined quality metric]{}
+  \begin{sfrenumeration}
+  \item[\stassigned{(1)}] \stassigned{The RNG gets initialized during
+      every startup and after 2048 requests with a random seed of
+      minimal 384 bits using a PTRNG of class PTG.2. The RNG generates
+      output for which more than $2^{34}$ strings of bit length 128
+      are mutually different with probability $w > 1- 2^{(-16)}$.}
+  \item[\stassigned{(2)}] \stassigned{Statistical test suites cannot
+      practically distinguish the random numbers from output sequences
+      of an ideal RNG. The random numbers must pass test procedure A.}
+  \end{sfrenumeration}}
+
+
+% !TEX root = ase
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../ase"
+%%% TeX-engine: luatex
+%%% End:

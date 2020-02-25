@@ -1,0 +1,136 @@
+\newcommand{\documenttitle}{Security Target}
+
+\newcommand{\citepp}{\autocite{\thispp}}
+
+\newcommand{\stformat}[1]{\textcolor{blue}{#1}}
+\newcommand{\ppformat}[1]{\uline{#1}}
+
+\makeatletter
+\newcommand{\isempty}[2]{%
+  \@ifmtarg{#1}{#2}{NO}}
+\newcommand{\isnotempty}[2]{%
+  \@ifnotmtarg{#1}{#2}}
+\makeatother
+
+\newcommand{\strefined}[2][]{\stformat{\textbf{#2}}\isnotempty{#1}{\footnote{Refinement: \emph{#1}}}}
+\newcommand{\stassigned}[2][]{\stformat{#2}\isnotempty{#1}{\footnote{Assignment: \emph{#1}}}}
+\newcommand{\stselected}[2][]{\stformat{\emph{#2}}\isnotempty{#1}{\footnote{Selection: \emph{#1}}}}
+\newcommand{\stdeleted}[2][]{\textbf{\stformat{\sout{#2}}}\isnotempty{#1}{\footnote{Deletion: \emph{#1}}}}
+\newcommand{\pprefined}[1]{\textbf{#1}}
+\newcommand{\ppdeleted}[1]{\textbf{\sout{#1}}}
+\newcommand{\ppassigned}[1]{\ppformat{#1}}
+\newcommand{\ppselected}[1]{\ppformat{\textit{#1}}}
+
+\newcommand{\rsaoaep}{RSAOAEP}
+\newcommand{\rsapkcs}{RSA RSAES-PKCS1-v1\_5}
+
+\renewcommand{\sfrlink}[2][]{%
+  \index{\sfrplain{\directlua{removeSfrSubComponent("#2")}}@\sfr{\directlua{removeSfrSubComponent("#2")}}}%
+  \hyperlink{\directlua{removeSfrSubComponent("#2")}}{\sfr[#1]{#2}}}
+
+\newcommand{\sfrlinknoindex}[2][]{%
+  \hyperlink{\directlua{removeSfrSubComponent("#2")}}{\sfr[#1]{#2}}}
+
+\newcommand{\objsource}[1]{\directlua{getObjectiveSource("#1")}}
+
+\newcommand{\sfrsubsection}[1]{\index{\sfrplain{#1}@\sfr{#1}|textbf}%
+  \label{\directlua{toLower("#1")}}%
+  \hypertarget{\directlua{toLower("#1")}}%
+  {\minisec{{\normalsize\sfrplain{#1}}\nopagebreak\\{\small\sfrtext{#1}}}%
+    \vspace{1ex}}}
+
+\newcommand{\objectivesubsection}[1]{\hypertarget{\directlua{toLower("#1")}}%
+  {\minisec{{\normalsize\obj{#1}} {\small{(\objtext{#1})}}}%
+    \label{\directlua{toLower("#1")}}}}
+
+\newcommand{\assumptionsubsection}[2]{\hypertarget{\directlua{toLower("#1")}}%
+  {\minisec{{\normalsize \secitem{#1}} {\small{(#2)}}}%
+    \label{\directlua{toLower("#1")}}}}
+
+
+\newlist{sfrdefinitionlist}{description}{1}
+\setlist[sfrdefinitionlist]{leftmargin=5cm,labelwidth=5cm, labelsep=!}
+
+\newcommand{\sfrdefinition}[2]{%
+  \begin{sfrdefinitionlist}
+  \item[{\normalfont \hypertarget{#1}{{\sfr{#1}}}}] #2
+  \end{sfrdefinitionlist}}
+
+
+
+\DeclareNewTOC[listname={Verzeichnis der ST-Anwendungshinweise}]{appnote}
+
+\newcounter{appnotenumber}
+
+\newcommand{\applicationnote}[3][]{%
+  \refstepcounter{appnotenumber}
+  \begin{sfrdefinitionlist}
+  \item[{\normalfont ST-Anwendungshinweis \arabic{appnotenumber}}] #3
+  \end{sfrdefinitionlist}
+  \addcontentsline{appnote}{section}{\arabic{appnotenumber}\quad{}#2 \isnotempty{#1}{#1}}}
+
+\newcommand{\appnoteref}[1]{ST-Anwendungshinweis~\ref*{#1}}
+
+\newcommand{\hierarchicalto}[1]{%
+  \begin{sfrdefinitionlist}
+  \item[{\normalfont Hierarchical to:}] #1
+  \end{sfrdefinitionlist}}
+
+\newcommand{\dependencies}[1]{%
+  \begin{sfrdefinitionlist}
+  \item[{\normalfont Dependencies:}] #1
+  \end{sfrdefinitionlist}}
+
+\newcommand{\refinement}[1]{%
+  \begin{sfrdefinitionlist}
+  \item[{\normalfont Refinement:}] #1
+  \end{sfrdefinitionlist}}
+
+
+\newlist{sfrenumeration}{enumerate}{1}
+\setlist[sfrenumeration]{leftmargin=1cm,labelindent=0cm,labelwidth=1.5em,labelsep=!}
+\setlist[sfrenumeration,1]{label=(\arabic*)}
+%\setlist[sfrenumeration,2]{label=(\alph*)} Wie einen eigenen Zähler für die zweite Ebene einführen?
+
+\newlist{sfritemize}{itemize}{1}
+\setlist[sfritemize,1]{labelindent=0cm,labelwidth=1.5em,labelsep=!,label=\textbullet}
+%labelsep=0.5em,labelwidth=1em,itemsep=0ex
+
+\newcommand{\appnote}{\textsl{Application note}}
+
+\newcommand{\objunmodifiedfrompp}[1]{Das in Abschnitt~\objsource{#1} von
+  \citepp{} beschriebene Sicherheitsziel \obj{#1} muss erfüllt werden.}
+
+\newcommand{\ospunmodifiedfrompp}[1]{Die in Abschnitt~\objsource{#1} von
+  \citepp{} beschriebene organisatorische Sicherheitspolitik \obj{#1} gilt ohne
+  Anpassung.}
+
+\newcommand{\sfrunmodifiedfrompp}[1]{Die in \autocite[Abschnitt~#1]{\thispp}
+  formulierten Sicherheitsanforderungen gelten ohne Anpassung.}
+
+\newcommand{\unmodifiedfrompp}{Die Verfeinerungen in \citepp{} gelten ohne Anpassung.}
+
+\newcommand{\operationrequired}[1]{\todo[Operation required]{{[}#1{]}}}
+
+\newcolumntype{O}{p{2.3mm}}
+\newcolumntype{T}{p{2.7mm}}
+
+\newcommand{\tracehead}[1]{\rot{\hyperlink{\directlua{toLower("#1")}}%
+    {\textsmaller[2]{\textsf{\objplain{#1}}}}}}
+
+\newcommand{\tracerow}[1]{\textsmaller[2]{\textsf{\nounderscore{#1}}}}
+
+\newcounter{compreq}
+\newcommand{\thecompreqid}{COMP-REQ-\arabic{compreq}}
+\newcommand{\compreqid}[1]{\refstepcounter{compreq}\secitemformat{\thecompreqid}\label{#1}}
+\newcommand{\compreq}[3]{%
+%  \refstepcounter{compreq}%
+  \minisec{\compreqid{#3} #1}
+  #2
+}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: shared
+%%% TeX-engine: luatex
+%%% End:

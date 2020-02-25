@@ -1,0 +1,8 @@
+label;name;plainname
+vpn;VPN Client;VPN Client
+ntpclient;NTP Client;NTP Client
+selfprotect;Protection;Protection
+adminsystem;Ad\-minis\-tra\-tions\-sys\-tem;Administrationssystem
+cryptsystem;Kryp\-to\-diens\-te;Kryptodienste
+tls;TLS-Server;TLS-Server
+nn;(None);(None)

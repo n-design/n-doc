@@ -1,0 +1,25 @@
+\label{tab:ls.lan.protocols-ports}
+\begin{longtable}{@{}lcllcclp{6cm}@{}}
+  \toprule
+  Dienst & In/Out & Protokoll & via & Quellport & Zielport & TSFI & Anmerkung \\ \midrule \endhead
+  \bottomrule \caption*{Übersicht der Protokoll- und Portnummern für IP/TCP/UDP auf \formatintf{LS.LAN}} \endfoot
+  \bottomrule \caption{Übersicht der Protokoll- und Portnummern für IP/TCP/UDP auf \formatintf{LS.LAN}} \endlastfoot
+  Basisprotokolle & -- & IEEE802.3 &  -- & -- & -- &    \tsfilink{ls.lan.ether} \\
+  & -- & IPv4 & IEEE802.3 & -- & -- &    \tsfilink{ls.lan.ip} \\
+  & -- & TCP &  IPv4 & -- & -- &    \tsfilink{ls.lan.tcp} \\
+  & -- & UDP &  IPv4 & -- & -- &    \tsfilink{ls.lan.udp} \\[2ex]
+  Administration & In & TLS & TCP & bel. & 9443 & \tsfilink{ls.lan.tls} & \\ %Verbindung \tlsadmin{} \\
+  & In & HTTP & TLS & bel. & 9443 &  \tsfilink{ls.lan.httpmgmt} \\[2ex]
+\end{longtable}
+
+
+%
+
+%!TEX root = "../adv_fsp"
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: luatex
+%%% TeX-master: "../adv_fsp"
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

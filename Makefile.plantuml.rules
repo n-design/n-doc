@@ -1,0 +1,9 @@
+.PHONY:  pdf
+
+pdf: $(PDF_FILES)
+
+%.pdf: %.wsd
+	plantuml -Djava.awt.headless=true -charset UTF-8 -tpdf $< $@
+
+clean:
+	rm -f $(PDF_FILES)

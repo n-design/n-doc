@@ -1,0 +1,8 @@
+label;name;description
+sf.networkservices;SF.Net\-work\-Ser\-vices;Netzbasierte Sicherheitsfunktionen
+sf.administration;SF.Ad\-mi\-ni\-stra\-tion;Administration
+sf.cryptographicservices;SF.Cryp\-to\-gra\-phic\-Ser\-vices;Kryptografische Dienste
+sf.tls;SF.TLS;TLS-Service
+sf.selfprotection;SF.Self\-Pro\-tec\-tion;Selbstschutz
+sf.nn;SF.OFFEN;Noch nicht zugeordnet
+sf.vpn;SF.VPN;VPN-Client

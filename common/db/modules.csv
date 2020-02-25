@@ -1,0 +1,13 @@
+subsystem;label;name;plainname
+vpn;core;Core;Core
+vpn;cert;Zertifikatsdienst;Zertifikatsdienst
+ntpclient;core;Core;Core
+selfprotect;memory;Speicherschutz;Speicherschutz
+selfprotect;selftest;Selbsttest;Selbsttest
+adminsystem;webserver;HTTP-Server;HTTP-Server
+adminsystem;mgmt;Management-Anwendung;Management-Anwendung
+cryptsystem;algorithms;Al\-go\-rith\-men;Algorithmen
+cryptsystem;keymgmt;Key-Services;Key-Services
+cryptsystem;rng;Zufallszahlen;Zufallszahlen
+tls;core;Core;Core
+tls;cert;Zertifikatsdienst;Zertifikatsdienst

@@ -1,0 +1,39 @@
+\chapter{Logische Schnittstellen}\hypertarget{tsfi.ls}{\label{tsfi.ls}}
+
+In diesem Kapitel werden die logischen Schnittstellen des TOE
+beschrieben. 
+
+In den Unterabschnitten dieses Kapitel gibt es zu jeder Schnittstelle eine
+grafische Darstellung über die Protokolle, die auf der Schnittstelle zum Einsatz
+kommen. Dabei sind diejenigen Protokolle, die zu einer TSFI gehören, orange
+markiert. Gelb markierte Protokolle gehören nicht zu einer TSFI. Gepunktet
+markierte Protokolle sind Schnittstellen für \nontsf{} Anteile des TOE -- also
+\secitem{non-TSFI}. Sie werden trotzdem aufgeführt, da sie als
+Außenschnittstelle des TOE beschreibungsrelevant sind.
+
+\clearpage
+
+\input{../adv_fsp/chapter_3/ls_lan}
+
+\clearpage
+
+\input{../adv_fsp/chapter_3/ls_wan}
+
+\clearpage
+
+
+\hrefsection{tsfi.ls.led}{\tsfisectionname{ls.led}}
+
+Über diese Schnittstelle kann der TOE des Status auf \intf{PS.LED}
+anzeigen. \lsled{} wird vom Betriebssystem genutzt. Die Bedeutung der Anzeige
+ist in \autocite[Kapitel 6]{agd_adm} beschrieben.
+
+
+% !TEX root = adv_fsp
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: luatex
+%%% TeX-master: "adv_fsp"
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

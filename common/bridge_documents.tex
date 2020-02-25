@@ -1,0 +1,21 @@
+\begin{luacode}
+
+  bridge_documents = require "bridge_documents"
+
+  function getDocumentVersion(key)
+    bridge_documents.getDocumentVersion(key, tex)
+  end
+
+  function get_version_number_for_refliste(version)
+   return bridge_documents.get_version_number_for_refliste(version)
+  end
+
+  function gitCommitId(key)
+    bridge_documents.gitCommitId(key, tex)
+  end
+
+  function getDocumentDate(key)
+    bridge_documents.getDocumentDate(key, tex)
+  end
+
+\end{luacode}

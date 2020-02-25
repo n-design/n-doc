@@ -1,0 +1,16 @@
+sfr;sf
+fcs_ckm.1;sf.cryptographicservices
+fcs_ckm.2;sf.cryptographicservices
+fcs_ckm.4;sf.cryptographicservices
+fcs_cop.1/hash;sf.cryptographicservices
+fcs_cop.1/hmac;sf.cryptographicservices
+fcs_cop.1/tls.aes;sf.tls
+fcs_cop.1/tls.auth;sf.tls
+fcs_rng.1/hashdrbg;sf.cryptographicservices
+fdp_rip.1;sf.selfprotection
+fpt_stm.1;sf.networkservices
+fpt_tdc.1/TLS.Zert;sf.tls
+fpt_tst.1;sf.selfprotection
+ftp_itc.1/tls;sf.tls
+ftp_itc.1/vpn;sf.vpn
+ftp_trp.1/admin;sf.administration

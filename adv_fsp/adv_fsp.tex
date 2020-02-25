@@ -1,0 +1,56 @@
+\documentclass[a4paper]{scrreprt}
+\input{../common/common-packages.tex}
+\input{../common/common-macros.tex}
+\input{fsp-common-macros.tex}
+\input{../common/common-packages-atend.tex}
+
+\newcommand{\thisdocument}{adv_fsp}
+
+\begin{document}
+
+\input{../common/titlepage}
+
+\cleardoublepage{}
+
+\tableofcontents
+
+\cleardoublepage{}
+
+\listoftables
+
+\cleardoublepage{}
+
+\listoffigures{}
+
+\cleardoublepage{}
+
+%% Einführung, physische Schnittstellen
+\input{fsp_chapter_1_2}
+
+\cleardoublepage{}
+
+%% Einführung, logische Schnittstellen
+\input{fsp_chapter_3}
+
+\cleardoublepage{}
+
+% %% Übersicht über die Sicherheitsfunktionen
+\input{fsp_chapter_4}
+
+\appendix
+
+\input{appendix}
+
+\input{../common/tls_appendix}
+
+\printbibliography
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: luatex
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

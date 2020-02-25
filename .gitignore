@@ -1,0 +1,89 @@
+# Target files
+ase.pdf
+adv_tds.pdf
+adv_fsp.pdf
+adv_arc.pdf
+refliste.pdf
+alc.pdf
+ate_cov.pdf
+mwe_st.pdf
+mwe_tds.pdf
+mwe_fsp.pdf
+mwe_arc.pdf
+mwe_ate.pdf
+
+# MWE Bodys
+mwe_tds/mwe_tds_body.tex
+mwe_fsp/mwe_fsp_body.tex
+mwe_st/mwe_st_body.tex
+mwe_arc/mwe_arc_body.tex
+mwe_ate/mwe_ate_body.tex
+mwe_*/*.pdf
+
+# Intermediate PDF files
+
+# Generated HTML files
+doku/*.html
+
+# Target directory for delivery
+deliverables/
+
+# TeX auxiliary files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.fls
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lol
+*.lot
+*.out
+*.pyg
+*.toc
+
+# Emacs specific files
+\#*
+.#*
+*~
+auto
+*.rel
+
+# Visual Studio Code specific files
+.vscode
+.*.swp
+.*.swo
+
+# Temp files created by other tools
+Icon*
+.sync/
+*.synctex*
+*.run.xml
+*_latexmk
+.fuse_hidden*
+*.pid
+*.db-journal
+*.fop
+_minted-*/
+
+# Custom lists
+*.todo
+*.appnote
+
+# Intermediate DB Files
+*_raw.csv
+_tmp_*
+
+# SQLite file created by createdb.sh
+mauvecorp_vpn_client.db
+
+# Random scratch files
+scratch/tikztest.pdf

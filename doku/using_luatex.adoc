@@ -1,0 +1,207 @@
+= Lua in der CC-Doku Plattform verwenden
+
+Bei der Übersetzung der LaTeX Dokumente wird an einigen Stellen auf
+den in LuaTeX eingebauten Lua-Interpreter zurückgegriffen. Besonders
+deutlich wird das bei der Auflösung von TDS-Elementen und SFR. Da
+dieses Vorgehen nicht alltäglich bei der Verwendung von LaTeX ist, wird
+hier erklärt, wie diese Komponenten zusammenspielen.
+
+== Architektur der Lua Anteile der Plattform
+
+In LuaLaTeX gibt es verschiedene Verfahren, den Lua Interpreter
+aufzurufen. Die grundsätzliche Einbindung des Interpreters in TeX wird in link:http://dante.ctan.org/tex-archive/info/luatex/lualatex-doc/lualatex-doc.pdf[der Dokumentation des Programms] anschaulich beschrieben.
+
+Am gängigsten ist die Verwendung des Makros ``\directlua{}``. der Inhalt
+des Makros ist Lua-Code, der beim Verarbeiten des Makros ausgeführt
+wird. Darüber hinaus gibt es noch Zusatzpakete, die andere Umgebungen
+bereitstellen, in denen Lua Code untergebracht werden kann. Wir
+verwenden das link:https://dante.ctan.org/ctan/macros/luatex/latex/luacode/luacode.pdf[Luacode] Package.
+
+In unseren Dokumenten findet die Einbindung folgendermaßen statt
+(beispielhaft an ADV_TDS, alle anderen Dokumente funktionieren
+identisch):
+
+``adv_tds/adv_tds.tex``:: ist das Rahmendokument, es bindet die
+gemeinsam genutzten Packages und Makro-Dateien ein.
+
+``common/common-packages.tex``:: enthält die Präambel (also alles, was vor
+dem ``\begin{document}`` kommt) der Dokumente. Hier werden Packages
+geladen, die von allen Dokumenten verwendet werden.
+
+``common/luabridge.tex``:: Hier kommt das erste Mal Lua Code ins
+Spiel. Zuerst werden einige Packages geladen, die zusätzliche Lua
+Aufrufe (vgl. oben) ermöglichen. Außerdem wird hier der Suchpfad für
+die Lua Module gesetzt. Lua hat ein eigenes Verfahren zum Laden von
+Modulen, das im Detail weiter unten beschrieben wird. Weiterhin
+enthält die Datei einen großen Block Code in einer luacode
+Umgebung. In diesem Block werden Funktionen definiert, die von den
+LaTeX Makros aufgerufen werden. Diese Funktionen wiederum stellen eine
+Brücke zu den anderen Lua Module dar, die über require Statements
+geladen werden. Die Ergebnisse der Aufrufe dieser Module werden hier
+über ``tex.sprint()`` an den TeX Prozessor übergeben und in den Textsatz
+eingebracht. Man kann hier ganz grob von API-Funktionen sprechen.
+
+``lua/*.lua``:: Enthält den Code, in dem die fachlichen
+Funktionen umgesetzt sind. Für die verschiedenen Domänen
+(TDS-Elemente, SFR, SF, Objectives) gibt es jeweils eine eigene ``.lua`` Datei, die über ``require`` von der ``luabridge.tex`` herangezogen wird. Hintergrund für dieses Verfahren ist, dass so die Lua Anteile auch außerhalb des LuaTeX Prozesses entwickelt und getestet werden können. An dieser Stelle kann man von der Implementierung der API sprechen, wie sie in ``luabridge.tex`` definiert wird.
+
+== Infrastruktur
+
+Verschiedene Komponenten spielen bei der Ausführung von Lua Code
+zusammen. Hier wird erklärt, welche Programme installiert sein müssen,
+um die Dokumente zu übersetzen. Grundsätzlich gilt, dass in LuaTeX ein
+ganz normaler, vollwertiger Lua Interpreter eingebaut ist. In der bei
+uns verwendeten TeX Distribution TeXLive 2019 hat der Interpreter den
+Versionsstand 5.3.
+
+Allerdings brauchen wir für unsere Dokumente auch externe
+Bibliotheken, die zusätzlich installiert werden müssen. Wir erklären
+das am Beispiel der Bibliothek libsqlite3. Dies ist ein Paket, das
+eine Lua API für den Zugriff auf sqlite3 Datenbanken anbietet.
+
+Die Bibliothek libsqlite3 wird über den Lua Package Manager luarocks
+installiert. luarocks ist selbst vollständig in Lua geschrieben. Er
+lädt Quellpakete, übersetzt diese spezifisch für die vorliegende Lua
+Version und installiert sie in standardisierten Suchpfaden. Leider
+funktionieren die von den Linux Distributionen ausgelieferten luarocks
+Installationen nicht zuverlässig, weswegen es sich empfiehlt, luarocks
+selbst zu installieren.
+
+Wenn luarocks installiert ist, kann man damit fortgefahren, die
+Bibliotheken zu installieren.
+
+Nun die Schritte im einzelnen:
+
+=== Installieren der notwendigen Linux Packages (Ubuntu)
+
+Wir brauchen Lua und seine Entwicklungsbibliotheken in der Version 5.3:
+
+----
+sudo apt install lua5.3 liblua5.3-dev
+----
+
+Außerdem benötigen wir eine sqlite3 Installation inklusive der Quellen:
+
+----
+sudo apt install sqlite3 libsqlite3-0 libsqlite3-dev
+----
+
+
+=== Installieren von luarocks
+
+Den Paketmanager luarocks installiert man am besten direkt aus den Quellen:
+
+----
+wget http://luarocks.github.io/luarocks/releases/luarocks-2.4.3.tar.gz
+tar xzvf luarocks-2.4.3.tar.gz 
+cd luarocks-2.4.3/
+./configure 
+make build
+sudo make install
+----
+
+=== Installieren von libsqlite3, ftcsv, luaunit
+
+Die Bibliothek für den Zugriff auf sqlite3 Datenbanken, der Parser für CSV-Dateien und das Testframework werden anschließend über luarocks installiert:
+
+----
+sudo luarocks install lsqlite3
+sudo luarocks install ftcsv
+sudo luarocks install luaunit
+----
+
+
+Ob alles geklappt hat, lässt sich über einen kleinen Integrationstest festellen:
+----
+cc-autor@cc-vm:~$ lua
+Lua 5.3.5  Copyright (C) 1994-2018 Lua.org, PUC-Rio
+> l = require "lsqlite3"
+> print (l)
+table: 0x5580b5f885e0
+----
+
+Wenn der Interpreter die Biblitohek laden und referenzieren kann, wird
+die Adresse des Moduls ausgegeben. Ansonsten gibt es eine
+Fehlermeldung (beispielhaft für die nicht existierende Bibliothek
+lsqlite3a:
+
+----
+> x = require "lsqlite3a"
+stdin:1: module 'lsqlite3a' not found:
+	no field package.preload['lsqlite3a']
+	no file '/usr/local/share/lua/5.2/lsqlite3a.lua'
+	no file '/usr/local/share/lua/5.2/lsqlite3a/init.lua'
+	no file '/usr/local/lib/lua/5.2/lsqlite3a.lua'
+	no file '/usr/local/lib/lua/5.2/lsqlite3a/init.lua'
+	no file '/usr/share/lua/5.2/lsqlite3a.lua'
+	no file '/usr/share/lua/5.2/lsqlite3a/init.lua'
+	no file './lsqlite3a.lua'
+	no file '/usr/local/lib/lua/5.2/lsqlite3a.so'
+	no file '/usr/lib/x86_64-linux-gnu/lua/5.2/lsqlite3a.so'
+	no file '/usr/lib/lua/5.2/lsqlite3a.so'
+	no file '/usr/local/lib/lua/5.2/loadall.so'
+	no file './lsqlite3a.so'
+stack traceback:
+	[C]: in function 'require'
+	stdin:1: in main chunk
+	[C]: in ?
+----
+
+=== Installation unter macOS
+
+Die Komponenten, die unter Linux mit einem Paketmanager installiert
+werden, können grundsätzlich auch unter macOS mit einem Paketmanager
+(z.B. link:https://brew.sh/[Homebrew]) installiert werden:
+
+----
+brew install lua
+----
+
+Zudem ist sqlite3 im Lieferumfang von macOS enthalten. Allerdings
+fehlen dann die Header-Dateien an den von Luarocks, bzw. lsqlite3
+erwarteten Stellen. Daher hat es sich bewährt, sqlite3 selbst zu
+kompilieren und zu installieren. Dafür ist eine Compilerumgebung
+erforderlich, sodass man am besten XCode installiert.
+
+----
+curl -O https://sqlite.org/2017/sqlite-autoconf-3200100.tar.gz
+tar xzvf sqlite-autoconf-3200100.Tar
+cd sqlite-autoconf-3200100
+./configure; make
+sudo make install
+----
+
+Alle weiteren Punkte funktionieren genau wie in der Installation unter Linux.
+
+
+
+=== Integration der Lua Module in LuaTeX
+
+Jetzt wird es trickreich: Der in LuaTeX eingebaute Lua Interpreter
+wird beim Start mit einem anderen Mechanismus für das Laden der
+Packages konfiguriert: Standard Lua verwendet die globale Variable
+package.path, die (in etwa) eine Liste von Pfaden enthält, in denen
+nach Modulen gesucht wird. LuaTeX hingegen verwendet den
+Suchmechanismus KPSE, der insgesamt in der TeXLive Distribution
+verwendet wird, um Packages, Schriftarten, Makrodateien, TeX Dateien
+und vieles mehr zu laden. Er bildet eine Reihe
+von sog. TEXMF-Verzeichnisbäumen, in denen die Dateien liegen. KPSE
+ist ein ausgefeilter Mechanismus, der uns in der CC-Dokumentation
+leider Knüppel zwischen die Beine wirft: Das Verzeichnis ``../common/``,
+in dem sich alle unsere Lua Dateien und die davon abhängigen CSV
+Dateien befinden, liegt nicht in einem TEXMF-Baum und somit nicht in
+den Suchpfaden. Daher muss der Suchpfad angepasst werden, was wir in
+``luabridge.tex`` vornehmen:
+
+----
+\directlua{package.path = "../common/?.lua;" .. package.path}
+\usepackage{luapackageloader}
+----
+Mit diesen Befehlen wird der Suchpfad package.path erweitert. Danach
+wird ein Package geladen, das den ursprünglichen Lua Suchmechanismus
+für Module wieder herstellt, bzw. den KPSE basierten Mechanismus
+ergänzt. So können wir eigene Module aus unserem Dokumenten-Repository
+einbinden, ohne die Module an eine Stelle im TEXMF-Baum zu kopieren
+und damit aus dem Git-Repository zu lösen.
+
+

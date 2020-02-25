@@ -1,0 +1,44 @@
+label;name;description;src
+fcs_ckm.1.1;FCS\_CKM.1.1;Cryptographic key generation;6.2.x
+fcs_ckm.1;FCS\_CKM.1;Cryptographic key generation;6.2.x
+fcs_ckm.2.1;FCS\_CKM.2.1;Cryptographic key distribution;6.2.x
+fcs_ckm.2;FCS\_CKM.2;Cryptographic key distribution;6.2.x
+fcs_ckm.4.1;FCS\_CKM.4.1;Cryptographic key destruction;6.2.x
+fcs_ckm.4;FCS\_CKM.4;Cryptographic key destruction;6.2.x
+fcs_cop.1.1/hash;FCS\_COP.1.1/Hash;Cryptographic operation/Hash;6.2.x
+fcs_cop.1.1/hmac;FCS\_COP.1.1/HMAC;Cryptographic operation/HMAC;6.2.x
+fcs_cop.1.1/tls.aes;FCS\_COP.1.1/TLS.AES;Cryptographic operation;6.2.x
+fcs_cop.1.1/tls.auth;FCS\_COP.1.1/TLS.Auth;Cryptographic operation for TLS;6.2.x
+fcs_cop.1/hash;FCS\_COP.1/Hash;Cryptographic operation;6.2.x
+fcs_cop.1/hmac;FCS\_COP.1/HMAC;Cryptographic operation;6.2.x
+fcs_cop.1/tls.aes;FCS\_COP.1/TLS.AES;Cryptographic operation;6.2.x
+fcs_cop.1/tls.auth;FCS\_COP.1/TLS.Auth;Cryptographic operation for TLS;6.2.x
+fcs_rng.1.1/hashdrbg;FCS\_RNG.1.1/Hash\_DRBG;Zufallszahlenerzeugung;6.2.x
+fcs_rng.1.2/hashdrbg;FCS\_RNG.1.2/Hash\_DRBG;Zufallszahlenerzeugung;6.2.x
+fcs_rng.1/hashdrbg;FCS\_RNG.1/Hash\_DRBG;Zufallszahlenerzeugung;6.2.x
+fdp_rip.1.1;FDP\_RIP.1.1;Subset residual information protection;6.2.x
+fdp_rip.1;FDP\_RIP.1;Subset residual information protection;6.2.x
+fpt_tdc.1.1/tls.zert;FPT\_TDC.1.1/TLS.Zert;Inter-TSF basic TSF data consistency;6.2.x
+fpt_tdc.1.2/tls.zert;FPT\_TDC.1.2/TLS.Zert;Inter-TSF basic TSF data consistency;6.2.x
+fpt_tdc.1/tls.zert;FPT\_TDC.1/TLS.Zert;Inter-TSF basic TSF data consistency;6.2.x
+fpt_tdc.1.1/zert;FPT\_TDC.1.1/Zert;Inter-TSF basic TSF data consistency;6.2.x
+fpt_tdc.1.2/zert;FPT\_TDC.1.2/Zert;Inter-TSF basic TSF data consistency;6.2.x
+fpt_tdc.1/zert;FPT\_TDC.1/Zert;Inter-TSF basic TSF data consistency;6.2.x
+fpt_stm.1.1;FPT\_STM.1.1;Reliable time stamps;6.2.x
+fpt_stm.1;FPT\_STM.1;Reliable time stamps;6.2.x
+fpt_tst.1.1;FPT\_TST.1.1;TSF testing;6.2.x
+fpt_tst.1.2;FPT\_TST.1.2;TSF testing;6.2.x
+fpt_tst.1.3;FPT\_TST.1.3;TSF testing;6.2.x
+fpt_tst.1;FPT\_TST.1;TSF testing;6.2.x
+ftp_itc.1.1/tls;FTP\_ITC.1.1/TLS;Inter-TSF trusted channel / TLS;6.2.x
+ftp_itc.1.1/vpn;FTP\_ITC.1.1/VPN;Inter-TSF trusted channel / VPN;6.2.x
+ftp_itc.1.2/tls;FTP\_ITC.1.2/TLS;Inter-TSF trusted channel / TLS;6.2.x
+ftp_itc.1.2/vpn;FTP\_ITC.1.2/VPN;Inter-TSF trusted channel / VPN;6.2.x
+ftp_itc.1.3/tls;FTP\_ITC.1.3/TLS;Inter-TSF trusted channel / TLS;6.2.x
+ftp_itc.1.3/vpn;FTP\_ITC.1.3/VPN;Inter-TSF trusted channel / VPN;6.2.x
+ftp_itc.1/tls;FTP\_ITC.1/TLS;Inter-TSF trusted channel / TLS;6.2.x
+ftp_itc.1/vpn;FTP\_ITC.1/VPN;Inter-TSF trusted channel / VPN;6.2.x
+ftp_trp.1.1/admin;FTP\_TRP.1.1/Admin;Trusted path;6.2.x
+ftp_trp.1.2/admin;FTP\_TRP.1.2/Admin;Trusted path;6.2.x
+ftp_trp.1.3/admin;FTP\_TRP.1.3/Admin;Trusted path;6.2.x
+ftp_trp.1/admin;FTP\_TRP.1/Admin;Trusted path;6.2.x

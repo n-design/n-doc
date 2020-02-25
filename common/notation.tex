@@ -1,0 +1,50 @@
+\section*{Anmerkungen zur Notation}
+
+Tabelle~\vref{tab:intro.notc} listet die in diesem Dokument verwendeten
+typographischen Auszeichnungen und ihre Verwendung auf. Oftmals ist die
+Abgrenzung zwischen den in der Tabelle aufgeführten Kategorien nicht ganz
+leicht: So kommt es gelegentlich vor, dass auf verschiedenen Abstraktionsebenen
+dieselben Begriffe verwendet werden. Es ist in solchen Fällen nicht auf den
+ersten Blick zu erkennen, auf welcher Abstraktionsebene der Begriff gerade
+verwendet wird. Beispielsweise kann ein Begriff gleichzeitig ein
+Konfigurationsparameter aus der Spezifikation und gleichzeitig der Name einer
+Variable im Code sein. Durch eine möglichst hohe typographische Konsistenz soll
+der jeweilige Kontext verdeutlicht werden. Die Hinweise in
+\tableref{tab:intro.notc} sollen helfen, die Begrifflichkeiten einzuordnen und
+voneinander abzugrenzen.
+
+Module und Subsysteme werden durch doppelte Doppelpunkte in der Form
+\secitemformat{Sub\-sys\-tem::Mo\-dul} notiert. Wird in einem solchen Kontext
+auf eine Schnittstelle verwiesen, wird der Name der Schnittstelle durch zwei
+Schrägstriche vom Namen des Moduls getrennt:
+\secitemformat{Sub\-sys\-tem::Mo\-dul//Schnittstelle}.
+
+Die ihm Text zitierten Namen von Code-Elementen -- besonders die Komponenten im
+Java-Umfeld -- können zum Teil lang werden. In solchen Fällen werden die Namen
+der besseren Lesbarkeit halber mit Trennstrichen versehen, die in dieser Form
+nicht im Code sichtbar sind. Diese minimale Abweichung wird in Kauf genommen, um
+dem Text ein harmonisches Gesamtbild zu verleihen, das nicht durch übermäßigen
+Weißraum gestört wird.
+
+\begin{table}[htb]
+  \centering{}
+  \begin{tabularx}{\textwidth}{@{}lX@{}}
+    \toprule
+    Typographische Auszeichnung & Verwendung\\
+    \midrule
+    \keyword{Schlüsselwörter} & \keyword{Schlüsselwörter} sind solche Begriffe, die z.\,B. direkt aus der Spezifikation entnommen sind, dies können Konfigurationsparameter und ihre Werte sein. Aber auch andere Begriffe, die im Kontext des TOE eine hervorgehobene Bedeutung haben, sind so ausgezeichnet.\\
+    \code{Code-Elemente} & \code{Code-Elemente} sind solche Begriffe, die unmittelbar aus dem Source-Code des TOE entnommen sind. Dies können beispielsweise Java-Bundles, Klassen- oder Methodennamen sein, aber auch deren Parameter oder logische Strukturen in einer der verwendeten Programmiersprachen.\\
+    \filename{Dateinamen} & \filename{Dateinamen} beziehen sich auf Namen oder Namensteile von Elementen im Dateisystem.\\
+    \secitem{Sicherheitsbezogene Begriffe} & Begriffe, die in direktem Bezug zum Rahmenwerk der Common Criteria stehen, sind als \secitem{Sicherheitsbezogene Begriffe} gesetzt. Dies sind SFR, die Namen der SF und TSFI, aber auch die Namen der Subsysteme, Module und Schnittstellen, die den TOE konstituieren. Weiterhin sind Namen der vom TOE verwendeten Zertifikate und sonstigen Schlüsselmaterials in dieser Form gesetzt.\\
+    \bottomrule
+  \end{tabularx}
+    \caption{Typographische Konventionen}
+    \label{tab:intro.notc}
+\end{table}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: shared
+%%% TeX-engine: luatex
+%%% End:

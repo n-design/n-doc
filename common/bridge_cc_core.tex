@@ -1,0 +1,113 @@
+\begin{luacode}
+
+  bridge_cc_core = require "bridge_cc_core"
+
+  function replacelabel(key, fullyq)
+    bridge_cc_core.replacelabel(key, fullyq, tex)
+  end
+
+  function get_module_status(key)
+    bridge_cc_core.get_module_status(key, tex)
+  end
+
+  function print_module_to_sfr_table(key, relationtype)
+    bridge_cc_core.print_module_to_sfr_table(key, relationtype, tex)
+  end
+
+  function print_modules_for_sfr_rows()
+    bridge_cc_core.print_modules_for_sfr_rows(tex)
+  end
+
+  function print_modules_for_sfr_row(sfr)
+    bridge_cc_core.print_modules_for_sfr_row(sfr, tex)
+  end
+
+  function print_tsfi_for_sfr_rows()
+    bridge_cc_core.print_tsfi_for_sfr_rows(tex)
+  end
+
+  function print_tsfi_for_sfr_row(sfr)
+    bridge_cc_core.print_tsfi_for_sfr_row(sfr, tex)
+  end
+
+  function print_sfr_for_tsfi_rows()
+    bridge_cc_core.print_sfr_for_tsfi_rows(tex)
+  end
+
+  function print_sfr_for_tsfi_row(tsfi)
+    bridge_cc_core.print_sfr_for_tsfi_row(tsfi, tex)
+  end
+
+  function print_subsys_to_sfr_table(key, relationtype)
+    bridge_cc_core.print_subsys_to_sfr_table(key, relationtype, tex)
+  end
+
+  function print_module_to_bundle_table(key)
+    bridge_cc_core.print_module_to_bundle_table(key, tex)
+  end
+
+  function print_tuc_to_sfr_table(key)
+    bridge_cc_core.print_tuc_to_sfr_table(key, tex)
+  end
+
+  function print_sf_to_tsfi_table(key)
+    bridge_cc_core.print_sf_to_tsfi_table(key, tex)
+  end
+
+  function print_tsfi_to_sf_table(key)
+    bridge_cc_core.print_tsfi_to_sf_table(key, tex)
+  end
+
+  function getSfr(key)
+    bridge_cc_core.getSfr(key, tex)
+  end
+
+  function getSfrText(key)
+    bridge_cc_core.getSfrText(key, tex)
+  end
+
+  function removeSfrSubComponent(key)
+    bridge_cc_core.removeSfrSubComponent(key, tex)
+  end
+
+  function getSecfunc(key)
+    bridge_cc_core.getSecfunc(key, tex)
+  end
+
+  function getSecfuncText(key)
+    bridge_cc_core.getSecfuncText(key, tex)
+  end
+
+  function getObjective(key)
+    bridge_cc_core.getObjective(key, tex)
+  end
+
+  function getObjectiveText(key)
+    bridge_cc_core.getObjectiveText(key, tex)
+  end
+
+  function getObjectiveSource(key)
+    bridge_cc_core.getObjectiveSource(key, tex)
+  end
+
+  function getTsfi(key)
+    bridge_cc_core.getTsfi(key, tex)
+  end
+
+  function print_testcase_table()
+    bridge_cc_core.print_testcase_table(tex)
+  end
+
+  function print_sfr_to_num_testcase_table()
+    bridge_cc_core.print_sfr_to_num_testcase_table(tex)
+  end
+
+  function print_tsfi_to_num_testcase_table()
+    bridge_cc_core.print_tsfi_to_num_testcase_table(tex)
+  end
+
+  function print_module_to_num_testcase_table()
+    bridge_cc_core.print_module_to_num_testcase_table(tex)
+  end
+
+\end{luacode}

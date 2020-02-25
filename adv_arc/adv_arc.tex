@@ -1,0 +1,70 @@
+\documentclass[a4paper]{scrreprt}
+\input{../common/common-packages.tex}
+\input{../common/common-macros.tex}
+\input{arc-common-macros.tex}
+
+\newcommand{\documenttitle}{Sicherheitsarchitektur}
+\newcommand{\thisdocument}{adv_arc}
+
+\input{../common/common-packages-atend.tex}
+
+\makeindex
+\newindex[Liste der SFR]{sfr}
+
+\begin{document}
+
+\input{../common/titlepage}
+
+\cleardoublepage{}
+
+\tableofcontents
+
+\cleardoublepage{}
+
+\listoftables
+
+\cleardoublepage{}
+
+\listoffigures{}
+
+\cleardoublepage{}
+
+\input{arc_chapter_1}
+
+\input{arc_chapter_2}
+
+\input{arc_chapter_3}
+
+\input{arc_chapter_4}
+
+\input{arc_chapter_5}
+
+\input{arc_chapter_6}
+
+\input{arc_chapter_7}
+
+\input{tsfi-zu-sfr}
+
+\appendix
+
+\input{../common/tls_appendix}
+
+\input{../common/tsfi_appendix}
+
+\printbibliography
+
+\cleardoublepage
+
+\printindex[sfr][Index der SFR]
+
+\clearpage
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: luatex
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

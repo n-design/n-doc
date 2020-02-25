@@ -1,0 +1,12 @@
+label;name;description;PP
+o.admin;O.Admin;Administration nur nach Autorisierung und über sicheren Kanal;4.1.1
+o.tlscrypto;O.TLS\_Krypto;TLS-Kanäle mit sicheren kryptographische Algorithmen;4.1.1
+o.schutz;O.Schutz;Selbstschutz, Selbsttest und Schutz von Benutzerdaten;4.1.1
+o.zeitdienst;O.Zeitdienst;Nutzung eines sicheren Zeitdienstes;4.1.1
+o.vpn_auth;O.VPN\_Auth;Gegenseitige Authentisierung im VPN-Tunnel;4.1.2
+o.vpn_integrität;O.VPN\_Integrität;Integritätsschutz von Daten im VPN-Tunnel;4.1.2
+o.vpn_vertraul;O.VPN\_Vertraul;Schutz der Vertraulichkeit von Daten im VPN-Tunnel;4.1.2
+o.zert_prüf;O.Zert\_Prüf;Gültigkeitsprüfung für VPN-Zertifikate;4.1.2
+oe.echtzeituhr;OE.Echtzeituhr;Bereitstellung einer Echtzeituhr;4.4
+osp.tls;OSP.TLS;TLS-Kanäle mit sicheren kryptographische Algorithmen;3.4
+osp.zeitdienst;OSP.Zeitdienst;Zeitdienst;3.4

@@ -1,0 +1,88 @@
+\hrefchapter{obj}{Sicherheitsziele}
+
+\hrefsection{obj.toe}{Sicherheitsziele des TOE}
+
+\objectivesubsection{o.tlscrypto}
+\objunmodifiedfrompp{o.tlscrypto}
+
+\objectivesubsection{o.schutz}
+\objunmodifiedfrompp{o.schutz}
+
+\objectivesubsection{o.admin}
+\objunmodifiedfrompp{o.admin}
+
+\objectivesubsection{o.vpn_auth}
+\objunmodifiedfrompp{o.vpn_auth}
+
+\objectivesubsection{o.vpn_integrität}
+\objunmodifiedfrompp{o.vpn_integrität}
+
+\objectivesubsection{o.vpn_vertraul}
+\objunmodifiedfrompp{o.vpn_vertraul}
+
+\objectivesubsection{o.zeitdienst}
+\objunmodifiedfrompp{o.zeitdienst}
+
+\objectivesubsection{o.zert_prüf}
+\objunmodifiedfrompp{o.zert_prüf}
+
+
+\hrefsection{obj.env}{Sicherheitsziele für die Umgebung des TOE}
+
+\objectivesubsection{oe.echtzeituhr}
+\objunmodifiedfrompp{oe.echtzeituhr}
+
+
+\hrefsection{obj.toe.ratio}{Erklärung der Sicherheitsziele des TOE}
+
+\hrefsubsection{obj.toe.ratio.overview}{Abbildung der Bedrohungen, OSPs
+  und Annahmen auf Ziele}
+
+Die Abbildung der Bedrohungen, organisatorischen Sicherheitspolitiken und
+Annahmen auf Sicherheitsziele für den TOE entspricht den in \citepp{}
+beschriebenen Relationen. \tableref{tab:o.mapping} entspricht grundsätzlich der
+Übersicht im Schutzprofil.
+
+Das Schutzprofil beschreibt darüber hinaus, dass einige Bedrohungen
+durch Assurance-Komponenten der CC abgewehrt werden. Diese zusätzliche
+Sicherung gilt auch für dieses Security Target.
+
+\afterpage{%
+  \clearpage% Flush earlier floats (otherwise order might not be correct)
+  \begin{landscape}% Landscape page
+    \centering % Center table
+    \small
+    \input{objectives_tracing.tex}
+  \end{landscape}
+  \clearpage% Flush page
+}
+
+\hrefsubsection{obj.toe.ratio.changes}{Erklärung der Abweichungen
+  gegenüber dem Schutzprofil}
+
+Für alle unmodifizerten Beziehungen, die dem Schutzprofil entnommen
+sind (in \tableref{tab:o.mapping} mit "`\tcheck{}"' markiert) gelten
+die Erklärungen, die im Schutzprofil beschrieben sind.
+
+\hrefsubsubsection{obj.toe.ratio.threats}{Abwehr der Bedrohungen
+  durch die Sicherheitsziele}
+
+\hrefsubsubsection{obj.toe.ratio.osps}{Abbildung der organisatorischen
+  Sicherheitspolitiken auf Sicherheitsziele}
+
+Die Abbildungen der organisatorischen Sicherheitspolitiken auf Sicherheitsziele
+wird unverändert aus dem Schutzprofil übernommen.
+
+\hrefsubsubsection{obj.toe.ratio.changes.assumptions}{Abbildung der
+  Annahmen auf Sicherheitsziele für die Umgebung}
+
+Die Abbildung der Annahmen auf Sicherheitsziele der Umgebung wird
+unverändert aus dem Schutzprofil übernommen.
+
+
+% !TEX root = ../ase
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../ase"
+%%% TeX-engine: luatex
+%%% End:

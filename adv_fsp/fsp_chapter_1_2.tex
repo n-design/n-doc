@@ -1,0 +1,51 @@
+\chapter{Einführung}
+\label{intro}
+
+Dieses Dokument enthält die notwendigen Informationen zu Evaluation
+der Vertrauenswürdigkeitskomponente \secitem{ADV_FSP.4} für die
+Evaluation des \thisproduct{}.
+
+Das Dokument beschreibt zunächst die physikalischen und logischen
+Schnittstellen, welche die Sicherheitsfunktionalität des TOE (TSF) betreffen. Im
+Anschluss werden alle Sicherheitsfunktionen des TOE ausführlich beschrieben. Es
+wird dokumentiert, über welche Schnittstelle die Sicherheitsfunktionen aktiviert
+werden.
+
+\input{../common/notation.tex}
+
+\cleardoublepage
+
+\chapter{Physische Schnittstellen}\label{tsfi.ps}
+
+\hrefsection{tsfi.ps.lan}{\texorpdfstring{\formatintf{PS.LAN}}{PS.LAN}}
+
+Über die Netzwerkschnittstellen können Clientsysteme oder andere Systeme im LAN
+mit dem TOE kommunizieren. Die logische Schnittstelle \lslan{} wird über diese
+physische Schnittstelle bereitgestellt.
+
+Obwohl der TOE ein reiner Software-TOE ist, spielt auch die Hardware, auf der
+der TOE läuft, eine wichtige Rolle für die Sicherheit. Aus diesem Grund
+betrachten wir hier kurz einige Eigenschaften der physischen Schnittstellen, die
+im \thisproduct{} verbaut sind. Die Beschreibung gilt gleichermaßen für
+\formatintf{PS.LAN} wie für \formatintf{PS.WAN}.
+
+
+\hrefsection{tsfi.ps.wan}{\texorpdfstring{\formatintf{PS.WAN}}{PS.WAN}}
+
+Eine analog zu \formatintf{PS.LAN} ausgeführte Ethernet-Schnittstelle zu
+Datennetzen (WAN)\dots
+
+\hrefsection{tsfi.ps.led}{\texorpdfstring{\formatintf{PS.LED}}{PS.LED}}
+
+Der TOE ist mit LED ausgestattet, die im Takt blinken. Über die physische
+Schnittstelle wird die logische Schnittstelle \lsled{} erreicht, über die der
+Nutzer Informationen über den Zustand des TOE abrufen kann.
+
+% !TEX root = "../adv_fsp"
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: luatex
+%%% TeX-master: "../adv_fsp"
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

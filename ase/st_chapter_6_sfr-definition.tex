@@ -1,0 +1,111 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chapter 6 : SFR Definitions %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrefchapter{sfr}{Sicherheitsanforderungen}
+
+\hrefsection{sfr.intro}{Hinweise und Definitionen}
+
+Der größte Teil der Sicherheitsanforderungen wird ohne Anpassungen aus dem
+Schutzprofil übernommen. Anpassungen werden kenntlich gemacht. Bei denjenigen
+SFR, die das Schutzprofil bereits vorsieht, wird in diesem Security Target
+darauf verzichtet, die Hierarchie der Komponenten sowie deren Abhängigkeiten zu
+wiederholen. Diese Informationen sind dem Schutzprofil \citepp{} zu
+entnehmen. Bei Sicherheitsanforderungen, die durch das Security Target
+hinzugefügt werden, sind die Hierarchie- und Abhängigkeitsinformationen
+aufgeführt.
+
+\hrefsubsection{sfr.intro.notc}{Hinweise zur Notation}
+
+Die typographischen Auszeichnungen für die Operationen an den SFR sind in
+\tableref{tab:sfr.intro.notc} beschrieben. ST-seitige Löschungen werden immer von
+einem Hinweis begleitet, wie die Löschung motiviert ist.
+
+\begin{table}[htb]
+  \centering{}
+  \begin{tabularx}{\textwidth}{@{}llX@{}}
+    \toprule
+    Quelle & Art der Anpassung & Typographische Eigenschaften\\
+    \midrule
+    PP & Zuweisung (Assignment) & Zuweisungen sind \ppassigned{unterstrichen} gesetzt.\\
+    & Auswahl (Selection) & Auswahlen sind \ppselected{kursiv und unterstrichen} gesetzt.\\
+    & Verfeinerung (Refinement) & Verfeinerungen sind \pprefined{fett} gesetzt.\\
+    & Löschung (Deletion) & Löschungen sind \ppdeleted{fett und durchgestrichen} gesetzt.\\
+    \midrule
+    ST & Zuweisung (Assignment) & Zuweisungen sind \stassigned{in blauer Schrift} gesetzt.\\
+    & Auswahl (Selection) & Auswahlen sind \stselected{in blauer Schrift und kursiv} gesetzt.\\
+    & Verfeinerung (Refinement) & Verfeinerungen sind \strefined{in blauer Schrift und fett} gesetzt.\\
+    & Löschung (Deletion) & Löschungen sind \stdeleted{in blauer Schrift, fett und durchgestrichen} gesetzt.\\
+    \bottomrule
+  \end{tabularx}
+    \caption{Typographische Konventionen}
+    \label{tab:sfr.intro.notc}
+\end{table}
+
+\hrefsubsection{sfr.intro.model}{Modellierung von Subjekten, Objekten,
+  Attributen und Operationen}
+
+Die Modellierungen des Schutzprofils \citepp{} gelten auch für dieses Security
+Target.
+
+\input{chapter_6/sfr_definitions}
+
+
+
+\hrefsection{sfr.toe.eal}{Sicherheitsanforderungen an die
+  Vertrauenswürdigkeit des EVG}
+
+Die Sicherheitsanforderungen an die Vertrauenswürdigkeit für dieses Security
+Target entsprechen denen, die in \citepp{} definiert sind.
+
+\hrefsection{sfr.ratio}{Erklärung der Sicherheitsanforderungen}
+
+\hrefsubsection{sfr.ratio.dep}{Erklärung der Abhängigkeiten der SFR}
+
+Die Abhängigkeiten der in \sectref{sfr.def} aufgestellten funktionalen
+Sicherheitsanforderungen sind erfüllt. Es gelten dieselben Auflösungen von
+Abhängigkeiten, wie sie im Schutzprofil \citepp[Abschnitt~6.4.2]{} beschrieben
+sind.
+
+Die Abhängigkeiten der über das Schutzprofil hinaus aufgenommenen
+Sicherheitsanforderungen sind bei der Definition des jeweiligen SFR
+notiert.  Die zusätzlich aufgenommenen SFR sind Iterationen
+bestehender Komponenten, sodass sich durch diese keine neuen
+Abhängigkeiten ergeben.
+
+Die in \sectref{comp.pp-fcsrng} neu eingeführte Komponente
+\secitem{FCS_RNG.1} hat keine Abhängigkeiten, die aufgelöst werden
+müssen.
+
+\hrefsubsection{sfr.ratio.overview}{Überblick der Abdeckung von
+  Sicherheitszielen}
+
+
+Die Zuordnung von Sicherheitszielen zu Sicherheitsanforderungen entspricht
+weitestgehend der Zuordnung, die in \citepp{} getroffen
+wurde. \tableref{tab:sfr.ratio.sfrtoobjmapping} zeigt den Zusammenhang.
+
+\afterpage{%
+  \clearpage% Flush earlier floats (otherwise order might not be correct)
+  \centering % Center table
+  \input{../ase/chapter_6/mapping_sfr_to_objectives}%     
+  % \clearpage% Flush page
+}
+
+\hrefsubsection{sfr.ratio.obj}{Detaillierte Erklärung für die
+  Sicherheitsziele}
+
+Die detaillierte Erklärung der Sicherheitsziele wird unverändert aus \citepp{}
+übernommen.
+
+\hrefsection{sfr.ratio.eal}{Erklärung für die gewählte EAL-Stufe}
+
+Die Erklärung der gewählten EAL-Stufe wird unverändert aus dem Schutzprofil
+\citepp{} übernommen.
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "ase"
+%%% TeX-engine: luatex
+%%% End:

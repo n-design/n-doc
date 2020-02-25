@@ -1,0 +1,67 @@
+\documentclass[a4paper]{scrreprt}
+\input{../common/common-packages.tex}
+\input{../common/common-macros.tex}
+\newcommand{\thisdocument}{alc}
+\newcommand{\documenttitle}{Life Cycle Support}
+
+\setcounter{secnumdepth}{4}
+\typearea{11}
+\sloppy
+
+\input{../common/common-packages-atend.tex}
+
+\begin{document}
+
+\input{../common/titlepage}
+
+\cleardoublepage{}
+
+\tableofcontents
+
+\cleardoublepage{}
+
+\listoftables
+
+\cleardoublepage{}
+
+\listoffigures{}
+
+\cleardoublepage{}
+
+\hrefchapter{einleitung}{Einleitung}
+
+Dieses Dokument enthält die notwendigen Informationen zur Evaluation der
+Vertrauenswürdigkeitskomponenten \secitem{ALC_CMC.3}, \secitem{ALC_CMS.3},
+\secitem{ALC_DEL.1}, \secitem{ALC_DVS.1}, \secitem{ALC_LCD.1} und
+\secitem{ALC_TAT.1} für die Evaluation des \thisproductlong{} bezogen auf den
+Entwicklungsstandort MauveCorp, Fliederweg~98, Köln.
+
+\hrefchapter{standort}{Übersicht über den Entwicklungsstandort}
+
+\hrefchapter{konfigurationsliste}{Konfigurationsliste (ALC\_CMS.3)}
+
+\hrefchapter{konfigurationsmanagementplan}{Konfigurationsmanagementplan (ALC\_CMC.3)}
+
+\hrefchapter{auslieferung}{Auslieferung des TOE (ALC\_DEL.1)}
+
+\hrefchapter{sicherheit}{Sicherheit der Entwicklungsumgebung (ALC\_DVS.1)}
+
+\hrefchapter{lebenzyklus}{Lebenszyklus des TOE (ALC\_LCD.1)}
+
+\hrefchapter{entwicklungswerkzeuge}{Entwicklungswerkzeuge (ALC\_TAT.1)}
+
+\cleardoublepage{}
+
+\appendix
+
+\cleardoublepage
+
+\printbibliography
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "alc"
+%%% TeX-engine: luatex
+%%% End:

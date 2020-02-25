@@ -1,0 +1,20 @@
+sfr;relationtype;subsystem;module;purpose
+fcs_ckm.1;enf;cryptsystem;keymgmt;Schlüsselerstellung für VPN und TLS
+fcs_ckm.2;enf;cryptsystem;keymgmt;Schlüsselverteilung für VPN und TLS
+fcs_ckm.4;enf;cryptsystem;keymgmt;Schlüsselzerstörung für VPN und TLS
+fcs_cop.1/hash;enf;cryptsystem;algorithms;Hash-Algorithmen bereitstellen
+fcs_cop.1/hmac;enf;cryptsystem;algorithms;HMAC-Algorithmen bereitstellen
+fcs_cop.1/tls.aes;enf;tls;core;AES für TLS bereitstellen
+fcs_cop.1/tls.auth;enf;tls;core;Authentisierung des TLS-Partners
+fcs_rng.1/hashdrbg;enf;cryptsystem;rng;Zufallszahlen erzeugen
+fdp_rip.1;enf;selfprotect;memory;Speicher bereinigen
+fpt_tdc.1/tls.zert;enf;tls;cert;Zertifikatsprüfung
+fpt_tdc.1/zert;enf;vpn;cert;Zertifikatsprüfung
+fpt_stm.1;enf;ntpclient;core;Zeitdienst
+fpt_tst.1;enf;selfprotect;selftest;Selbsttest ausführen
+ftp_itc.1/tls;enf;tls;core;TLS-Verbindungen starten/beenden
+ftp_itc.1/vpn;enf;vpn;core;VPN-Verbindungen starten/beenden
+ftp_itc.1/vpn;sup;adminsystem;mgmt;VPN-Verbindungen managen
+ftp_trp.1/admin;enf;adminsystem;webserver;Managementanwendung bereitstellen
+ftp_trp.1/admin;sup;vpn;core;VPN-Verbindungen starten/beenden
+fpt_tst.1;sup;selfprotect;selftest;Selbsttest aufrufen

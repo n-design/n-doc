@@ -1,0 +1,98 @@
+\chapter{TLS Verbindungen}\label{appendix.tls}
+
+Für die TLS-Verbindungen werden die im Schutzprofil genannten
+Cipher Suiten verwendet. Der TOE beherrscht genau diese Cipher Suiten
+und keine darüber hinaus. \tableref{tab:ciphersuites} listet diese
+Cipher Suiten auf. \tableref{tab:elliptic-curves} zeigt die elliptischen
+Kurven, die beim ECDHE Schlüsselaustausch zur Anwendung kommen.
+
+\begin{table}[htb]
+  \centering
+  \begin{tabularx}{1\linewidth}{>{\small}X>{\ttfamily}c*{2}{C{1.85cm}}}
+    \toprule Algorithmen / Cipher Suite & \textrm{IANA\,ID} & TLS\,1.2\newline\cite{rfc5246}
+    \tabularnewline \midrule
+    TLS\_DHE\_RSA\_WITH\_AES\_128\_CBC\_SHA        & 0x00,\,0x33  & \tcheck \tabularnewline
+    TLS\_DHE\_RSA\_WITH\_AES\_256\_CBC\_SHA        & 0x00,\,0x39  & \tcheck \tabularnewline
+    TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA      & 0xc0,\,0x13  & \tcheck \tabularnewline
+    TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA      & 0xc0,\,0x14  & \tcheck \tabularnewline
+    TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA256   & 0xc0,\,0x27  & \tcheck \tabularnewline
+    TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA384   & 0xc0,\,0x28  & \tcheck \tabularnewline
+    TLS\_ECDHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256   & 0xc0,\,0x2f  & \tcheck \tabularnewline
+    TLS\_ECDHE\_RSA\_WITH\_AES\_256\_GCM\_SHA384   & 0xc0,\,0x30  & \tcheck \tabularnewline
+    \bottomrule
+  \end{tabularx}
+  \caption{Cipher Suites der TLS Verbindungen des TOE}
+  \label{tab:ciphersuites}
+\end{table}
+
+\begin{table}[htb]
+  \centering
+  \begin{tabularx}{0.7\linewidth}{X>{\ttfamily}cc}
+    \toprule Elliptische Kurve & \textrm{IANA\,ID} & Standard \\
+    \midrule
+    secp256r1 (P-256) & 23 & \cite{rfc8422, X9.62} \\
+    secp384r1 (P-384) & 24 & \cite{rfc8422, X9.62} \\
+    brainpoolP256r1   & 26 & \cite{rfc7027} \\
+    brainpoolP384r1   & 27 & \cite{rfc7027} \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Elliptische Kurven für die TLS Verbindungen des TOE}
+  \label{tab:elliptic-curves}
+\end{table}
+
+
+Der TOE kommuniziert mit anderen vertrauenswürdigen IT-Produkten über gesicherte
+Verbindungen. Die Integrität und die Vertrauenswürdigkeit der Verbindungen wird
+durch die Verwendung von TLS in der Version~1.2 und die in
+\tableref{tab:ciphersuites} genannten Algorithmen und Cipher Suiten
+sichergestellt. \tableref{tab:tlsconnections} listet die Verbindungen auf, die
+der TOE eingeht. Die Spalten dieser Tabelle werden in
+\tableref{tab:tlslegende} beschrieben.
+
+\begin{table}[htb]
+  \renewcommand{\arraystretch}{1.5}
+  \centering
+  \begin{tabularx}{0.9\linewidth}{lX}
+    \toprule Spalte & Beschreibung\\ \midrule
+    ID & Symbolischer Name der Verbindung \\
+    Schnittstelle & Logische Schnittstelle, deren Kommunikation abgesichert wird.\\
+    Rolle & Beschreibt, ob der TOE in dieser Verbindung Client oder Server ist.\\
+    Peer & Beschreibung des Partners in der TLS-Verbindung\\
+    Protokoll & Anwendungsprotokoll, das für die Verbindung genutzt wird. \\
+    \secitemformat{Subsystem::Modul} & Name des Subsystems und des Moduls, von dem die Verbindung ausgeht, bzw. das die Verbindung empfängt und behandelt. \\
+    Port & Port, den der TOE öffnet, um die Verbindung aufzubauen. Für Verbindungen, bei denen der TOE Server ist, steht hier eine Portnummer. Wenn der TOE Client ist, steht „dyn.“ für die ephemerische Portvergabe bei TCP-Verbindungen. „konfig.“ steht dafür, dass der Zielport konfigurierbar ist.\\
+    Schnittstelle & Logische Schnittstelle des TOE , über die die Verbindung läuft.\\
+    Identität des TOE & Zertifikat, mit dem sich der TOE gegenüber dem Peer authentisiert.\\
+    Identität des Peer & Zertifikat/Verfahren, mit dem sich der Peer gegenüber dem TOE authentisiert.\\
+    Authentifizierung des Peer durch & Verfahren, Datenquelle oder Subsystem/Modul, mit dem der TOE die Identität des Peers verifiziert.\\
+    \bottomrule
+  \end{tabularx}
+  \hypertarget{tab:o.tlslegende}{\caption{Legende zu den TLS Verbindungen}}
+  \label{tab:tlslegende}
+\end{table}
+
+
+
+
+
+\afterpage{%
+  \clearpage% Flush earlier floats (otherwise order might not be correct)
+  \begin{landscape}% Landscape page
+    \centering % Center table
+    {
+      \input{../common/tls_connections.tex}
+    }
+    % \captionof{table}{Security Functions / Security Function Requirements}% Add 'table' caption
+  \end{landscape}
+  \clearpage% Flush page
+}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: shared
+%%% TeX-engine: luatex
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

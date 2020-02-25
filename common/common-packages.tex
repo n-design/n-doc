@@ -1,0 +1,105 @@
+\usepackage{amsfonts}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel,varioref}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{minibox}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{scrtime}
+\usepackage[normalem]{ulem}
+\usepackage{color}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usepackage[underline=false]{pgf-umlsd}
+\usepackage{graphicx,grffile}
+\usepackage{footnote}\makesavenoteenv{long table}
+\usepackage{pdflscape}
+\usepackage{afterpage}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{relsize}
+\usepackage{xifthen}
+\usepackage{ifmtarg}
+\usepackage{varioref}
+\usepackage{placeins}
+\usepackage{adjustbox}
+\usepackage{dirtree}
+\usepackage{caption}
+\usepackage{gitinfo2}
+\usepackage{splitidx}
+\usepackage[style=alphabetic,backend=biber]{biblatex}
+\usepackage{amsmath}
+\usepackage{fancybox}
+\usepackage{multirow, makecell}
+\usepackage{listings}
+\usepackage{upquote}
+
+\DeclareFieldFormat{labelalpha}{\thefield{label}}
+
+\addbibresource{../common/bibliographies/complete.bib}
+\addbibresource{../common/bibliographies/reduced.bib}
+
+\usepackage{ifluatex}
+\directlua{package.path = "../lua/?.lua;./?.lua;" .. package.path}
+\directlua{package.cpath = "./?.so;" .. package.cpath}
+\usepackage{luapackageloader}
+\usepackage{luacode}
+
+\input{../common/bridge_common.tex}
+\input{../common/bridge_cc_core.tex}
+\input{../common/bridge_documents.tex}
+\input{../common/bridge_tls.tex}
+
+\setcounter{secnumdepth}{4}
+\typearea{11}
+\sloppy
+
+% Parameter zum Unterbinden der Meldungen
+% für Overfull/Underfull boxes
+\hfuzz=2000pt
+\hbadness=10000
+\vfuzz=20pt
+\vbadness=\maxdimen
+
+% Vereinbarung der Basisschriftarten
+\usepackage{fontspec} 
+\defaultfontfeatures{Ligatures=TeX}
+
+% "FreeSerif" als Standardschrift
+\setmainfont{FreeSerif}
+
+% "FreeSans" als serifenlose Schrift
+% http://www.tug.dk/FontCatalogue/gnufreefontsans/
+\setsansfont{FreeSans}
+
+% "Nimbus 15 Mono Narrow" als Monospaced Font
+% http://www.tug.dk/FontCatalogue/nimbus15mononarrow/
+\setmonofont{zcoN}[
+ItalicFont  = zcoN-Oblique,
+SlantedFont = zcoN-Oblique]
+
+\newfontfamily\ccfont{RobotoCondensed}[
+ItalicFont = RobotoCondensed-Italic,
+SlantedFont = RobotoCondensed-Italic,
+BoldFont = RobotoCondensed-Bold,
+BoldItalicFont = RobotoCondensed-BoldItalic]
+\newfontfamily\codefont{lmmonoltcond10-regular.otf}
+\newfontfamily\narrowfilefont{lmmonoltcond10-oblique.otf}
+
+\usepackage{tocbasic}
+\usepackage[section]{minted}
+\setminted[java]{fontsize=\footnotesize,numbers=left,stepnumber=5,stepnumberfromfirst,autogobble=true,breaklines=true,frame=lines,framesep=1ex}
+\setminted[c]{fontsize=\footnotesize,numbers=left,stepnumber=5,stepnumberfromfirst,autogobble=true,breaklines=true,frame=lines,framesep=1ex}
+
+\usepackage[babel=once,german=quotes]{csquotes}
+\defineshorthand{"`}{\openautoquote}
+\defineshorthand{"'}{\closeautoquote}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: shared
+%%% TeX-engine: luatex
+%%% TeX-parse-self: t
+%%% End:

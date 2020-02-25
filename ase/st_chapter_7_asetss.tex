@@ -1,0 +1,167 @@
+\hrefchapter{sf}{TOE Summary Specification}
+
+Dieses Kapitel vermittelt einen Überblick über die IT-Sicherheitsfunktionen des
+TOE, wie sie in der funktionalen Spezifikation beschrieben sind. Es enthält
+Beschreibungen der allgemeinen technischen Verfahren, die der TOE anwendet, um
+die Sicherheitsanforderungen zu erfüllen.
+
+Der Abschnitt \hyperref[sf.relationtosfr]{\ref*{sf.relationtosfr}} zeigt
+tabellarisch die Zusammenhänge zwischen den Sicherheitsfunktionen des TOE und
+den Sicherheitsanforderungen, die dieses Security Target in den Abschnitten
+\hyperref[sfr.def]{\ref*{sfr.def}} aufstellt.
+ 
+
+
+\hrefsection{sf.vpn}{\secfuncheadline{sf.vpn}}
+
+Die Sicherheitsfunktion \secfunc{sf.vpn} erstellt sichere Kommunikationskanäle
+zwischen dem TOE und einem entfernten, vertrauenswürdigen IT-Produkt.
+
+\umgesetztesfr{\sfrlink{ftp_itc.1/vpn}}
+
+Zertifikate werden mathematisch geprüft
+
+\umgesetztesfr{\sfrlink{fpt_tdc.1/zert}}
+
+\hrefsection{sf.networkservices}{\secfuncheadline{sf.networkservices}}
+
+Die Sicherheitsfunktion \secfunc{sf.networkservices} stellt dem TOE zuverlässige
+Zeitstempel zur Verfügung. Eine Referenzzeit wird über den VPN-Kanal von einem
+vertrauenswürdigen NTP-Server bezogen. Dabei wird NTP in Version~4 verwendet
+\cite{rfc5905}. Die Abweichung zwischen der Netzwerkzeit und der lokalen Zeit im
+TOE darf maximal 1~Stunde betragen. Der TOE verwendet die Uhrzeit hauptsächlich,
+um die Gültigkeit von Zertifikaten zu prüfen.
+
+\umgesetztesfr{\sfrlink{fpt_stm.1}}
+
+\hrefsection{sf.selfprotection}{\secfuncheadline{sf.selfprotection}}
+
+Die Sicherheitsfunktion \secfunc{sf.selfprotection} ist dafür
+verantwortlich, den TOE und die Daten, die er verarbeitet, vor
+Angriffen und Manipulation zu schützen.
+
+Sensible Daten werden aus dem Arbeitsspeicher gelöscht, sobald sie
+nicht mehr verwendet werden. Das umfasst kryptographische Schlüssel,
+Session Keys, kurzlebige Schlüssel während des Ver- und
+Entschlüsselungsvorgangs, aber auch sensible Benutzerddaten. Das
+Löschen wird durch aktives Überschreiben der entsprechenden
+Speicherbereiche mit einer Konstante oder pseudo-zufälligen Werten
+umgesetzt.
+
+\umgesetztesfr{\sfrlink{fdp_rip.1}}
+
+Der TOE kann eine Reihe von Selbsttests ausführen, um seine
+Integrität und die Funktionsfähigkeit seiner eigenen
+Sicherheitsfunktionen und Komponenten zu beweisen. Abhängig von deren
+Ausprägung werden die Selbsttests entweder beim Systemstart, während
+des normalen Betriebs oder zu beiden Gelegenheiten ausgeführt. Der
+Administrator kann die Selbsttests ebenfalls starten.
+
+\umgesetztesfr{\sfrlink{fpt_tst.1}}
+
+
+\hrefsection{sf.administration}{\secfuncheadline{sf.administration}}
+
+Die Sicherheitsfunktionen des TOE definieren eine Rolle „Administrator“.
+Benutzer greifen zur Verwaltung des TOE über eine TLS-Verbindung auf den TOE zu.
+Die TLS-Verbindung wird von der Funktion
+\secfunclink{sf.cryptographicservices} bereit gestellt. Ist ein Administrator
+authentisiert, ist er autorisiert, verschiedene TSF-Parameter zu konfigurieren
+und TSF-bezogene Operationen durchzuführen.
+
+\begin{itemize}
+\item Die Systemzeit/Echtzeituhr modifizieren
+\item Die Selbsttests des TOE auslösen (vgl. \secfunclink{sf.selfprotection})
+\end{itemize}
+
+Es ist zu beachten, dass die Web-Anwendung in der Umgebung des TOE
+ausgeführt wird. Die Sicherheitsleistungen werden von der
+Management-Schnittstelle erbracht, die den Authentisierungsstatus des
+Administrators prüft.
+
+Der TOE informiert den Administrator über kritische Betriebszustände über die
+LEDs an der Gehäusefront (\intf{PS.LED}).
+
+\umgesetztesfr{\sfrlink{ftp_trp.1/admin}}
+
+\hrefsection{sf.cryptographicservices}{\secfuncheadline{sf.cryptographicservices}}
+
+Die Sicherheitsfunktion \secfunc{sf.cryptographicservices} stellt
+Implementierungen verschiedener kryptographischer Basisalgorithmen zur
+Verfügung, die von anderen Sicherheitsfunktionen des TOE verwendet werden
+können.
+
+\minisec{Schlüsselbehandlung}
+
+Die Sicherheitsfunktionalität stellt alle Algorithmen zur Erzeugung, Verteilung
+und Vernichtung von Schlüsseln zur Verfügung.
+
+\umgesetztesfr{\sfrlink{fcs_ckm.1} & \sfrlink{fcs_ckm.2} & \sfrlink{fcs_ckm.4}}
+
+\minisec{Zufallszahlen}
+
+Der TOE enthält einen DRNG nach \sfrlink{fcs_rng.1/hashdrbg}, um Zufallszahlen
+hoher Qualität zu erzeugen. Die so erzeugten Zufallszahlen werden für
+verschiedene Zwecke verwendet, u.a. beim TLS-Verbindungsaufbau
+(\sfrlink{fcs_ckm.1} und \sfrlink{fcs_cop.1/tls.aes})
+
+\umgesetztesfr{\sfrlink{fcs_rng.1/hashdrbg}}
+
+\minisec{Hash-Algorithmen}
+
+Die Funktion bietet Implementierungen für die Hash-Algorithmen SHA-1,
+SHA-256 und SHA-512. Im Kontext von TLS implementiert der TOE außerdem
+SHA-384 für bestimmte Cipher Suites.
+
+\umgesetztesfr{\sfrlink{fcs_cop.1/hash}}
+
+\minisec{HMAC Generierung}
+
+Die Funktion bietet darüber hinaus Algorithmen für die HMAC-Generierung, wobei
+die genannten Hash-Algorithmen zum Tragen kommen: HMAC-SHA-1(-96),
+HMAC-SHA-256(-128).
+
+\umgesetztesfr{\sfrlink{fcs_cop.1/hmac}}
+
+\hrefsection{sf.tls}{\secfuncheadline{sf.tls}}
+
+Der TOE stellt die Umsetzung des TLS-Protokolls in der Version~1.2 bereit. Die
+Funktion stellt die Integrität und Vertraulichkeit der Verbindungen zum
+Web-Browswer des Administrators sicher. Die genaue Verwendung der
+TLS-Verbindungen und eine Auflistung der Kommunikationspartner befindet sich in
+Tabelle~\vref{tab:tlsconnections}.
+
+\umgesetztesfr{\sfrlink{ftp_itc.1/tls} & \sfrlink{fcs_cop.1/tls.aes}}
+
+Die Sicherheitsfunktion \secfunc{sf.cryptographicservices} bietet Algorithmen
+zur Verifikation von Signaturen. X.509-Zertifikate werden unter Verwendung des
+RSA-PKCS1-v1.5- bzw RSASSA-PSS-Algorithmus geprüft.
+
+\umgesetztesfr{\sfrlink{fpt_tdc.1/tls.zert} & \sfrlink{fcs_cop.1/tls.auth}}
+
+Für die Generierung von Nonces und Schlüsseln verwendet der TOE den Hash\_DRBG
+Zufallsgenerator aus \secfunclink{sf.cryptographicservices}. Session Keys werden
+durch das Überschreiben mit konstanten oder pseudozufälligen Werten sicher aus
+dem Speicher entfernt, ebenfalls durch Aufruf von
+\secfunclink{sf.cryptographicservices}.
+
+
+\pagebreak
+
+\hrefsection{sf.relationtosfr}{Verhältnis von SFR zu SF}
+
+\tableref{tab:sf.mapping} zeigt, in welchem Verhältnis die im
+Abschnitt~\sectref{sfr.def} definierten Sicherheitsanforderungen an den
+TOE zu den in \sectref{sf} beschriebenen Sicherheitsfunktionen des NK
+stehen. Die verwendeten Symbole sind in der Legende in
+\tableref{tab:o.mappinglegende} beschrieben.
+
+\input{../ase/chapter_7/mapping_sfr_to_sf}
+
+
+% !TEX root = ase
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "ase"
+%%% TeX-engine: luatex
+%%% End:

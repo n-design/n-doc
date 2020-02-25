@@ -1,0 +1,229 @@
+= Dokmentation der TOE Design Specification (TDS) 
+
+Ziel des TDS ist es, dem Leser zu vermitteln, _wie_ der TOE die TOE
+Security Functions (TSF) umsetzt. Dazu wird der TOE in Subsysteme und
+Module zerlegtfootnote:[Der Detailgrad bei der Aufteilung hängt vom
+geforderten Assurance Level ab. Das fiktive Protection Profile legt für den
+TOE ADV_TDS.3 (Stufe 3) fest.]. Das ist im Rahmen der
+Systemanalyse bereits geschehen. Die Beschreibung auf Ebene der
+Subsysteme ist ebenfalls nahezu vollständig.
+
+Die Hinweise zum Verfahren basieren auf dem Common Criteria
+Standard
+(link:http://www.commoncriteriaportal.org/files/ccfiles/CCPART3V3.1R5.pdf[Teil
+3]). Die re­le­van­ten Kapitel im
+Standard sind „13.6 TOE Design (ADV_TDS)“ und Anhang A.4
+(ADV_TDS: Sub­systems and Modules).  Praktischerweise sind die Absätze
+in den Common Criteria durchnummeriert, sodass ggf. auf einzelne
+Absätze verwiesen werden kann.  Solche Referenzen sind hier als [CC
+nnn] dargestellt.
+
+
+== Logische Struktur des TDS
+
+[arabic]
+. Einleitung
+. Beschreibung der Subsysteme
+[arabic]
+.. Beschreibung eines Subsystems
+.. Vom Subsystem umgesetzte SFR
+.. Interaktion mit anderen Subsystemen
+. Beschreibung der Module
+[arabic]
+.. Beschreibung eines Moduls
+.. SFR-relevante Abläufe
+.. Schnittstellen des Moduls
+
+== Ebene der Subsysteme
+
+Die Beschreibung der Subsysteme wird bei der uns vorgegebenen EAL-Stufe
+sehr kurz gehalten, da EAL3 die Untergliederung in Module vorsieht. Für
+jedes Subsystem gibt es drei Unterabschnitte
+
+=== Beschreibung des Subsystems
+
+Enthält eine kurze bis mittellange Erklärung, was das Subsystem macht,
+welche Rolle es im Gesamtkontext des TOE einnimmt und ggf. welche
+Besonderheiten es aufweist. Die Grafik für die Dekomposition in Bundles
+wird aus dem Enterprise Architect übernommen. Kann erst einmal leer
+bleiben.
+
+=== Umgesetzte SFR
+
+Tabellarische Darstellung der SFR, unterteilt nach SFR-enforcing und SFR-supporting.
+
+=== Interaktion mit anderen Subsystemen
+
+Textuelle Beschreibung der Interaktion, noch nicht auf Schnittstellen eingehen, eher funktionale Beschreibung.
+
+
+== Ebene der Module
+
+Für jedes Modul gibt es drei Unterabschnitte. Die Struktur ist für jedes
+Modul identisch. Ein Modul ist entweder Enforcing (setzt
+Sicherheitsanforderungen um), Supporting (unterstützt andere Module bei
+der Umsetzung) oder Non-interfering (hat keine Auswirkung auf
+Sicherheitsanforderungen).
+
+=== Schritt 1: Verifizieren der SFR-Zuordnungen
+
+Im Protection Profile (PP) werden Sicherheitsanforderungen (Security
+Functional Requirements, SFR) definiert. Diese werden ggf. im Security
+Target (ST) verfeinert und ergänzt.
+
+Common Criteria ordnet Subsysteme und Module den Kategorien
+_SFR-enforcing_, _SFR-supporting_ und _SFR-non interfering_ zu.
+Auch diese Zuordnung ist nicht zuverlässig vorgenommen worden und muss
+im Rahmen der Erstellung des TDS verifiziert werden.
+
+TIP: Oft bestehen die SFR in unserem PP aus vielen Unterpunkten,
+sodass ein bestimmtes Modul nur für einen der Unterpunkte relevant
+ist. Trotzdem wird das Modul dem SFR zugeordnet und als SFR-enforcing
+oder SFR-supporting klassifiziert.
+
+
+=== Schritt 2: Beschreiben des Zwecks und der Funktion eines Moduls
+
+Die Beschreibung des Zwecks eines Moduls soll dem Leser einen
+Überblick vermitteln, welche Funktion das Modul im Kontext des
+Gesamtsystems hat.  Wenn ein Modul als SFR-enforcing gekennzeichnet
+ist, muss dieser Abschnitt muss nicht zu tief in die Details gehen,
+das passiert in der Beschreibung der Abläufe [CC 608ff]. Bei
+SFR-supporting Modulen müssen die Abläufe nicht beschrieben werden,
+weswegen es angebracht ist, die allgemeine Beschreibung des Moduls
+etwas zu vertiefen.
+
+
+=== Schritt 3: Beschreiben der Schnittstellen eines Moduls
+
+Ausgangspunkt für die Beschreibung der SFR-relevanten Abläufe (im
+nächsten Abschnitt) eines Moduls sind die Schnittstellen an der
+Außenseite des Moduls.
+
+Der Begriff der Schnittstelle ist von den Common Critera weit gefasst:
+Es können physische Schnittstellen sein (wie beispielsweise Ethernet
+oder USB), Programmierschnittstellen im Sinne einer API, aber auch
+Datenstrukturen, die zur Modifikation exponiert werden [CC 609]. 
+Es wird zwischen _provided_ und _required_ Interfaces
+unterschieden. 
+
+Da die Interfaces (bzw. die Methoden darin) die Eintrittspunkte und
+Austrittspunkte der Abläufe eines Moduls darstellen, müssen die
+Übergabeparameter und die Rückgabewerte beschrieben werden.
+
+=== Schritt 4: Beschreiben der SFR-relevanten Abläufe
+
+
+Der wichtigste Teil der Beschreibung eines Moduls ist die Darlegung der
+SFR-relevanten Abläufe. Dieser Abschnitt ist der Kernpunkt der Arbeit
+und wird vom Evaluator am kritischsten begutachtet. Daher ist es
+geboten, hier mit Sorgfalt und angemessenem Detaillierungsgrad zu Werke
+zu gehen. Allerdings ist nur für _SFR-enforcing_ Module notwendig, die
+Abläufe zu beschreiben. Module, die als _SFR-supporting_ gekennzeichnet
+sind, brauchen diesen Abschnitt nicht.
+
+Die Sichtweise der Common Criteria auf die Abläufe ist am Prozess
+orientiert. Startpunkt ist der Eintritt in einen Prozess, also die
+Schnittstelle -- in unserem Fall also der Methodenaufruf am Java
+Interface. Ab hier wird detailliert beschrieben, wie das Modul
+vorgeht, um die Sicherheitsanforderungen umzusetzen. Während eines
+Ablaufs kann es sein, dass Abläufe aus einem anderen Modul aufgerufen
+werden. Die Beschreibung erstreckt sich nicht über die Modulgrenzen
+hinweg (da der entsprechende Ablauf in einem anderen Modul beschrieben
+wird), muss aber deutlich machen, über welche Schnittstelle der Aufruf
+geschieht. Vor allem aber muss beschrieben sein, _warum_ an dieser
+Stelle ein anderer SFR-relevanter Ablauf aufgerufen wird [CC 611].
+
+TIP: Für die Dokumentation eines SFR-relevanten Ablaufs ist es
+notwendig, die umgesetzten SFR und die auslösenden Schnittstellen in
+der Beschreibung aufzuführen.
+
+So müssen unmittelbar unterhalb der Überschrift sowohl die umgesetzten
+SFR als auch die Schnittstellen genannt werden.
+
+Je komplexer und umfangreicher der Ablauf ist, desto wichtiger ist es,
+zusätzlich an spezifischen Stellen der Beschreibung auf den SFR zu
+verweisen. Das ist besonders zu beachten, wenn ein Ablauf mehrere SFR
+implementiert und dies an unterschiedlichen Stellen geschieht.
+
+
+=== Schritt 5: Vollständigkeitsprüfung der abgedeckten SFR und Schnittstellen
+
+Zum Schluss ist es notwendig, Quervergleiche zwischen der
+Beschreibungen der Abläufe und den dokumentierten SFR und
+Schnittstellen zu machen: Stimmen die SFR, die in den Abläufen
+beschrieben sind, überein mit denjenigen, die zu Beginn der
+Modulbeschreibung überein? Passen die Schnittstellen in den Abläufen
+zu denen, die im entsprechenden Abschnitt aufgelistet sind? Sind es
+mehr oder sind es weniger? Hier lauern formale Fehler, die Fragen des
+Evaluators aufrufen können, weswegen besondere Sorgfalt erforderlich
+ist.
+
+== Physische Struktur / Umsetzung in Dateien
+
+Nahezu alle Dateien für die Beschreibung des TDS liegen im Unterverzeichnis ``tds/``
+
+|===
+| ``adv_tds.tex`` | Das Haupt-Dokument enthält ausschließlich technische Elemente, alle Texte werden eingebunden. Dieses Dokument wird übersetzt, es entsteht ``adv_tds.pdf``.
+| ``tds_intro.tex`` | Die Einführung (Kapitel 1).
+| ``tds_subsysteme.tex`` | Die Beschreibung der Subsysteme (Kapitel 2).
+| ``tds_module.tex`` | Die Beschreibung der Module (Kapitel 3). Hier werden einzelne Modulbeschreibungen eingebunden, bzw. die Datei enthält die unbearbeiteten, aus Word konvertierten Dokumentteile.
+| ``module/<subsystemname>/<modulname>.tex`` | Die Beschreibung der Module. Jedes Modul wird in seiner eigenen Datei beschrieben.
+| ``module/tds_module_template.tex`` | Template für die Beschreibung eines Moduls. Enthält notwendige Gliederungspunkte und Kommentare zur Anleitung. Bitte kopieren und für eigene Module bearbeiten, vgl. auch link:step-by-step.adoc[die Anleitung dazu].
+| ``user_macros.tex`` | Makros, die die Autoren verwenden sollen.
+| ``internal_macros.tex`` | Komplexere Makros, die nicht direkt von Benutzern verwendet werden sollen.
+|===
+
+Darüber hinaus gibt es in ``/common`` noch Dateien, die von TDS und ST gemeinsam verwendet werden
+
+|===
+| ``common-macros.tex``           | Makro-Definitionen, die gemeinsam von TDS und ST verwendet  werden.
+| ``common-packages.tex``         | Laden der Packages, die von allen Dokumenten verwendet werden.
+| ```common/db/*.csv`             | Rohdaten, die in eine SQLite Datenbank eingelesen werden.
+| ```lua/*.lua``                  | Lua-Programme zum Zugriff auf die Datenbank mit TDS und SFR Informationen
+| ```common/luabridge.tex``       | LaTeX Datei mit Lua-Funktionen. Schnittstelle zu den Lua-Programmen, vgl.  link:using-luatex.adoc[die Hinweise für die Verwendung von Lua].
+| ``bibliographies/complete.bib`` | BibLaTeX Datei mit Quellen für Literaturverweise
+|===
+
+
+
+== Labels zur Verwendung im TDS
+
+Ein zentrales Element für die Strukturierung des TDS ist die Hierarchie
+von Labels. Jedes Subsystem, jedes Modul und jede Schnittstelle hat ein
+Label, aus dem sich Typ und Stellung in der Hierarchie ableiten lassen.
+Labels sind immer durchgehend klein geschrieben, Camel Case wird nicht
+verwendet. Labels werden an vielen Stellen verwendet: Für das Generieren
+von Verweisen/Hyperlinks im Dokument Automatisches Expandieren zu
+“echten” Namen von Entitäten.
+
+=== Labels für Subsysteme: ``sub.``
+
+Jedes Subsystem hat einen Bezeichner, der das Subsystem eindeutig
+identifiziert, z.B.: +
+``sub.aas``, +
+``sub.adminservice``, +
+``sub.cardservice``
+
+=== Labels für Module: ``mod.``
+
+Jedes Modul hat einen Bezeichner, der das Modul einem Subsystem
+zuordnet, z.B.: +
+``mod.aas.core``, +
+``mod.adminservice.core``, +
+``mod.fmvsdm.core``, +
+``mod.fmvsdm.ssl``
+
+=== Labels für Schnittstellen: ``int.``
+
+Jede Schnittstelle lässt sich über ihr Label eindeutig einem Subsystem
+und Modul zuordnen: 
+``int.aas.core.iaasm``, +
+``int.cardservice.core.icardservice``, +
+``int.toolsak.secstorage.storageservice``
+
+=== Labels für Abläufe/Prozesse: ``prc.``
+
+Jeder SFR-relevante Ablauf erhält ein Label, mit dem sich der Prozess eindeutig identifizieren lässt: +
+
+``prc.adminservice.core.createUser``

@@ -1,0 +1,98 @@
+\documentclass[a4paper]{scrreprt}
+\input{../common/common-packages.tex}
+\input{../common/common-macros.tex}
+\newcommand{\thisdocument}{ate_cov}
+\newcommand{\documenttitle}{Testabdeckung ATE\_COV}
+
+\input{../common/common-packages-atend.tex}
+
+
+% Links zu Modulen und Subsystemen ausschalten.
+\renewcommand{\tdslink}[2][]{\tds[#1]{#2}}
+% Dateinamen immer in schmaler Schrift setzen
+\renewcommand{\filename}[1]{{\narrowfilefont #1}}
+
+\usepackage[paper=a4paper, landscape]{geometry}
+\KOMAoptions{paper=a4,paper=landscape,usegeometry}
+
+\begin{document}
+
+\input{../common/titlepage-landscape}
+
+\cleardoublepage{}
+
+\tableofcontents
+
+\cleardoublepage{}
+
+\newgeometry{left=1.5cm, right=1.5cm, top=1.5cm, bottom=3cm}
+
+\hrefchapter{intro}{Einführung}
+
+Das vorliegende Dokument ist die ATE\_COV zu \thisproductlong{}. Die Tabellen in den
+folgenden Abschnitten zeigen die Testabdeckung des TOE. Dabei werden dieselben
+Daten unterschiedlich aufbereitet. \sectref{tests} listet jeden Testfall auf und
+benennt dazu das TDS-Modul, die SFR und die TSFI, die von diesem Testfall
+abgedeckt werden. Zuvor zeigen die Tabellen in \sectref{summary}
+Zusammenfassungen an: Die Anzahl der Testfälle pro TDS-Modul, pro SFR und pro
+TSFI. Alle Tabellen basieren auf Abfragen der Datenbank
+\filename{mauvecorp\_vpn\_client.db}. Weiter gehende Abfragen für den Evaluationsprozess können
+daraus erstellt werden. Die relevanten Tabellen sind \code{testcases},
+\code{testcase\_module}, \code{testcase\_sfr} und \code{testcase\_tsfi}.
+
+\hrefchapter{summary}{Zusammenfassung}
+
+\hrefsection{summary.nummodules}{Anzahl der Testfälle pro TDS-Modul}
+
+{\footnotesize
+\begin{longtable}{@{}L{5.8cm}>{\tiny}lrL{5.8cm}>{\tiny}lrL{5.8cm}>{\tiny}lr@{}}
+  \toprule Modul & {\footnotesize Status} & Anz. & Modul & {\footnotesize Status} & Anz. & Modul & {\footnotesize Status} & Anz. \\ \midrule \endhead
+  \bottomrule \endfoot
+  \directlua{print_module_to_num_testcase_table()}
+\end{longtable}
+}
+
+\clearpage\hrefsection{summary.numsfr}{Anzahl der Testfälle pro SFR}
+
+{\footnotesize
+\begin{longtable}{@{}L{3.4cm}r@{\hspace{1.3cm}}L{3.4cm}r@{\hspace{1.3cm}}L{3.4cm}r@{\hspace{1.3cm}}L{3.4cm}r@{}}
+  \toprule SFR & Anzahl & SFR & Anzahl & SFR & Anzahl & SFR & Anzahl\\ \midrule \endhead
+  \bottomrule \endfoot
+  \directlua{print_sfr_to_num_testcase_table()}
+\end{longtable}
+}
+
+\clearpage\hrefsection{summary.numtsfi}{Anzahl der Testfälle pro TSFI}
+
+{\footnotesize
+\begin{longtable}{@{}L{4cm}r@{\hspace{1.5cm}}L{4cm}r@{\hspace{1.5cm}}L{4cm}r@{}}
+  \toprule TSFI & Anzahl & TSFI & Anzahl & TSFI & Anzahl \\ \midrule \endhead
+  \bottomrule \endfoot
+  \directlua{print_tsfi_to_num_testcase_table()}
+\end{longtable}
+}
+
+
+\hrefchapter{tests}{Testfälle}
+
+{\footnotesize
+\begin{longtable}{@{}lL{7cm}L{9cm}L{7cm}@{}}
+  \toprule ID & Subsystem::Modul & SFR & TSFI \\ \midrule \endhead
+  \bottomrule \endfoot
+  \directlua{print_testcase_table()}
+\end{longtable}
+}
+
+
+%\input{../common/tls_appendix}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: luatex
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

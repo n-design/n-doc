@@ -1,0 +1,77 @@
+%% Beispieldatei für die Beschreibung eines TDS Moduls.
+%% Das wichtigste an dieser Stelle ist, genau das Kürzel des Moduls
+%% zu kennen, das beschrieben wird. Module heißen immer
+%%
+%% mod.<subsystem>.<modul>
+%%
+%% wobei die entsprechenden Definitionen in der Datei
+%% modules.csv stehen.
+%%
+%% Kleiner Tipp: Diese Datei hat als Vorlage
+%%
+%% mod.subxxx.modyyy
+%%
+%% Mit einem Suche/Ersetze Lauf zum Austausch des Template-Codes
+%% kann man sich schon eine Menge Arbeit sparen.
+
+
+\moduleKapitel{mod.cryptsystem.algorithms}
+
+%% Generiert die Tabelle der SFR, die dieses Modul umsetzt oder
+%% unterstützt.
+\generatesfrtable{mod.cryptsystem.algorithms}
+
+%% Generiert die Tabelle der Bundles, aus denen sich dieses Modul
+%% zusammensetzt
+%\generatebundletable{mod.cryptsystem.algorithms}
+
+\moduleBeschreibung{mod.cryptsystem.algorithms.desc}
+
+Über das Modul \tds{mod.cryptsystem.algorithms} des Subsystems
+\tdslink{sub.cryptsystem} stellt der TOE
+Verfahren .......
+
+% Hier die Funktionen des Moduls beschreiben: Was macht es? Welche
+% Rolle spielt es im Gesamtsystem? Noch nicht in die Details gehen,
+% diese werden später bei den Abläufen erklärt.
+
+%% Nach der Beschreibung des Moduls folgt die Beschreibung der
+%% Abläufe.  Diese Überschrift leitet den entsprechenden Abschnitt
+%% ein.
+\moduleAblaeufe{prc.cryptsystem.algorithms}
+
+%% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
+%% sollte nicht zu lang, aber ausreichend verständlich sein.
+\modulAblauf{prc.cryptsystem.algorithms.hash}{Hashwerte berechnen}
+
+\umgesetztesfr{\sfrlink{fcs_cop.1/hash}}
+
+\modulAblauf{prc.cryptsystem.algorithms.hmac}{HMAC berechnen}
+
+\umgesetztesfr{\sfrlink{fcs_cop.1/hmac}}
+
+
+%% Der nächste wichtige Abschnitt in der Modulbeschreibung: Die
+%% Schnittstellen.
+\moduleSchnittstellen{int.cryptsystem.algorithms}
+
+
+%% Jede Schnittstelle hat einen Bezeichner, der mit "int."
+%% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
+%% die Schnittstelle an) oder required (das Modul nutzt die
+%% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
+\modulSchnittstelleProvided{int.cryptsystem.algorithms.gethash}
+
+Über diese Schnittstelle werden Hashwerte berechnet.
+
+\modulSchnittstelleProvided{int.cryptsystem.algorithms.gethmac}
+
+Über diese Schnittstelle werden HMAC berechnet.
+
+
+% !TEX root = "../../adv_tds"
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../adv_tds"
+%%% TeX-engine: luatex
+%%% End:

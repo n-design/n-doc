@@ -1,0 +1,44 @@
+\documentclass[a4paper]{scrreprt}
+\input{../common/common-packages.tex}
+\input{../common/common-macros.tex}
+\input{refliste-common-macros.tex}
+\newcommand{\thisdocument}{refliste}
+
+\KOMAoptions{paper=a4,paper=landscape,pagesize=auto}
+\KOMAoption{DIV}{12}
+
+\input{../common/common-packages-atend.tex}
+
+\begin{document}
+
+\input{../common/titlepage-landscape}
+
+
+\chapter*{Referenzen der Herstellerdokumente}
+
+\begin{tabularx}{1\linewidth}{llXr}
+  \toprule
+  Schlüssel & CC-Typ & Name & Version\\
+  \midrule
+  \autocite{ase} & ASE\_ST & Security Target & \nosnapshot{\documentversion{ase}} \\
+  \autocite{adv_fsp} & ADV\_FSP & Funktionale Spezifikation & \nosnapshot{\documentversion{adv_fsp}} \\
+  \autocite{adv_tds} & ADV\_TDS & Design Spezifikation & \nosnapshot{\documentversion{adv_tds}} \\
+  \autocite{adv_arc} & ADV\_ARC & Sicherheitsarchitektur & \nosnapshot{\documentversion{adv_arc}} \\
+  \autocite{ate_cov} & ATE\_COV & Testdokumentation Coverage & \nosnapshot{\documentversion{ate_cov}} \\
+  \autocite{alc} & ALC & Life Cycle Support  & \nosnapshot{\documentversion{alc}} \\
+   -- & -- & Datenbank \filename{mauvecorp\_vpn\_client\_\nosnapshot{\documentversion{db}}.db} & \nosnapshot{\documentversion{db}} \\
+  \bottomrule
+\end{tabularx}
+
+\printbibliography
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: luatex
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

@@ -1,0 +1,6 @@
+code;type;severity;msg
+1;Technical;Fatal;Verbindung abgelaufen
+2;Technical;Fatal;Verbindung zurückgewiesen
+3;Technical;Fatal;Nachrichtenschema fehlerhaft.
+4;Technical;Fatal;Version Nachrichtenschema fehlerhaft.
+6;Technical;Fatal;Protokollfehler

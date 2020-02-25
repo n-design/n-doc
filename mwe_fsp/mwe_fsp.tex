@@ -1,0 +1,41 @@
+\documentclass[a4paper]{scrreprt}
+
+\newcommand{\verfahren}{98}
+
+\input{../common/common-packages.tex}
+\input{../common/common-macros.tex}
+\input{../adv_fsp/fsp-common-macros.tex}
+\input{../common/common-packages-atend.tex}
+
+\newcommand{\thisdocument}{mwe_fsp}
+
+\renewcommand{\documenttitle}{Minimal Working Example -- FSP}
+
+
+\begin{document}
+
+\input{../common/titlepage}
+
+
+\chapter*{Minimal Working Example}
+
+In Tradition der Fragen auf \TeX{}\,/\,\LaTeX{} StackExchange stellt
+dieses Dokument einen Rahmen dar, in dem Funktionen der Doku-Plattform
+im Kontext eines "`echten"' Dokuments ausprobiert werden können, ohne
+jedesmal eins der umfangreichen Dokumente übersetzen zu müssen.
+\vspace{2cm}
+
+\input{mwe_fsp_body}
+
+\printbibliography
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: luatex
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

@@ -1,0 +1,62 @@
+\documentclass[a4paper]{scrreprt}
+\input{../common/common-packages.tex}
+\input{../common/common-macros.tex}
+\input{internal_macros.tex}
+\input{user_macros.tex}
+\input{../common/common-packages-atend.tex}
+
+\input{../common/common-sfr-index.tex}
+
+\newcommand{\thisdocument}{adv_tds}
+\newcommand{\documenttitle}{TOE Design Specification}
+
+\begin{document}
+
+\input{../common/titlepage}
+
+\cleardoublepage{}
+
+\tableofcontents
+
+\cleardoublepage{}
+
+\listoftoc{lot}  % Tabellenverzeichnis
+
+\cleardoublepage{}
+
+\listoftoc{lof}  % Abbildungsverzeichnis
+
+\cleardoublepage{}
+
+\input{tds_intro}
+
+\input{tds_subsysteme}
+
+\input{tds_module}
+
+\appendix
+
+\input{../common/tls_appendix}
+
+\input{../common/tsfi_appendix}
+
+\input{sfr2module_appendix}
+
+\cleardoublepage
+
+\printbibliography
+
+% \pagebreak
+% \input{../common/offene_punkte}
+
+\printindex
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: luatex
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

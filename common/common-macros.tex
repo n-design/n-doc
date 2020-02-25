@@ -1,0 +1,273 @@
+% Allgemeine Makros für die Titelseite
+% Können nach einem ersten Release dokumentspezifisch
+% überschrieben werden.
+\newcommand{\documentdate}[1]{\directlua{getDocumentDate("#1")}}
+\newcommand{\documentversion}[1]{\directlua{getDocumentVersion("#1")}}
+
+% Name des Produkts in Kurz- und in Langform
+\newcommand{\thisproduct}{MauveVPN Client}
+\newcommand{\thisproductlong}{MauveCorp MauveVPN Client}
+\newcommand{\thisdeveloper}{Mauve Corporation}
+\newcommand{\thiscompany}{MauveCorp\\Fliederweg 98\\50020 Köln\\\textsmaller{certification@mauvecorp.com}}
+
+\newcommand{\thispp}{vpnpp}
+\newcommand{\toeversion}{2.11}
+\newcommand{\thisTOE}{\thisproduct~\toeversion}
+\newcommand{\bsicertid}{BSI-DSZ-CC-xyz}
+\newcommand{\bsippid}{BSI-CC-PP-00zz}
+
+
+
+
+% Als Erinnerung für später zu erledigende Aufgaben
+% Markiert den übergebenen Text deutlich und setzt
+% einen Merker in die Randspalte.
+% define list of To Do items
+\DeclareNewTOC[listname={Offene Punkte}]{todo}
+\newcommand{\todocolor}{magenta}
+\newcommand{\todo}[2][]{\marginpar{\textcolor{\todocolor}%
+    {\fbox{\textbf{To Do}}}}\textcolor{\todocolor}{#2}
+  \ifthenelse{\equal{#1}{}}{}{\addcontentsline{todo}{section}{#1}}}
+
+
+% Kann verwendet werden, wenn in eigenen Dokumenten Abschnitte leer
+% bleiben, aber die Kongruenz zum PP oder zu anderen CC Dokumenten
+% erhalten bleiben soll.
+\newcommand{\intentionallyleftblank}{(This section intentionally left blank.)}
+
+% Makro für Java (und anderen) Quelltext
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\java}[2][]{\textsmaller[2]{\code{#1}}\code{#2}}
+\newcommand{\bundle}[1]{\footnotesize{\java{#1}}}
+
+% Makro für feste CC-Begriffe wie Enforcing, Required
+% Wird nicht vom Autor direkt verwendet, s. dazu
+% die folgenden Makros, die direkt den Text setzen.
+\newcommand{\ccAttribute}[1]{{\small #1}}
+% Makro für "Enforcing"
+\newcommand{\enfc}{\secitemfont{SFR-enforcing}}
+% Makro für "Supporting"
+\newcommand{\supp}{\secitemfont{SFR-supporting}}
+% Makro für "non-Interfering"
+\newcommand{\noninterfering}{\secitemfont{non-interfering}}
+% Makro für "non-TSF"
+\newcommand{\nontsf}{\secitemfont{non-TSF}}
+
+% Makro für RFC. Argument ist die Nummer des RFC. Enthält das optionale
+% Argument den Buchstaben "c", wird auch eine Referenz auf das
+% Literaturverzeichnis eingefügt.
+% Achtung: Das Leerzeichen vor \autocite ist wichtig.
+\newcommand{\rfc}[2][false]{RFC\,#2%
+  \ifthenelse{\equal{#1}{c}}{ \autocite{rfc#2}}{}}
+
+\newcommand{\nounderscore}[1]{\directlua{replaceUnderscore("#1")}}
+
+% Makro für Schlüsselwörter, z.B. Konfigurationsparameter aus der
+% Admin-Anwendung.  Vieles, was man ansonsten in Anführungszeichen
+% schreiben würde, kann besser als \keyword{} ausgezeichnet werden.
+% Die Unterstriche werden automatisch mit einem Backslash maskiert.
+\newcommand{\keyword}[1]{\textsmaller[0.8]{\ccfont \textit{\directlua{replaceUnderscore("#1")}}}}
+
+\newcommand{\errorcondition}[1]{{\keyword{#1}}}
+
+% Makro für Fehlercode mit Fehlertext
+\newcommand{\error}[1]{#1 -- \enquote{\directlua{getError("#1")}}}
+
+% Makro für Dateinamen
+\newcommand{\filename}[1]{{\narrowfilefont #1}}
+
+% Links auf Abbildungen, Tabellen, Abschnitte
+\newcommand{\figureref}[1]{\hyperref[#1]{Abbildung~\ref*{#1}}}
+\newcommand{\tableref}[1]{\hyperref[#1]{Tabelle~\ref*{#1}}}
+\newcommand{\listref}[1]{\hyperref[#1]{Listing~\ref*{#1}}}
+\newcommand{\sectref}[1]{\hyperref[#1]{Abschnitt~\ref*{#1}}}
+\newcommand{\chapterref}[1]{\hyperref[#1]{Kapitel~\ref*{#1}}}
+\newcommand{\appendixref}[1]{\hyperref[#1]{Anhang~\ref*{#1}}}
+
+% Überschriften, die direkt den Anker für einen Hyperlink enthalten
+\newcommand{\hrefchapter}[2]{\hypertarget{#1}{\chapter{#2}\label{#1}}}
+\newcommand{\hrefsection}[2]{\hypertarget{#1}{\section{#2}\label{#1}}}
+\newcommand{\hrefsubsection}[2]{\hypertarget{#1}{\subsection{#2}\label{#1}}}
+\newcommand{\hrefsubsubsection}[2]{\hypertarget{#1}{\subsubsection{#2}\label{#1}}}
+\newcommand{\hrefparagraph}[2]{\hypertarget{#1}{\paragraph{#2}\label{#1}}}
+\newcommand{\hrefsubparagraph}[2]{\hypertarget{#1}{\subparagraph{#2}\label{#1}}}
+
+
+% Allgemeines Format für Begriffe aus der CC:
+% Objectives (O.)
+% Objectives of the environment (OE.)
+% Threats (T.)
+% Assumptions (A.)
+% SFR
+% SF
+%
+\newcommand{\secitemfont}[1]{{\ccfont #1}}
+\newcommand{\secitemformat}[1]{{\textsmaller[0.9]{\secitemfont{#1}}}}
+\newcommand{\secitem}[1]{\secitemformat{\nounderscore{#1}}}
+
+
+% Makros für die Auflösung und Darstellung von Security
+% Objectives. Der übergebene Parameter wird anhand der Daten in
+% obj_definitions.tex aufgelöst.
+\newcommand{\obj}[1]{\secitemformat{\directlua{getObjective("#1")}}}
+\newcommand{\objtext}[1]{\directlua{getObjectiveText("#1")}}
+\newcommand{\objplain}[1]{\directlua{getObjective("#1")}}
+\newcommand{\objlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\obj{#1}}}
+
+%% ------------------------------------------------------------
+%%
+%% Makros für
+%% Security Functional Requirements (SFR)
+%%
+
+% Makro für die Auflösung und Darstellung von Security Functional
+% Requirements (SFR). Der übergebene Parameter wird anhand der Daten
+% in sfr_definitions.tex aufgelöst.
+% Das optionale Argument für \sfr{}: Ergänzung (1), (2) z.B. für
+% FDP_ACC, FDP_ACF mit vielen Unterpunkten.
+\newcommand{\sfr}[2][]{\formatsfr{\directlua{getSfr("#2")}#1}}
+\newcommand{\sfrplain}[2][]{\directlua{getSfr("#2")}#1}
+\newcommand{\sfrtext}[1]{\directlua{getSfrText("#1")}}
+\newcommand{\sfrlink}[2][]{\hyperlink{\directlua{removeSfrSubComponent("#2")}}{\sfr[#1]{#2}}}
+% Formatierung der SFR. Kann in seltenen Fällen direkt aufgerufen
+% werden (z.B. bei Komponenten-Definitionen, die nicht direkt SFR
+% sind).
+\newcommand{\formatsfr}[1]{{\secitemformat{#1}}}
+% Makro für umgesetzte SFR, kann z.B. am Ende einer Ablaufbeschreibung 
+% verwendet werden.
+\newcommand{\umgesetztesfr}[1]{\enfsupsfrtable{Umgesetzte SFR}{#1}}
+\newcommand{\unterstuetztesfr}[1]{\supportedsfr{#1}}
+\newcommand{\supportedsfr}[1]{\enfsupsfrtable{Unterstützte SFR}{#1}}
+
+\newcommand{\enfsupsfrtable}[2]{
+  \begin{flushright}
+    \minibox[frame,l,t]{{\small \textsf{#1}}\\
+      \begin{tabular}{@{}lll@{}}
+        #2
+      \end{tabular}}
+  \end{flushright}}
+
+\newcommand{\getModuleStatus}[1]{\directlua{get_module_status("#1")}}
+
+\newcommand{\checkSfrReferences}{\directlua{checkSfrReferences()}}
+
+
+%% ------------------------------------------------------------
+%%
+%% Makros für
+%% TOE Security Function Interfaces (TSFI)
+%%
+
+% Makros für die Namen der Schnittstellen, die in OPB2.1 eine Rolle
+% spielen. 
+\newcommand{\ls}{\tsfilink{ls}}
+
+% Formatierung der TSFI wie LS.VPN, LS.LAN etc.
+\newcommand{\formatintf}[1]{{\ccfont #1}}
+\newcommand{\intf}[1]{\secitemformat{#1}}
+\newcommand{\tsfi}[1]{\intf{\directlua{getTsfi("#1")}}}
+\newcommand{\tsfilink}[1]{\hyperlink{tsfi.#1}{\tsfi{#1}}}
+\newcommand{\printSfToTsfi}[1]{\directlua{print_sf_to_tsfi_table("#1")}}
+\newcommand{\printTsfiToSf}[1]{\directlua{print_tsfi_to_sf_table("#1")}}
+
+\newcommand{\lslan}{\tsfilink{ls.lan}}
+\newcommand{\lswan}{\tsfilink{ls.wan}}
+\newcommand{\lswandhcp}{\tsfilink{ls.wan.dhcp}}
+\newcommand{\lsled}{\tsfilink{ls.led}}
+\newcommand{\lslantls}{\tsfilink{ls.lan.tls}}
+\newcommand{\lslanhttpmgmt}{\tsfilink{ls.lan.httpmgmt}}
+
+%% ------------------------------------------------------------
+%%
+%% Makros für
+%% TOE Security Functions (SF)
+%%
+
+% Makros für die Sicherheitsfunktionen. Der übergebene Parameter wird
+% anhand der Daten in sf_definitions.tex aufgelöst.
+\newcommand{\secfunc}[1]{\formatsecfunc{\directlua{getSecfunc("#1")}}}
+\newcommand{\secfuncplain}[1]{\directlua{getSecfunc("#1")}}
+\newcommand{\secfunctext}[1]{\directlua{getSecfuncText("#1")}}
+\newcommand{\secfunclink}[1]{\hyperlink{\directlua{toLower("#1")}}{\secfunc{#1}}}
+\newcommand{\formatsecfunc}[1]{{\secitemformat{#1}}}
+\newcommand{\secfuncheadline}[1]{\texorpdfstring{\secfunctext{#1}\hspace{1em}(\secitemfont{\secfuncplain{#1}})}{\secfunctext{#1} (\secfuncplain{#1})}}
+
+%% ------------------------------------------------------------
+%%
+%% Makros für
+%% Tabellen
+%% 
+\newcommand{\tcheck}{\textsmaller[1]{\checkmark{}}}
+\newcommand{\tno}{\ldotp{}}
+\newcommand{\toptio}{\textcolor{blue}{\textbullet{}}}
+\newcommand{\tdrop}{\textcolor{blue}{\textopenbullet{}}}
+\newcommand{\tadded}{\textcolor{magenta}{\tcheck{}}}
+\newcommand{\leftblank}{---}
+
+%% ------------------------------------------------------------
+%%
+%% Makros für
+%% IDs der TLS Verbindungen
+%%
+%% Aufbau der Tabelle
+\newcounter{tlsconnid}
+\renewcommand*\thetlsconnid{TLS.\arabic{tlsconnid}}
+\newcommand{\tlsconntablerow}[2]{\luadirect{getTlsConnectionTableRow("#1", "#2")}}
+\newcommand{\tlsid}[1]{\refstepcounter{tlsconnid}\secitemformat{\thetlsconnid}\label{#1}}
+
+%% Makros für die Referenzierung einer TLS ID
+\newcommand{\tlsexample}{\intf{\ref{tls.example}}}
+
+% Makro für den Verweis auf Subsysteme, Module und Schnittstellen, die im
+% TDS definifiert werden.
+\newcommand{\tds}[2][no]{\secitemformat{\directlua{replacelabel("#2", "#1")}}}
+\newcommand{\tdsplain}[2][no]{\directlua{replacelabel("#2", "#1")}}
+% Makro für Links auf Subsysteme/Module. Ist nur für das TDS relevant.
+% Wird im TDS so umdefiniert, dass die Link-Funktion dazukommt.
+% Für alle anderen Dokumente wird stattdessen das \tds Makto aufgerufen.
+\newcommand{\tdslink}[2][no]{\tds[#1]{#2}}
+
+% Drei Spaltentypen für Tabellen, mehrzeiligen Text mit erzwungenen Zeilenumbrüchen
+% erlauben. Vgl. https://tex.stackexchange.com/questions/12703/
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{Y}{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}X}
+
+
+\newcommand{\landscapetable}[1]{%
+\afterpage{%
+  \clearpage% Flush earlier floats (otherwise order might not be correct)
+  \begin{landscape}% Landscape page
+    \centering % Center table
+    {
+      \input{#1}
+    }
+  \end{landscape}
+  \clearpage% Flush page
+}%
+}
+
+% Auslassungspunkte zwischen erster und zweiter Spalte einer Tabelle
+\makeatletter
+\newcommand \mydotfill {\leavevmode \cleaders \hb@xt@ .66em{\hss .\hss }\hfill \kern \z@}
+\makeatother
+\newcommand{\tablekeyword}[1]{\keyword{#1}\mydotfill}
+\newcommand{\defaultvalue}[1]{\textsl{#1}}
+
+% Kommentare für Verzeichnisbäume, z.B. im FSP
+\newcommand{\myDTcomment}[1]{\mydotfill{}\begin{minipage}[t]{10cm}\textrm{#1}\end{minipage}}
+
+\newcolumntype{Q}[2]{%
+    >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}%
+    l%
+    <{\egroup}%
+}
+\newcommand*\rot{\multicolumn{1}{Q{90}{0em}}}% no optional argument here, please!
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: shared
+%%% TeX-engine: luatex
+%%% End:

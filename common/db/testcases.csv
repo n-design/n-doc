@@ -1,0 +1,24 @@
+label;block;name
+vpn1;6.3.3.4;VPN Aufbau -- Gutfall
+vpn2;6.3.3.4;VPN Aufbau -- Schlechtfall
+vpn3;6.3.3.4;VPN Zertifikat gültig
+vpn4;6.3.3.4;VPN Zertifikat ungültig
+vpn5;6.3.3.4;VPN Zertifikat abgelaufen
+ntp1;6.3.3.2;Zeitsynchro gelingt
+ntp2;6.3.3.2;Zeitsynchro schlägt fehl
+selfprotect1;6.3.3.x;Speicher überschreiben
+selfprotect2;6.3.3.x;Selbsttest aufrufen
+adminsystem1;6.3.3.x;Server antwortet
+adminsystem2;6.3.3.x;Server down
+adminsystem3;6.3.3.x;Server Zertifikat abgelaufen
+cryptsystem1;6.3.3.x;Hash berechnen SHA-256
+cryptsystem2;6.3.3.x;Hash berechnen SHA-512
+cryptsystem3;6.3.3.x;HMAC berechnen
+cryptsystem4;6.3.3.x;Key erzeugen
+cryptsystem5;6.3.3.x;Key zerstören
+cryptsystem6;6.3.3.x;1000 Zufallszahlen erzeugen
+tls1;6.3.3.4;TLS Aufbau -- Gutfall
+tls2;6.3.3.4;TLS Aufbau -- Schlechtfall
+tls3;6.3.3.4;TLS Zertifikat gültig
+tls4;6.3.3.4;TLS Zertifikat ungültig
+tls5;6.3.3.4;TLS Zertifikat abgelaufen

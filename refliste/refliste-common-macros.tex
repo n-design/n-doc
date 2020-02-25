@@ -1,0 +1,15 @@
+\newcommand{\nosnapshot}[1]{\directlua{tex.sprint(get_version_number_for_refliste("#1"))}}
+
+\newcommand{\documenttitle}{Referenzen der Herstellerdokumente}
+
+\makeatletter
+\newcommand*\ExpandableInput[1]{\@@input#1 }
+\makeatother
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: luatex
+%%% TeX-master: shared
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

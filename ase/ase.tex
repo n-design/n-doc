@@ -1,0 +1,83 @@
+\documentclass[a4paper]{scrreprt}
+\input{../common/common-packages.tex}
+\input{../common/common-macros.tex}
+\input{st-common-macros.tex}
+\input{../common/common-packages-atend.tex}
+\input{../common/common-sfr-index.tex}
+
+\newcommand{\thisdocument}{ase}
+
+\begin{document}
+
+\input{../common/titlepage}
+
+\cleardoublepage{}
+
+\input{st_chapter_0_preface.tex} %% Vorwort
+
+\cleardoublepage{}
+
+\tableofcontents
+
+\cleardoublepage{}
+
+\listoftables
+
+\cleardoublepage{}
+
+\listoffigures{}
+
+\cleardoublepage{}
+
+\input{st_chapter_1_intro} %% Introduction
+\input{st_chapter_2_conformance-claims} %% Conformance Claims
+
+\cleardoublepage{}
+
+\input{st_chapter_3_problem-definition} %% Security Problem Definition
+
+\cleardoublepage{}
+
+\input{st_chapter_4_security-objectives} %% Security Objectives
+
+\cleardoublepage{}
+
+\input{st_chapter_5_component-definition.tex} %% Component Definition
+
+\cleardoublepage{}
+
+\input{st_chapter_6_sfr-definition.tex} %% Security Functional Requirements
+
+\cleardoublepage{}
+
+\input{st_chapter_7_asetss.tex} %% Security Functions
+
+\cleardoublepage{}
+
+\appendix
+
+\input{mapping_legende}
+
+\input{../common/tls_appendix}
+
+\cleardoublepage
+
+\printbibliography
+
+% \pagebreak
+% \input{../common/offene_punkte}
+
+\cleardoublepage
+
+\listofappnotes
+
+\printindex
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: luatex
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

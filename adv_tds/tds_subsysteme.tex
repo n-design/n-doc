@@ -1,0 +1,90 @@
+
+\hrefchapter{sub}{Beschreibung der Subsysteme}
+
+Dieses Kapitel beschreibt die Unterteilung des TOE in seine Subsysteme.
+
+\subsystemkapitel{sub.vpn}
+
+\subsystembeschreibung{sub.vpn.desc}
+
+Das Subsystem \tds{sub.vpn} stellt den VPN-Client bereit, mit dem VPN-Tunnel im
+WAN aufgebaut werden können.
+
+\subsystemsfr{sub.vpn.sfr}
+
+\generatesfrsubsystable{sub.vpn}
+
+\subsysteminteract{sub.vpn.interact}
+
+Das Subsystem ruft Funktionalität aus dem Subsystem \tdslink{sub.cryptsystem}
+auf.
+
+\subsystemkapitel{sub.ntpclient}
+
+\subsystembeschreibung{sub.ntpclient.desc}
+
+Das Subsystem \tds{sub.ntpclient} stellt den VPN-Client bereit, mit dem die
+Systemzeit synchronisiert werden kann.
+
+\subsystemsfr{sub.ntpclient.sfr}
+
+\generatesfrsubsystable{sub.ntpclient}
+
+\subsysteminteract{sub.ntpclient.interact}
+
+\subsystemkapitel{sub.selfprotect}
+
+\subsystembeschreibung{sub.selfprotect.desc}
+
+Das Subsystem \tds{sub.selfprotect} enthält die Funktionen zum Selbstschutz des
+TOE. Das Subsystem sorgt für Speicherbereinigung
+(\tdslink{mod.selfprotect.memory}) und Selbsttests
+(\tdslink{mod.selfprotect.selftest}).
+
+\subsystemsfr{sub.selfprotect.sfr}
+
+\generatesfrsubsystable{sub.selfprotect}
+
+\subsysteminteract{sub.selfprotect.interact}
+
+\subsystemkapitel{sub.adminsystem}
+
+\subsystembeschreibung{sub.adminsystem.desc}
+
+Das Subsystem \tds{sub.adminsystem} stellt die Administrationsanwendung und
+Managementfunktionen des TOE bereit.
+
+\subsystemsfr{sub.adminsystem.sfr}
+
+\generatesfrsubsystable{sub.adminsystem}
+
+\subsysteminteract{sub.adminsystem.interact}
+
+Das Subsystem ruft die Selbsttests des Subsystems \tdslink{sub.selfprotect} auf.
+
+\subsystemkapitel{sub.cryptsystem}
+
+\subsystembeschreibung{sub.cryptsystem.desc}
+
+\subsystemsfr{sub.cryptsystem.sfr}
+
+\generatesfrsubsystable{sub.cryptsystem}
+
+\subsysteminteract{sub.cryptsystem.interact}
+
+\subsystemkapitel{sub.tls}
+
+\subsystembeschreibung{sub.tls.desc}
+
+\subsystemsfr{sub.tls.sfr}
+
+\generatesfrsubsystable{sub.tls}
+
+\subsysteminteract{sub.tls.interact}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "adv_tds"
+%%% TeX-engine: luatex
+%%% End:

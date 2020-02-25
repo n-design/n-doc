@@ -1,0 +1,92 @@
+%% Beispieldatei für die Beschreibung eines TDS Moduls.
+%% Das wichtigste an dieser Stelle ist, genau das Kürzel des Moduls
+%% zu kennen, das beschrieben wird. Module heißen immer
+%%
+%% mod.<subsystem>.<modul>
+%%
+%% wobei die entsprechenden Definitionen in der Datei
+%% modules.csv stehen.
+%%
+%% Kleiner Tipp: Diese Datei hat als Vorlage
+%%
+%% mod.vpn.core
+%%
+%% Mit einem Suche/Ersetze Lauf zum Austausch des Template-Codes
+%% kann man sich schon eine Menge Arbeit sparen.
+
+
+\moduleKapitel{mod.vpn.core}
+
+%% Generiert die Tabelle der SFR, die dieses Modul umsetzt oder
+%% unterstützt.
+\generatesfrtable{mod.vpn.core}
+
+%% Generiert die Tabelle der Bundles, aus denen sich dieses Modul
+%% zusammensetzt
+%\generatebundletable{mod.vpn.core}
+
+\moduleBeschreibung{mod.vpn.core.desc}
+
+Über das Modul \tds{mod.vpn.core} des Subsystems
+\tdslink{sub.vpn} stellt der TOE
+Schnittstellen .......
+
+% Hier die Funktionen des Moduls beschreiben: Was macht es? Welche
+% Rolle spielt es im Gesamtsystem? Noch nicht in die Details gehen,
+% diese werden später bei den Abläufen erklärt.
+
+%% Nach der Beschreibung des Moduls folgt die Beschreibung der
+%% Abläufe.  Diese Überschrift leitet den entsprechenden Abschnitt
+%% ein.
+\moduleAblaeufe{prc.vpn.core}
+
+%% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
+%% sollte nicht zu lang, aber ausreichend verständlich sein.
+\modulAblauf{prc.vpn.core.connect}{Verbindung zum VPN-Konzentrator aufbauen}
+
+Der Ablauf baut die Verbindung zum VPN-Konzentrator auf. Das Zertifikat des
+Konzentrators wird über die Schnittstelle \tdslink[fq]{int.vpn.cert.checkcert}
+geprüft.
+
+\umgesetztesfr{\sfrlink{ftp_itc.1/vpn}}
+
+%% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
+%% sollte nicht zu lang, aber ausreichend verständlich sein.
+\modulAblauf{prc.vpn.core.disconnect}{Verbindung zum VPN-Konzentrator abbbauen}
+
+Der Ablauf baut die Verbindung zum VPN-Konzentrator ab.
+
+\umgesetztesfr{\sfrlink{ftp_itc.1/vpn}}
+
+
+%% Der nächste wichtige Abschnitt in der Modulbeschreibung: Die
+%% Schnittstellen.
+\moduleSchnittstellen{int.vpn.core}
+
+
+%% Jede Schnittstelle hat einen Bezeichner, der mit "int."
+%% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
+%% die Schnittstelle an) oder required (das Modul nutzt die
+%% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
+\modulSchnittstelleProvided{int.vpn.core.connect}
+
+Über diese Schnittstelle wird die VPN-Verbindung aufgebaut
+(vgl. \sectref{prc.vpn.core.connect}).
+
+\modulSchnittstelleProvided{int.vpn.core.disconnect}
+
+Über diese Schnittstelle wird die VPN-Verbindung abgebaut (vgl. \sectref{prc.vpn.core.disconnect}).
+
+%% Ab hier: Die Liste der Schnittstellen, die entweder über die
+%% Blueprint-Konfiguration oder programmatisch herangezogen werden.
+\modulSchnittstelleRequired{int.vpn.cert.checkcert}
+
+Die Schnittstelle \tdslink[fq]{int.vpn.cert.checkcert} wird
+verwendet, um das Zertifikat des VPN-Konzentrators zu prüfen.
+
+% !TEX root = "../../adv_tds"
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../adv_tds"
+%%% TeX-engine: luatex
+%%% End:

@@ -1,0 +1,99 @@
+%% Beispieldatei für die Beschreibung eines TDS Moduls.
+%% Das wichtigste an dieser Stelle ist, genau das Kürzel des Moduls
+%% zu kennen, das beschrieben wird. Module heißen immer
+%%
+%% mod.<subsystem>.<modul>
+%%
+%% wobei die entsprechenden Definitionen in der Datei
+%% modules.csv stehen.
+%%
+%% Kleiner Tipp: Diese Datei hat als Vorlage
+%%
+%% mod.subxxx.modyyy
+%%
+%% Mit einem Suche/Ersetze Lauf zum Austausch des Template-Codes
+%% kann man sich schon eine Menge Arbeit sparen.
+
+
+\moduleKapitel{mod.vpn.cert}
+
+%% Generiert die Tabelle der SFR, die dieses Modul umsetzt oder
+%% unterstützt.
+\generatesfrtable{mod.vpn.cert}
+
+%% Generiert die Tabelle der Bundles, aus denen sich dieses Modul
+%% zusammensetzt
+%\generatebundletable{mod.vpn.cert}
+
+\moduleBeschreibung{mod.vpn.cert.desc}
+
+Über das Modul \tds{mod.vpn.cert} des Subsystems
+\tdslink{sub.vpn} stellt der TOE
+Schnittstellen .......
+
+% Hier die Funktionen des Moduls beschreiben: Was macht es? Welche
+% Rolle spielt es im Gesamtsystem? Noch nicht in die Details gehen,
+% diese werden später bei den Abläufen erklärt.
+
+%% Nach der Beschreibung des Moduls folgt die Beschreibung der
+%% Abläufe.  Diese Überschrift leitet den entsprechenden Abschnitt
+%% ein.
+\moduleAblaeufe{prc.vpn.cert}
+
+%% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
+%% sollte nicht zu lang, aber ausreichend verständlich sein.
+\modulAblauf{prc.vpn.cert.checkcert}{Prüfung des Zertifikats des
+  VPN-Konzentrators}
+
+Das Zertifikat wird auf mathematische Gültigkeit geprüft. Der Hash des
+Zertifikats wird über die Funktion
+\tdslink[fq]{int.cryptsystem.algorithms.gethash} berechnet.
+
+%% Hier folgt die ausführliche Beschreibung des SFR-relevanten
+%% Ablaufs.  Das sollte ordentlich in die Details des Verfahrens
+%% gehen. Es ist nicht wichtig, auf Implementationsdetails
+%% herumzureiten. Hingegen ist es für den Evaluator hilfreich, wenn
+%% bestimmte Namen genannt werden, weil das einen
+%% schönen Anker für das Lesen des Codes bildet. Auf keinen Fall
+%% sollten hier Zeilennummern genannt werden. Diese müssten jedesmal
+%% wieder angepasst und korrigiert werden.
+%%
+%% Wenn auf Code verwiesen wird, bitte mit dem Makro \code{}
+%% einschließen. Ggf. kann es notwendig sein, Trennhilfen
+%% vorzugeben. Diese bitte mit "\-" an den entsprechenden Stellen
+%% einfügen:  \code{get\-Card\-Terminals()}
+%%
+
+
+%% Wenn an einzelnen Stellen besonders deutlich erkennbar ist, dass
+%% ein SFR umgesetzt wird, ist es hilfreich, den Evaluator darauf
+%% hinzuweisen. Auf jeden Fall muss eine solche Zeile am Ende einer
+%% Ablaufbeschreibung stehen.
+\umgesetztesfr{\sfrlink{fpt_tdc.1/zert}}
+
+
+%% Der nächste wichtige Abschnitt in der Modulbeschreibung: Die
+%% Schnittstellen.
+\moduleSchnittstellen{int.vpn.cert}
+
+
+%% Jede Schnittstelle hat einen Bezeichner, der mit "int."
+%% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
+%% die Schnittstelle an) oder required (das Modul nutzt die
+%% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
+\modulSchnittstelleProvided{int.vpn.cert.checkcert}
+
+Über diese Schnittstelle das Zertifikat des VPN-Konzentrators geprüft
+(vgl. \sectref{prc.vpn.cert.checkcert}).
+
+\modulSchnittstelleRequired{int.cryptsystem.algorithms.gethash}
+
+Die Schnittstelle \tdslink[fq]{int.cryptsystem.algorithms.gethash} wird
+verwendet, um den Hash über das Zertifikat zu berechnen.
+
+% !TEX root = "../../adv_tds"
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../adv_tds"
+%%% TeX-engine: luatex
+%%% End:

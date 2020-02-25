@@ -1,0 +1,18 @@
+\begin{luacode}
+
+  bridge = require "bridge_common"
+  bridge.init("../common/db/")
+
+  function toLower(key)
+    bridge.toLower(key, tex)
+  end
+
+  function replaceUnderscore(key)
+    bridge.replaceUnderscore(key, tex)
+  end
+
+  function getError(key)
+    bridge.getError(key, tex)
+  end
+
+\end{luacode}
