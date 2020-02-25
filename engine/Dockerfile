@@ -36,9 +36,10 @@ RUN apt-get install -y make git sqlite perl openjdk-11-jre-headless graphviz cur
 COPY --from=buildbase /luarocks-3.1.2/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
 COPY --from=buildbase /luarocks-3.1.2/lua_modules/share/lua/5.3/ /usr/local/share/lua/5.3
 
-COPY plantuml.tar.gz /
+COPY plantuml-accessories.tar.gz /
+RUN tar x -C / -f /plantuml-accessories.tar.gz
 
-RUN tar x -C / -f /plantuml.tar.gz
+RUN curl -L http://sourceforge.net/projects/plantuml/files/plantuml.1.2020.1.jar/download > /usr/local/java/plantuml.jar
 
 RUN echo ${ctanmirror}
 

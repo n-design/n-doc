@@ -4,8 +4,8 @@ TeXLive, SQLite, Lua, PlantUML und Werkzeuge für CC-Dokumentation
 == Überblick
 
 Die Dateien in diesem Repository bilden die Grundlage für ein Docker Image zum
-Erstellen der CC-Dokumentation für den Konnektor. Das Image paketiert eine
-reduzierte Fassung von TeXLive, der Datenbank SQLite, Lua und der Bilbiotheken
+Erstellen der CC-Dokumentation mit n-doc. Das Image paketiert eine
+reduzierte Fassung von TeXLive, der Datenbank SQLite, Lua und der Bibliotheken
 für die Verwendung von SQLite in Lua. Zum Erstellen der Grafiken in den
 Dokumenten wird PlantUML eingebunden. PlantUML braucht ein Java Runtime
 Environment.
