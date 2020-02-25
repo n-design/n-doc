@@ -4,23 +4,24 @@ TeXLive, SQLite, Lua, PlantUML und Werkzeuge für CC-Dokumentation
 == Überblick
 
 Die Dateien in diesem Repository bilden die Grundlage für ein Docker Image zum
-Erstellen der CC-Dokumentation mit n-doc. Das Image paketiert eine
-reduzierte Fassung von TeXLive, der Datenbank SQLite, Lua und der Bibliotheken
-für die Verwendung von SQLite in Lua. Zum Erstellen der Grafiken in den
-Dokumenten wird PlantUML eingebunden. PlantUML braucht ein Java Runtime
+Erstellen der CC-Dokumentation mit
+link:https://github.com/n-design/n-doc_template[n-doc_template]. Das Image
+paketiert eine reduzierte Fassung von TeXLive, der Datenbank SQLite, Lua und der
+Bibliotheken für die Verwendung von SQLite in Lua. Zum Erstellen der Grafiken in
+den Dokumenten wird PlantUML eingebunden. PlantUML braucht ein Java Runtime
 Environment.
 
 Die meisten Abhängigkeiten werden beim Erstellen des Containers
-heruntergeladen. Lediglich PlantUML wird als Binary mitgeliefert, da es keine
-zuverlässigen Downloadpunkte für die verwendeten Bibliotheken zum Erstellen der
-PDFs gibt.
+heruntergeladen. Lediglich einige Zusatzpakete für PlantUML werden als Binary
+mitgeliefert, da es keine zuverlässigen Downloadpunkte für die verwendeten
+Bibliotheken zum Erstellen der PDFs gibt.
 
 == Aufruf
 
 === Erstellen des Images
 
 Das n-doc Image wird über das Ziel `image` des Makefiles erstellt. Dabei wird
-das Image mit dem Label `n-design/n-doc` versehen:
+das Image mit dem Label `ndesign/n-doc` versehen:
 
 ----
 make image
@@ -33,33 +34,12 @@ gecachte Zwischen-Images zu erzwingen:
 CACHE_OPTION=--no-cache make image
 ----
 
-Zum Übertragen des Images auf den n-design Nexus wird das Ziel `publish`
+Zum Publizieren des Images wird das Ziel `publish`
 verwendet:
 
 ----
 make publish
 ----
-
-
-=== Übersetzen der Dokumente
-
-Die Dokumente werden durch den Aufruf von `make` erstellt. Die Quellen der
-Dokumente müssen im aktuellen Verzeichnis liegen und das Verzeichnis muss unter
-dem Pfad `/data` in den Container gemountet werden:
-
-----
-docker run --rm  --volume $(pwd):/data ndesign/n-doc make -j4 delivery
-----
-
-Statt `delivery` kann auch ein Dokumenttyp (`st`, `tds` etc) verwendet
-werden. Der Parameter `-j` steuert die Anzahl der Threads (jobs), die GNU Make
-gleichzeitig startet. Hier muss eine Zahl angegeben werden: Die Anzahl der
-Builder in der CI-Plattform oder die Anzahl der Cores des Arbeitsplatzrechners.
-
-WARNING: Ohne eine Zahl hinter `-j` verwendet GNU Make die maximalen Ressourcen
-des Rechners und startet alle Jobs gleichzeitig. Das führt häufig zum Stillstand
-des Systems, weil die simultan laufenden PlantUML Prozesse den Speicher komplett
-auslasten.
 
 == Wartung & Pflege
 
@@ -86,6 +66,7 @@ erstellender Layer mit kleinen Downloads ersetzt werden.
 * Einmal jährlich (ca. Mai) wird das Jahresrelease von TeXLive
   herausgegeben. TeXLive verwendet rollierende Releases, sodass Releases mit
   geringem Aufwand umzusetzen sind. Im vorliegenden Dockerfile wird die
-  Distribution ohne die Jahreszahl in den Pfadnamen installiert. Lediglich wenn es z.B. bei Lua einen Versionswechsel gibt (Wie beim Übergang
-  von 2018 auf 2019, bei dem LuaTeX auf Lua 5.3 angehoben wurde),
-  müssen ggf. die eingebundenen Bibliotheken angepasst werden.
+  Distribution ohne die Jahreszahl in den Pfadnamen installiert. Lediglich wenn
+  es z.B. bei Lua einen Versionswechsel gibt (Wie beim Übergang von 2018 auf
+  2019, bei dem LuaTeX auf Lua 5.3 angehoben wurde), müssen ggf. die
+  eingebundenen Bibliotheken angepasst werden.
