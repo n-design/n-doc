@@ -1,6 +1,8 @@
 testcase;sfr
 vpn1;ftp_itc.1/vpn
 vpn2;ftp_itc.1/vpn
+vpn1;fcs_ckm.2
+vpn2;fcs_ckm.2
 vpn3;fpt_tdc.1/zert
 vpn4;fpt_tdc.1/zert
 vpn5;fpt_tdc.1/zert
@@ -19,6 +21,8 @@ cryptsystem5;fcs_ckm.4
 cryptsystem6;fcs_rng.1/hashdrbg
 tls1;ftp_itc.1/tls
 tls2;ftp_itc.1/tls
+tls1;fcs_ckm.2
+tls2;fcs_ckm.2
 tls1;fcs_cop.1/tls.aes
 tls2;fcs_cop.1/tls.aes
 tls1;fcs_cop.1/tls.auth
