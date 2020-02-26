@@ -80,8 +80,6 @@ cc_core.verbatim_mapper = function (v) return v; end;
 cc_core.mod_mapper = function (v) return "mod." .. v.sub .. "." .. v.mod; end;
 
 cc_core.querysets = {
-    {name="docversion", st=[[SELECT version FROM releases WHERE document=?]], resultitem = "version"},
-    {name="docdate", st=[[SELECT date FROM releases WHERE document=?]], resultitem = "date"},
     {name="sub", st=[[SELECT name FROM subsystems WHERE label=?]], resultitem = "name"},
     {name="mod", st=[[SELECT name FROM modules WHERE subsystem=? AND label=?]], resultitem = "name"},
     {name="int", st=[[SELECT name FROM interfaces WHERE subsystem=? AND module=? AND label=?]], resultitem = "name"},
