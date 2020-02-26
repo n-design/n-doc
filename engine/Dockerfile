@@ -28,7 +28,7 @@ RUN ./configure && make build && make install && \
 WORKDIR /
 
 FROM ${baseimage}
-ARG ctanmirror=http://ftp.fau.de/ctan
+ARG ctanmirror=http://www.ctan.org/tex-archive
 
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y make git sqlite perl openjdk-11-jre-headless graphviz curl python-pygments
