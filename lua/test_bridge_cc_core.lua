@@ -119,6 +119,11 @@ function testbridge.test_print_module_to_num_testcase_table()
    bridge.print_module_to_num_testcase_table(tex.expected(expected_result:gsub("__1ex", "[1ex]")))
 end
 
+function testbridge.test_print_sfr_to_sf_table()
+   expected_result = [[]]
+   bridge.print_sfr_to_sf_table(tex.expected(expected_result:gsub("__1ex", "[1ex]")))
+end
+
 -- function printTlsConnectionTable()
 --    bridge.printTlsConnectionTable(tex)
 -- end

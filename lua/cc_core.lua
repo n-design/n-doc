@@ -153,6 +153,11 @@ select distinct tsfi as label, purpose as purpose from sfr_tsfi
   where sfr = :sfr
 ]], mapper = cc_core.verbatim_mapper},
 
+    {name="sfr2sf", st=[[
+select distinct sf from sfr_sf
+  where sfr = :sfr
+]], resultitem="sf"},
+
     {name="testcase2sfr", st=[[
 select distinct sfr.label from sfr join testcase_sfr on sfr.label=testcase_sfr.sfr where testcase_sfr.testcase=:testcase
 ]], resultitem = "label"},
@@ -198,6 +203,10 @@ end
 
 function cc_core.getSfrText(key)
     return cmn.get_by_query_key("sfrtext", key)
+end
+
+function cc_core.getSfr2Sf(key)
+   return cmn.get_relations_by_query_key("sfr2sf", {sfr=key}, function (e) return e end)
 end
 
 function cc_core.removeSfrSubComponent(key)

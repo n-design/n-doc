@@ -156,4 +156,17 @@ function bridge_cc_core.print_module_to_num_testcase_table(tex)
    bridge_cc_core.print_category_to_num_testcase_table(tex, "modules", "modulestatus", cc_core.getNumberOfTestcasesModule, 3)
 end
 
+function bridge_cc_core.print_sfr_to_sf_table(tex)
+   local sfr_labels = common.generate_label_list("mainsfr")
+   local resulttable = {}
+   for _,sfr in pairs(sfr_labels) do
+      local tablerow = {}
+      table.insert(tablerow, sfr)
+      table.insert(tablerow, table.concat(cc_core.getSfr2Sf(sfr), ", "))
+      table.insert(resulttable, table.concat(tablerow, ": "))
+   end
+   print(table.concat(resulttable, " "))
+   tex.sprint(table.concat(resulttable))
+end
+
 return bridge_cc_core
