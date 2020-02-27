@@ -1,8 +1,10 @@
 sfr;subsfr
 fcs_ckm.1;fcs_ckm.1
 fcs_ckm.1;fcs_ckm.1.1
-fcs_ckm.2;fcs_ckm.2.1
-fcs_ckm.2;fcs_ckm.2
+fcs_ckm.2/ike;fcs_ckm.2.1/ike
+fcs_ckm.2/ike;fcs_ckm.2/ike
+fcs_ckm.2/tls;fcs_ckm.2.1/tls
+fcs_ckm.2/tls;fcs_ckm.2/tls
 fcs_ckm.4;fcs_ckm.4.1
 fcs_ckm.4;fcs_ckm.4
 fcs_cop.1/hash;fcs_cop.1/hash

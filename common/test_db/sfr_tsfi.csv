@@ -1,9 +1,9 @@
 sfr;tsfi;purpose
 fcs_ckm.1;ls.lan.tls;Schlüsselaushandlung für TLS
-fcs_ckm.2;ls.lan.tls;Schlüsselverteilung für TLS
+fcs_ckm.2/tls;ls.lan.tls;Schlüsselverteilung für TLS
 fcs_ckm.4;ls.lan.tls;TLS Verbindungen im LAN abbauen
 fcs_ckm.1;ls.wan.ipsec;Schlüsselaushandlung für VPN
-fcs_ckm.2;ls.wan.ipsec;Schlüsselverteilung für VPN
+fcs_ckm.2/ike;ls.wan.ipsec;Schlüsselverteilung für VPN
 fcs_ckm.4;ls.wan.ipsec;IPSEC Verbindungen im WAN abbauen
 fcs_cop.1/hash;ls.wan.ipsec;IPSec Hash Operationen
 fcs_cop.1/hmac;ls.wan.ipsec;IPSec HMAC Operationen

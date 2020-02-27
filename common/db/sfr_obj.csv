@@ -4,11 +4,10 @@ fcs_ckm.1;o.vpn_integrität
 fcs_ckm.1;o.vpn_vertraul
 fcs_ckm.1;o.basiscrypto
 fcs_ckm.1;o.tlscrypto
-fcs_ckm.2;o.vpn_auth
-fcs_ckm.2;o.vpn_integrität
-fcs_ckm.2;o.vpn_vertraul
-fcs_ckm.2;o.basiscrypto
-fcs_ckm.2;o.tlscrypto
+fcs_ckm.2/ike;o.vpn_auth
+fcs_ckm.2/ike;o.vpn_integrität
+fcs_ckm.2/ike;o.vpn_vertraul
+fcs_ckm.2/tls;o.tlscrypto
 fcs_ckm.4;o.vpn_auth
 fcs_ckm.4;o.vpn_integrität
 fcs_ckm.4;o.vpn_vertraul

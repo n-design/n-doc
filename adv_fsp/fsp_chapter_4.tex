@@ -28,7 +28,7 @@ um (Perfect) Forward Secrecy zu gewährleisten.
 
 Initiator (TOE) und Responder (VPN-Konzentrator) werden im Rahmen des
 IKE-Protokolls gegenseitig zertifikatsbasiert authentifiziert
-(\sfr{FTP_ITC.1/VPN}, \sfr{FCS_CKM.2}) und handeln Schlüssel für die
+(\sfr{ftp_itc.1/vpn}, \sfr{fcs_ckm.2/ike}) und handeln Schlüssel für die
 Verschlüsselung und Integritätssicherung der Nutzdaten aus.  Die Signaturprüfung
 mit öffentlichen Schlüsseln und die symmetrischen Algorithmen werden in Software
 umgesetzt (s.~Abschnitt~\vref{sf.cryptographicservices}).
@@ -176,7 +176,7 @@ Die Algorithmen PRF-HMAC-SHA-256 und PRF-HMAC-SHA-1 werden vom TOE unterstützt.
 \rfc{2104} spezifiziert den HMAC-Algorithmus für beliebige Hash-Algorithmen
 \cite{rfc2104}.  FIPS180-4 \cite{FIPS180-4} spezifiziert die verwendeten
 Hash-Algorithmen. \cite{rfc4868} beschreibt die PRFs auf Basis der HMACs, wie
-sie bei IKE eingesetzt werden (\sfrlink{FCS_CKM.1}, \sfrlink{FCS_CKM.2}).
+sie bei IKE eingesetzt werden (\sfrlink{fcs_ckm.1}, \sfrlink{fcs_ckm.2/ike}).
 
 
 \subsubsection{Schlüsselaustausch für IKE (Diffie-Hellman)}%
@@ -186,7 +186,7 @@ Der TOE implementiert den Diffie-Hellman-Algorithmus für den Schlüsselaustausc
 im Rahmen des IKE-Protokolls IKEv2 \cite{rfc7296}.  Der TOE stellt zudem sicher,
 dass Diffie-Hellman-Schlüssel nur für eine Sitzung verwendet werden und danach
 neu erzeugt werden, um (Perfect) Forward Secrecy zu
-gewährleisten. (\sfrlink{fcs_ckm.2})
+gewährleisten. (\sfrlink{fcs_ckm.2/ike})
 
 \subsubsection{Schlüsselzerstörung}%
 \label{sf.cryptographicservices.ipsec.keydest}

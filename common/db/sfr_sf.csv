@@ -1,6 +1,7 @@
 sfr;sf
 fcs_ckm.1;sf.cryptographicservices
-fcs_ckm.2;sf.cryptographicservices
+fcs_ckm.2/ike;sf.vpn
+fcs_ckm.2/tls;sf.tls
 fcs_ckm.4;sf.cryptographicservices
 fcs_cop.1/hash;sf.cryptographicservices
 fcs_cop.1/hmac;sf.cryptographicservices
