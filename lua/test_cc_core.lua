@@ -79,7 +79,7 @@ end
 function test_cc_core.test_tsfi_to_sfr()
    lu.assertEquals(cc_core.getTsfi2Sfr("ls.wan.ipsec"), --
 		   {{label = "fcs_ckm.1", purpose = "Schlüsselaushandlung für VPN"},
-		      {label = "fcs_ckm.2", purpose = "Schlüsselverteilung für VPN"},
+		      {label = "fcs_ckm.2/ike", purpose = "Schlüsselverteilung für VPN"},
 		      {label = "fcs_ckm.4", purpose = "IPSEC Verbindungen im WAN abbauen"},
 		      {label = "fcs_cop.1/hash", purpose = "IPSec Hash Operationen"},
 		      {label = "fcs_cop.1/hmac", purpose = "IPSec HMAC Operationen"},
@@ -159,7 +159,7 @@ end
 
 function test_cc_core.test_Module2Sfr() local mod = "mod.tls.core"
    lu.assertEquals(cc_core.generate_table_module_to_sfr(mod, "enf"),
-		   {"fcs_ckm.2", "fcs_cop.1/tls.aes", "fcs_cop.1/tls.auth", "ftp_itc.1/tls"})
+		   {"fcs_ckm.2/tls", "fcs_cop.1/tls.aes", "fcs_cop.1/tls.auth", "ftp_itc.1/tls"})
    supportingsfr = {"ftp_trp.1/admin"}
    lu.assertEquals(cc_core.generate_table_module_to_sfr("mod.vpn.core", "sup"), supportingsfr)
 end

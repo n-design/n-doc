@@ -1,7 +1,7 @@
 sfr;relationtype;subsystem;module;purpose
 fcs_ckm.1;enf;cryptsystem;keymgmt;Schlüsselerstellung für VPN und TLS
-fcs_ckm.2;enf;vpn;core;Verbindungsaufbau, Schlüsselverteilung für VPN
-fcs_ckm.2;enf;tls;core;Verbindungsaufbau, Schlüsselverteilung für TLS
+fcs_ckm.2/ike;enf;vpn;core;Verbindungsaufbau, Schlüsselverteilung für VPN
+fcs_ckm.2/tls;enf;tls;core;Verbindungsaufbau, Schlüsselverteilung für TLS
 fcs_ckm.4;enf;cryptsystem;keymgmt;Schlüsselzerstörung für VPN und TLS
 fcs_cop.1/hash;enf;cryptsystem;algorithms;Hash-Algorithmen bereitstellen
 fcs_cop.1/hmac;enf;cryptsystem;algorithms;HMAC-Algorithmen bereitstellen
