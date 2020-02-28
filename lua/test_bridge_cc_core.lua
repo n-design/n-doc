@@ -119,10 +119,16 @@ function testbridge.test_print_module_to_num_testcase_table()
    bridge.print_module_to_num_testcase_table(tex.expected(expected_result:gsub("__1ex", "[1ex]")))
 end
 
-function testbridge.test_print_sfr_to_sf_table()
-   expected_result = [[]]
-   bridge.print_sfr_to_sf_table(tex.expected(expected_result:gsub("__1ex", "[1ex]")))
+function testbridge.test_print_sfr_to_sf_table_header()
+   expected_result = [[& \rot{\textsmaller[1]{\secfunclink{sf.administration}}} & \rot{\textsmaller[1]{\secfunclink{sf.cryptographicservices}}} & \rot{\textsmaller[1]{\secfunclink{sf.networkservices}}} & \rot{\textsmaller[1]{\secfunclink{sf.selfprotection}}} & \rot{\textsmaller[1]{\secfunclink{sf.tls}}} & \rot{\textsmaller[1]{\secfunclink{sf.vpn}}} ]]
+   bridge.print_sfr_to_sf_table_header(tex.expected(expected_result:gsub("__1ex", "[1ex]")))
 end
+
+function testbridge.test_print_sfr_to_sf_table_body()
+   expected_result = [[\textsmaller[1]{\sfrlinknoindex{fcs_ckm.1}} & \tno & \tcheck & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_ckm.2/ike}} & \tno & \tno & \tno & \tno & \tno & \tcheck\\\textsmaller[1]{\sfrlinknoindex{fcs_ckm.2/tls}} & \tno & \tno & \tno & \tno & \tcheck & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_ckm.4}} & \tno & \tcheck & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/hash}} & \tno & \tcheck & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/hmac}} & \tno & \tcheck & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/tls.aes}} & \tno & \tno & \tno & \tno & \tcheck & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/tls.auth}} & \tno & \tno & \tno & \tno & \tcheck & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_rng.1/hashdrbg}} & \tno & \tcheck & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fdp_rip.1}} & \tno & \tno & \tno & \tcheck & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fpt_tdc.1/tls.zert}} & \tno & \tno & \tno & \tno & \tcheck & \tno\\\textsmaller[1]{\sfrlinknoindex{fpt_tdc.1/zert}} & \tno & \tno & \tno & \tno & \tno & \tcheck\\\textsmaller[1]{\sfrlinknoindex{fpt_stm.1}} & \tno & \tno & \tcheck & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fpt_tst.1}} & \tno & \tno & \tno & \tcheck & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{ftp_itc.1/tls}} & \tno & \tno & \tno & \tno & \tcheck & \tno\\\textsmaller[1]{\sfrlinknoindex{ftp_itc.1/vpn}} & \tno & \tno & \tno & \tno & \tno & \tcheck\\\textsmaller[1]{\sfrlinknoindex{ftp_trp.1/admin}} & \tcheck & \tno & \tno & \tno & \tno & \tno\\]]
+   bridge.print_sfr_to_sf_table_body(tex.expected(expected_result:gsub("__1ex", "[1ex]")))
+end
+
 
 -- function printTlsConnectionTable()
 --    bridge.printTlsConnectionTable(tex)

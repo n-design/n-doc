@@ -90,6 +90,7 @@ cc_core.querysets = {
     {name="mainsfr_all_labels", st=[[SELECT DISTINCT sfr FROM sfr_subsfr]], resultitem = "sfr"},
     {name="sfrtext", st=[[SELECT description FROM sfr WHERE label=? COLLATE NOCASE]], resultitem = "description"},
     {name="sf", st=[[SELECT name FROM sf WHERE label=? COLLATE NOCASE]], resultitem = "name"},
+    {name="sf_all_labels", st=[[SELECT distinct label as sf FROM sf order by sf]], resultitem = "sf"},
     {name="sftext", st=[[SELECT description FROM sf WHERE label=? COLLATE NOCASE]], resultitem = "description"},
     {name="obj", st=[[SELECT name FROM obj WHERE label=? COLLATE NOCASE]], resultitem = "name"},
     {name="objtext", st=[[SELECT description FROM obj WHERE label=? COLLATE NOCASE]], resultitem = "description"},

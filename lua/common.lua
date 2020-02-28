@@ -36,7 +36,7 @@ function common.getError(key)
  end
 
 function common.labels(labeltype)
-   labels = common.generate_label_list(labeltype)
+   local labels = common.generate_label_list(labeltype)
    local i = 0
    return function ()
       i = i + 1
