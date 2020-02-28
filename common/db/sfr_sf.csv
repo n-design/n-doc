@@ -10,7 +10,8 @@ fcs_cop.1/tls.auth;sf.tls
 fcs_rng.1/hashdrbg;sf.cryptographicservices
 fdp_rip.1;sf.selfprotection
 fpt_stm.1;sf.networkservices
-fpt_tdc.1/TLS.Zert;sf.tls
+fpt_tdc.1/tls.zert;sf.tls
+fpt_tdc.1/zert;sf.vpn
 fpt_tst.1;sf.selfprotection
 ftp_itc.1/tls;sf.tls
 ftp_itc.1/vpn;sf.vpn
