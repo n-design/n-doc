@@ -16,6 +16,8 @@ function split_at_dot(key)
 end
 
 cc_core.table_definitions = {
+   [[CREATE TABLE spd ( `label` TEXT, `name` TEXT, `description` TEXT, `PP` TEXT, PRIMARY KEY(`label`) )]],
+   [[CREATE TABLE spd_obj ( `spd` TEXT, `obj` TEXT, `rel` TEXT, FOREIGN KEY(`spd`) REFERENCES `spd`(`label`), FOREIGN KEY(`obj`) REFERENCES `obj`(`label`))]],   
    [[CREATE TABLE subsystems ( `label` TEXT, `name` TEXT, `plainname` TEXT, PRIMARY KEY(`label`) )]],
    [[CREATE TABLE modules ( `subsystem` TEXT, `label` TEXT, `name` TEXT, `plainname` TEXT, PRIMARY KEY(`subsystem`,`label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) )]],
    [[CREATE TABLE interfaces ( `subsystem` TEXT, `module` TEXT, `label` TEXT, `name` TEXT, PRIMARY KEY(`subsystem`, `module`, `label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) , FOREIGN KEY(`module`) REFERENCES `modules`(`label`) )]],
@@ -47,6 +49,8 @@ function cc_core.all_table_definitions()
 end
 
 cc_core.populate_info = {
+   {st=[[INSERT INTO spd VALUES (:label, :name, :description, :PP)]], csv = "spd.csv"},
+   {st=[[INSERT INTO spd_obj VALUES (:spd, :obj, :rel)]], csv = "sfr_tsfi.csv"},
    {st=[[INSERT INTO subsystems VALUES (:label, :name, :plainname)]], csv="subsystems.csv"},
    {st=[[INSERT INTO modules VALUES (:subsystem, :label, :name, :plainname)]], csv = "modules.csv"},
    {st=[[INSERT INTO interfaces VALUES (:subsystem, :module, :label, :name)]], csv = "interfaces.csv"},
@@ -80,6 +84,10 @@ cc_core.verbatim_mapper = function (v) return v; end;
 cc_core.mod_mapper = function (v) return "mod." .. v.sub .. "." .. v.mod; end;
 
 cc_core.querysets = {
+    {name="spd", st=[[SELECT name FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "name"},
+    {name="spdtext", st=[[SELECT description FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "description"},
+    {name="spdsource", st=[[SELECT PP as source FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "source"},
+    {name="spd2obj", st=[[select distinct obj from spd_obj where spd=:spd]], mapper = cc_core.verbatim_mapper},
     {name="sub", st=[[SELECT name FROM subsystems WHERE label=?]], resultitem = "name"},
     {name="mod", st=[[SELECT name FROM modules WHERE subsystem=? AND label=?]], resultitem = "name"},
     {name="int", st=[[SELECT name FROM interfaces WHERE subsystem=? AND module=? AND label=?]], resultitem = "name"},
@@ -233,6 +241,25 @@ end
 
 function cc_core.getObjectiveSource(key)
    return cmn.get_by_query_key("objsource", key)
+end
+
+function cc_core.getSpd(key)
+   return cmn.get_by_query_key("spd", key)
+end
+
+function cc_core.getSpdText(key)
+   return cmn.get_by_query_key("spdtext", key)
+end
+
+function cc_core.getSpdSource(key)
+   return cmn.get_by_query_key("spdsource", key)
+end
+
+function cc_core.getSpd2Obj(key)
+   r = cmn.get_relations_by_query_key("spd2obj", {spd=key}, function (e) return e end)
+   print (#r)
+   for _,i in pairs(r) do print ("i", i) end
+   return cmn.get_relations_by_query_key("spd2obj", {spd=key}, function (e) return e end)
 end
 
 function cc_core.getTsfi(key)

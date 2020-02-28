@@ -1,0 +1,8 @@
+label;name;description;PP
+t.wan.client;T.WAN.Client;Bedrohungen aus dem WAN;3.2
+t.lan.admin;T.LAN.Admin;Datenverkehr zur Managementschnittstelle abhören;3.2
+t.zert_prüf;T.Zert_Prüf;Manipulierte Zertifikate;3.2
+t.timesync;T.TimeSync;Manipulierte Zeitstempel;3.2
+osp.tls;OSP.TLS;TLS-Kanäle mit sicheren kryptographische Algorithmen;3.3
+osp.zeitdienst;OSP.Zeitdienst;Zeitdienst;3.3
+a.guidance;A.Guidance;Befolgen der Guidance;3.4
