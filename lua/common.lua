@@ -24,10 +24,8 @@ function common.check_for_errors(replaced, key)
    return result
 end
 
-function common.generate_label_list(thelabel, srckey)
-    local srckey = srckey or "%"
-    if srckey == "" then srckey = "%" end
-    local labels = common.get_relations_by_query_key(thelabel .."_all_labels", {src=srckey})
+function common.generate_label_list(thelabel)
+    local labels = common.get_relations_by_query_key(thelabel .."_all_labels")
     return labels
 end
 
