@@ -171,9 +171,13 @@ function test_cc_core.testSubmod2Bundle()
 end
 
 
-function test_cc_core.test_get_module_status(key)
+function test_cc_core.test_get_module_status()
    lu.assertEquals(cc_core.get_module_status("mod.tls.core"), "\\enfc{}")
    lu.assertEquals(cc_core.get_module_status("mod.adminsystem.mgmt"), "\\supp{}")   
+end
+
+function test_cc_core.test_getSfr2Sf()
+   lu.assertEquals(cc_core.getSfr2Sf("fcs_ckm.1"), {"sf.cryptographicservices"})
 end
 
 function print_sfr_2_submod(sfr, relationtype)

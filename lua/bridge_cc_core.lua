@@ -156,4 +156,53 @@ function bridge_cc_core.print_module_to_num_testcase_table(tex)
    bridge_cc_core.print_category_to_num_testcase_table(tex, "modules", "modulestatus", cc_core.getNumberOfTestcasesModule, 3)
 end
 
+function init_sf_row()
+   row = {}
+   for sf in common.labels("sf") do
+      row[sf] = [[\tno]]
+   end
+   return row
+end
+
+function bridge_cc_core.print_sfr_to_sf_table_header(tex)
+   local resulttable = {}
+   for sf in common.labels("sf") do
+      table.insert(resulttable, [[& \rot{\textsmaller[1]{\secfunclink{]])
+      table.insert(resulttable, sf)
+      table.insert(resulttable, [[}}} ]])
+   end
+   tex.sprint(table.concat(resulttable))
+end
+
+function p(r)
+   local result = {}
+   for sf in common.labels("sf") do
+      table.insert(result, r[sf])
+   end
+   return table.concat(result, " & ")
+end
+
+
+function bridge_cc_core.print_sfr_to_sf_table_body(tex)
+   local resulttable = {}
+   for sfr in common.labels("mainsfr") do
+      local sf_row = init_sf_row()
+      local sf_for_sfr = cc_core.getSfr2Sf(sfr)
+      for _,sf in pairs(sf_for_sfr) do
+ 	 sf_row[sf]=[[\tcheck]]
+      end
+      tablerow={}
+      table.insert(tablerow, [[\textsmaller[1]{\sfrlinknoindex{]])
+      table.insert(tablerow, sfr)
+      table.insert(tablerow, [[}} & ]])
+      table.insert(tablerow, p(sf_row))
+      table.insert(tablerow, [[\\]])
+      table.insert(resulttable, table.concat(tablerow))
+   end
+--   for _,r in pairs(resulttable) do
+--      print(r)
+--   end
+   tex.sprint(table.concat(resulttable))
+end
+
 return bridge_cc_core
