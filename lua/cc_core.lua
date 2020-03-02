@@ -16,6 +16,8 @@ function split_at_dot(key)
 end
 
 cc_core.table_definitions = {
+   [[CREATE TABLE spd ( `label` TEXT, `name` TEXT, `description` TEXT, `PP` TEXT, `PP_order` TEXT, PRIMARY KEY(`label`) )]],
+   [[CREATE TABLE spd_obj ( `spd` TEXT, `obj` TEXT, `rel` TEXT, FOREIGN KEY(`spd`) REFERENCES `spd`(`label`), FOREIGN KEY(`obj`) REFERENCES `obj`(`label`))]],   
    [[CREATE TABLE subsystems ( `label` TEXT, `name` TEXT, `plainname` TEXT, PRIMARY KEY(`label`) )]],
    [[CREATE TABLE modules ( `subsystem` TEXT, `label` TEXT, `name` TEXT, `plainname` TEXT, PRIMARY KEY(`subsystem`,`label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) )]],
    [[CREATE TABLE interfaces ( `subsystem` TEXT, `module` TEXT, `label` TEXT, `name` TEXT, PRIMARY KEY(`subsystem`, `module`, `label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) , FOREIGN KEY(`module`) REFERENCES `modules`(`label`) )]],
@@ -47,6 +49,8 @@ function cc_core.all_table_definitions()
 end
 
 cc_core.populate_info = {
+   {st=[[INSERT INTO spd VALUES (:label, :name, :description, :PP, :PP_order)]], csv = "spd.csv"},
+   {st=[[INSERT INTO spd_obj VALUES (:spd, :obj, :rel)]], csv = "spd_obj.csv"},
    {st=[[INSERT INTO subsystems VALUES (:label, :name, :plainname)]], csv="subsystems.csv"},
    {st=[[INSERT INTO modules VALUES (:subsystem, :label, :name, :plainname)]], csv = "modules.csv"},
    {st=[[INSERT INTO interfaces VALUES (:subsystem, :module, :label, :name)]], csv = "interfaces.csv"},
@@ -58,6 +62,7 @@ cc_core.populate_info = {
    {st=[[INSERT INTO sf VALUES (:label, :name, :description)]], csv = "sf.csv"},
    {st=[[INSERT INTO sfr_sf VALUES (:sfr, :sf)]], csv = "sfr_sf.csv"},
    {st=[[INSERT INTO obj VALUES (:label, :name, :description, :PP)]], csv = "obj.csv"},
+   {st=[[INSERT INTO sfr_obj VALUES (:sfr, :obj)]], csv = "sfr_obj.csv"},
    {st=[[INSERT INTO tsfi VALUES (:label, :name, :relationtype)]], csv = "tsfi.csv"},
    {st=[[INSERT INTO sfr_tsfi VALUES (:sfr, :tsfi, :purpose)]], csv = "sfr_tsfi.csv"},
    {st=[[INSERT INTO errors VALUES (:code, :type, :severity, :msg)]], csv = "errors.csv"},
@@ -80,6 +85,11 @@ cc_core.verbatim_mapper = function (v) return v; end;
 cc_core.mod_mapper = function (v) return "mod." .. v.sub .. "." .. v.mod; end;
 
 cc_core.querysets = {
+    {name="spd", st=[[SELECT name FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "name"},
+    {name="spd_all_labels", st=[[SELECT label FROM spd ORDER by PP_order]], resultitem = "label"},
+    {name="spdtext", st=[[SELECT description FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "description"},
+    {name="spdsource", st=[[SELECT PP as source FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "source"},
+    {name="spd2obj", st=[[select distinct obj from spd_obj where spd=:spd]], resultitem="obj"},
     {name="sub", st=[[SELECT name FROM subsystems WHERE label=?]], resultitem = "name"},
     {name="mod", st=[[SELECT name FROM modules WHERE subsystem=? AND label=?]], resultitem = "name"},
     {name="int", st=[[SELECT name FROM interfaces WHERE subsystem=? AND module=? AND label=?]], resultitem = "name"},
@@ -93,6 +103,8 @@ cc_core.querysets = {
     {name="sf_all_labels", st=[[SELECT distinct label as sf FROM sf order by sf]], resultitem = "sf"},
     {name="sftext", st=[[SELECT description FROM sf WHERE label=? COLLATE NOCASE]], resultitem = "description"},
     {name="obj", st=[[SELECT name FROM obj WHERE label=? COLLATE NOCASE]], resultitem = "name"},
+    {name="obj_all_labels", st=[[SELECT label FROM obj ORDER BY label]], resultitem = "label"},
+    {name="obj_no_env_all_labels", st=[[SELECT label FROM obj WHERE label LIKE 'o.%' ORDER BY label]], resultitem = "label"},
     {name="objtext", st=[[SELECT description FROM obj WHERE label=? COLLATE NOCASE]], resultitem = "description"},
     {name="objsource", st=[[SELECT PP as source FROM obj WHERE label=? COLLATE NOCASE]], resultitem = "source"},
     {name="tsfi", st=[[SELECT name FROM tsfi WHERE label=? COLLATE NOCASE]], resultitem = "name"},
@@ -155,9 +167,10 @@ select distinct tsfi as label, purpose as purpose from sfr_tsfi
 ]], mapper = cc_core.verbatim_mapper},
 
     {name="sfr2sf", st=[[
-select distinct sf from sfr_sf
-  where sfr = :sfr
-]], resultitem="sf"},
+select distinct sf from sfr_sf where sfr = :sfr]], resultitem="sf"},
+
+    {name="sfr2obj", st=[[
+select distinct obj from sfr_obj where sfr=:sfr]], resultitem="obj"},
 
     {name="testcase2sfr", st=[[
 select distinct sfr.label from sfr join testcase_sfr on sfr.label=testcase_sfr.sfr where testcase_sfr.testcase=:testcase
@@ -210,6 +223,14 @@ function cc_core.getSfr2Sf(key)
    return cmn.get_relations_by_query_key("sfr2sf", {sfr=key}, function (e) return e end)
 end
 
+function cc_core.getSfr2Obj(key)
+   return cmn.get_relations_by_query_key("sfr2obj", {sfr=key}, function (e) return e end)
+end
+
+function cc_core.getSfr2Obj(key)
+   return cmn.get_relations_by_query_key("sfr2obj", {sfr=key}, function (e) return e end)
+end
+
 function cc_core.removeSfrSubComponent(key)
    local component = string.gsub(string.lower(key), "^([a-z]+_[a-z]+%.[0-9])%.[0-9]([/.]*)", "%1%2")
    return component
@@ -233,6 +254,22 @@ end
 
 function cc_core.getObjectiveSource(key)
    return cmn.get_by_query_key("objsource", key)
+end
+
+function cc_core.getSpd(key)
+   return cmn.get_by_query_key("spd", key)
+end
+
+function cc_core.getSpdText(key)
+   return cmn.get_by_query_key("spdtext", key)
+end
+
+function cc_core.getSpdSource(key)
+   return cmn.get_by_query_key("spdsource", key)
+end
+
+function cc_core.getSpd2Obj(key)
+   return cmn.get_relations_by_query_key("spd2obj", {spd=key}, function (e) return e end)
 end
 
 function cc_core.getTsfi(key)

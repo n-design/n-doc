@@ -108,11 +108,19 @@
 
 % Makros für die Auflösung und Darstellung von Security
 % Objectives. Der übergebene Parameter wird anhand der Daten in
-% obj_definitions.tex aufgelöst.
+% obj.csv aufgelöst.
 \newcommand{\obj}[1]{\secitemformat{\directlua{getObjective("#1")}}}
 \newcommand{\objtext}[1]{\directlua{getObjectiveText("#1")}}
 \newcommand{\objplain}[1]{\directlua{getObjective("#1")}}
 \newcommand{\objlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\obj{#1}}}
+
+% Makros für die Auflösung und Darstellung von Security
+% Problems. Der übergebene Parameter wird anhand der Daten in
+% spd.csv aufgelöst.
+\newcommand{\spd}[1]{\secitemformat{\directlua{getSpd("#1")}}}
+\newcommand{\spdtext}[1]{\directlua{getSpdText("#1")}}
+\newcommand{\spdsource}[1]{\directlua{getSpdSource("#1")}}
+\newcommand{\spdlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\spd{#1}}}
 
 %% ------------------------------------------------------------
 %%

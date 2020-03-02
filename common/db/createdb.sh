@@ -40,6 +40,8 @@ sqlite3 << EOF
 .import ${TMP_PREFIX}_sfr_tsfi.csv sfr_tsfi
 .import ${TMP_PREFIX}_obj.csv obj
 .import ${TMP_PREFIX}_sfr_obj.csv sfr_obj
+.import ${TMP_PREFIX}_spd.csv spd
+.import ${TMP_PREFIX}_spd_obj.csv spd_obj
 .import ${TMP_PREFIX}_errors.csv errors
 .import ${TMP_PREFIX}_testcases.csv testcases
 .import ${TMP_PREFIX}_testcase_module.csv testcase_module

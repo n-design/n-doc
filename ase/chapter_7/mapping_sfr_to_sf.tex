@@ -1,12 +1,12 @@
 \begin{longtable}[c]{@{}l>{\centering}*{8}{c}<{\centering}@{}}
   \toprule
-  \directlua{print_sfr_to_sf_table_header()}
+  \directlua{print_table_header('sf', 'secfunclink')}
   \\
   % 
   \midrule \endhead
   \midrule \caption{Abbildung der SFR auf Sicherheitsfunktionalität}  \endfoot
   \bottomrule \caption{Abbildung der SFR auf Sicherheitsfunktionalität} \label{tab:sf.mapping} \endlastfoot
-  \directlua{print_sfr_to_sf_table_body()}
+  \directlua{print_table_body('mainsfr', 'sf', 'sfrlinknoindex', cc_core.getSfr2Sf)}
 \end{longtable}
 
 % !TEX root = ../ase

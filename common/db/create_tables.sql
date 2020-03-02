@@ -1,3 +1,5 @@
+CREATE TABLE spd ( `label` TEXT, `name` TEXT, `description` TEXT, `PP` TEXT, PRIMARY KEY(`label`) );
+CREATE TABLE spd_obj ( `spd` TEXT, `obj` TEXT, `rel` TEXT, FOREIGN KEY(`spd`) REFERENCES `spd`(`label`), FOREIGN KEY(`obj`) REFERENCES `obj`(`label`) );
 CREATE TABLE subsystems ( `label` TEXT, `name` TEXT, `plainname` TEXT, PRIMARY KEY(`label`) );
 CREATE TABLE modules ( `subsystem` TEXT, `label` TEXT, `name` TEXT, `plainname` TEXT, PRIMARY KEY(`subsystem`,`label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) );
 CREATE TABLE interfaces ( `subsystem` TEXT, `module` TEXT, `label` TEXT, `name` TEXT, PRIMARY KEY(`subsystem`, `module`, `label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) , FOREIGN KEY(`module`) REFERENCES `modules`(`label`) );

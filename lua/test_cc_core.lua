@@ -47,6 +47,18 @@ function test_cc_core.test_objectives()
    lu.assertEquals(cc_core.getObjectiveSource(obj), "4.1.1")
 end
 
+function test_cc_core.test_spd()
+   spd = "t.lan.admin"
+   lu.assertEquals(cc_core.getSpd(spd), [[T.LAN.Admin]])
+   lu.assertEquals(cc_core.getSpdText(spd), "Datenverkehr zur Managementschnittstelle abhören")
+   lu.assertEquals(cc_core.getSpdSource(spd), "3.2")
+end
+
+function test_cc_core.test_spd_to_obj()
+   lu.assertEquals(cc_core.getSpd2Obj("t.lan.admin"), {"o.admin", "o.tlscrypto", "o.schutz"})
+   lu.assertEquals(cc_core.getSpd2Obj("a.guidance"), {""})
+end
+
 function test_cc_core.test_secfunc()
    lu.assertEquals(cc_core.getSecfunc("sf.cryptographicservices"), [[SF.Cryp\-to\-gra\-phic\-Ser\-vices]])
    lu.assertEquals(cc_core.getSecfuncText("sf.cryptographicservices"), "Kryptografische Dienste")
@@ -60,8 +72,7 @@ end
 
 function test_cc_core.test_sf_to_tsfi()
    lu.assertEquals(cc_core.getSf2Tsfi("sf.cryptographicservices"), {
-    "ls.lan.tls",
-    "ls.wan.ipsec"})
+    "ls.lan.tls", "ls.wan.ipsec"})
 end
 
 function test_cc_core.test_tsfi_to_sf()

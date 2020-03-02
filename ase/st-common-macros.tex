@@ -43,8 +43,8 @@
   {\minisec{{\normalsize\obj{#1}} {\small{(\objtext{#1})}}}%
     \label{\directlua{toLower("#1")}}}}
 
-\newcommand{\assumptionsubsection}[2]{\hypertarget{\directlua{toLower("#1")}}%
-  {\minisec{{\normalsize \secitem{#1}} {\small{(#2)}}}%
+\newcommand{\spdsubsection}[2]{\hypertarget{\directlua{toLower("#1")}}%
+  {\minisec{{\normalsize \spd{#1}} {\small{(\spdtext{#1})}}}%
     \label{\directlua{toLower("#1")}}}}
 
 
@@ -101,9 +101,18 @@
 \newcommand{\objunmodifiedfrompp}[1]{Das in Abschnitt~\objsource{#1} von
   \citepp{} beschriebene Sicherheitsziel \obj{#1} muss erfüllt werden.}
 
-\newcommand{\ospunmodifiedfrompp}[1]{Die in Abschnitt~\objsource{#1} von
-  \citepp{} beschriebene organisatorische Sicherheitspolitik \obj{#1} gilt ohne
+\newcommand{\ospunmodifiedfrompp}[1]{Die in Abschnitt~\spdsource{#1} von
+  \citepp{} beschriebene organisatorische Sicherheitspolitik \spd{#1} gilt ohne
   Anpassung.}
+
+\newcommand{\threatunmodifiedfrompp}[1]{Die in Abschnitt~\spdsource{#1} von
+  \citepp{} beschriebene Bedrohung \spd{#1} gilt ohne
+  Anpassung.}
+
+\newcommand{\assumptionunmodifiedfrompp}[1]{Die in Abschnitt~\spdsource{#1} von
+  \citepp{} beschriebene Annahme \spd{#1} gilt ohne
+  Anpassung.}
+
 
 \newcommand{\sfrunmodifiedfrompp}[1]{Die in \autocite[Abschnitt~#1]{\thispp}
   formulierten Sicherheitsanforderungen gelten ohne Anpassung.}
@@ -117,8 +126,6 @@
 
 \newcommand{\tracehead}[1]{\rot{\hyperlink{\directlua{toLower("#1")}}%
     {\textsmaller[2]{\textsf{\objplain{#1}}}}}}
-
-\newcommand{\tracerow}[1]{\textsmaller[2]{\textsf{\nounderscore{#1}}}}
 
 \newcounter{compreq}
 \newcommand{\thecompreqid}{COMP-REQ-\arabic{compreq}}
