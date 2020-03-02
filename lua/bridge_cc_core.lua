@@ -156,10 +156,10 @@ function bridge_cc_core.print_module_to_num_testcase_table(tex)
    bridge_cc_core.print_category_to_num_testcase_table(tex, "modules", "modulestatus", cc_core.getNumberOfTestcasesModule, 3)
 end
 
-function init_sf_row()
-   row = {}
-   for sf in common.labels("sf") do
-      row[sf] = [[\tno]]
+function init_data_row(label)
+   local row = {}
+   for l in common.labels(label) do
+      row[l] = [[\tno]]
    end
    return row
 end
@@ -176,28 +176,30 @@ function bridge_cc_core.print_table_header(label, macro, tex)
    tex.sprint(table.concat(resulttable))
 end
 
-function p(r)
+function p(label, r)
    local result = {}
-   for sf in common.labels("sf") do
-      table.insert(result, r[sf])
+   for l in common.labels(label) do
+      table.insert(result, r[l])
    end
    return table.concat(result, " & ")
 end
 
 
-function bridge_cc_core.print_sfr_to_sf_table_body(tex)
+function bridge_cc_core.print_table_body(label_row, label_header, macro, mapping_function, tex)
    local resulttable = {}
-   for sfr in common.labels("mainsfr") do
-      local sf_row = init_sf_row()
-      local sf_for_sfr = cc_core.getSfr2Sf(sfr)
-      for _,sf in pairs(sf_for_sfr) do
- 	 sf_row[sf]=[[\tcheck]]
+   for l in common.labels(label_row) do
+      local data_row = init_data_row(label_header)
+      local tupel = mapping_function(l)
+      for _,val in pairs(tupel) do
+ 	 data_row[val]=[[\tcheck]]
       end
-      tablerow={}
-      table.insert(tablerow, [[\textsmaller[1]{\sfrlinknoindex{]])
-      table.insert(tablerow, sfr)
+      local tablerow={}
+      table.insert(tablerow, [[\textsmaller[1]{\]])
+      table.insert(tablerow, macro)
+      table.insert(tablerow, [[{]])
+      table.insert(tablerow, l)
       table.insert(tablerow, [[}} & ]])
-      table.insert(tablerow, p(sf_row))
+      table.insert(tablerow, p(label_header, data_row))
       table.insert(tablerow, [[\\]])
       table.insert(resulttable, table.concat(tablerow))
    end

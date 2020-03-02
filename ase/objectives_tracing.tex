@@ -4,14 +4,7 @@
   \midrule \endhead
   \bottomrule \caption*{Abbildung der Sicherheitsziele auf Bedrohungen und Annahmen} \endfoot
   \bottomrule \caption{Abbildung der Sicherheitsziele auf Bedrohungen und Annahmen} \label{tab:o.mapping} \endlastfoot
-  %                         & tlscryp & schutz  & admin   & auth    & vertrau & integr  & zert    & echtze 
-  \tracerow{T.WAN.Client}   & \tno    & \tno    & \tno    & \tcheck & \tcheck & \tcheck & \tno    & \tno    \\
-  \tracerow{T.LAN.Admin}    & \tcheck & \tcheck & \tcheck & \tno    & \tno    & \tno    & \tno    & \tno    \\
-  \tracerow{T.Zert_Prüf}    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tcheck & \tno    \\
-  \tracerow{T.TimeSync}     & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tcheck \\
-  \tracerow{OSP.TLS}        & \tcheck & \tcheck & \tno    & \tno    & \tcheck & \tno    & \tno    & \tno    \\
-  \tracerow{OSP.Zeitdienst} & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tcheck \\
-  \tracerow{A.Guidance}     & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    \\
+  \directlua{print_table_body('spd', 'obj', 'tracerow', cc_core.getSpd2Obj)}
 \end{longtable}
 
 % !TEX root = ../ase

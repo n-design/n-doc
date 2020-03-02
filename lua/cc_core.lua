@@ -16,7 +16,7 @@ function split_at_dot(key)
 end
 
 cc_core.table_definitions = {
-   [[CREATE TABLE spd ( `label` TEXT, `name` TEXT, `description` TEXT, `PP` TEXT, PRIMARY KEY(`label`) )]],
+   [[CREATE TABLE spd ( `label` TEXT, `name` TEXT, `description` TEXT, `PP` TEXT, `PP_order` TEXT, PRIMARY KEY(`label`) )]],
    [[CREATE TABLE spd_obj ( `spd` TEXT, `obj` TEXT, `rel` TEXT, FOREIGN KEY(`spd`) REFERENCES `spd`(`label`), FOREIGN KEY(`obj`) REFERENCES `obj`(`label`))]],   
    [[CREATE TABLE subsystems ( `label` TEXT, `name` TEXT, `plainname` TEXT, PRIMARY KEY(`label`) )]],
    [[CREATE TABLE modules ( `subsystem` TEXT, `label` TEXT, `name` TEXT, `plainname` TEXT, PRIMARY KEY(`subsystem`,`label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) )]],
@@ -49,7 +49,7 @@ function cc_core.all_table_definitions()
 end
 
 cc_core.populate_info = {
-   {st=[[INSERT INTO spd VALUES (:label, :name, :description, :PP)]], csv = "spd.csv"},
+   {st=[[INSERT INTO spd VALUES (:label, :name, :description, :PP, :PP_order)]], csv = "spd.csv"},
    {st=[[INSERT INTO spd_obj VALUES (:spd, :obj, :rel)]], csv = "spd_obj.csv"},
    {st=[[INSERT INTO subsystems VALUES (:label, :name, :plainname)]], csv="subsystems.csv"},
    {st=[[INSERT INTO modules VALUES (:subsystem, :label, :name, :plainname)]], csv = "modules.csv"},
@@ -85,6 +85,7 @@ cc_core.mod_mapper = function (v) return "mod." .. v.sub .. "." .. v.mod; end;
 
 cc_core.querysets = {
     {name="spd", st=[[SELECT name FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "name"},
+    {name="spd_all_labels", st=[[SELECT label FROM spd ORDER by PP_order]], resultitem = "label"},
     {name="spdtext", st=[[SELECT description FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "description"},
     {name="spdsource", st=[[SELECT PP as source FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "source"},
     {name="spd2obj", st=[[select distinct obj from spd_obj where spd=:spd]], resultitem="obj"},

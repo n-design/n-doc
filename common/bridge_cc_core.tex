@@ -114,8 +114,8 @@
     bridge_cc_core.print_table_header(label, macro, tex)
   end
 
-  function print_sfr_to_sf_table_body()
-    bridge_cc_core.print_sfr_to_sf_table_body(tex)
+  function print_table_body(label_row, label_header, macro, mapping_function)
+    bridge_cc_core.print_table_body(label_row, label_header, macro, mapping_function, tex)
   end
 
 \end{luacode}
