@@ -101,6 +101,7 @@ cc_core.querysets = {
     {name="sf_all_labels", st=[[SELECT distinct label as sf FROM sf order by sf]], resultitem = "sf"},
     {name="sftext", st=[[SELECT description FROM sf WHERE label=? COLLATE NOCASE]], resultitem = "description"},
     {name="obj", st=[[SELECT name FROM obj WHERE label=? COLLATE NOCASE]], resultitem = "name"},
+    {name="obj_all_labels", st=[[SELECT label FROM obj ORDER BY label]], resultitem = "label"},
     {name="objtext", st=[[SELECT description FROM obj WHERE label=? COLLATE NOCASE]], resultitem = "description"},
     {name="objsource", st=[[SELECT PP as source FROM obj WHERE label=? COLLATE NOCASE]], resultitem = "source"},
     {name="tsfi", st=[[SELECT name FROM tsfi WHERE label=? COLLATE NOCASE]], resultitem = "name"},

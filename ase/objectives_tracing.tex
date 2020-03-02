@@ -1,13 +1,6 @@
 \begin{longtable}[c]{@{}l*{13}{O}|*{17}{O}@{}}
   \toprule
-  & \tracehead{o.tlscrypto}
-  & \tracehead{o.schutz}
-  & \tracehead{o.admin}
-  & \tracehead{o.vpn_auth}
-  & \tracehead{o.vpn_vertraul}
-  & \tracehead{o.vpn_integrität}
-  & \tracehead{o.zert_prüf}
-  & \tracehead{oe.echtzeituhr}\\%
+  \directlua{print_table_header('obj', 'objlink')} \\%
   \midrule \endhead
   \bottomrule \caption*{Abbildung der Sicherheitsziele auf Bedrohungen und Annahmen} \endfoot
   \bottomrule \caption{Abbildung der Sicherheitsziele auf Bedrohungen und Annahmen} \label{tab:o.mapping} \endlastfoot

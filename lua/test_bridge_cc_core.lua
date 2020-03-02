@@ -119,9 +119,15 @@ function testbridge.test_print_module_to_num_testcase_table()
    bridge.print_module_to_num_testcase_table(tex.expected(expected_result:gsub("__1ex", "[1ex]")))
 end
 
-function testbridge.test_print_sfr_to_sf_table_header()
+function testbridge.test_print_sf_table_header()
    expected_result = [[& \rot{\textsmaller[1]{\secfunclink{sf.administration}}} & \rot{\textsmaller[1]{\secfunclink{sf.cryptographicservices}}} & \rot{\textsmaller[1]{\secfunclink{sf.networkservices}}} & \rot{\textsmaller[1]{\secfunclink{sf.selfprotection}}} & \rot{\textsmaller[1]{\secfunclink{sf.tls}}} & \rot{\textsmaller[1]{\secfunclink{sf.vpn}}} ]]
-   bridge.print_sfr_to_sf_table_header(tex.expected(expected_result:gsub("__1ex", "[1ex]")))
+   -- bridge.print_sfr_to_sf_table_header(tex.expected(expected_result:gsub("__1ex", "[1ex]")))
+   bridge.print_table_header("sf", "secfunclink", tex.expected(expected_result:gsub("__1ex", "[1ex]")))
+end
+
+function testbridge.test_print_obj_table_header()
+   expected_result = [[& \rot{\textsmaller[1]{\objlink{o.admin}}} & \rot{\textsmaller[1]{\objlink{o.schutz}}} & \rot{\textsmaller[1]{\objlink{o.tlscrypto}}} & \rot{\textsmaller[1]{\objlink{o.vpn_auth}}} & \rot{\textsmaller[1]{\objlink{o.vpn_integrität}}} & \rot{\textsmaller[1]{\objlink{o.vpn_vertraul}}} & \rot{\textsmaller[1]{\objlink{o.zeitdienst}}} & \rot{\textsmaller[1]{\objlink{o.zert_prüf}}} & \rot{\textsmaller[1]{\objlink{oe.echtzeituhr}}} ]]
+   bridge.print_table_header("obj", "objlink", tex.expected(expected_result:gsub("__1ex", "[1ex]")))
 end
 
 function testbridge.test_print_sfr_to_sf_table_body()

@@ -164,11 +164,13 @@ function init_sf_row()
    return row
 end
 
-function bridge_cc_core.print_sfr_to_sf_table_header(tex)
+function bridge_cc_core.print_table_header(label, macro, tex)
    local resulttable = {}
-   for sf in common.labels("sf") do
-      table.insert(resulttable, [[& \rot{\textsmaller[1]{\secfunclink{]])
-      table.insert(resulttable, sf)
+   for l in common.labels(label) do
+      table.insert(resulttable, [[& \rot{\textsmaller[1]{\]])
+      table.insert(resulttable, macro)
+      table.insert(resulttable, [[{]])
+      table.insert(resulttable, l)
       table.insert(resulttable, [[}}} ]])
    end
    tex.sprint(table.concat(resulttable))
