@@ -87,7 +87,7 @@ cc_core.querysets = {
     {name="spd", st=[[SELECT name FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "name"},
     {name="spdtext", st=[[SELECT description FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "description"},
     {name="spdsource", st=[[SELECT PP as source FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "source"},
-    {name="spd2obj", st=[[select distinct obj from spd_obj where spd=:spd]], mapper = cc_core.verbatim_mapper},
+    {name="spd2obj", st=[[select distinct obj from spd_obj where spd=:spd]], resultitem="obj"},
     {name="sub", st=[[SELECT name FROM subsystems WHERE label=?]], resultitem = "name"},
     {name="mod", st=[[SELECT name FROM modules WHERE subsystem=? AND label=?]], resultitem = "name"},
     {name="int", st=[[SELECT name FROM interfaces WHERE subsystem=? AND module=? AND label=?]], resultitem = "name"},
