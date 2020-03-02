@@ -115,6 +115,14 @@ function bridge_cc_core.getObjectiveText(key, tex)
    tex.sprint(cc_core.getObjectiveText(key))
 end
 
+function bridge_cc_core.getSpd(key, tex)
+   tex.sprint(cc_core.getSpd(key))
+end
+
+function bridge_cc_core.getSpdText(key, tex)
+   tex.sprint(cc_core.getSpdText(key))
+end
+
 function bridge_cc_core.getObjectiveSource(key, tex)
    tex.sprint(cc_core.getObjectiveSource(key))
 end

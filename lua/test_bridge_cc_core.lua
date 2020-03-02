@@ -137,7 +137,7 @@ end
 
 function testbridge.test_print_spd_to_obj_table_body()
    expected_result = [[\textsmaller[1]{\tracerow{t.wan.client}} & \tno & \tno & \tno & \tcheck & \tcheck & \tcheck & \tno & \tno & \tno\\\textsmaller[1]{\tracerow{t.lan.admin}} & \tcheck & \tcheck & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\tracerow{t.zert_prüf}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tcheck & \tno\\\textsmaller[1]{\tracerow{t.timesync}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tcheck\\\textsmaller[1]{\tracerow{osp.tls}} & \tno & \tcheck & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\tracerow{osp.zeitdienst}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tcheck\\\textsmaller[1]{\tracerow{a.guidance}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\]]
-   bridge.print_table_body("spd", "obj", "tracerow", cc_core.getSpd2Obj, tex.expected(expected_result:gsub("__1ex", "[1ex]")))
+   bridge.print_table_body("spd", "obj", "spdlink", cc_core.getSpd2Obj, tex.expected(expected_result:gsub("__1ex", "[1ex]")))
 end
 
 
