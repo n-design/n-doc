@@ -123,6 +123,10 @@ function bridge_cc_core.getSpdText(key, tex)
    tex.sprint(cc_core.getSpdText(key))
 end
 
+function bridge_cc_core.getSpdSource(key, tex)
+   tex.sprint(cc_core.getSpdSource(key))
+end
+
 function bridge_cc_core.getObjectiveSource(key, tex)
    tex.sprint(cc_core.getObjectiveSource(key))
 end

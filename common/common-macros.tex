@@ -119,6 +119,7 @@
 % spd.csv aufgelöst.
 \newcommand{\spd}[1]{\secitemformat{\directlua{getSpd("#1")}}}
 \newcommand{\spdtext}[1]{\directlua{getSpdText("#1")}}
+\newcommand{\spdsource}[1]{\directlua{getSpdSource("#1")}}
 \newcommand{\spdlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\spd{#1}}}
 
 %% ------------------------------------------------------------
