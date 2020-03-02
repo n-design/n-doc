@@ -62,6 +62,7 @@ cc_core.populate_info = {
    {st=[[INSERT INTO sf VALUES (:label, :name, :description)]], csv = "sf.csv"},
    {st=[[INSERT INTO sfr_sf VALUES (:sfr, :sf)]], csv = "sfr_sf.csv"},
    {st=[[INSERT INTO obj VALUES (:label, :name, :description, :PP)]], csv = "obj.csv"},
+   {st=[[INSERT INTO sfr_obj VALUES (:sfr, :obj)]], csv = "sfr_obj.csv"},
    {st=[[INSERT INTO tsfi VALUES (:label, :name, :relationtype)]], csv = "tsfi.csv"},
    {st=[[INSERT INTO sfr_tsfi VALUES (:sfr, :tsfi, :purpose)]], csv = "sfr_tsfi.csv"},
    {st=[[INSERT INTO errors VALUES (:code, :type, :severity, :msg)]], csv = "errors.csv"},
@@ -103,6 +104,7 @@ cc_core.querysets = {
     {name="sftext", st=[[SELECT description FROM sf WHERE label=? COLLATE NOCASE]], resultitem = "description"},
     {name="obj", st=[[SELECT name FROM obj WHERE label=? COLLATE NOCASE]], resultitem = "name"},
     {name="obj_all_labels", st=[[SELECT label FROM obj ORDER BY label]], resultitem = "label"},
+    {name="obj_no_env_all_labels", st=[[SELECT label FROM obj WHERE label LIKE 'o.%' ORDER BY label]], resultitem = "label"},
     {name="objtext", st=[[SELECT description FROM obj WHERE label=? COLLATE NOCASE]], resultitem = "description"},
     {name="objsource", st=[[SELECT PP as source FROM obj WHERE label=? COLLATE NOCASE]], resultitem = "source"},
     {name="tsfi", st=[[SELECT name FROM tsfi WHERE label=? COLLATE NOCASE]], resultitem = "name"},
@@ -165,9 +167,10 @@ select distinct tsfi as label, purpose as purpose from sfr_tsfi
 ]], mapper = cc_core.verbatim_mapper},
 
     {name="sfr2sf", st=[[
-select distinct sf from sfr_sf
-  where sfr = :sfr
-]], resultitem="sf"},
+select distinct sf from sfr_sf where sfr = :sfr]], resultitem="sf"},
+
+    {name="sfr2obj", st=[[
+select distinct obj from sfr_obj where sfr=:sfr]], resultitem="obj"},
 
     {name="testcase2sfr", st=[[
 select distinct sfr.label from sfr join testcase_sfr on sfr.label=testcase_sfr.sfr where testcase_sfr.testcase=:testcase
@@ -218,6 +221,14 @@ end
 
 function cc_core.getSfr2Sf(key)
    return cmn.get_relations_by_query_key("sfr2sf", {sfr=key}, function (e) return e end)
+end
+
+function cc_core.getSfr2Obj(key)
+   return cmn.get_relations_by_query_key("sfr2obj", {sfr=key}, function (e) return e end)
+end
+
+function cc_core.getSfr2Obj(key)
+   return cmn.get_relations_by_query_key("sfr2obj", {sfr=key}, function (e) return e end)
 end
 
 function cc_core.removeSfrSubComponent(key)

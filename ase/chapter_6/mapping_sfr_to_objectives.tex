@@ -1,38 +1,13 @@
 \begin{longtable}[c]{@{}l*{13}{T}@{}}
   \toprule
-  & \tracehead{o.tlscrypto}
-  & \tracehead{o.schutz}
-  & \tracehead{o.admin}
-  & \tracehead{o.zeitdienst}
-  & \tracehead{o.vpn_auth}
-  & \tracehead{o.vpn_vertraul}
-  & \tracehead{o.vpn_integrität}
-  & \tracehead{o.zert_prüf}
+  \directlua{print_table_header('obj_no_env', 'objlink')}
   \\
   % 
   \midrule \endhead
   \bottomrule \endfoot
   \bottomrule  \caption*{Abbildung der Sicherheitsziele auf Sicherheitsanforderungen} \endfoot
   \bottomrule  \caption{Abbildung der Sicherheitsziele auf Sicherheitsanforderungen} \label{tab:sfr.ratio.sfrtoobjmapping} \endlastfoot
-  %                                                     & TLSkryp & schutz  & admin   & zeit    & vpnauth & vpnvert & vpninte & zertprü 
-\textsmaller[1]{\sfrlinknoindex{ftp_itc.1/vpn}}         & \tno    & \tno    & \tno    & \tno    & \tcheck & \tcheck & \tcheck & \tno    \\
-\textsmaller[1]{\sfrlinknoindex{fpt_stm.1}}             & \tno    & \tno    & \tno    & \tcheck & \tno    & \tno    & \tno    & \tno    \\
-\textsmaller[1]{\sfrlinknoindex{fpt_tdc.1/zert}}        & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tcheck \\
-\textsmaller[1]{\sfrlinknoindex{fdp_rip.1}}             & \tno    & \tcheck & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    \\
-\textsmaller[1]{\sfrlinknoindex{fpt_tst.1}}             & \tno    & \tcheck & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    \\
-\textsmaller[1]{\sfrlinknoindex{ftp_trp.1/admin}}       & \tcheck & \tno    & \tcheck & \tno    & \tno    & \tno    & \tno    & \tno    \\
-\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/hash}}        & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tcheck \\
-\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/hmac}}        & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tcheck \\
-\textsmaller[1]{\sfrlinknoindex{fcs_ckm.1}}             & \tcheck & \tno    & \tno    & \tno    & \tcheck & \tcheck & \tcheck & \tcheck \\
-\textsmaller[1]{\sfrlinknoindex{fcs_ckm.2/ike}}         & \tno    & \tno    & \tno    & \tno    & \tcheck & \tcheck & \tcheck & \tcheck \\
-\textsmaller[1]{\sfrlinknoindex{fcs_ckm.2/tls}}         & \tcheck & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tcheck \\
-\textsmaller[1]{\sfrlinknoindex{fcs_ckm.4}}             & \tcheck & \tno    & \tno    & \tno    & \tcheck & \tcheck & \tcheck & \tcheck \\
-\textsmaller[1]{\sfrlinknoindex{ftp_itc.1/tls}}         & \tcheck & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    \\
-\textsmaller[1]{\sfrlinknoindex{fpt_tdc.1/tls.zert}}    & \tcheck & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    \\
-\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/tls.aes}}     & \tcheck & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    \\
-\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/tls.auth}}    & \tcheck & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    \\
-\textsmaller[1]{\sfrlinknoindex{fcs_rng.1/hashdrbg}}    & \tadded & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    & \tno    \\
-%                                                       & TLSkryp & schutz  & admin   & zeit    & vpnauth & zertprü & vpnvert & vpninte 
+  \directlua{print_table_body('mainsfr', 'obj_no_env', 'sfrlinknoindex', cc_core.getSfr2Obj)}
 \end{longtable}
 
 % !TEX root = ../ase
