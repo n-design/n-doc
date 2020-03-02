@@ -50,7 +50,7 @@ end
 
 cc_core.populate_info = {
    {st=[[INSERT INTO spd VALUES (:label, :name, :description, :PP)]], csv = "spd.csv"},
-   {st=[[INSERT INTO spd_obj VALUES (:spd, :obj, :rel)]], csv = "sfr_tsfi.csv"},
+   {st=[[INSERT INTO spd_obj VALUES (:spd, :obj, :rel)]], csv = "spd_obj.csv"},
    {st=[[INSERT INTO subsystems VALUES (:label, :name, :plainname)]], csv="subsystems.csv"},
    {st=[[INSERT INTO modules VALUES (:subsystem, :label, :name, :plainname)]], csv = "modules.csv"},
    {st=[[INSERT INTO interfaces VALUES (:subsystem, :module, :label, :name)]], csv = "interfaces.csv"},
