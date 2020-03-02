@@ -1,0 +1,123 @@
+\newcommand{\thispp}{vpnpp}
+\newcommand{\toeversion}{2.11}
+\newcommand{\thisTOE}{\thisproduct~\toeversion}
+\newcommand{\bsicertid}{BSI-DSZ-CC-xyz}
+\newcommand{\bsippid}{BSI-CC-PP-00zz}
+
+% Makro für feste CC-Begriffe wie Enforcing, Required
+% Wird nicht vom Autor direkt verwendet, s. dazu
+% die folgenden Makros, die direkt den Text setzen.
+\newcommand{\ccAttribute}[1]{{\small #1}}
+% Makro für "Enforcing"
+\newcommand{\enfc}{\secitemfont{SFR-enforcing}}
+% Makro für "Supporting"
+\newcommand{\supp}{\secitemfont{SFR-supporting}}
+% Makro für "non-Interfering"
+\newcommand{\noninterfering}{\secitemfont{non-interfering}}
+% Makro für "non-TSF"
+\newcommand{\nontsf}{\secitemfont{non-TSF}}
+
+% Makros für die Auflösung und Darstellung von Security
+% Objectives. Der übergebene Parameter wird anhand der Daten in
+% obj.csv aufgelöst.
+\newcommand{\obj}[1]{\secitemformat{\directlua{getObjective("#1")}}}
+\newcommand{\objtext}[1]{\directlua{getObjectiveText("#1")}}
+\newcommand{\objplain}[1]{\directlua{getObjective("#1")}}
+\newcommand{\objlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\obj{#1}}}
+
+% Makros für die Auflösung und Darstellung von Security
+% Problems. Der übergebene Parameter wird anhand der Daten in
+% spd.csv aufgelöst.
+\newcommand{\spd}[1]{\secitemformat{\directlua{getSpd("#1")}}}
+\newcommand{\spdtext}[1]{\directlua{getSpdText("#1")}}
+\newcommand{\spdsource}[1]{\directlua{getSpdSource("#1")}}
+\newcommand{\spdlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\spd{#1}}}
+
+%% ------------------------------------------------------------
+%%
+%% Makros für
+%% Security Functional Requirements (SFR)
+%%
+
+% Makro für die Auflösung und Darstellung von Security Functional
+% Requirements (SFR). Der übergebene Parameter wird anhand der Daten
+% in sfr_definitions.tex aufgelöst.
+% Das optionale Argument für \sfr{}: Ergänzung (1), (2) z.B. für
+% FDP_ACC, FDP_ACF mit vielen Unterpunkten.
+\newcommand{\sfr}[2][]{\formatsfr{\directlua{getSfr("#2")}#1}}
+\newcommand{\sfrplain}[2][]{\directlua{getSfr("#2")}#1}
+\newcommand{\sfrtext}[1]{\directlua{getSfrText("#1")}}
+\newcommand{\sfrlink}[2][]{\hyperlink{\directlua{removeSfrSubComponent("#2")}}{\sfr[#1]{#2}}}
+% Formatierung der SFR. Kann in seltenen Fällen direkt aufgerufen
+% werden (z.B. bei Komponenten-Definitionen, die nicht direkt SFR
+% sind).
+\newcommand{\formatsfr}[1]{{\secitemformat{#1}}}
+% Makro für umgesetzte SFR, kann z.B. am Ende einer Ablaufbeschreibung 
+% verwendet werden.
+\newcommand{\umgesetztesfr}[1]{\enfsupsfrtable{Umgesetzte SFR}{#1}}
+\newcommand{\unterstuetztesfr}[1]{\supportedsfr{#1}}
+\newcommand{\supportedsfr}[1]{\enfsupsfrtable{Unterstützte SFR}{#1}}
+
+\newcommand{\enfsupsfrtable}[2]{
+  \begin{flushright}
+    \minibox[frame,l,t]{{\small \textsf{#1}}\\
+      \begin{tabular}{@{}lll@{}}
+        #2
+      \end{tabular}}
+  \end{flushright}}
+
+\newcommand{\getModuleStatus}[1]{\directlua{get_module_status("#1")}}
+
+\newcommand{\checkSfrReferences}{\directlua{checkSfrReferences()}}
+
+%% ------------------------------------------------------------
+%%
+%% Makros für
+%% TOE Security Function Interfaces (TSFI)
+%%
+
+% Makros für die Namen der Schnittstellen, die in OPB2.1 eine Rolle
+% spielen. 
+\newcommand{\ls}{\tsfilink{ls}}
+
+% Formatierung der TSFI wie LS.VPN, LS.LAN etc.
+\newcommand{\formatintf}[1]{{\ccfont #1}}
+\newcommand{\intf}[1]{\secitemformat{#1}}
+\newcommand{\tsfi}[1]{\intf{\directlua{getTsfi("#1")}}}
+\newcommand{\tsfilink}[1]{\hyperlink{tsfi.#1}{\tsfi{#1}}}
+\newcommand{\printSfToTsfi}[1]{\directlua{print_sf_to_tsfi_table("#1")}}
+\newcommand{\printTsfiToSf}[1]{\directlua{print_tsfi_to_sf_table("#1")}}
+
+%% ------------------------------------------------------------
+%%
+%% Makros für
+%% TOE Security Functions (SF)
+%%
+
+% Makros für die Sicherheitsfunktionen. Der übergebene Parameter wird
+% anhand der Daten in sf_definitions.tex aufgelöst.
+\newcommand{\secfunc}[1]{\formatsecfunc{\directlua{getSecfunc("#1")}}}
+\newcommand{\secfuncplain}[1]{\directlua{getSecfunc("#1")}}
+\newcommand{\secfunctext}[1]{\directlua{getSecfuncText("#1")}}
+\newcommand{\secfunclink}[1]{\hyperlink{\directlua{toLower("#1")}}{\secfunc{#1}}}
+\newcommand{\formatsecfunc}[1]{{\secitemformat{#1}}}
+\newcommand{\secfuncheadline}[1]{\texorpdfstring{\secfunctext{#1}\hspace{1em}(\secitemfont{\secfuncplain{#1}})}{\secfunctext{#1} (\secfuncplain{#1})}}
+
+% Makro für den Verweis auf Subsysteme, Module und Schnittstellen, die im
+% TDS definifiert werden.
+\newcommand{\tds}[2][no]{\secitemformat{\directlua{replacelabel("#2", "#1")}}}
+\newcommand{\tdsplain}[2][no]{\directlua{replacelabel("#2", "#1")}}
+% Makro für Links auf Subsysteme/Module. Ist nur für das TDS relevant.
+% Wird im TDS so umdefiniert, dass die Link-Funktion dazukommt.
+% Für alle anderen Dokumente wird stattdessen das \tds Makto aufgerufen.
+\newcommand{\tdslink}[2][no]{\tds[#1]{#2}}
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: shared
+%%% TeX-engine: luatex
+%%% End:
