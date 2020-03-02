@@ -256,9 +256,6 @@ function cc_core.getSpdSource(key)
 end
 
 function cc_core.getSpd2Obj(key)
-   r = cmn.get_relations_by_query_key("spd2obj", {spd=key}, function (e) return e end)
-   print (#r)
-   for _,i in pairs(r) do print ("i", i) end
    return cmn.get_relations_by_query_key("spd2obj", {spd=key}, function (e) return e end)
 end
 

@@ -72,8 +72,7 @@ end
 
 function test_cc_core.test_sf_to_tsfi()
    lu.assertEquals(cc_core.getSf2Tsfi("sf.cryptographicservices"), {
-    "ls.lan.tls",
-    "ls.wan.ipsec"})
+    "ls.lan.tls", "ls.wan.ipsec"})
 end
 
 function test_cc_core.test_tsfi_to_sf()
