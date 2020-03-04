@@ -30,7 +30,7 @@ function common.generate_label_list(thelabel)
 end
 
 function common.getError(key)
-    return get_by_query_key("error", key)
+    return common.get_by_query_key("error", key)
  end
 
 function common.labels(labeltype)

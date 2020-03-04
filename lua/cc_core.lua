@@ -33,11 +33,12 @@ cc_core.table_definitions = {
    [[CREATE TABLE tsfi ( `label` TEXT, `name` TEXT, `relationtype` TEXT, PRIMARY KEY(`label`))]],
    [[CREATE TABLE sfr_tsfi ( `sfr` TEXT,  `tsfi` TEXT, `purpose` TEXT,  FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`tsfi`) REFERENCES `tsfi`(`label`))]],
    [[CREATE TABLE errors ( `code` TEXT, `type` TEXT, `severity` TEXT, `msg` TEXT, PRIMARY KEY(`code`))]],
-   [[CREATE TABLE testcases ( `label` TEXT, `block` TEXT, `name` TEXT, `quelle` TEXT, PRIMARY KEY(`label`))]],
+   [[CREATE TABLE testcases ( `label` TEXT, `name` TEXT, `block` TEXT, `desc` TEXT, `quelle` TEXT, PRIMARY KEY(`label`))]],
    [[CREATE TABLE testcase_module ( `testcase` TEXT, `subsystem` TEXT, `module` TEXT, FOREIGN KEY(`testcase`) REFERENCES `testcases`(`label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) , FOREIGN KEY(`module`) REFERENCES `modules`(`label`))]],
    [[CREATE TABLE testcase_sfr ( `testcase` TEXT, `sfr` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`testcase`) REFERENCES `testcases`(`label`))]],
    [[CREATE TABLE testcase_tsfi ( `testcase` TEXT, `tsfi` TEXT, FOREIGN KEY(`tsfi`) REFERENCES `tsfi`(`label`), FOREIGN KEY(`testcase`) REFERENCES `testcases`(`label`))]]
 }
+
 
 function cc_core.all_table_definitions()
    local i = 0
@@ -66,7 +67,7 @@ cc_core.populate_info = {
    {st=[[INSERT INTO tsfi VALUES (:label, :name, :relationtype)]], csv = "tsfi.csv"},
    {st=[[INSERT INTO sfr_tsfi VALUES (:sfr, :tsfi, :purpose)]], csv = "sfr_tsfi.csv"},
    {st=[[INSERT INTO errors VALUES (:code, :type, :severity, :msg)]], csv = "errors.csv"},
-   {st=[[INSERT INTO testcases VALUES (:label, :block, :name, :quelle)]], csv = "testcases.csv"},
+   {st=[[INSERT INTO testcases VALUES (:label, :name, :block, :desc, :quelle)]], csv = "testcases.csv"},
    {st=[[INSERT INTO testcase_module VALUES (:testcase, :subsystem, :module)]], csv = "testcase_module.csv"},
    {st=[[INSERT INTO testcase_sfr VALUES (:testcase, :sfr)]], csv = "testcase_sfr.csv"},
    {st=[[INSERT INTO testcase_tsfi VALUES (:testcase, :tsfi)]], csv = "testcase_tsfi.csv"}
@@ -110,7 +111,7 @@ cc_core.querysets = {
     {name="tsfi", st=[[SELECT name FROM tsfi WHERE label=? COLLATE NOCASE]], resultitem = "name"},
     {name="tsfi_all_labels", st=[[SELECT label FROM tsfi ORDER by label]], resultitem = "label"},
     {name="error", st=[[SELECT msg FROM errors WHERE code=? COLLATE NOCASE]], resultitem = "msg"},
-    {name="testcase", st="SELECT name FROM testcases WHERE label=? COLLATE NOCASE", resultitem = "name"},
+    {name="testcase", st=[[SELECT name FROM testcases WHERE label=? COLLATE NOCASE]], resultitem = "name"},
     {name="sfr2module", st=[[select subsystems.label as sub, modules.label as mod 
 from sfr join sfr_module on sfr.label = sfr_module.sfr
 join modules on sfr_module.module = modules.label and sfr_module.subsystem = modules.subsystem

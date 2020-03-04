@@ -101,7 +101,7 @@ function test_cc_core.test_tsfi_to_sfr()
 end
 
 function test_cc_core.test_ate_testcase()
-   lu.assertEquals(cc_core.getTestcase("vpn1"), [[VPN Aufbau -- Gutfall]] )
+   lu.assertEquals(cc_core.getTestcase("vpn1"), [[VPN_1]] )
 end
 
 function test_cc_core.test_ate_testcase_to_sfr()
