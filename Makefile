@@ -63,12 +63,8 @@ delivery: $(DELIVERABLES)
 	rm -rf $(DELIVERY_DIR)
 	mkdir -p $(DELIVERY_DIR)
 	cp $+ $(DELIVERY_DIR)
-	cp $(README) $(DELIVERY_DIR)
 	cp $(DB_DIR)/$(DB_FILE) $(DELIVERY_DIR)
 	./scripts/renamereleases.sh $(DELIVERY_DIR)
-	git rev-parse HEAD >$(DELIVERY_DIR)/commitid.txt
-	git show --no-patch --format=%cd --date=format:"%d.%m.%Y (%H:%M)" $(git rev-parse HEAD) >$(DELIVERY_DIR)/timestamp_website.txt
-	git show --no-patch --format=%cd --date=format:"%Y%m%d_%H%M" $(git rev-parse HEAD) >$(DELIVERY_DIR)/timestamp.txt
 
 $(DELIVERABLES): $(ALL_DIRS) $(DB_DIR)
 

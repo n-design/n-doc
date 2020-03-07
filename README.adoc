@@ -2,12 +2,19 @@
 :experimental:
 
 =  CC Dokumentation für den Mauve VPN Client
+Ein fiktionales Produkt als Vorlage für das n-doc Verfahren
 
 Dieses Repository enthält die Herstellerdokumente des CC Verfahrens für den
 Mauve VPN Client. Dieses Dokument und die verlinkten Anleitungen beschreiben das
 Dokumentationsverfahren und die verwendeten Werkzeuge.
 
 == Übersetzen der Dokumente
+
+* Clonen des Repo
+
+* Aufruf von `./runmake.sh`
+
+* Ergebnisdokumente landen im Verzeichnis `deliverables`.
 
 Zum Übersetzen der Dokumente nach PDF wird das Docker Image
 link:https://github.com/n-design/n-doc[n-doc] verwendet. Die Quellen der
@@ -18,6 +25,7 @@ Aufruf):
 ----
 docker run --rm  --volume $(pwd):/data ndesign/n-doc make -j4 delivery
 ----
+
 
 Statt `delivery` kann auch ein Dokumenttyp (`st`, `tds` etc) verwendet
 werden. Der Parameter `-j` steuert die Anzahl der Threads (jobs), die GNU Make
