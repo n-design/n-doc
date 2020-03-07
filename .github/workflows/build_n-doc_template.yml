@@ -26,4 +26,5 @@ jobs:
     - name: Compile documents
       uses: docker://ndesign/n-doc:latest
       with:
-        entrypoint: make -j2 delivery
+        volumes: /home/runner/work/n-doc_template/n-doc_template":"/data"
+        
