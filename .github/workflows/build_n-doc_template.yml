@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Build_Template
+name: Build Documents
 
 # Controls when the action will run. Triggers the workflow on push or pull request 
 # events but only for the master branch
@@ -20,11 +20,19 @@ jobs:
     steps:
 
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - name: Check out
+      uses: actions/checkout@v2
 
     # Runs a single command using the runners shell
     - name: Compile documents
       uses: docker://ndesign/n-doc:latest
       with:
         volumes: /home/runner/work/n-doc_template/n-doc_template":"/data"
+
+    - name: Upload documents
+      uses: actions/upload-artifact@v1
+      with:
+        name: Document Snapshots
+        path: deliverables/*
+    
         
