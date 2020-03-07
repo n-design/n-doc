@@ -22,15 +22,23 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: Check out
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    # Prepare
+    - name: Create gitinfo files for TeX
+      run: make hooks && git checkout
 
     # Runs a single command using the runners shell
     - name: Compile documents
       uses: docker://ndesign/n-doc:latest
       with:
         volumes: /home/runner/work/n-doc_template/n-doc_template":"/data"
+        entrypoint: /usr/bin/make
+        args: -j4 delivery
 
     - name: Archive document snapshots
-      uses: tar czf MauveCorp_VPN-Client.tar.gz deliverables/*
+      run: tar czf MauveCorp_VPN-Client.tar.gz deliverables/*
         
     - name: Upload documents
       uses: actions/upload-artifact@v1

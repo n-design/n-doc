@@ -23,12 +23,14 @@ dem Pfad `/data` in den Container gemountet werden (`runmake.sh` enthält diesen
 Aufruf):
 
 ----
-docker run --rm  --volume $(pwd):/data ndesign/n-doc make -j4 delivery
+docker run --rm  --volume $(pwd):/data ndesign/n-doc [-j <n> ] delivery
 ----
 
 
 Statt `delivery` kann auch ein Dokumenttyp (`st`, `tds` etc) verwendet
-werden. Der Parameter `-j` steuert die Anzahl der Threads (jobs), die GNU Make
+werden.
+
+Der optionale Parameter `-j` steuert die Anzahl der Threads (jobs), die GNU Make
 gleichzeitig startet. Hier muss eine Zahl angegeben werden: Die Anzahl der
 Builder in der CI-Plattform oder die Anzahl der Cores des Arbeitsplatzrechners.
 
