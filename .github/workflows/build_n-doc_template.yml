@@ -1,0 +1,49 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build Documents
+
+# Controls when the action will run. Triggers the workflow on push or pull request 
+# events but only for the master branch
+on:
+  push:
+    branches: [ master, test-* ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Check out
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    # Prepare
+    - name: Create gitinfo files for TeX
+      run: make hooks && git checkout
+
+    # Runs a single command using the runners shell
+    - name: Compile documents
+      uses: docker://ndesign/n-doc:latest
+      with:
+        volumes: /home/runner/work/n-doc_template/n-doc_template":"/data"
+        entrypoint: /usr/bin/make
+        args: -j4 delivery
+
+    - name: Archive document snapshots
+      run: tar czf MauveCorp_VPN-Client.tar.gz deliverables/*
+        
+    - name: Upload documents
+      uses: actions/upload-artifact@v1
+      with:
+        name: "Document Snapshots"
+        path: MauveCorp_VPN-Client.tar.gz
+    
+        
