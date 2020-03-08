@@ -1,4 +1,4 @@
-= Lua in der CC-Doku Plattform verwenden
+= Lua in n-doc verwenden
 
 Bei der Übersetzung der LaTeX Dokumente wird an einigen Stellen auf
 den in LuaTeX eingebauten Lua-Interpreter zurückgegriffen. Besonders
@@ -11,7 +11,7 @@ hier erklärt, wie diese Komponenten zusammenspielen.
 In LuaLaTeX gibt es verschiedene Verfahren, den Lua Interpreter
 aufzurufen. Die grundsätzliche Einbindung des Interpreters in TeX wird in link:http://dante.ctan.org/tex-archive/info/luatex/lualatex-doc/lualatex-doc.pdf[der Dokumentation des Programms] anschaulich beschrieben.
 
-Am gängigsten ist die Verwendung des Makros ``\directlua{}``. der Inhalt
+Am gängigsten ist die Verwendung des Makros ``\directlua{}``. Der Inhalt
 des Makros ist Lua-Code, der beim Verarbeiten des Makros ausgeführt
 wird. Darüber hinaus gibt es noch Zusatzpakete, die andere Umgebungen
 bereitstellen, in denen Lua Code untergebracht werden kann. Wir
@@ -24,26 +24,48 @@ identisch):
 ``adv_tds/adv_tds.tex``:: ist das Rahmendokument, es bindet die
 gemeinsam genutzten Packages und Makro-Dateien ein.
 
-``common/common-packages.tex``:: enthält die Präambel (also alles, was vor
-dem ``\begin{document}`` kommt) der Dokumente. Hier werden Packages
-geladen, die von allen Dokumenten verwendet werden.
+``common/common-packages.tex``:: enthält die Präambel (also alles, was vor dem
+``\begin{document}`` kommt) der Dokumente. Hier werden Packages geladen, die von
+allen Dokumenten verwendet werden. Weiterhin wird hier der Suchpfad für die Lua
+Module gesetzt. Lua hat ein eigenes Verfahren zum Laden von Modulen, das im
+Detail weiter unten beschrieben wird.
 
-``common/luabridge.tex``:: Hier kommt das erste Mal Lua Code ins
-Spiel. Zuerst werden einige Packages geladen, die zusätzliche Lua
-Aufrufe (vgl. oben) ermöglichen. Außerdem wird hier der Suchpfad für
-die Lua Module gesetzt. Lua hat ein eigenes Verfahren zum Laden von
-Modulen, das im Detail weiter unten beschrieben wird. Weiterhin
-enthält die Datei einen großen Block Code in einer luacode
-Umgebung. In diesem Block werden Funktionen definiert, die von den
-LaTeX Makros aufgerufen werden. Diese Funktionen wiederum stellen eine
-Brücke zu den anderen Lua Module dar, die über require Statements
-geladen werden. Die Ergebnisse der Aufrufe dieser Module werden hier
-über ``tex.sprint()`` an den TeX Prozessor übergeben und in den Textsatz
-eingebracht. Man kann hier ganz grob von API-Funktionen sprechen.
+Der Lua-Code ist in n-doc in verschiedene Pakete aufgeteilt:
 
-``lua/*.lua``:: Enthält den Code, in dem die fachlichen
-Funktionen umgesetzt sind. Für die verschiedenen Domänen
-(TDS-Elemente, SFR, SF, Objectives) gibt es jeweils eine eigene ``.lua`` Datei, die über ``require`` von der ``luabridge.tex`` herangezogen wird. Hintergrund für dieses Verfahren ist, dass so die Lua Anteile auch außerhalb des LuaTeX Prozesses entwickelt und getestet werden können. An dieser Stelle kann man von der Implementierung der API sprechen, wie sie in ``luabridge.tex`` definiert wird.
+``common``:: enthält Utility-Funktionen, die allen anderen Paketen verwendet
+  werden. ``common`` soll keine fachlichen Funktionen enthalten.
+
+``cc_core``:: enthät Funktionen, die in einem CC-Verfahren notwendig sind
+
+``documents``:: enthält Funktionen für die Versionierung der Dokumente
+
+Jedes dieser Pakete umfasst dieselbe Struktur an Komponenten;  hier erklärt anhand des Pakets `cc_core`. 
+
+
+``common/bridge_cc_core.tex``:: In diesem Modul werden Funktionen definiert, die
+von den LaTeX Makros aufgerufen werden. Diese Funktionen wiederum stellen eine
+Brücke zu den anderen Lua Module dar, die über `require` Statements geladen
+werden. Die Ergebnisse der Aufrufe dieser Module werden über ``tex.sprint()`` an
+den TeX Prozessor übergeben und in den Textsatz eingebracht. Man kann hier ganz
+grob von API-Funktionen sprechen.
+
+``lua/bridge_cc_core.lua``:: In diesem Modul liegen die fachlichen Funktionen,
+die aus `bridge_cc_core.tex` aufgerufen werden. 
+
+
+``lua/cc_core.lua``:: Enthält den Code für den Zugriff auf die Datenbank. Das
+Modul umfasst die Tabellendefinition, die Anweisungen für die Provisionierung
+der Tabellen und die Abfragefunktionen, inklusive der SQL-Statements für die
+Querys.
+
+`lua/test_bridge_cc_core.lua``:: In diesem Modul liegen die Tests der fachlichen
+Funktionen. Sie haben den Charakter von Integrationstests, weil hier auf korrekt
+produzierten LaTeX Code getestet wird.
+
+
+``lua/test_cc_core.lua``:: In dieses Modul sind die Unit-Tests für den Zugriff
+auf die Datenbank. Hier wird auf Lua-Datenstrukturen getestet.
+
 
 == Infrastruktur
 
@@ -56,19 +78,18 @@ Versionsstand 5.3.
 
 Allerdings brauchen wir für unsere Dokumente auch externe
 Bibliotheken, die zusätzlich installiert werden müssen. Wir erklären
-das am Beispiel der Bibliothek libsqlite3. Dies ist ein Paket, das
-eine Lua API für den Zugriff auf sqlite3 Datenbanken anbietet.
+das am Beispiel der Bibliothek `libsqlite3`. Dies ist ein Paket, das
+eine Lua API für den Zugriff auf Sqlite Datenbanken anbietet.
 
-Die Bibliothek libsqlite3 wird über den Lua Package Manager luarocks
-installiert. luarocks ist selbst vollständig in Lua geschrieben. Er
-lädt Quellpakete, übersetzt diese spezifisch für die vorliegende Lua
-Version und installiert sie in standardisierten Suchpfaden. Leider
+Die Bibliothek `libsqlite3` wird über den Lua Package Manager `luarocks`
+installiert. Er lädt Quellpakete, übersetzt diese spezifisch für die vorliegende
+Lua Version und installiert sie in standardisierten Suchpfaden. Leider
 funktionieren die von den Linux Distributionen ausgelieferten luarocks
-Installationen nicht zuverlässig, weswegen es sich empfiehlt, luarocks
-selbst zu installieren.
+Installationen nicht zuverlässig, weswegen es sich empfiehlt, luarocks selbst zu
+installieren.
 
-Wenn luarocks installiert ist, kann man damit fortgefahren, die
-Bibliotheken zu installieren.
+Wenn luarocks installiert ist, kann man damit fortgefahren, die Bibliotheken zu
+installieren.
 
 Nun die Schritte im einzelnen:
 
@@ -187,17 +208,18 @@ verwendet wird, um Packages, Schriftarten, Makrodateien, TeX Dateien
 und vieles mehr zu laden. Er bildet eine Reihe
 von sog. TEXMF-Verzeichnisbäumen, in denen die Dateien liegen. KPSE
 ist ein ausgefeilter Mechanismus, der uns in der CC-Dokumentation
-leider Knüppel zwischen die Beine wirft: Das Verzeichnis ``../common/``,
+leider Knüppel zwischen die Beine wirft: Das Verzeichnis ``../lua/``,
 in dem sich alle unsere Lua Dateien und die davon abhängigen CSV
 Dateien befinden, liegt nicht in einem TEXMF-Baum und somit nicht in
 den Suchpfaden. Daher muss der Suchpfad angepasst werden, was wir in
-``luabridge.tex`` vornehmen:
+``common-packages.tex`` vornehmen:
 
 ----
-\directlua{package.path = "../common/?.lua;" .. package.path}
-\usepackage{luapackageloader}
+\directlua{package.path = "../lua/?.lua;./?.lua;" .. package.path}
+\directlua{package.cpath = "./?.so;" .. package.cpath}
 ----
-Mit diesen Befehlen wird der Suchpfad package.path erweitert. Danach
+
+Mit diesen Befehlen wird der Suchpfad `package.path` erweitert. Danach
 wird ein Package geladen, das den ursprünglichen Lua Suchmechanismus
 für Module wieder herstellt, bzw. den KPSE basierten Mechanismus
 ergänzt. So können wir eigene Module aus unserem Dokumenten-Repository
