@@ -55,6 +55,7 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr install $(cat /texlive.packages) &
 ENV PATH=/usr/local/texlive/bin/x86_64-linux:$PATH
 
 WORKDIR /data
+RUN rm -r /install-tl
 
 VOLUME ["/data"]
 
