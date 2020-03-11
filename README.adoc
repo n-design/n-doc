@@ -23,7 +23,7 @@ dem Pfad `/data` in den Container gemountet werden (`runmake.sh` enthält diesen
 Aufruf):
 
 ----
-docker run --rm  --volume $(pwd):/data ndesign/n-doc [-j <n> ] delivery
+docker run --rm  --volume $(pwd):/data ndesign/n-doc make [-j <n> ] delivery
 ----
 
 
