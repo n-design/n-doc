@@ -85,6 +85,7 @@ stringenc
 substr
 tocloft
 tools
+threeparttable
 trimspaces
 truncate
 ulem
