@@ -139,13 +139,26 @@ function bridge_cc_core.print_testcase_table(tex)
    local testcases = cc_core.getTestcases()
    local resulttable = {}
    for _,testcase in pairs(testcases) do
+      local tc = cc_core.getTestcase(testcase)
       local submod = cc_core.getTestcase2Module(testcase)
       local sfrs = cc_core.getTestcase2Sfr(testcase)
       local tsfis = cc_core.getTestcase2Tsfi(testcase)
-      local tablerow = tg.generate_testcase_row(testcase, submod, sfrs, tsfis)
+      local tablerow = tg.generate_testcase_row(tc, submod, sfrs, tsfis)
       table.insert(resulttable, tablerow)
    end
    tex.print(table.concat(resulttable))
+end
+
+function bridge_cc_core.print_testcase_to_tsfi_table(key, tex)
+   local tsfis = cc_core.getTestcase2Tsfi(key)
+   local result = tablegen.print_item_list(tsfis, "tsfi")
+   tex.sprint(result)
+end
+
+function bridge_cc_core.print_testcase_to_sfr_table(key, tex)
+   local sfrs = cc_core.getTestcase2Sfr(key)
+   local result = tablegen.print_item_list(sfrs, "sfrnolink")
+   tex.sprint(result)
 end
 
 function bridge_cc_core.print_category_to_num_testcase_table(tex, label, item_mapper, counter_function, num_columns)

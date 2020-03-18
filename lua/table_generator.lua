@@ -237,8 +237,7 @@ end
 
 function tg.generate_testcase_row(testcase, submods, sfrs, tsfis)
    local result = {}
-   --table.insert(result, testcase:gsub("_", "\\_") .. eoc)
-   table.insert(result, testcase .. eoc)
+   table.insert(result, testcase:gsub("_", "\\_") .. eoc)
    table.insert(result, tg.print_item_list(submods, "module"))
    table.insert(result, eoc)
    table.insert(result, tg.print_item_list(sfrs, "sfrnolink"))
