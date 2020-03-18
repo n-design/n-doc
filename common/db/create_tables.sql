@@ -13,7 +13,7 @@ CREATE TABLE sfr_obj ( `sfr` TEXT, `obj` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sf
 CREATE TABLE tsfi ( `label` TEXT, `name` TEXT, `relationtype` TEXT, PRIMARY KEY(`label`) );
 CREATE TABLE sfr_tsfi ( `sfr` TEXT,  `tsfi` TEXT, `purpose` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`tsfi`) REFERENCES `tsfi`(`label`) );
 CREATE TABLE errors ( `code` TEXT, `type` TEXT, `severity` TEXT, `msg` TEXT, PRIMARY KEY(`code`) );
-CREATE TABLE testcases ( `label` TEXT, `block` TEXT, `name` TEXT, PRIMARY KEY(`label`) );
+CREATE TABLE testcases ( `label` TEXT, `name` TEXT, `block` TEXT, `desc` TEXT, `quelle` TEXT, PRIMARY KEY(`label`) );
 CREATE TABLE testcase_module ( `testcase` TEXT, `subsystem` TEXT, `module` TEXT, FOREIGN KEY(`testcase`) REFERENCES `testcases`(`label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) , FOREIGN KEY(`module`) REFERENCES `modules`(`label`) );
 CREATE TABLE testcase_sfr ( `testcase` TEXT, `sfr` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`testcase`) REFERENCES `testcases`(`label`) );
 CREATE TABLE testcase_tsfi ( `testcase` TEXT, `tsfi` TEXT, FOREIGN KEY(`tsfi`) REFERENCES `tsfi`(`label`), FOREIGN KEY(`testcase`) REFERENCES `testcases`(`label`) );
