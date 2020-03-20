@@ -1,4 +1,4 @@
-ARG baseimage=ubuntu:19.10
+ARG baseimage=ubuntu:18.04
 
 FROM ${baseimage} as buildbase
 LABEL maintainer="alexander.krumeich@n-design.de"
