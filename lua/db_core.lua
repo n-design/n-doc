@@ -44,10 +44,10 @@ function populate_tables(populate)
       local parsedTable = parser.parse(dbcore.dbpath .. csv, ";")
       if texio then
 	 log_out = {}
-	 table.insert(log_out, "(")
+	 table.insert(log_out, "\n(")
 	 table.insert(log_out, dbcore.dbpath)
 	 table.insert(log_out, csv)
-	 table.insert(log_out, ")")
+	 table.insert(log_out, ") ")
 	 texio.write("log", table.concat(log_out))
       end
       for k,v in pairs(parsedTable) do
