@@ -1,0 +1,12 @@
+FROM ndesign/n-doc
+
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get install -y openjdk-11-jre-headless
+
+COPY plantuml-accessories.tar.gz /
+RUN tar x -C / -f /plantuml-accessories.tar.gz
+
+RUN curl -L http://sourceforge.net/projects/plantuml/files/plantuml.1.2020.1.jar/download > /usr/local/java/plantuml.jar
+WORKDIR /data
+
+VOLUME ["/data"]
