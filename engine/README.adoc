@@ -3,28 +3,28 @@ TeXLive, SQLite, Lua, PlantUML und Werkzeuge für CC-Dokumentation
 
 == Überblick
 
-Die Dateien in diesem Repository bilden die Grundlage für ein Docker Image zum
+Die Dateien in diesem Repository bilden die Grundlage für Docker Images zum
 Erstellen der CC-Dokumentation mit
 link:https://github.com/n-design/n-doc_template[n-doc_template]. Das Image
 paketiert eine reduzierte Fassung von TeXLive, der Datenbank SQLite, Lua und der
-Bibliotheken für die Verwendung von SQLite in Lua. Zum Erstellen der Grafiken in
-den Dokumenten wird PlantUML eingebunden. PlantUML braucht ein Java Runtime
-Environment.
-
-Die meisten Abhängigkeiten werden beim Erstellen des Containers
-heruntergeladen. Lediglich einige Zusatzpakete für PlantUML werden als Binary
-mitgeliefert, da es keine zuverlässigen Downloadpunkte für die verwendeten
-Bibliotheken zum Erstellen der PDFs gibt.
+Bibliotheken für die Verwendung von SQLite in Lua. 
 
 == Aufruf
 
 === Erstellen des Images
 
-Das n-doc Image wird über das Ziel `image` des Makefiles erstellt. Dabei wird
-das Image mit dem Label `ndesign/n-doc` versehen:
+Das n-doc Image wird über das Ziel `n-doc` des Makefiles erstellt. Dabei wird
+das Image mit dem Label `ndesign/n-doc:latest` versehen:
 
 ----
-make image
+make n-doc
+----
+
+Zusätzlich kann -- auf `ndesign/n-doc` basierend -- eine zweite Variante gebaut
+werden, die link:https://plantuml.com/[PlantUML] bereitstellt. Es ist ca. 200 MB größer als die einfache Variante. Diese Variante trägt das Tag `ndesign/n-doc:latest-plantuml`:
+
+----
+make n-doc-plantuml
 ----
 
 Das Makefile sieht eine Umgebungsvariable vor, um den kompletten Build ohne
@@ -34,7 +34,7 @@ gecachte Zwischen-Images zu erzwingen:
 CACHE_OPTION=--no-cache make image
 ----
 
-Zum Publizieren des Images wird das Ziel `publish`
+Zum Publizieren der Images wird das Ziel `publish`
 verwendet:
 
 ----
