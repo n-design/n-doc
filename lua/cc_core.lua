@@ -16,6 +16,8 @@ function split_at_dot(key)
 end
 
 cc_core.table_definitions = {
+   [[CREATE TABLE subjobj ( `label` TEXT, `name` TEXT, `description` TEXT, PRIMARY KEY(`label`) )]],
+   [[CREATE TABLE sfr_subjobj ( `sfr` TEXT, `subjobj` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`subjobj`) REFERENCES `subjobj`(`label`))]],
    [[CREATE TABLE spd ( `label` TEXT, `name` TEXT, `description` TEXT, `PP` TEXT, `PP_order` TEXT, PRIMARY KEY(`label`) )]],
    [[CREATE TABLE spd_obj ( `spd` TEXT, `obj` TEXT, `rel` TEXT, FOREIGN KEY(`spd`) REFERENCES `spd`(`label`), FOREIGN KEY(`obj`) REFERENCES `obj`(`label`))]],   
    [[CREATE TABLE subsystems ( `label` TEXT, `name` TEXT, `plainname` TEXT, PRIMARY KEY(`label`) )]],
@@ -50,6 +52,8 @@ function cc_core.all_table_definitions()
 end
 
 cc_core.populate_info = {
+   {st=[[INSERT INTO subjobj VALUES (:label, :name, :description)]], csv = "subjobj.csv"},
+   {st=[[INSERT INTO sfr_subjobj VALUES (:sfr, :subjobj)]], csv = "sfr_subjobj.csv"},
    {st=[[INSERT INTO spd VALUES (:label, :name, :description, :PP, :PP_order)]], csv = "spd.csv"},
    {st=[[INSERT INTO spd_obj VALUES (:spd, :obj, :rel)]], csv = "spd_obj.csv"},
    {st=[[INSERT INTO subsystems VALUES (:label, :name, :plainname)]], csv="subsystems.csv"},
@@ -91,6 +95,9 @@ cc_core.querysets = {
     {name="spdtext", st=[[SELECT description FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "description"},
     {name="spdsource", st=[[SELECT PP as source FROM spd WHERE label=? COLLATE NOCASE]], resultitem = "source"},
     {name="spd2obj", st=[[select distinct obj from spd_obj where spd=:spd]], resultitem="obj"},
+    {name="subjobj", st=[[SELECT name FROM subjobj WHERE label=? COLLATE NOCASE]], resultitem = "name"},
+    {name="subjobj_all_labels", st=[[SELECT label FROM subjobj]], resultitem = "label"},
+    {name="subjobjtext", st=[[SELECT description FROM subjobj WHERE label=? COLLATE NOCASE]], resultitem = "description"},
     {name="sub", st=[[SELECT name FROM subsystems WHERE label=?]], resultitem = "name"},
     {name="mod", st=[[SELECT name FROM modules WHERE subsystem=? AND label=?]], resultitem = "name"},
     {name="int", st=[[SELECT name FROM interfaces WHERE subsystem=? AND module=? AND label=?]], resultitem = "name"},
@@ -112,6 +119,8 @@ cc_core.querysets = {
     {name="tsfi_all_labels", st=[[SELECT label FROM tsfi ORDER by label]], resultitem = "label"},
     {name="error", st=[[SELECT msg FROM errors WHERE code=? COLLATE NOCASE]], resultitem = "msg"},
     {name="testcase", st=[[SELECT name FROM testcases WHERE label=? COLLATE NOCASE]], resultitem = "name"},
+    {name="subjobj2sfr", st=[[select distinct sfr from sfr_subjobj where subjobj=:subjobj]], resultitem="sfr"},
+    {name="sfr2subjobj", st=[[select distinct subjobj from sfr_subjobj where sfr=:sfr]], resultitem="subjobj"},
     {name="sfr2module", st=[[select subsystems.label as sub, modules.label as mod 
 from sfr join sfr_module on sfr.label = sfr_module.sfr
 join modules on sfr_module.module = modules.label and sfr_module.subsystem = modules.subsystem
@@ -271,6 +280,22 @@ end
 
 function cc_core.getSpd2Obj(key)
    return cmn.get_relations_by_query_key("spd2obj", {spd=key}, function (e) return e end)
+end
+
+function cc_core.getSubjobj(key)
+   return cmn.get_by_query_key("subjobj", key)
+end
+
+function cc_core.getSubjobjText(key)
+   return cmn.get_by_query_key("subjobjtext", key)
+end
+
+function cc_core.getSubjobj2Sfr(key)
+   return cmn.get_relations_by_query_key("subjobj2sfr", {subjobj=key}, function (e) return e end)
+end
+
+function cc_core.getSfr2Subjobj(key)
+   return cmn.get_relations_by_query_key("sfr2subjobj", {sfr=key}, function (e) return e end)
 end
 
 function cc_core.getTsfi(key)

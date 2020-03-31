@@ -33,6 +33,12 @@
 \newcommand{\spdsource}[1]{\directlua{getSpdSource("#1")}}
 \newcommand{\spdlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\spd{#1}}}
 
+% Makros für die Auflösung und Darstellung von Subjekten und Objekten. Der
+% übergebene Parameter wird anhand der Daten in ubjobj.csv aufgelöst.
+\newcommand{\subjobj}[1]{\secitemformat{\directlua{getSubjobj("#1")}}}
+\newcommand{\subjobjtext}[1]{\directlua{getSubjobjText("#1")}}
+\newcommand{\subjobjlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\subjobj{#1}}}
+
 %% ------------------------------------------------------------
 %%
 %% Makros für

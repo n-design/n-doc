@@ -47,6 +47,23 @@ function test_cc_core.test_objectives()
    lu.assertEquals(cc_core.getObjectiveSource(obj), "4.1.1")
 end
 
+function test_cc_core.test_subjobj()
+   subject = "s_admin"
+   lu.assertEquals(cc_core.getSubjobj(subject), [[S\_Administrator]])
+   lu.assertEquals(cc_core.getSubjobjText(subject), "Subjekt, das für einen Administrator handelt.")
+end
+
+function test_cc_core.test_subjobj_to_sfr()
+   subject = "s_admin"
+   lu.assertEquals(cc_core.getSubjobj2Sfr(subject), {"ftp_trp.1/admin"})
+end
+
+function test_cc_core.test_sfr_to_subjobj()
+   sfr = "ftp_trp.1/admin"
+   lu.assertEquals(cc_core.getSfr2Subjobj(sfr), {"s_admin"})
+end
+
+
 function test_cc_core.test_spd()
    spd = "t.lan.admin"
    lu.assertEquals(cc_core.getSpd(spd), [[T.LAN.Admin]])
