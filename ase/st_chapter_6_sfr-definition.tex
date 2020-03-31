@@ -46,7 +46,22 @@ einem Hinweis begleitet, wie die Löschung motiviert ist.
   Attributen und Operationen}
 
 Die Modellierungen des Schutzprofils \citepp{} gelten auch für dieses Security
-Target.
+Target. Über das Schutzprofil hinaus werden die Subjekte, Objekte und Attribute
+in \tableref{tab:sfr.intro.model} angenommen.
+
+\begin{table}[htb]
+  \centering{}
+  \begin{tabularx}{\textwidth}{@{}lXX@{}}
+    \toprule
+    Subjekt & Bechreibung & Attribut \\
+    \midrule
+    \hypertarget{}{\subjobj{s_admin}} & \subjobjtext{s_admin} & (Kein) \\
+    \subjobj{s_zeitdienst} & \subjobjtext{s_zeitdienst} & (Kein) \\
+    \bottomrule
+  \end{tabularx}
+    \caption{Subjekte}
+    \label{tab:sfr.intro.model}
+\end{table}
 
 \input{chapter_6/sfr_definitions}
 
@@ -76,6 +91,33 @@ Abhängigkeiten ergeben.
 Die in \sectref{comp.pp-fcsrng} neu eingeführte Komponente
 \secitem{FCS_RNG.1} hat keine Abhängigkeiten, die aufgelöst werden
 müssen.
+
+Die Darstellungen in \tableref{tab:sfr.subjobj2sfr} und
+\tableref{tab:sfr.sfr2subjobj} zeigen, wie die zusätzlich angenommenen Subjekte
+aus \tableref{tab:sfr.intro.model} in Zusammenhang zu den
+Sicherheitsanforderungen stehen.
+
+\begin{longtable}[c]{@{}l>{\centering}*{17}{c}<{\centering}@{}}
+  \toprule
+  \directlua{print_table_header('mainsfr', 'sfrlinknoindex')} \\
+  % 
+  \midrule \endhead
+  \midrule \caption{Abbildung der Subjekte auf SFR}  \endfoot
+  \bottomrule \caption{Abbildung der Subjekte auf SFR} \label{tab:sfr.subjobj2sfr} \endlastfoot
+  \directlua{print_table_body('subjobj', 'mainsfr', 'subjobjlink', cc_core.getSubjobj2Sfr)}
+\end{longtable}
+
+\begin{longtable}[c]{@{}l>{\centering}*{2}{c}<{\centering}@{}}
+  \toprule
+  \directlua{print_table_header('subjobj', 'subjobjlink')} \\
+  % 
+  \midrule \endhead
+  \midrule \caption{Abbildung der SFR auf Subjekte}  \endfoot
+  \bottomrule \caption{Abbildung der SFR auf Subjekte} \label{tab:sfr.sfr2subjobj} \endlastfoot
+  \directlua{print_table_body('mainsfr', 'subjobj', 'sfrlinknoindex', cc_core.getSfr2Subjobj)}
+\end{longtable}
+
+
 
 \hrefsubsection{sfr.ratio.overview}{Überblick der Abdeckung von
   Sicherheitszielen}

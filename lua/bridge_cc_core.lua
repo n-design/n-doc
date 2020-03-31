@@ -115,6 +115,14 @@ function bridge_cc_core.getObjectiveText(key, tex)
    tex.sprint(cc_core.getObjectiveText(key))
 end
 
+function bridge_cc_core.getSubjobj(key, tex)
+   tex.sprint(cc_core.getSubjobj(key))
+end
+
+function bridge_cc_core.getSubjobjText(key, tex)
+   tex.sprint(cc_core.getSubjobjText(key))
+end
+
 function bridge_cc_core.getSpd(key, tex)
    tex.sprint(cc_core.getSpd(key))
 end

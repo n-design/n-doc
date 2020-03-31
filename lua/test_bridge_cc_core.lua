@@ -95,6 +95,14 @@ function testbridge.test_getObjectiveSource()
    bridge_cc_core.getObjectiveSource("o.zeitdienst", tex.expected([[4.1.1]]))
 end
 
+function testbridge.test_getSubjobj()
+   bridge_cc_core.getSubjobj("s_admin", tex.expected([[S\_Administrator]]))
+end
+
+function testbridge.test_getSubjobjText()
+   bridge_cc_core.getSubjobjText("s_admin", tex.expected([[Subjekt, das für einen Administrator handelt.]]))
+end
+
 function testbridge.test_getTsfi()
    bridge_cc_core.getTsfi("ls.lan.tls", tex.expected([[LS.LAN.TLS]]))
 end
