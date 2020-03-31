@@ -58,9 +58,9 @@ function test_cc_core.test_subjobj_to_sfr()
    lu.assertEquals(cc_core.getSubjobj2Sfr(subject), {"ftp_trp.1/admin"})
 end
 
-function test_cc_core.test_subjobj_to_sfr()
+function test_cc_core.test_sfr_to_subjobj()
    sfr = "ftp_trp.1/admin"
-   lu.assertEquals(cc_core.getSfr2Subjobj(subject), {"s_admin"})
+   lu.assertEquals(cc_core.getSfr2Subjobj(sfr), {"s_admin"})
 end
 
 
