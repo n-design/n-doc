@@ -58,6 +58,7 @@ logreq
 ltablex
 ltxcmds
 luacode
+luahbtex
 lualatex-truncate
 luapackageloader
 luatexbase
