@@ -14,14 +14,19 @@
 
 
 # set to dry=echo for debugging/development
-dry=''
-
+dry=${DRYRUN:-''}
 RELEASE_DB=common/db/releases.csv
 require_user_confirmation=true
 
+# Cross platform compatibility for use under macOS (BSD)
+# (with POSIX compatible sed)
+function sedi () {
+    sed --version >/dev/null 2>&1 && sed -i -- "$@" || sed -i "" "$@"
+}
+
 function get_version() {
     ccdoc=$1
-    version=$(grep ${ccdoc} "${RELEASE_DB}" | cut -d ';' -f2)
+    version=$(grep "${ccdoc};" "${RELEASE_DB}" | cut -d ';' -f2)
     echo $version
 }
 
@@ -37,11 +42,11 @@ function set_version() {
     key=$1
     version_to_set=$2
     date_to_set=${3:-$(date "+%d.%m.%Y")}
-    sed -i "s/${key};.*/${key};${version_to_set};${date_to_set}/" "$RELEASE_DB"
+    sedi "s/${key};.*/${key};${version_to_set};${date_to_set}/" "$RELEASE_DB"
 }
 
 function usage() {
-    echo "Usage: $0 [--assume-yes] (--all|<document>...)"
+    echo "Usage: $0 [--assume-yes] [--dry-run] (--all|<document>...)"
     exit 1
 }
 
@@ -55,6 +60,7 @@ function processCmdLine() {
             --all) alldocs=$(get_all_documents); shift;;
 	    --assume-yes) require_user_confirmation=false; shift;;
 	    --help) usage && exit 0;;
+	    --dry-run) dry="echo"; shift;;
 	    -*) usage && exit 0;;
             *) alldocs+=" $1"; shift;;
         esac
@@ -67,11 +73,11 @@ function processCmdLine() {
 processCmdLine $@
 
 # Only proceed if no changes in working directory
-if [[ -n "$(git status --porcelain)" ]]; then
+if [[ -z $dry && -n "$(git status --porcelain)" ]]; then
     echo "Uncommitted changes in repository. Please commit first. Aborting."
     exit 2
 fi
-if [[ $(git rev-parse --abbrev-ref HEAD) != "master" ]]; then
+if [[ -z $dry && $(git rev-parse --abbrev-ref HEAD) != "master" ]]; then
     echo "Not on branch 'master'. Aborting."
     exit 3
 fi
@@ -87,6 +93,9 @@ for doc in $alldocs; do
     fi
 done    
 
+last_release=$(git tag --list Auslieferung/* | cut -f 2 -d '/' | sort -n | tail -1)
+this_release=$((last_release + 1))
+this_release_tag="Auslieferung/$this_release"
 
 # Sanity check
 for doc in $alldocs; do
@@ -96,6 +105,7 @@ for doc in $alldocs; do
     nextversion=$(get_next_version $taggedversion)
     echo "Tagging $doc with ${doc^^}/v$taggedversion (and updating from $currentversion to $nextversion)"
 done
+echo "Finally, tagging release with ${this_release_tag}"
 if [ "$require_user_confirmation" = "true" ]; then
     read -p "Enter 'yes' to Continue -> " isok
     if [ ${isok^^} != 'YES' ]; then
@@ -126,12 +136,13 @@ for doc in $alldocs; do
     $dry git tag -m "Increased ${doc^^} version to v$taggedversion" "${doc^^}/v$taggedversion" ${to_be_tagged}
 done
 
+$dry git tag -m "Dokumente zu ${this_release_tag}" ${this_release_tag} ${to_be_tagged}
+
 # Step 4: Increase version to next snapshot
 for doc in $alldocs; do
     documentkey=$doc
     currentversion=$(get_version $documentkey)
     nextversion=$(get_next_version $currentversion)
-    #echo "Next:    " $nextversion
     set_version $documentkey $nextversion '\\today'
 done
 
@@ -139,3 +150,8 @@ done
 $dry git commit -a -m "Increased versions for next snapshot" >/dev/null
 $dry git push
 $dry git push --tags
+
+# Cleanup after dry-run
+if [[ -n "$dry" ]]; then
+    git checkout -- $RELEASE_DB
+fi
