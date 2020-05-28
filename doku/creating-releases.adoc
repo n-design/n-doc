@@ -1,9 +1,9 @@
 :icons: font
 :experimental:
 
-= Erstellen eines CC-Doku Releases
+= Erstellen eines Dokumenten-Releases
 
-Das Erstellen eines Releases der CC-Dokumentation ist ein mehrschrittiger
+Das Erstellen eines Releases der Dokumentation ist ein mehrschrittiger
 Prozess, der in unregelmäßigen Abständen durchgeführt wird. Dieses Dokument
 beschreibt die notwendigen Schritte, jeweils mit den notwendigen Vorbedingungen.
 
