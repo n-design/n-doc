@@ -2,7 +2,6 @@ sfr;obj
 fcs_ckm.1;o.vpn_auth
 fcs_ckm.1;o.vpn_integrität
 fcs_ckm.1;o.vpn_vertraul
-fcs_ckm.1;o.basiscrypto
 fcs_ckm.1;o.tlscrypto
 fcs_ckm.2/ike;o.vpn_auth
 fcs_ckm.2/ike;o.vpn_integrität
@@ -11,11 +10,11 @@ fcs_ckm.2/tls;o.tlscrypto
 fcs_ckm.4;o.vpn_auth
 fcs_ckm.4;o.vpn_integrität
 fcs_ckm.4;o.vpn_vertraul
-fcs_ckm.4;o.basiscrypto
 fcs_ckm.4;o.tlscrypto
 ftp_itc.1/vpn;o.vpn_auth
 ftp_itc.1/vpn;o.vpn_integrität
 ftp_itc.1/vpn;o.vpn_vertraul
+ftp_itc.1/tls;o.tlscrypto
 ftp_trp.1/admin;o.admin
 ftp_trp.1/admin;o.tlscrypto
 fpt_stm.1;o.zeitdienst
@@ -29,3 +28,8 @@ fdp_rip.1/nk;o.schutz
 fpt_stm.1;o.zeitdienst
 fpt_tdc.1/tls.zert;o.tlscrypto
 fpt_tst.1;o.schutz
+fcs_rng.1/hashdrbg;o.tlscrypto
+fcs_rng.1/hashdrbg;o.vpn_auth
+fcs_rng.1/hashdrbg;o.vpn_integrität
+fcs_rng.1/hashdrbg;o.vpn_vertraul
+fdp_rip.1;o.schutz
