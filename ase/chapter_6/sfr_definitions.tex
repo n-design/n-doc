@@ -25,8 +25,6 @@
     rules} when interpreting the TSF data from another trusted IT
   product.\par{}\strefined{The interpretation rules are defined in \dots{}}}
 
-\applicationnote{\sfr{fpt_tdc.1/zert}}{}
-
 \hrefsubsection{sfr.def.packetinspection}{Stateful Packet Inspection}
 
 \intentionallyleftblank{}
@@ -82,6 +80,9 @@
   trusted path.}
 
 \sfrdefinition{ftp_trp.1.3/admin}{\sfrunmodifiedfrompp{6.2.6}}
+
+\applicationnote{\sfr{ftp_trp.1/admin}}{\label{appnote:clientcert} Der TOE
+  unterstützt beidseitige Authentisierung durch Zertifikate im TLS-Handshake.}
 
 
 \hrefsubsection{sfr.def.crypto}{Kryptographische Basisdienste}
@@ -164,6 +165,11 @@
   functions for which a trusted channel is required]{any
     connection specified in Table~\ref{tab:tlsconnections}.}}
 
+\applicationnote{\sfr{ftp_itc.1/tls}}{\label{appnote:brainpool} Der TOE
+  unterstützt den ECDHE-Schlüsselaustausch mit elliptischen Kurven. Die
+  verwendeten Kurven sind in \tableref{tab:elliptic-curves} aufgelistet.}
+
+
 \sfrsubsection{fpt_tdc.1/tls.zert}
 
 \sfrdefinition{fpt_tdc.1.1/tls.zert}{The TSF shall provide the
@@ -171,8 +177,6 @@
   
   \begin{sfrenumeration}
   \item \ppassigned{X.509-Zertifikate für TLS-Verbindungen}
-  \item \ppassigned{eine Liste gültiger CA-Zertifikate (Trust-Service Status List
-    TSL)}
   \item \ppassigned{Sperrinformationen zu Zertifikaten für TLS-Verbindungen, die
     via OCSP erhalten werden}
   \item \stassigned[additional list of data types]{no other data types}
