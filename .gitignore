@@ -49,6 +49,7 @@ deliverables/
 *.out
 *.pyg
 *.toc
+.texmfcache/
 
 # Emacs specific files
 \#*
