@@ -1,6 +1,6 @@
 push @generated_exts, "lol", "run.xml";
 
-$bibtex_use = 2;
-$pdflatex = "lualatex --shell-escape %O %S";
-$lualatex = "lualatex --shell-escape %O %S";
 $pdf_mode = 4; $postscript_mode = $dvi_mode = 0;
+$bibtex_use = 2;
+$pdflatex = "pdflatex --shell-escape %O %S";
+$lualatex = "lualatex --shell-escape %O %S";
