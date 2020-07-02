@@ -7,6 +7,15 @@
 \addbibresource{../common/bibliographies/complete.bib}
 \addbibresource{../common/bibliographies/reduced.bib}
 
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite]{
+      \perdatasource{../common/bibliographies/reduced.bib}
+      \step[fieldset=keywords, fieldvalue={,mauverfc}, append]
+    }
+  }
+}
+
 \usepackage{ifluatex}
 \directlua{package.path = "../lua/?.lua;./?.lua;" .. package.path}
 \directlua{package.cpath = "./?.so;" .. package.cpath}
