@@ -18,6 +18,8 @@ dry=${DRYRUN:-''}
 RELEASE_DB=common/db/releases.csv
 require_user_confirmation=true
 
+declare -A alldocs
+
 # Cross platform compatibility for use under macOS (BSD)
 # (with POSIX compatible sed)
 function sedi () {
@@ -51,21 +53,32 @@ function usage() {
 }
 
 function get_all_documents() {
-    echo $(tail -n +2 ${RELEASE_DB} | cut -d ';' -f 1 | awk '{printf "%s ", $1}')
+    for d in $(tail -n +2 ${RELEASE_DB} | cut -d ';' -f 1); do
+	alldocs[$d]=$d
+    done
+}
+
+function unique_documents() {
+    if [ -z "${alldocs[$1]}" ]; then
+	alldocs[$1]=$1;
+    else
+	echo "\"$1\" occurs multiple times. Aborting."
+	usage
+    fi
 }
 
 function processCmdLine() {
     while [ -n "$1" ]; do
         case $1 in 
-            --all) alldocs=$(get_all_documents); shift;;
+            --all) get_all_documents; shift;;
 	    --assume-yes) require_user_confirmation=false; shift;;
 	    --help) usage && exit 0;;
 	    --dry-run) dry="echo"; shift;;
 	    -*) usage && exit 0;;
-            *) alldocs+=" $1"; shift;;
+            *) unique_documents $1; shift;;
         esac
     done
-    if [ -z "$alldocs" ]; then
+    if [ "${#alldocs[@]}" -eq 0 ]; then
 	usage && exit 1;
     fi
 }
@@ -85,8 +98,8 @@ fi
 
 # Check if all documents exist before processing
 # Abort if any document is missing.
-for doc in $alldocs; do
-    grep $doc ${RELEASE_DB} >/dev/null
+for doc in "${alldocs[@]}"; do
+    grep "^$doc;" ${RELEASE_DB} >/dev/null
     if [ $? -ne 0 ]; then
 	echo "Document ${doc^^} not found. Aborting."
 	usage
@@ -98,7 +111,7 @@ this_release=$(printf "%02d" $((last_release + 1)))
 this_release_tag="Auslieferung/$this_release"
 
 # Sanity check
-for doc in $alldocs; do
+for doc in "${alldocs[@]}"; do
     documentkey=$doc
     currentversion=$(get_version $documentkey)
     taggedversion=${currentversion%-SNAPSHOT}
