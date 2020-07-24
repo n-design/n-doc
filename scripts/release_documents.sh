@@ -121,7 +121,7 @@ done
 echo "Finally, tagging release with ${this_release_tag}"
 if [ "$require_user_confirmation" = "true" ]; then
     read -p "Enter 'yes' to Continue -> " isok
-    if [ ${isok^^} != 'YES' ]; then
+    if [ "${isok^^}" != 'YES' ]; then
 	echo "Exiting."
 	exit 2
     fi
