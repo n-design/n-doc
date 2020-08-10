@@ -86,12 +86,20 @@
     bridge_cc_core.getObjectiveText(key, tex)
   end
 
+  function getObjectiveSource(key)
+    bridge_cc_core.getObjectiveSource(key, tex)
+  end
+
   function getSpd(key)
     bridge_cc_core.getSpd(key, tex)
   end
 
   function getSpdText(key)
     bridge_cc_core.getSpdText(key, tex)
+  end
+
+  function getSpdSource(key)
+    bridge_cc_core.getSpdSource(key, tex)
   end
 
   function getSubjobj(key)
@@ -102,20 +110,20 @@
     bridge_cc_core.getSubjobjText(key, tex)
   end
 
-  function getSpdSource(key)
-    bridge_cc_core.getSpdSource(key, tex)
-  end
-
-  function getObjectiveSource(key)
-    bridge_cc_core.getObjectiveSource(key, tex)
-  end
-
   function getTsfi(key)
     bridge_cc_core.getTsfi(key, tex)
   end
 
   function print_testcase_table()
     bridge_cc_core.print_testcase_table(tex)
+  end
+
+  function print_testcase_to_sfr_table(key)
+    bridge_cc_core.print_testcase_to_sfr_table(key, tex)
+  end
+
+  function print_testcase_to_tsfi_table(key)
+    bridge_cc_core.print_testcase_to_tsfi_table(key, tex)
   end
 
   function print_sfr_to_num_testcase_table()
