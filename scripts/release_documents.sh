@@ -129,7 +129,7 @@ fi
 
 # Step 1: Remove "-SNAPSHOT" for each document 
 # (thus setting the version)
-for doc in $alldocs; do
+for doc in ${alldocs[@]}; do
     documentkey=$doc
     currentversion=$(get_version $documentkey)
     taggedversion=${currentversion%-SNAPSHOT}
@@ -143,7 +143,7 @@ $dry git commit -a -m "Increased versions for release" >/dev/null
 to_be_tagged=$(git rev-parse HEAD)
 
 # Step 3: tag the HEAD commit for each document
-for doc in $alldocs; do
+for doc in ${alldocs[@]}; do
     taggedversion=$(get_version $doc)
     echo "Tagging $doc with ${doc^^}/v$taggedversion"
     $dry git tag -m "Increased ${doc^^} version to v$taggedversion" "${doc^^}/v$taggedversion" ${to_be_tagged}
@@ -152,7 +152,7 @@ done
 $dry git tag -m "Dokumente zu ${this_release_tag}" ${this_release_tag} ${to_be_tagged}
 
 # Step 4: Increase version to next snapshot
-for doc in $alldocs; do
+for doc in ${alldocs[@]}; do
     documentkey=$doc
     currentversion=$(get_version $documentkey)
     nextversion=$(get_next_version $currentversion)
