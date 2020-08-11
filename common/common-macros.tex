@@ -3,12 +3,7 @@
 % überschrieben werden.
 \newcommand{\documentdate}[1]{\directlua{getDocumentDate("#1")}}
 \newcommand{\documentversion}[1]{\directlua{getDocumentVersion("#1")}}
-
-% Name des Produkts in Kurz- und in Langform
-\newcommand{\thisproduct}{MauveVPN Client}
-\newcommand{\thisproductlong}{MauveCorp MauveVPN Client}
-\newcommand{\thisdeveloper}{Mauve Corporation}
-\newcommand{\thiscompany}{MauveCorp\\Fliederweg 98\\50020 Köln\\\textsmaller{certification@mauvecorp.com}}
+\newcommand{\nosnapshot}[1]{\directlua{tex.sprint(get_version_number_for_refliste("#1"))}}
 
 % Als Erinnerung für später zu erledigende Aufgaben
 % Markiert den übergebenen Text deutlich und setzt
@@ -83,13 +78,6 @@
 \newcommand{\secitemformat}[1]{{\textsmaller[0.9]{\secitemfont{#1}}}}
 \newcommand{\secitem}[1]{\secitemformat{\nounderscore{#1}}}
 
-\newcommand{\lslan}{\tsfilink{ls.lan}}
-\newcommand{\lswan}{\tsfilink{ls.wan}}
-\newcommand{\lswandhcp}{\tsfilink{ls.wan.dhcp}}
-\newcommand{\lsled}{\tsfilink{ls.led}}
-\newcommand{\lslantls}{\tsfilink{ls.lan.tls}}
-\newcommand{\lslanhttpmgmt}{\tsfilink{ls.lan.httpmgmt}}
-
 %% ------------------------------------------------------------
 %%
 %% Makros für
@@ -113,9 +101,6 @@
 \newcommand{\tlsconntablerow}[2]{\luadirect{getTlsConnectionTableRow("#1", "#2")}}
 \newcommand{\tlsid}[1]{\refstepcounter{tlsconnid}\secitemformat{\thetlsconnid}\label{#1}}
 
-%% Makros für die Referenzierung einer TLS ID
-\newcommand{\tlsexample}{\intf{\ref{tls.example}}}
-
 % Drei Spaltentypen für Tabellen, mehrzeiligen Text mit erzwungenen Zeilenumbrüchen
 % erlauben. Vgl. https://tex.stackexchange.com/questions/12703/
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
@@ -124,7 +109,6 @@
 \newcolumntype{Y}{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}X}
 \newcolumntype{Q}[2]{>{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}l<{\egroup}}
 \newcommand*\rot{\multicolumn{1}{Q{90}{0em}}}% no optional argument here, please!
-
 
 \newcommand{\landscapetable}[1]{%
 \afterpage{%
@@ -145,8 +129,6 @@
 \makeatother
 \newcommand{\tablekeyword}[1]{\keyword{#1}\mydotfill}
 \newcommand{\defaultvalue}[1]{\textsl{#1}}
-
-
 
 %%% Local Variables:
 %%% mode: latex
