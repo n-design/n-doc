@@ -106,8 +106,8 @@ for doc in "${alldocs[@]}"; do
     fi
 done    
 
-last_release=$(git tag --list Auslieferung/* | cut -f 2 -d '/' | sort -n | tail -1)
-this_release=$(printf "%02d" $((last_release + 1)))
+last_release=$(git tag --list | grep Auslieferung/ | cut -f 2 -d '/' | sort -n | tail -1)
+this_release=$(printf "%02d" $((10#$last_release + 1)))
 this_release_tag="Auslieferung/$this_release"
 
 # Sanity check
