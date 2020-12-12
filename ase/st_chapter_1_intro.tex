@@ -1,73 +1,55 @@
-\hrefchapter{intro}{Einführung in das Security Target}
+\hrefchapter{intro}{Introduction to the Security Target}
 
-Der TOE, der in diesem Dokument beschrieben wird, ist der \emph{\thisTOE{}}. Der
-TOE ist eine sichere Komponente, die als \thisproduct{} eingesetzt wird.
+The TOE described in this document is the \emph{\thisTOE{}}. The TOE is a secure
+component used as a VPN client.
 
-Dieses Dokument ist das \emph{Security Target}, in dem die funktionalen und
-organisatorischen Sicherheitsanforderungen des TOE und seiner Einsatzumgebung
-beschrieben werden.  Dieses Dokument findet seine formale Grundlage in:
+This document is the \emph{security target}, which describes the functional and
+organizational security requirements of the TOE and its operating
+environment. This document is formally based on:
 
 \begin{itemize}
 \item \citetitle{\thispp} \autocite{\thispp}
 \end{itemize}
 
-\hrefsection{intro.refst}{ST Referenz}
+\hrefsection{intro.refst}{ST Reference}
 
 \begin{tabularx}{1\textwidth}{@{}p{0.3\textwidth}X@{}}
   \toprule
-  Titel des Dokuments & Security Target / \thisproduct\\
-  Version des Dokuments & \documentversion{\thisdocument}\\
-  Datum des Dokuments & \documentdate{\thisdocument}\\
-  Allgemeiner Status: & \\
-  Autor  &  \thisdeveloper{}\\
-  Editor &  \\
+  Title of the document  & Security Target / \thisproduct\\
+  Version of the document & \documentversion{\thisdocument}\\
+  Date of the document & \documentdate{\thisdocument}\\
+  Author & \thisdeveloper{} \\
+  Editor & \thisdeveloper{} \\
   \bottomrule
 \end{tabularx}
 
-\hrefsection{intro.reftoe}{TOE Referenz}
+\hrefsection{intro.reftoe}{TOE Reference}
 
 \begin{tabularx}{1\textwidth}{@{}p{0.3\textwidth}X@{}}
   \toprule
-  Evaluierungsgegenstand & \thisTOE{}\\
-  Version des EVG & \toeversion{} \\
-  Hersteller & \thisdeveloper{} \\
-  Vertrauenswürdigkeitsstufe &
-  \secitemformat{EAL3} erweitert um
+  Target of evaluation & \thisTOE{}\\
+  Version of the TOE & \toeversion{} \\
+  Manufacturer & \thisdeveloper{} \\
+  Assurance level &
+  \secitemformat{EAL3} extended by
   \secitemformat{AVA\_VAN.3}, \secitemformat{ADV\_IMP.1}, %
   \secitemformat{ADV\_TDS.3}, \secitemformat{ADV\_FSP.4}, %
   \secitemformat{ALC\_TAT.1}, and \secitemformat{ALC\_FLR.2} %
-  (Kurzbezeichnung „\secitemformat{EAL3+}“)\\
+  („\secitemformat{EAL3+}“)\\
   CC Version &  3.1 Release 5\\
   \bottomrule
 \end{tabularx}
 
 \cleardoublepage{}
 
-\hrefsection{intro.overview}{Überblick über den TOE}
+\hrefsection{intro.overview}{TOE Overview}
 
-Der Evaluierungsgegenstand ist der \thisTOE{}.
+The target of evaluation is the \thisTOE{}. \thisproduct{}
+implements---conformant to \citepp{}---the product type of a VPN router. The TOE
+deliverables are the TOE and its operating instructions. Thus the TOE fulfills
+the scope required in \autocite{\thispp}.
 
-Der Lieferumfang des TOE umfasst ebenfalls die Betriebsdokumentation für
-\thisproduct{}. Somit entspricht der TOE dem im Schutzprofil \autocite{\thispp}
-genannten Umfang und Aufbau.
-
-\hrefsubsection{intro.overview.toetype}{TOE Typ}
-
-\thisproduct{} implementiert -- konform zu \citepp{} -- den Produkttyp eines
-VPN-Routers.
-
-\hrefsubsection{intro.overview.usage}{Verwendung und Hauptfunktionalität des
-  TOE}
-
-\hrefsubsection{intro.overview.nontoe}{Erforderliche Non-TOE
-  Hardware/Software/Firmware}
-
-
-\hrefsection{intro.desc}{Beschreibung des TOE}
-
-\hrefsubsection{intro.desc.goals}{Hauptziele des TOE}
-
-\hrefsubsection{intro.desc.aufbau}{Aufbau des TOE}
+\hrefsection{intro.desc}{TOE description}
 
 % \begin{figure}[tb]
 %   \centering{}
@@ -80,68 +62,65 @@ VPN-Routers.
 %     \label{fig:intro.desc.case}}
 % \end{figure}
 
-Das Betriebssystem des \thisproduct{} ist GNU/Linux. Teile des Betriebssystems
-setzen Sicherheitsanforderungen an den TOE um und sind somit SFR-enforcing.
+The operating system of the \thisproduct{} is GNU/Linux. Parts of the operating
+system implement security requirements of the TOE and are SFR-enforcing.
 
-\hrefsubsection{intro.desc.env}{Einsatzumgebung des TOE}
+\hrefsubsection{intro.desc.env}{Operation Environemtn of the TOE}
 
-\hrefsubsection{intro.desc.hardware}{Hardware des \thisproduct}
+\hrefsubsection{intro.desc.hardware}{Hardware of the \thisproduct}
 
-\hrefsubsection{intro.desc.intf}{Schnittstellen des \thisproduct}
+The TOE has custom made hardware\dots{}
 
-\hrefsubsubsection{intro.desc.intf.phys}{Physische Schnittstellen}
+\hrefsubsection{intro.desc.intf}{Interfaces of the\thisproduct}
 
-Alle Schnittstellen des \thisproduct{} sind physisch am Gehäuse des Geräts
-untergebracht. Die außen sichtbaren Schnittstellen sind auf dem Foto des TOE in
-\figureref{fig:intro.desc.case} zu erkennen.
+\hrefsubsubsection{intro.desc.intf.phys}{Physical Interfaces}
+
+All interfaces of the \thisproduct{} are physically placed on the case of the
+device. The interfaces of the TOE are visible in the pictures in
+\figureref{fig:intro.desc.case}.
 
 \begin{description}
-\item[\intf{PS.LAN}] ist die Schnittstelle ins LAN\dots
-\item[\intf{PS.WAN}] ist die Schnittstelle ins WAN\dots
-\item[\intf{PS.LED}] repräsentiert die LEDs an der Außenseite des Geräts.
+\item[\intf{PS.LAN}] is the interface to the LAN\dots
+\item[\intf{PS.WAN}] is the interface to the WAN\dots
+\item[\intf{PS.LED}] represents the LEDs on the front of the case.
 \end{description}
 
-\hrefsubsubsection{intro.desc.intf.log}{Logische Schnittstellen}
+\hrefsubsubsection{intro.desc.intf.log}{Logical Interfaces}
 
-\input{../common/tsfi.tex} % Wird auch in anderen Dokumenten verwendet
+\input{../common/tsfi.tex} % Also used in other documents
 
 \clearpage
 
-\hrefsubsection{intro.desc.physdiff}{Aufbau und physische Abgrenzung des TOE}
+\hrefsubsection{intro.desc.arch}{TOE Architecture and Functionalities}
 
-Der TOE besteht aus folgenden Subsystemen:
+The TOE consists of the following subsystems:
 
 \begin{description}
-\item[\tds{sub.vpn}] enthält die VPN-Funktionen wie IPSec und IKE.
-\item[\tds{sub.ntpclient}] synchronisiert die Systemzeit mit einem Zeitserver.
-\item[\tds{sub.selfprotect}] enthält Schutzmechanismen für den TOE.
-\item[\tds{sub.adminsystem}] wird für die Administration des TOE verwendet.
-\item[\tds{sub.cryptsystem}] bietet kryptografische Basisfunktionen.
-\item[\tds{sub.tls}] erstellt TLS-Verbindungen für die Administrationsschnittstelle.
+\item[\tds{sub.vpn}] contains VPN functionalities such as enthält die
+  VPN-Funktionen IPSec and IKE.
+\item[\tds{sub.ntpclient}] synchronizes system time with an NTP server in the WAN.
+\item[\tds{sub.selfprotect}] contains protection mechanisms for the TOE.
+\item[\tds{sub.adminsystem}] provides the management functions of the TOE.
+\item[\tds{sub.cryptsystem}] provides cryptographic functionalities.
+\item[\tds{sub.tls}] creates TLS connections for the management console.
 \end{description}
 
+\hrefsubsection{intro.desc.scope}{Physical Scope of the TOE}
 
+The physical scope of the TOE comprises the components listed in
+\tableref{tab:intro.desc.scope}.
 
-\hrefsubsection{intro.desc.secservices}{Logische Abgrenzung: Vom TOE
-  erbrachte Sicherheitsdienste}
-
-\hrefsubsection{intro.desc.scope}{Physischer Umfang des TOE}
-
-Der physische Umfang des TOE umfasst die in \tableref{tab:intro.desc.scope} aufgelisteten Komponenten.
-
-
-\renewcommand{\arraystretch}{1.5}
 \begin{table}[htb]
   \centering
-  \begin{tabularx}{0.95\linewidth}{@{}p{7cm}Xl@{}}
+  \begin{tabularx}{0.95\linewidth}{@{}lXl@{}}
     \toprule
-    Komponente & Beschreibung & Version\\ \midrule
-    Firmware Image & Die Firmware  des TOE & \toeversion{} \\
-    Guidance Documentation („Administrationshandbuch“) & Die Guidance Documentation beschreibt die sichere Verwendung des TOE & \toeversion{} \\
-    Benutzerhandbuch ("`Allgemeine Gebrauchsanleitung \thisproduct{}"') & Das Benutzerhandbuch beschreibt die allgemeine Verwendung, sowohl dessen TOE Anteile als auch die nicht-TOE Anteile & \toeversion\\
+    Component & Description & Version\\ \midrule
+    Firmware Image & The firmware of the TOE & \toeversion{} \\
+    Guidance Documentation  & The guidance documentation describes the secure usage of the TOE & \toeversion{} \\
+    User Manual  & The manual describes the functionalities and operating instructions of the TOE & \toeversion\\
     \bottomrule
   \end{tabularx}
-  \caption{Physischer Umfang des TOE}
+  \caption{Physiscal Scope of the TOE}
   \label{tab:intro.desc.scope}
 \end{table}
 \renewcommand{\arraystretch}{1.0}

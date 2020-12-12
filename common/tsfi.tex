@@ -1,23 +1,21 @@
-Der TOE verfügt über die logischen Schnittstellen, die das Schutzprofil
-\autocite{\thispp} beschreibt. Diese werden hier der besseren Lesbarkeit halber
-wiederholt.
+The TOE provides the logical interfaces described in the protection profile \autocite{\thispp}. They are repeated here.
 
 \begin{description}
 
-\item[\hypertarget{tsfi.ls.lan}{\intf{LS.LAN}}] ist die Schnittstelle des TOE
-  ins lokale Netzwerk der Einsatzumgebung. Zusätzlich zu den im Schutzprofil
-  genannten Schnittstellen werden hier weitere protokollspezifische
-  Schnittstellen definiert. \tableref{tab:tsfi.ls.lan} listet diese logischen
-  Schnittstellen.
+\item[\hypertarget{tsfi.ls.lan}{\intf{LS.LAN}}] is the TOE's interface to the
+  local area network of the operating environment. In addition to the interfaces
+  described in the protection profile, there are further protocol specific
+  interfaces described here. \tableref{tab:tsfi.ls.lan} lists these logical
+  interfaces.
 
-\item[\hypertarget{tsfi.ls.wan}{\intf{LS.WAN}}] ist die Schnittstelle des TOE
-  zum WA. Verschiedene Protokolle implementieren weitere Logische Schnittstellen
-  in Richtung des WAN. \tableref{tab:tsfi.ls.wan} listet diese logischen
-  Schnittstellen.
+\item[\hypertarget{tsfi.ls.wan}{\intf{LS.WAN}}] is the TOE's interface to the
+  wide area network of the operating environment, the Internet. In addition to
+  the interfaces described in the protection profile, there are further protocol
+  specific interfaces described here. \tableref{tab:tsfi.ls.wan} lists these
+  logical interfaces.
  
-\item[\hypertarget{tsfi.ls.led}{\intf{LS.LED}}] repräsentiert die
-  logische Schnittstelle zum Display und den Bedienknöpfen über
-  \intf{PS.LED}.
+\item[\hypertarget{tsfi.ls.led}{\intf{LS.LED}}] represents the logical interface
+  to the display and the buttons of \intf{PS.LED}.
 
 \end{description}
 
@@ -25,17 +23,17 @@ wiederholt.
     \centering
     \begin{tabularx}{1\columnwidth}{@{}llX@{}}
       \toprule
-      Bezeichner & Rolle & Zweck der Schnittstelle \\
+      Label & Client/Server & Purpose of the interface \\
       \midrule
-      \hypertarget{tsfi.ls.lan.ether}{\tsfi{ls.lan.ether}} & --- & Protokoll auf Zugangsschicht \\
-      \hypertarget{tsfi.ls.lan.ip}{\tsfi{ls.lan.ip}} & --- & Zugang zur Internet-Schicht \\
-      \hypertarget{tsfi.ls.lan.tcp}{\tsfi{ls.lan.tcp}} & --- & Zugang zur Transportschicht \\
-      \hypertarget{tsfi.ls.lan.tls}{\tsfi{ls.lan.tls}} & beide & Sicherung der Verbindung mit TLS~1.2 \\
-      \hypertarget{tsfi.ls.lan.udp}{\tsfi{ls.lan.udp}} & --- & Zugang zur Transportschicht \\
-      \hypertarget{tsfi.ls.lan.httpmgmt}{\tsfi{ls.lan.httpmgmt}} & Server & HTTP-Zugriff auf Managementschnittstelle \\
+      \hypertarget{tsfi.ls.lan.ether}{\tsfi{ls.lan.ether}} & --- & media access \\
+      \hypertarget{tsfi.ls.lan.ip}{\tsfi{ls.lan.ip}} & --- & access to the Internet layer \\
+      \hypertarget{tsfi.ls.lan.tcp}{\tsfi{ls.lan.tcp}} & --- & access to the transport layer \\
+      \hypertarget{tsfi.ls.lan.tls}{\tsfi{ls.lan.tls}} & server & transport security with TLS~1.2 \\
+      \hypertarget{tsfi.ls.lan.udp}{\tsfi{ls.lan.udp}} & --- & access to the transport layer \\
+      \hypertarget{tsfi.ls.lan.httpmgmt}{\tsfi{ls.lan.httpmgmt}} & server & HTTP access to the management console \\
       \bottomrule
     \end{tabularx}
-    \caption{Logische Schnittstellen an \tsfi{ls.lan}}
+    \caption{Logical Interfaces on \tsfi{ls.lan}}
     \label{tab:tsfi.ls.lan}
   \end{table}
 
@@ -43,18 +41,18 @@ wiederholt.
     \centering
     \begin{tabularx}{1\columnwidth}{@{}llX@{}}
       \toprule
-      Bezeichner & Rolle & Zweck der Schnittstelle \\
+      Label & Client/Server & Purpose of the interface \\
       \midrule
-      \hypertarget{tsfi.ls.wan.ether}{\tsfi{ls.wan.ether}} & --- & Protokoll auf Zugangsschicht \\
-      \hypertarget{tsfi.ls.wan.ip}{\tsfi{ls.wan.ip}} & --- & Zugang zur Internet-Schicht \\
-      \hypertarget{tsfi.ls.wan.ntp}{\tsfi{ls.wan.ntp}} & Client & Abruf der Uhrzeit \\
-      \hypertarget{tsfi.ls.wan.dhcp}{\tsfi{ls.wan.dhcp}} & Client & Adressbezug im WAN \\
-      \hypertarget{tsfi.ls.wan.tcp}{\tsfi{ls.wan.tcp}} & --- & Zugang zur Transportschicht \\
-      \hypertarget{tsfi.ls.wan.udp}{\tsfi{ls.wan.udp}} & --- & Zugang zur Transportschicht \\
-      \hypertarget{tsfi.ls.wan.ipsec}{\tsfi{ls.wan.ipsec}} & --- & VPN Datenverkehr \\
+      \hypertarget{tsfi.ls.wan.ether}{\tsfi{ls.wan.ether}} & --- & media access \\
+      \hypertarget{tsfi.ls.wan.ip}{\tsfi{ls.wan.ip}} & --- & access to the Internet layer \\
+      \hypertarget{tsfi.ls.wan.tcp}{\tsfi{ls.wan.tcp}} & --- & access to the transport layer \\
+      \hypertarget{tsfi.ls.wan.ntp}{\tsfi{ls.wan.ntp}} & client & Obtaining time \\
+      \hypertarget{tsfi.ls.wan.dhcp}{\tsfi{ls.wan.dhcp}} & client & Obtaining IP addresses in the WAN \\
+      \hypertarget{tsfi.ls.wan.udp}{\tsfi{ls.wan.udp}} & --- & access to the transport layer \\
+      \hypertarget{tsfi.ls.wan.ipsec}{\tsfi{ls.wan.ipsec}} & --- & VPN data traffic\\
       \bottomrule
     \end{tabularx}
-    \caption{Logische Schnittstellen an \tsfi{ls.wan}}
+    \caption{Logical Interfaces on \tsfi{ls.wan}}
     \label{tab:tsfi.ls.wan}
   \end{table}
 
