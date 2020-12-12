@@ -50,14 +50,15 @@
 % in sfr_definitions.tex aufgelöst.
 % Das optionale Argument für \sfr{}: Ergänzung (1), (2) z.B. für
 % FDP_ACC, FDP_ACF mit vielen Unterpunkten.
-\newcommand{\sfr}[2][]{\formatsfr{\directlua{getSfr("#2")}#1}}
 \newcommand{\sfrplain}[2][]{\directlua{getSfr("#2")}#1}
-\newcommand{\sfrtext}[1]{\directlua{getSfrText("#1")}}
-\newcommand{\sfrlink}[2][]{\hyperlink{\directlua{removeSfrSubComponent("#2")}}{\sfr[#1]{#2}}}
-% Formatierung der SFR. Kann in seltenen Fällen direkt aufgerufen
-% werden (z.B. bei Komponenten-Definitionen, die nicht direkt SFR
-% sind).
 \newcommand{\formatsfr}[1]{{\secitemformat{#1}}}
+\newcommand{\sfr}[2][]{\formatsfr{\sfrplain[#1]{#2}}}
+\newcommand{\sfrlink}[2][]{\hyperlink{\sfrmain{#2}}{\sfr[#1]{#2}}}
+\newcommand{\sfrmain}[1]{\directlua{removeSfrSubComponent("#1")}}
+
+\newcommand{\sfrtext}[1]{\directlua{getSfrText("#1")}}
+\newcommand{\sfrindex}[1]{\textsmaller[1.5]{\secitemfont{\sfrplain{\sfrmain{#1}}}}}
+
 % Makro für umgesetzte SFR, kann z.B. am Ende einer Ablaufbeschreibung 
 % verwendet werden.
 \newcommand{\umgesetztesfr}[1]{\enfsupsfrtable{Umgesetzte SFR}{#1}}
