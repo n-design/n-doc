@@ -74,9 +74,10 @@
 \newcommand{\modulSchnittstelleProvided}[1]{\hrefparagraph{#1}{\tdsplain{#1}\,\provided{}}}
 \newcommand{\modulSchnittstelleRequired}[1]{\paragraph{\tdsplain{#1}\,\required{}}}
 
-\newcommand{\generatesfrtable}[1]{\noindent{}Das Modul erfüllt die
-  Anforderungen, die durch die SFR in \tableref{tab:#1.sfr} an den EVG
-  gestellt werden. Das Modul ist \modulStatus{#1} für den TOE.\par{}
+\newcommand{\generatesfrtable}[1]{%
+  \noindent{}Das Modul erfüllt die Anforderungen, die durch die SFR in
+  \tableref{tab:#1.sfr} an den EVG gestellt werden. Das Modul ist
+  \modulStatus{#1} für den TOE.\par{}
   \captionsetup[table]{list=no}
   \begin{table}[htb]
     \centering
