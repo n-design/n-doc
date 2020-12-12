@@ -7,6 +7,10 @@
 \newcommand{\tsfipurpose}[1]{\hrefsubsubsection{#1.terms}{Zweck und Nutzungsbedingungen}}
 \newcommand{\tsfiparameters}[1]{\hrefsubsubsection{#1.params}{Parameter}}
 
+% Prints mapping tables 
+\newcommand{\printSfToTsfi}[1]{\directlua{print_sf_to_tsfi_table("#1")}}
+\newcommand{\printTsfiToSf}[1]{\directlua{print_tsfi_to_sf_table("#1")}}
+
 
 \newcommand{\aufrufschnittstellen}[1]{\minisec{Schnittstellen der Sicherheitsfunktion}%
   Der Aufruf der Sicherheitsfunktion \secfunc{#1} erfolgt über: \printSfToTsfi{#1}.\par{}}
@@ -66,6 +70,7 @@
     \label{tab:sfr2tsfi}
   \end{longtable}
 }
+
 
 \newcommand{\printTsfiForSfrRows}[1]{\directlua{print_tsfi_for_sfr_rows("#1")}}
 

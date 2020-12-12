@@ -17,11 +17,11 @@ den Sicherheitsanforderungen, die dieses Security Target in den Abschnitten
 Die Sicherheitsfunktion \secfunc{sf.vpn} erstellt sichere Kommunikationskanäle
 zwischen dem TOE und einem entfernten, vertrauenswürdigen IT-Produkt.
 
-\umgesetztesfr{\sfrlink{ftp_itc.1/vpn} & \sfrlink{fcs_ckm.2/ike}}
+\implementedsfr{\sfrlink{ftp_itc.1/vpn} & \sfrlink{fcs_ckm.2/ike}}
 
 Zertifikate werden mathematisch geprüft
 
-\umgesetztesfr{\sfrlink{fpt_tdc.1/zert}}
+\implementedsfr{\sfrlink{fpt_tdc.1/zert}}
 
 \hrefsection{sf.networkservices}{\secfuncheadline{sf.networkservices}}
 
@@ -32,7 +32,7 @@ vertrauenswürdigen NTP-Server bezogen. Dabei wird NTP in Version~4 verwendet
 TOE darf maximal 1~Stunde betragen. Der TOE verwendet die Uhrzeit hauptsächlich,
 um die Gültigkeit von Zertifikaten zu prüfen.
 
-\umgesetztesfr{\sfrlink{fpt_stm.1}}
+\implementedsfr{\sfrlink{fpt_stm.1}}
 
 \hrefsection{sf.selfprotection}{\secfuncheadline{sf.selfprotection}}
 
@@ -48,7 +48,7 @@ Löschen wird durch aktives Überschreiben der entsprechenden
 Speicherbereiche mit einer Konstante oder pseudo-zufälligen Werten
 umgesetzt.
 
-\umgesetztesfr{\sfrlink{fdp_rip.1}}
+\implementedsfr{\sfrlink{fdp_rip.1}}
 
 Der TOE kann eine Reihe von Selbsttests ausführen, um seine
 Integrität und die Funktionsfähigkeit seiner eigenen
@@ -57,7 +57,7 @@ Ausprägung werden die Selbsttests entweder beim Systemstart, während
 des normalen Betriebs oder zu beiden Gelegenheiten ausgeführt. Der
 Administrator kann die Selbsttests ebenfalls starten.
 
-\umgesetztesfr{\sfrlink{fpt_tst.1}}
+\implementedsfr{\sfrlink{fpt_tst.1}}
 
 
 \hrefsection{sf.administration}{\secfuncheadline{sf.administration}}
@@ -82,7 +82,7 @@ Administrators prüft.
 Der TOE informiert den Administrator über kritische Betriebszustände über die
 LEDs an der Gehäusefront (\intf{PS.LED}).
 
-\umgesetztesfr{\sfrlink{ftp_trp.1/admin}}
+\implementedsfr{\sfrlink{ftp_trp.1/admin}}
 
 \hrefsection{sf.cryptographicservices}{\secfuncheadline{sf.cryptographicservices}}
 
@@ -96,7 +96,7 @@ können.
 Die Sicherheitsfunktionalität stellt alle Algorithmen zur Erzeugung, Verteilung
 und Vernichtung von Schlüsseln zur Verfügung.
 
-\umgesetztesfr{\sfrlink{fcs_ckm.1} & \sfrlink{fcs_ckm.4}}
+\implementedsfr{\sfrlink{fcs_ckm.1} & \sfrlink{fcs_ckm.4}}
 
 \minisec{Zufallszahlen}
 
@@ -105,7 +105,7 @@ hoher Qualität zu erzeugen. Die so erzeugten Zufallszahlen werden für
 verschiedene Zwecke verwendet, u.a. beim TLS-Verbindungsaufbau
 (\sfrlink{fcs_ckm.1} und \sfrlink{fcs_cop.1/tls.aes})
 
-\umgesetztesfr{\sfrlink{fcs_rng.1/hashdrbg}}
+\implementedsfr{\sfrlink{fcs_rng.1/hashdrbg}}
 
 \minisec{Hash-Algorithmen}
 
@@ -113,14 +113,14 @@ Die Funktion bietet Implementierungen für die Hash-Algorithmen
 SHA-256 und SHA-512. Im Kontext von TLS implementiert der TOE außerdem
 SHA-384 für bestimmte Cipher Suites.
 
-\umgesetztesfr{\sfrlink{fcs_cop.1/hash}}
+\implementedsfr{\sfrlink{fcs_cop.1/hash}}
 
 \minisec{HMAC Generierung}
 
 Die Funktion bietet darüber hinaus Algorithmen für die HMAC-Generierung, wobei
 der genannte Hash-Algorithmus zum Tragen kommt: HMAC-SHA-256(-128).
 
-\umgesetztesfr{\sfrlink{fcs_cop.1/hmac}}
+\implementedsfr{\sfrlink{fcs_cop.1/hmac}}
 
 \hrefsection{sf.tls}{\secfuncheadline{sf.tls}}
 
@@ -130,13 +130,13 @@ Web-Browswer des Administrators sicher. Die genaue Verwendung der
 TLS-Verbindungen und eine Auflistung der Kommunikationspartner befindet sich in
 Tabelle~\vref{tab:tlsconnections}.
 
-\umgesetztesfr{\sfrlink{ftp_itc.1/tls} & \sfrlink{fcs_cop.1/tls.aes} & \sfrlink{fcs_ckm.2/tls}}
+\implementedsfr{\sfrlink{ftp_itc.1/tls} & \sfrlink{fcs_cop.1/tls.aes} & \sfrlink{fcs_ckm.2/tls}}
 
 Die Sicherheitsfunktion \secfunc{sf.cryptographicservices} bietet Algorithmen
 zur Verifikation von Signaturen. X.509-Zertifikate werden unter Verwendung des
 RSA-PKCS1-v1.5- bzw RSASSA-PSS-Algorithmus geprüft.
 
-\umgesetztesfr{\sfrlink{fpt_tdc.1/tls.zert} & \sfrlink{fcs_cop.1/tls.auth}}
+\implementedsfr{\sfrlink{fpt_tdc.1/tls.zert} & \sfrlink{fcs_cop.1/tls.auth}}
 
 Für die Generierung von Nonces und Schlüsseln verwendet der TOE den Hash\_DRBG
 Zufallsgenerator aus \secfunclink{sf.cryptographicservices}. Session Keys werden

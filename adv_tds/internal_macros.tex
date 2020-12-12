@@ -18,7 +18,7 @@
 \newcommand{\sfrlinknoindex}[2][]{%
   \hyperlink{\directlua{removeSfrSubComponent("#2")}}{\sfr[#1]{#2}}}
 
-\newcommand{\modulStatus}[1]{\getModuleStatus{#1}}
+\newcommand{\getModuleStatus}[1]{\directlua{get_module_status("#1")}}
 
 \newcommand{\printModuleToSfrTable}[2][enf]{\directlua{print_module_to_sfr_table("#2", "#1")}}
 

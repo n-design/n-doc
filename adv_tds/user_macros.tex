@@ -18,10 +18,10 @@
 
 
 % Makro für "Provided"
-\newcommand{\provided}{\ccAttribute{(Provided)}}
+\newcommand{\provided}{\secitemfont{(Provided)}}
 
 % Makro für "Required"
-\newcommand{\required}{\ccAttribute{(Required)}}
+\newcommand{\required}{\secitemfont{(Required)}}
 
 % Standardisiertes Einbinden der Grafik eines Subsystems
 % Argument 1: Label der Grafik für Referenzen auf das Bild
@@ -77,7 +77,7 @@
 \newcommand{\generatesfrtable}[1]{%
   \noindent{}Das Modul erfüllt die Anforderungen, die durch die SFR in
   \tableref{tab:#1.sfr} an den EVG gestellt werden. Das Modul ist
-  \modulStatus{#1} für den TOE.\par{}
+  \getModuleStatus{#1} für den TOE.\par{}
   \captionsetup[table]{list=no}
   \begin{table}[htb]
     \centering

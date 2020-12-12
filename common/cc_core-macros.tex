@@ -4,67 +4,74 @@
 \newcommand{\bsicertid}{BSI-DSZ-CC-xyz}
 \newcommand{\bsippid}{BSI-CC-PP-00zz}
 
-% Makro für feste CC-Begriffe wie Enforcing, Required
-% Wird nicht vom Autor direkt verwendet, s. dazu
-% die folgenden Makros, die direkt den Text setzen.
-\newcommand{\ccAttribute}[1]{{\small #1}}
-% Makro für "Enforcing"
+% Macro for "Enforcing"
 \newcommand{\enfc}{\secitemfont{SFR-enforcing}}
-% Makro für "Supporting"
+% Macro for "Supporting"
 \newcommand{\supp}{\secitemfont{SFR-supporting}}
-% Makro für "non-Interfering"
+% Macro for "non-Interfering"
 \newcommand{\noninterfering}{\secitemfont{non-interfering}}
-% Makro für "non-TSF"
+% Macro for "non-TSF"
 \newcommand{\nontsf}{\secitemfont{non-TSF}}
 
-% Makros für die Auflösung und Darstellung von Security
-% Objectives. Der übergebene Parameter wird anhand der Daten in
-% obj.csv aufgelöst.
+% Macros for resolving names of security objectives. The parameter references
+% the database entries defined in common/db/obj.csv
 \newcommand{\obj}[1]{\secitemformat{\directlua{getObjective("#1")}}}
 \newcommand{\objtext}[1]{\directlua{getObjectiveText("#1")}}
 \newcommand{\objplain}[1]{\directlua{getObjective("#1")}}
 \newcommand{\objlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\obj{#1}}}
 
-% Makros für die Auflösung und Darstellung von Security
-% Problems. Der übergebene Parameter wird anhand der Daten in
-% spd.csv aufgelöst.
+% Macros for resolving names of security problems. The parameter references
+% the database entries defined in common/db/spd.csv
 \newcommand{\spd}[1]{\secitemformat{\directlua{getSpd("#1")}}}
 \newcommand{\spdtext}[1]{\directlua{getSpdText("#1")}}
 \newcommand{\spdsource}[1]{\directlua{getSpdSource("#1")}}
 \newcommand{\spdlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\spd{#1}}}
 
-% Makros für die Auflösung und Darstellung von Subjekten und Objekten. Der
-% übergebene Parameter wird anhand der Daten in ubjobj.csv aufgelöst.
+% Macros for resolving names of subjects and objects (in adv_tds). The parameter
+% references the database entries defined in common/db/subjobj.csv
 \newcommand{\subjobj}[1]{\secitemformat{\directlua{getSubjobj("#1")}}}
 \newcommand{\subjobjtext}[1]{\directlua{getSubjobjText("#1")}}
 \newcommand{\subjobjlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\subjobj{#1}}}
 
 %% ------------------------------------------------------------
 %%
-%% Makros für
+%% Macros for
 %% Security Functional Requirements (SFR)
 %%
 
-% Makro für die Auflösung und Darstellung von Security Functional
-% Requirements (SFR). Der übergebene Parameter wird anhand der Daten
-% in sfr_definitions.tex aufgelöst.
-% Das optionale Argument für \sfr{}: Ergänzung (1), (2) z.B. für
-% FDP_ACC, FDP_ACF mit vielen Unterpunkten.
+% Macros for resolving names of security objectives. The required parameter
+% references the database entries defined in common/db/sfr.csv. The optional
+% parameter is used to specify sub-elements: FDP_ACF.1.2(2)
+
+% Prints the SFR with no formatting
 \newcommand{\sfrplain}[2][]{\directlua{getSfr("#2")}#1}
+
+% Formats an SFR. Macro is seldom used by the user.
 \newcommand{\formatsfr}[1]{{\secitemformat{#1}}}
+
+% Prints the SFR and formats the SFR.
 \newcommand{\sfr}[2][]{\formatsfr{\sfrplain[#1]{#2}}}
+
+% Prints the SFR and formats the SFR. Also creates a Hyperlink
 \newcommand{\sfrlink}[2][]{\hyperlink{\sfrmain{#2}}{\sfr[#1]{#2}}}
+
+% Prints the SFR without its sub-components.
+% FDP_ACF.1.2 -> FDP_ACF.1
 \newcommand{\sfrmain}[1]{\directlua{removeSfrSubComponent("#1")}}
 
+% Prints the text associated with the SFR
 \newcommand{\sfrtext}[1]{\directlua{getSfrText("#1")}}
+
+% Used for printing indices. Not intended for the end user
 \newcommand{\sfrindex}[1]{\textsmaller[1.5]{\secitemfont{\sfrplain{\sfrmain{#1}}}}}
 
-% Makro für umgesetzte SFR, kann z.B. am Ende einer Ablaufbeschreibung 
-% verwendet werden.
-\newcommand{\umgesetztesfr}[1]{\enfsupsfrtable{Umgesetzte SFR}{#1}}
-\newcommand{\unterstuetztesfr}[1]{\supportedsfr{#1}}
+% Macro for implemented/supported SFR. Paramter is in form of table lines, with
+% three items max. Can be used during process descriptions in adv_tds or in
+% ase_tss
+\newcommand{\implementedsfr}[1]{\enfsupsfrtable{Umgesetzte SFR}{#1}}
 \newcommand{\supportedsfr}[1]{\enfsupsfrtable{Unterstützte SFR}{#1}}
 
+% Not to be used by the user
 \newcommand{\enfsupsfrtable}[2]{
   \begin{flushright}
     \minibox[frame,l,t]{{\small \textsf{#1}}\\
@@ -73,51 +80,49 @@
       \end{tabular}}
   \end{flushright}}
 
-\newcommand{\getModuleStatus}[1]{\directlua{get_module_status("#1")}}
-
-\newcommand{\checkSfrReferences}{\directlua{checkSfrReferences()}}
-
 %% ------------------------------------------------------------
 %%
-%% Makros für
+%% Macros for
 %% TOE Security Function Interfaces (TSFI)
 %%
 
-% Makros für die Namen der Schnittstellen, die in OPB2.1 eine Rolle
-% spielen. 
-\newcommand{\ls}{\tsfilink{ls}}
-
-% Formatierung der TSFI wie LS.VPN, LS.LAN etc.
+% Macros for resolving names of TSFI. The parameter
+% references the database entries defined in common/db/tsfi.csv
 \newcommand{\formatintf}[1]{{\ccfont #1}}
 \newcommand{\intf}[1]{\secitemformat{#1}}
 \newcommand{\tsfi}[1]{\intf{\directlua{getTsfi("#1")}}}
 \newcommand{\tsfilink}[1]{\hyperlink{tsfi.#1}{\tsfi{#1}}}
-\newcommand{\printSfToTsfi}[1]{\directlua{print_sf_to_tsfi_table("#1")}}
-\newcommand{\printTsfiToSf}[1]{\directlua{print_tsfi_to_sf_table("#1")}}
 
 %% ------------------------------------------------------------
 %%
-%% Makros für
+%% Macros for
 %% TOE Security Functions (SF)
 %%
 
-% Makros für die Sicherheitsfunktionen. Der übergebene Parameter wird
-% anhand der Daten in sf_definitions.tex aufgelöst.
+% Macros for resolving names of TOE Security Functions (SF). The parameter
+% references the database entries defined in common/db/sf.csv
 \newcommand{\secfunc}[1]{\formatsecfunc{\directlua{getSecfunc("#1")}}}
 \newcommand{\secfuncplain}[1]{\directlua{getSecfunc("#1")}}
 \newcommand{\secfunctext}[1]{\directlua{getSecfuncText("#1")}}
 \newcommand{\secfunclink}[1]{\hyperlink{\directlua{toLower("#1")}}{\secfunc{#1}}}
 \newcommand{\formatsecfunc}[1]{{\secitemformat{#1}}}
-\newcommand{\secfuncheadline}[1]{\texorpdfstring{\secfunctext{#1}\hspace{1em}(\secitemfont{\secfuncplain{#1}})}{\secfunctext{#1} (\secfuncplain{#1})}}
 
-% Makro für den Verweis auf Subsysteme, Module und Schnittstellen, die im
-% TDS definifiert werden.
+% Creates a headline based on a key in sf.csv
+\newcommand{\secfuncheadline}[1]{\texorpdfstring%
+  {\secfunctext{#1}\hspace{1em}(\secitemfont{\secfuncplain{#1}})}%
+  {\secfunctext{#1} (\secfuncplain{#1})}}
+
+% Macros for referencing TDS subsystems, modules and interfaces.  The obligatory
+% parameter denotes the key defined in
+% common/db/{subsystems,modules,interfaces}.csv, e.g.
+% "sub.vpn", "mod.vpn.core" or "int.vpn.core.connect"
 \newcommand{\tds}[2][no]{\secitemformat{\directlua{replacelabel("#2", "#1")}}}
 \newcommand{\tdsplain}[2][no]{\directlua{replacelabel("#2", "#1")}}
 \newcommand{\tdsplaintext}[2][no]{\directlua{replacelabelplain("#2", "#1")}}
-% Makro für Links auf Subsysteme/Module. Ist nur für das TDS relevant.
-% Wird im TDS so umdefiniert, dass die Link-Funktion dazukommt.
-% Für alle anderen Dokumente wird stattdessen das \tds Makto aufgerufen.
+
+% Creates a link to a TDS entity (see above). Usually only relevant within TDS.
+% Defined here for compatibility reasons. Macro is redefined in
+% adv_tds/user_macros to produce a hyperlink
 \newcommand{\tdslink}[2][no]{\tds[#1]{#2}}
 
 
