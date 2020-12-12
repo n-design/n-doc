@@ -22,8 +22,8 @@
 \newcommand{\ppselected}[1]{\ppformat{\textit{#1}}}
 
 \renewcommand{\sfrlink}[2][]{%
-  \index{\sfrplain{\directlua{removeSfrSubComponent("#2")}}@\sfr{\directlua{removeSfrSubComponent("#2")}}}%
-  \hyperlink{\directlua{removeSfrSubComponent("#2")}}{\sfr[#1]{#2}}}
+  \index{\sfrmain{#2}@\sfrindex{#2}}%
+  \hyperlink{\sfrmain{#2}}{\sfr[#1]{#2}}}
 
 \newcommand{\sfrlinknoindex}[2][]{%
   \hyperlink{\directlua{removeSfrSubComponent("#2")}}{\sfr[#1]{#2}}}

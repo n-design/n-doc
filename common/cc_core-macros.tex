@@ -57,6 +57,8 @@
 \newcommand{\sfrmain}[1]{\directlua{removeSfrSubComponent("#1")}}
 
 \newcommand{\sfrtext}[1]{\directlua{getSfrText("#1")}}
+\newcommand{\sfrindex}[1]{\textsmaller[1.5]{\secitemfont{\sfrplain{\sfrmain{#1}}}}}
+
 % Makro für umgesetzte SFR, kann z.B. am Ende einer Ablaufbeschreibung 
 % verwendet werden.
 \newcommand{\umgesetztesfr}[1]{\enfsupsfrtable{Umgesetzte SFR}{#1}}
