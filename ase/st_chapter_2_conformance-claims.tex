@@ -1,31 +1,33 @@
-\hrefchapter{conf}{Postulat der Übereinstimmung} %{Conformance Claims}
+\hrefchapter{conf}{Conformance Claims}
 
-\hrefsection{conf.cc}{Konformität zu Common
-  Criteria} %{Common Criteria Conformance Claim}
+\hrefsection{conf.cc}{Common Criteria Conformance Claim}
 
-Das Security Target wurde gemäß Common Criteria, Version~3.1, Revision~5, erstellt und ist
+This Security Target claims conformance to the Common Criteria for
+Information Technology Security Evaluation version 3.1 according to Common
+Criteria, Version~3.1, Revision~5 and is
 
 \begin{itemize}
-\item CC Part 2 \autocite{CCPart2} erweitert (extended) und
-\item CC Part 3 \autocite{CCPart3} konform (conformant).
+\item CC Part 2 \autocite{CCPart2} extended and
+\item CC Part 3 \autocite{CCPart3} conformant.
 \end{itemize}
 
-\hrefsection{conf.pp}{Konformität zu Schutzprofilen}
+\hrefsection{conf.pp}{Protection Profile Conformance Claim}
 
-Dieses Security Target behauptet strikte Konformität zu:
+This Security Target claims strict conformance to
 
 \begin{itemize}
 \item "`\citetitle{\thispp}"' \autocite{\thispp}
 \end{itemize}
 
-\noindent{}Dieses Security Target behauptet keine Konformität zu weiteren Schutzprofilen.
+\noindent{}This Security Target claims no conformance to any other Protection
+Profile.
 
-\hrefsection{conf.package}{Konformität zu Paketen} %{Package Conformance Claim}
+\hrefsection{conf.package}{Package Conformance Claim}
 
-Das Schutzprofil fordert die Vertrauenswürdigkeitsstufe EAL3, erweitert um die
-Komponenten in \tableref{tab:conf.eal3plus}. Dieses Security Target behauptet
-Konformität zu genau diesen Paketen. Diese Konformität wird als „EAL3+“
-bezeichnet und ist somit „package-augmented“ gegenüber EAL3.
+The Protection Profile requires assurance level EAL3, augmented by the
+components listed in \tableref{tab:conf.eal3plus}. This Security Target claims
+Conformance to exactly these packages. This conformance is refered to as „EAL3+“
+and is package-augmented to EAL3.
 
 \begin{table}[htbp]
   \centering
@@ -33,46 +35,44 @@ bezeichnet und ist somit „package-augmented“ gegenüber EAL3.
     \toprule
     Paket & Erläuterung \\
     \midrule
-    \formatsfr{AVA\_VAN.5} & Resistenz gegen Angriffspotential „Enhanced-Basic“\\
-    \formatsfr{ADV\_FSP.4} & Vollständige Funktionale Spezifikation\\
-    \formatsfr{ADV\_TDS.3} & Einfaches Modulares Design\\
-    \formatsfr{ADV\_IMP.1} & TSF-Implementierung\\
-    \formatsfr{ALC\_TAT.1} & Wohldefinierte Entwicklungswerkzeuge\\
-    \formatsfr{ALC\_FLR.2} & Verfahren für Problemreports\\
+    \formatsfr{AVA\_VAN.5} & Resistance to attack potential „Enhanced-Basic“\\
+    \formatsfr{ADV\_FSP.4} & Functional specification with complete summary\\
+    \formatsfr{ADV\_TDS.3} & Basic modular design\\
+    \formatsfr{ADV\_IMP.1} & Implementation representation of the TSF\\
+    \formatsfr{ALC\_TAT.1} & Well-defined development tools\\
+    \formatsfr{ALC\_FLR.2} & Flaw reporting procedures\\
     \bottomrule
   \end{tabularx}
-  \caption{Ergänzungen zur Vertrauenswürdigkeit EAL3}
+  \caption{Augmentation of assurance level EAL3}
   \label{tab:conf.eal3plus}
 \end{table}
 
-\hrefsection{conf.rationale}{Erklärung der Konformität} %{Conformance Rationale}
+\hrefsection{conf.rationale}{Conformance Rationale}
 
-Dieses Security Target behauptet strikte Konformität zu \autocite{\thispp}. Durch diese
-Feststellung sind Widersprüche und Inkonsistenzen zu anderen Schutzprofilen
-ausgeschlossen. Diese Behauptung basiert auf der Betrachtung des TOE Typs, der
-Definition des Sicherheitsproblems und schließlich der Sicherheitsziele sowie
-der Sicherheitsanforderungen. Weiterhin behauptet dieses Security Target
-Konformität zu allen Security Assurance Requirements (SARs), die von
-\autocite{\thispp} gefordert werden.
+This Security Target claims strict Conformance to \autocite{\thispp}. By this
+claim there are no contradictions to and inconsistencies with other Protection
+Profiles. This claim is based on the description of the TOE type, the definition
+of the security problem and the security requirements. Furthermore, this
+Security Target claims Conformance to all Security Assurance Requirements (SARs)
+that are required by \autocite{\thispp}.
 
 \begin{description}
 
-\item[TOE Typ] Das Schutzprofil fordert, dass der TOE ein VPN Router ist. Der
-  vorliegende TOE ist ein VPN Router.
+\item[TOE Type] The Protection Profile requires that the TOE be a VPN
+  router. The present TOE is a VPN router.
   
-\item[Definition des Sicherheitsproblems] Die Definition des
-  Sicherheitsproblems, d.\,h. die Bedrohungen, Annahmen und die
-  organisatorischen Sicherheitspolitiken sind direkt aus dem Schutzprofil
-  \citepp{} übernommen.
+\item[Definition of the security problem] The definition of the security
+  problem, i.\,e. the threats, assumptions and organizational security policies
+  are adopted from the Protection Profile \citepp{}.
   
-\item[Sicherheitsziele und Sicherheitsanforderungen] Die Sicherheitsziele und
-  Sicherheitsanforderungen sind dem Schutzprofil \citepp{}
-  entnommen. Die Operationen an den SFR sind deutlich gekennzeichnet.
+\item[Objectives and Requirements] The security objectives and requirements are
+  adopted from the Protection Profile. The operations fulfilled by this Security
+  Target are marked clearly.
 \end{description}
 
-\chapterref{comp} bescheibt die über CC~Teil~2 \autocite{CCPart2} hinausgehenden
-funktionalen Anforderungen an die Vertrauenswürdigkeit. Es werden keine
-Anforderungen definiert, die über CC~Teil~3 \autocite{CCPart3} hinausgehen.
+\chapterref{comp} describes the functional requirement extending CC~Part~2
+\autocite{CCPart2}. There are no requirements that extend CC~Part~3
+\autocite{CCPart3}.
 
 %%% Local Variables:
 %%% mode: latex
