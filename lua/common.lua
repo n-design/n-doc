@@ -5,6 +5,11 @@ function common.replaceUnderscore(key)
    return result
 end
 
+function common.remove_smart_hyphen(key)
+   local result = string.gsub(key, '\\%-', '') -- I have no idea why this works.
+   return result
+end
+
 function common.get_by_query_key(querykey, key)
    local theKey = string.lower(key)
    local result = _G.db_core.read_from_db(querykey, {theKey})
