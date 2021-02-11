@@ -34,6 +34,7 @@
   \ifthenelse{\equal{#1}{c}}{ \autocite{rfc#2}}{}}
 
 \newcommand{\nounderscore}[1]{\directlua{replaceUnderscore("#1")}}
+\newcommand{\nohyphen}[1]{\directlua{remove_smart_hyphen([[#1]])}}
 
 % Makro für Schlüsselwörter, z.B. Konfigurationsparameter aus der
 % Admin-Anwendung.  Vieles, was man ansonsten in Anführungszeichen
@@ -58,12 +59,12 @@
 \newcommand{\appendixref}[1]{\hyperref[#1]{Anhang~\ref*{#1}}}
 
 % Überschriften, die direkt den Anker für einen Hyperlink enthalten
-\newcommand{\hrefchapter}[2]{\hypertarget{#1}{\chapter{#2}\label{#1}}}
-\newcommand{\hrefsection}[2]{\hypertarget{#1}{\section{#2}\label{#1}}}
-\newcommand{\hrefsubsection}[2]{\hypertarget{#1}{\subsection{#2}\label{#1}}}
-\newcommand{\hrefsubsubsection}[2]{\hypertarget{#1}{\subsubsection{#2}\label{#1}}}
-\newcommand{\hrefparagraph}[2]{\hypertarget{#1}{\paragraph{#2}\label{#1}}}
-\newcommand{\hrefsubparagraph}[2]{\hypertarget{#1}{\subparagraph{#2}\label{#1}}}
+\newcommand{\hrefchapter}[2]{\hypertarget{#1}{\chapter{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
+\newcommand{\hrefsection}[2]{\hypertarget{#1}{\section{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
+\newcommand{\hrefsubsection}[2]{\hypertarget{#1}{\subsection{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
+\newcommand{\hrefsubsubsection}[2]{\hypertarget{#1}{\subsubsection{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
+\newcommand{\hrefparagraph}[2]{\hypertarget{#1}{\paragraph{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
+\newcommand{\hrefsubparagraph}[2]{\hypertarget{#1}{\subparagraph{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
 
 
 % Allgemeines Format für Begriffe aus der CC:

@@ -11,6 +11,10 @@ function testbridge.test_replacelabel()
    bridge_cc_core.replacelabel("mod.tls.core", "fq", tex.expected("TLS-Server::\\-Core"))
 end
 
+function testbridge.test_replacelabelplain()
+   bridge_cc_core.replacelabelplain("mod.tls.core", "fq", tex.expected("TLS-Server::Core"))
+end
+
 function testbridge.test_get_module_status()
    bridge_cc_core.get_module_status("mod.tls.core", tex.expected("\\enfc{}"))
    bridge_cc_core.get_module_status("mod.signservice.core", tex.expected("\\nontsf{}"))

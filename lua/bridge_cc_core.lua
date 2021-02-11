@@ -13,6 +13,11 @@ function bridge_cc_core.replacelabel(key, fullyq, tex)
    tex.sprint(replacedlabel)
 end
 
+function bridge_cc_core.replacelabelplain(key, fullyq, tex)
+   replacedlabel = cc_core.replacelabel(key, fq)
+   tex.sprint(string.gsub(replacedlabel, '\\%-', ''))
+end
+
 function bridge_cc_core.get_module_status(key, tex)
    status = cc_core.get_module_status(key)
    tex.sprint(status)

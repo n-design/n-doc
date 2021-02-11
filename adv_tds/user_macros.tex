@@ -44,17 +44,17 @@
 %% Notiz zur Implementierung: Hier müssen direkte Lua-Aufrufe stehen, kein
 %% \tdsplain{} Makro, da sonst die unaufgelösten Strings in die PDF-Bookmarks
 %% übernommen werden.
-\newcommand{\subsystemkapitel}[1]{\clearpage\hrefsection{#1}{\texorpdfstring{Subsystem \secitemfont{\directlua{replacelabel("#1", "no")}}}{Subsystem \directlua{replacelabel("#1", "no")}}}}
+\newcommand{\subsystemkapitel}[1]{\clearpage\hrefsection{#1}{Subsystem \texorpdfstring{\secitemfont{\tdsplain{#1}}}{\directlua{replacelabelplain("#1", "no")}}}}
 \newcommand{\subsystembeschreibung}[1]{\subsection*{Beschreibung}\label{#1}}
 \newcommand{\subsystemsfr}[1]{\subsection*{Umgesetzte SFR}\label{{#1}}}
 \newcommand{\subsysteminteract}[1]{\subsection*{Interaktion mit anderen Subsystemen}\label{#1}}
-\newcommand{\modulefuersubsystemkapitel}[2]{\clearpage\section{\texorpdfstring{Module für Subsystem \secitemfont{\directlua{replacelabel("#2", "no")}}}{Module für Subsystem \directlua{replacelabel("#2", "no")}}}\label{#1}}
+\newcommand{\modulefuersubsystemkapitel}[2]{\clearpage\section{\texorpdfstring{Module für Subsystem \secitemfont{\directlua{replacelabel("#2", "no")}}}{Module für Subsystem \directlua{replacelabelplain("#2", "no")}}}\label{#1}}
 
 %% Fest formulierte Überschriften für das Kapitel Module.
 %% Die Beschreibung jedes Moduls muss genau diese Überschriften enthalten.
 %% zu übergebendes Argument: Das Label (der Hypertextanker) dieses Abschnitts.
 %%
-\newcommand{\moduleKapitel}[1]{\hrefsubsection{#1}{\texorpdfstring{Modul \secitemfont{\directlua{replacelabel("#1", "fq")}}}{\directlua{replacelabel("#1", "x")}}}}
+\newcommand{\moduleKapitel}[1]{\hrefsubsection{#1}{Modul \texorpdfstring{\secitemfont{\directlua{replacelabel("#1", "fq")}}}{\directlua{replacelabelplain("#1", "x")}}}}
   
 \newcommand{\moduleBeschreibung}[1]{\hrefsubsubsection{#1}{Beschreibung}}
 \newcommand{\moduleAblaeufe}[1]{\hrefsubsubsection{#1}{Abläufe des Moduls}}

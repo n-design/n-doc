@@ -13,6 +13,10 @@ function testcommon.test_basis()
    lu.assertEquals(common.replaceUnderscore("FCS_COP.1/AK.Xml"), "FCS\\_COP.1/AK.Xml")
 end
 
+function testcommon.test_remove_smart_hyphen()
+   lu.assertEquals(common.remove_smart_hyphen([[SF.Card\-Ter\-min\-al\-Mgmt]]), "SF.CardTerminalMgmt")
+end
+
 function testcommon.test_generate_label_list_for_tsfi()
    local expected={
     "ls.lan",
