@@ -114,6 +114,7 @@
 % TDS definifiert werden.
 \newcommand{\tds}[2][no]{\secitemformat{\directlua{replacelabel("#2", "#1")}}}
 \newcommand{\tdsplain}[2][no]{\directlua{replacelabel("#2", "#1")}}
+\newcommand{\tdsplaintext}[2][no]{\directlua{replacelabelplain("#2", "#1")}}
 % Makro für Links auf Subsysteme/Module. Ist nur für das TDS relevant.
 % Wird im TDS so umdefiniert, dass die Link-Funktion dazukommt.
 % Für alle anderen Dokumente wird stattdessen das \tds Makto aufgerufen.
