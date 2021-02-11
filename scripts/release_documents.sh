@@ -107,7 +107,7 @@ for doc in "${alldocs[@]}"; do
 done    
 
 last_release=$(git tag --list | grep Auslieferung/ | cut -f 2 -d '/' | sort -n | tail -1)
-this_release=$(printf "%02d" $((10#$last_release + 1)))
+this_release=$(printf "%02d" $(echo "${last_release:-0} + 1" | bc)) #bc because shell arithmetic and octal
 this_release_tag="Auslieferung/$this_release"
 
 # Sanity check
