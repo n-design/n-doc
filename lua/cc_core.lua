@@ -378,20 +378,23 @@ function cc_core.replacelabel(key, fq)
    local typkey, subkey, modkey, intkey = split_at_dot(key)
    local values = {subkey, modkey, intkey}
    local replacedlabel = {}
+   local sub = subkey and cmn.get_relations_by_query_key("sub", values, insert_error)[1]
+   local mod = modkey and cmn.get_relations_by_query_key("mod", values, insert_error)[1]
+   local int = intkey and cmn.get_relations_by_query_key("int", values, insert_error)[1]
    if fq then
-      local sub = subkey and cmn.get_relations_by_query_key("sub", values, insert_error)[1]
-      local mod = modkey and cmn.get_relations_by_query_key("mod", values, insert_error)[1]
-      local int = intkey and cmn.get_relations_by_query_key("int", values, insert_error)[1]
       table.insert(replacedlabel, sub)
       table.insert(replacedlabel, mod and "::\\-")
       table.insert(replacedlabel, mod)
       table.insert(replacedlabel, int and "//\\-")
       table.insert(replacedlabel, int)
    else
-      dbresult = cmn.get_relations_by_query_key(typkey, values)[1]
-      table.insert(replacedlabel, dbresult)
+      local results = {sub, mod, int}
+      local whatvalue = {sub=1, mod=2, int=3}
+      local thekey = whatvalue[typkey]
+      local dbresult = cmn.get_relations_by_query_key(typkey, values)[thekey]
+      table.insert(replacedlabel, results[thekey])
    end
-    result = table.concat(replacedlabel)
+    local result = table.concat(replacedlabel)
     return string.gsub(result, ".*__error__.*", "\\textcolor{red}{".. key .." is undefined}")
 end
 
@@ -410,12 +413,12 @@ end
 -- Ansonsten \nontsf
 --
 function cc_core.get_module_status(key)
-   typkey, subkey, modkey = split_at_dot(key)
-   dbresult = cmn.get_relations_by_query_key("module2sfr", {sub=subkey, mod=modkey, rel="enf"}, cc_core.mapper)
+   local typkey, subkey, modkey = split_at_dot(key)
+   local dbresult = cmn.get_relations_by_query_key("module2sfr", {sub=subkey, mod=modkey, rel="enf"}, cc_core.mapper)
    if dbresult then
       return "\\enfc{}"
    else
-      dbresult = cmn.get_relations_by_query_key("module2sfr", {sub=subkey, mod=modkey, rel="sup"}, cc_core.mapper)
+      local dbresult = cmn.get_relations_by_query_key("module2sfr", {sub=subkey, mod=modkey, rel="sup"}, cc_core.mapper)
       if dbresult then
 	 return "\\supp{}"
       else
@@ -425,8 +428,8 @@ function cc_core.get_module_status(key)
 end
 
 function cc_core.generate_table_sfr_to_module(sfr, relationtype)
-    submod = cmn.get_relations_by_query_key("sfr2module", { sfr=sfr, rel=relationtype })
-    result = {}
+    local submod = cmn.get_relations_by_query_key("sfr2module", { sfr=sfr, rel=relationtype })
+    local result = {}
     for _,v in ipairs(submod) do
         table.insert(result, v)
     end
@@ -434,36 +437,36 @@ function cc_core.generate_table_sfr_to_module(sfr, relationtype)
 end
 
 function cc_core.generate_table_module_to_sfr(key, relationtype, srckey)
-    relationtype = relationtype or "enf"
-    srckey = srckey or "%"
+    local relationtype = relationtype or "enf"
+    local srckey = srckey or "%"
     if srckey == "" then
         srckey = "%"
     end
-    typkey, subkey, modkey = split_at_dot(key)
-    query = "module2sfr"
-    dbresult = cmn.get_relations_by_query_key(query, {sub=subkey, mod=modkey, rel=relationtype, src=srckey})
+    local typkey, subkey, modkey = split_at_dot(key)
+    local query = "module2sfr"
+    local dbresult = cmn.get_relations_by_query_key(query, {sub=subkey, mod=modkey, rel=relationtype, src=srckey})
     return cc_core.check_for_errors_in_lists(dbresult, key)
 end
 
 function cc_core.generate_table_subsys_to_sfr(key, relationtype, srckey)
-    relationtype = relationtype or "enf"
-    srckey = srckey or "%"
-    typkey, subkey = split_at_dot(key)
-    query = "subsystem2sfr"
-    dbresult = cmn.get_relations_by_query_key(query, {sub=subkey, rel=relationtype, src=srckey})
+    local relationtype = relationtype or "enf"
+    local srckey = srckey or "%"
+    local typkey, subkey = split_at_dot(key)
+    local query = "subsystem2sfr"
+    local dbresult = cmn.get_relations_by_query_key(query, {sub=subkey, rel=relationtype, src=srckey})
     return cc_core.check_for_errors_in_lists(dbresult, key)
 end
 
 function cc_core.generate_table_module_to_bundle(key)
-    typkey, subkey, modkey = split_at_dot(key)
-    dbresult = cmn.get_relations_by_query_key("module2bundle", {sub=subkey, mod=modkey})
+    local typkey, subkey, modkey = split_at_dot(key)
+    local dbresult = cmn.get_relations_by_query_key("module2bundle", {sub=subkey, mod=modkey})
     return cc_core.check_for_errors_in_lists(dbresult, key)
 end
 
 function cc_core.map_modules_to_sfr(sfr_label, relation)
-    relation = relation or "enf"
-    modules = cmn.get_relations_by_query_key("sfr2module", {sfr=sfr_label, rel=relation})
-    dbresult = {}
+    local relation = relation or "enf"
+    local modules = cmn.get_relations_by_query_key("sfr2module", {sfr=sfr_label, rel=relation})
+    local dbresult = {}
     for _,v in ipairs(modules) do
         table.insert(dbresult, v)
     end
@@ -479,7 +482,7 @@ function cc_core.check_for_errors_in_lists(result, key)
 end
 
 function cc_core.check_for_errors(replacedlabel, key)
-    result = table.concat(replacedlabel)
+    local result = table.concat(replacedlabel)
     return string.gsub(result, ".*__error__.*", "\\textcolor{red}{".. key .." is undefined}")
 end
 
