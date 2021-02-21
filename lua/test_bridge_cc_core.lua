@@ -6,9 +6,34 @@ testbridge = {}
 
 bridge_cc_core = require("bridge_cc_core")
 
+function testbridge.test_replacelabel_subsystem()
+   bridge_cc_core.replacelabel("sub.tls", "fq", tex.expected("TLS-Server"))
+   bridge_cc_core.replacelabel("sub.tls", "no", tex.expected("TLS-Server"))
+end
 
-function testbridge.test_replacelabel()
+function testbridge.test_replacelabel_subsystem_failure()
+   bridge_cc_core.replacelabel("sub.xxx", "fq", tex.expected("\\textcolor{red}{sub.xxx is undefined}"))
+   bridge_cc_core.replacelabel("sub.xxx", "no", tex.expected("\\textcolor{red}{sub.xxx is undefined}"))
+end
+
+function testbridge.test_replacelabel_module()
    bridge_cc_core.replacelabel("mod.tls.core", "fq", tex.expected("TLS-Server::\\-Core"))
+   bridge_cc_core.replacelabel("mod.tls.core", "no", tex.expected("Core"))
+end
+
+function testbridge.test_replacelabel_module_failure()
+   bridge_cc_core.replacelabel("mod.tls.xxx", "fq", tex.expected("\\textcolor{red}{mod.tls.xxx is undefined}"))
+   bridge_cc_core.replacelabel("mod.tls.xxx", "no", tex.expected("\\textcolor{red}{mod.tls.xxx is undefined}"))
+end
+
+function testbridge.test_replacelabel_interface()
+   bridge_cc_core.replacelabel("int.tls.core.accept", "fq", tex.expected("TLS-Server::\\-Core//\\-TLS-Connection-Accept"))
+   bridge_cc_core.replacelabel("int.tls.core.accept", "no", tex.expected("TLS-Connection-Accept"))
+end
+
+function testbridge.test_replacelabel_interface_failure()
+   bridge_cc_core.replacelabel("int.tls.core.xxx", "fq", tex.expected("\\textcolor{red}{int.tls.core.xxx is undefined}"))
+   bridge_cc_core.replacelabel("int.tls.core.xxx", "no", tex.expected("\\textcolor{red}{int.tls.core.xxx is undefined}"))
 end
 
 function testbridge.test_replacelabelplain()

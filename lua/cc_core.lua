@@ -378,18 +378,21 @@ function cc_core.replacelabel(key, fq)
    local typkey, subkey, modkey, intkey = split_at_dot(key)
    local values = {subkey, modkey, intkey}
    local replacedlabel = {}
+   local sub = subkey and cmn.get_relations_by_query_key("sub", values, insert_error)[1]
+   local mod = modkey and cmn.get_relations_by_query_key("mod", values, insert_error)[1]
+   local int = intkey and cmn.get_relations_by_query_key("int", values, insert_error)[1]
    if fq then
-      local sub = subkey and cmn.get_relations_by_query_key("sub", values, insert_error)[1]
-      local mod = modkey and cmn.get_relations_by_query_key("mod", values, insert_error)[1]
-      local int = intkey and cmn.get_relations_by_query_key("int", values, insert_error)[1]
       table.insert(replacedlabel, sub)
       table.insert(replacedlabel, mod and "::\\-")
       table.insert(replacedlabel, mod)
       table.insert(replacedlabel, int and "//\\-")
       table.insert(replacedlabel, int)
    else
-      dbresult = cmn.get_relations_by_query_key(typkey, values)[1]
-      table.insert(replacedlabel, dbresult)
+      local results = {sub, mod, int}
+      local whatvalue = {sub=1, mod=2, int=3}
+      local thekey = whatvalue[typkey]
+      local dbresult = cmn.get_relations_by_query_key(typkey, values)[thekey]
+      table.insert(replacedlabel, results[thekey])
    end
     result = table.concat(replacedlabel)
     return string.gsub(result, ".*__error__.*", "\\textcolor{red}{".. key .." is undefined}")
