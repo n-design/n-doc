@@ -36,8 +36,14 @@ function testbridge.test_replacelabel_interface_failure()
    bridge_cc_core.replacelabel("int.tls.core.xxx", "no", tex.expected("\\textcolor{red}{int.tls.core.xxx is undefined}"))
 end
 
-function testbridge.test_replacelabelplain()
+function testbridge.test_replacelabelplain_module()
    bridge_cc_core.replacelabelplain("mod.tls.core", "fq", tex.expected("TLS-Server::Core"))
+   bridge_cc_core.replacelabelplain("mod.tls.core", "no", tex.expected("Core"))
+end
+
+function testbridge.test_replacelabelplain_module_failure()
+   bridge_cc_core.replacelabelplain("mod.tls.xxx", "fq", tex.expected("\\textcolor{red}{mod.tls.xxx is undefined}"))
+   bridge_cc_core.replacelabelplain("mod.tls.xxx", "no", tex.expected("\\textcolor{red}{mod.tls.xxx is undefined}"))
 end
 
 function testbridge.test_get_module_status()
