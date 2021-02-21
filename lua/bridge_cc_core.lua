@@ -14,6 +14,10 @@ function bridge_cc_core.replacelabel(key, fullyq, tex)
 end
 
 function bridge_cc_core.replacelabelplain(key, fullyq, tex)
+   fq = false
+   if fullyq == "fq" then
+      fq = true
+   end
    replacedlabel = cc_core.replacelabel(key, fq)
    tex.sprint(string.gsub(replacedlabel, '\\%-', ''))
 end
