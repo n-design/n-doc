@@ -91,20 +91,18 @@
 
 \sfrdefinition{fcs_cop.1.1/hash}{The TSF shall perform
   \ppassigned{hash value calculation} in accordance with a specified
-  cryptographic algorithm \ppassigned{SHA-1, SHA-256,}
+  cryptographic algorithm \ppassigned{\stdeleted{SHA-1}, SHA-256,}
   \stassigned[list of SHA-2 Algorithms with more than 256 bit
   size]{SHA-512} and cryptographic key sizes \ppassigned{none} that
   meet the following: \ppassigned{FIPS PUB 180-4
     \autocite{FIPS180-4}}.}
 
-\sfrsubsection{fcs_cop.1/hmac}
-\sfrdefinition{fcs_cop.1.1/hmac}{The TSF shall perform
-  \ppassigned{HMAC value generation and verification} in accordance
-  with a specified cryptographic algorithm \ppassigned{HMAC with
-    SHA-1,} \stassigned[list of SHA-2 Algorithms with 256bit size or
-  more]{SHA-256} and cryptographic key sizes \stassigned[cryptographic
-  key sizes]{160 and 256 bit} that meet the following:
-  \ppassigned{FIPS PUB 180-4 \autocite{FIPS180-4},
+\sfrsubsection{fcs_cop.1/hmac} \sfrdefinition{fcs_cop.1.1/hmac}{The TSF shall
+  perform \ppassigned{HMAC value generation and verification} in accordance with
+  a specified cryptographic algorithm \ppassigned{HMAC with \stdeleted{SHA-1},}
+  \stassigned[list of SHA-2 Algorithms with 256bit size or more]{SHA-256} and
+  cryptographic key sizes \stassigned[cryptographic key sizes]{160 and 256 bit}
+  that meet the following: \ppassigned{FIPS PUB 180-4 \autocite{FIPS180-4},
     RFC~2404 \autocite{rfc2404}, RFC~4868 \autocite{rfc4868}, RFC~5996
     \autocite{rfc5996}}.}
 
@@ -114,10 +112,10 @@
 
 \sfrdefinition{fcs_ckm.1.1}{The TSF shall generate cryptographic keys in
   accordance with a specified cryptographic key generation algorithm
-  \stassigned[cryptographic key generation algorithm]{PRF-HMAC-SHA1,
-    PRF-HMAC-SHA256} and specified cryptographic key sizes
-  \stassigned[cryptographic key sizes]{256~bit} that meet the following:
-  \ppassigned{TR-03116 \autocite{TR03116}}.\par
+  \stassigned[cryptographic key generation algorithm]{PRF-HMAC-SHA256} and
+  specified cryptographic key sizes \stassigned[cryptographic key
+  sizes]{256~bit} that meet the following: \ppassigned{TR-03116
+    \autocite{TR03116}}.\par
   \strefined{The following algorithms and preferences are supported for TLS key
     negotiation}
   \begin{sfritemize}
