@@ -3,19 +3,21 @@
 name: Build Documents
 
 # Controls when the action will run. Triggers the workflow on push or pull request 
-# events but only for the master branch
+# events but only for the main branch
 on:
   push:
-    branches: [ master, test-* ]
+    branches: [ main, test-* ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    container: ndesign/n-doc:3.1.0
+    volumes:
+      - /home/runner/work/n-doc_template/n-doc_template":"/data"
 
     steps:
 
@@ -31,11 +33,7 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Compile documents
-      uses: docker://ndesign/n-doc:3.1.0
-      with:
-        volumes: /home/runner/work/n-doc_template/n-doc_template":"/data"
-        entrypoint: /usr/bin/make
-        args: -j4 delivery
+      run: make -j2 delivery
 
     - name: Archive document snapshots
       run: tar czf MauveCorp_VPN-Client.tar.gz deliverables/*
@@ -43,7 +41,7 @@ jobs:
     - name: Upload documents
       uses: actions/upload-artifact@v1
       with:
-        name: "Document Snapshots"
+        name: "CC Documents for MauveCorp VPN Client"
         path: MauveCorp_VPN-Client.tar.gz
     
         
