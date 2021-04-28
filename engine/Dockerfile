@@ -19,9 +19,9 @@ RUN apt-get install -y \
     libsqlite3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl http://luarocks.github.io/luarocks/releases/luarocks-3.1.2.tar.gz | tar xz
+RUN curl http://luarocks.github.io/luarocks/releases/luarocks-3.7.0.tar.gz | tar xz
 
-WORKDIR /luarocks-3.1.2
+WORKDIR /luarocks-3.7.0
 
 RUN ./configure && make build && make install && \
     luarocks install lsqlite3 && \
@@ -38,8 +38,8 @@ RUN ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y make git sqlite perl graphviz curl python3-pygments
 
-COPY --from=buildbase /luarocks-3.1.2/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
-COPY --from=buildbase /luarocks-3.1.2/lua_modules/share/lua/5.3/ /usr/local/share/lua/5.3
+COPY --from=buildbase /luarocks-3.7.0/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
+COPY --from=buildbase /luarocks-3.7.0/lua_modules/share/lua/5.3/ /usr/local/share/lua/5.3
 
 RUN echo ${ctanmirror}
 
