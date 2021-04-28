@@ -3,7 +3,7 @@
 \newcommand{\citepp}{\autocite{\thispp}}
 
 \newcommand{\stformat}[1]{\textcolor{blue}{#1}}
-\newcommand{\ppformat}[1]{\uline{#1}}
+\newcommand{\ppformat}[1]{\underLine{#1}}
 
 \makeatletter
 \newcommand{\isempty}[2]{%
@@ -15,9 +15,9 @@
 \newcommand{\strefined}[2][]{\stformat{\textbf{#2}}\isnotempty{#1}{\footnote{Refinement: \emph{#1}}}}
 \newcommand{\stassigned}[2][]{\stformat{#2}\isnotempty{#1}{\footnote{Assignment: \emph{#1}}}}
 \newcommand{\stselected}[2][]{\stformat{\emph{#2}}\isnotempty{#1}{\footnote{Selection: \emph{#1}}}}
-\newcommand{\stdeleted}[2][]{\textbf{\stformat{\sout{#2}}}\isnotempty{#1}{\footnote{Deletion: \emph{#1}}}}
+\newcommand{\stdeleted}[2][]{\textbf{\stformat{\strikeThrough{#2}}}\isnotempty{#1}{\footnote{Deletion: \emph{#1}}}}
 \newcommand{\pprefined}[1]{\textbf{#1}}
-\newcommand{\ppdeleted}[1]{\textbf{\sout{#1}}}
+\newcommand{\ppdeleted}[1]{\textbf{\strikeThrough{#1}}}
 \newcommand{\ppassigned}[1]{\ppformat{#1}}
 \newcommand{\ppselected}[1]{\ppformat{\textit{#1}}}
 
