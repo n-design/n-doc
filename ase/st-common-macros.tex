@@ -3,7 +3,11 @@
 \newcommand{\citepp}{\autocite{\thispp}}
 
 \newcommand{\stformat}[1]{\textcolor{blue}{#1}}
-\newcommand{\ppformat}[1]{\underLine{#1}}
+\newcommand{\ppformat}[1]{#1}
+\newcommand{\assigned}[1]{\underLine{#1}}
+\newcommand{\selected}[1]{\underLine{\textit{#1}}}
+\newcommand{\refined}[1]{\textbf{#1}}
+\newcommand{\deleted}[1]{\refined{\strikeThrough{#1}}}
 
 \makeatletter
 \newcommand{\isempty}[2]{%
@@ -12,14 +16,14 @@
   \@ifnotmtarg{#1}{#2}}
 \makeatother
 
-\newcommand{\strefined}[2][]{\stformat{\textbf{#2}}\isnotempty{#1}{\footnote{Refinement: \emph{#1}}}}
-\newcommand{\stassigned}[2][]{\stformat{#2}\isnotempty{#1}{\footnote{Assignment: \emph{#1}}}}
-\newcommand{\stselected}[2][]{\stformat{\emph{#2}}\isnotempty{#1}{\footnote{Selection: \emph{#1}}}}
-\newcommand{\stdeleted}[2][]{\textbf{\stformat{\strikeThrough{#2}}}\isnotempty{#1}{\footnote{Deletion: \emph{#1}}}}
-\newcommand{\pprefined}[1]{\textbf{#1}}
-\newcommand{\ppdeleted}[1]{\textbf{\strikeThrough{#1}}}
-\newcommand{\ppassigned}[1]{\ppformat{#1}}
-\newcommand{\ppselected}[1]{\ppformat{\textit{#1}}}
+\newcommand{\strefined}[2][]{\stformat{\refined{#2}}\isnotempty{#1}{\footnote{Refinement: \emph{#1}}}}
+\newcommand{\stassigned}[2][]{\stformat{\assigned{#2}}\isnotempty{#1}{\footnote{Assignment: \emph{#1}}}}
+\newcommand{\stselected}[2][]{\stformat{\selected{#2}}\isnotempty{#1}{\footnote{Selection: \emph{#1}}}}
+\newcommand{\stdeleted}[2][]{\stformat{\deleted{#2}}\isnotempty{#1}{\footnote{Deletion: \emph{#1}}}}
+\newcommand{\pprefined}[1]{\refined{#1}}
+\newcommand{\ppdeleted}[1]{\deleted{#1}}
+\newcommand{\ppassigned}[1]{\assigned{#1}}
+\newcommand{\ppselected}[1]{\selected{\textit{#1}}}
 
 \renewcommand{\sfrlink}[2][]{%
   \index{\sfrmain{#2}@\sfrindex{#2}}%
