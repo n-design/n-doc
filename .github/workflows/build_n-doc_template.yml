@@ -31,7 +31,7 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Compile documents
-      uses: docker://ndesign/n-doc:latest
+      uses: docker://ndesign/n-doc:3.0.5
       with:
         volumes: /home/runner/work/n-doc_template/n-doc_template":"/data"
         entrypoint: /usr/bin/make
