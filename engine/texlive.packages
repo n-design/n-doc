@@ -58,9 +58,11 @@ logreq
 ltablex
 ltxcmds
 luacode
+luahbtex
 lualatex-truncate
 luapackageloader
 luatexbase
+lua-ul
 makecell
 makeindex
 mdwtools
@@ -88,7 +90,6 @@ tools
 threeparttable
 trimspaces
 truncate
-ulem
 uniquecounter
 upquote
 url

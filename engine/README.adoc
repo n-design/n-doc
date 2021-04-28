@@ -21,7 +21,7 @@ make n-doc
 ----
 
 Zusätzlich kann -- auf `ndesign/n-doc` basierend -- eine zweite Variante gebaut
-werden, die link:https://plantuml.com/[PlantUML] bereitstellt. Es ist ca. 200 MB größer als die einfache Variante. Diese Variante trägt das Tag `ndesign/n-doc:latest-plantuml`:
+werden, die link:https://plantuml.com/[PlantUML] bereitstellt. PlantUML steht unter LGPL Lizenz. Es ist ca. 200 MB größer als die einfache Variante. Diese Variante trägt das Tag `ndesign/n-doc:latest-plantuml`:
 
 ----
 make n-doc-plantuml

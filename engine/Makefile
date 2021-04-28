@@ -9,8 +9,8 @@ publish: images
 images: n-doc-plantuml
 
 n-doc-plantuml: n-doc
-	docker build $(CACHE_OPTION) -f Dockerfile.plantuml --tag ndesign/n-doc:latest-plantuml .
+	docker build $(CACHE_OPTION) -f Dockerfile.plantuml --progress plain --tag ndesign/n-doc:latest-plantuml .
 
 n-doc:
-	docker build $(CACHE_OPTION) --build-arg ctanmirror --build-arg baseimage --tag ndesign/n-doc:latest .
+	docker build $(CACHE_OPTION) --progress plain --build-arg ctanmirror --build-arg baseimage --tag ndesign/n-doc:latest .
 
