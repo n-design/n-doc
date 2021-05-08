@@ -1,3 +1,3 @@
 label;name;description
-s_admin;S\_Administrator;Subjekt, das für einen Administrator handelt.
-s_zeitdienst;S\_Zeitdienst;Subjekt, das die Uhrzeit liefert.
+s_admin;S\_Administrator;Subject that acts for an administrator.
+s_timeservice;S\_Time\_Service;Subject that provides time.

@@ -1,4 +1,4 @@
-\hrefsection{sfr.def}{Funktionale Sicherheitsanforderungen}
+\hrefsection{sfr.def}{Security Functional Requirements}
 
 \hrefsubsection{sfr.def.vpnclient}{VPN Client}
 
@@ -7,17 +7,15 @@
 \sfrdefinition{ftp_itc.1.2/vpn}{\sfrunmodifiedfrompp{6.2.1}}
 \sfrdefinition{ftp_itc.1.3/vpn}{\sfrunmodifiedfrompp{6.2.1}}
 
-\hrefsubsection{sfr.def.net}{Netzdienste}
+\hrefsubsection{sfr.def.net}{Network Services}
 
 \sfrsubsection{fpt_stm.1}
 
 \sfrdefinition{fpt_stm.1.1}{\sfrunmodifiedfrompp{6.2.3}}
 
-\refinement{Die Zuverlässigkeit (reliable) des Zeitstempels wird durch
-  Zeitsynchronisation der Echtzeituhr (gemäß \objlink{oe.realtimeclock}) mit
-  Zeitservern unter Verwendung des Protokolls NTPv4 \cite{rfc5905} erreicht.
-  Der EVG verwendet den verlässlichen Zeitstempel für sich selbst.}
-
+\refinement{Reliability of time stamps is achieved by synchronisation of the
+  real time clock (\objlink{oe.realtimeclock}) with time servers using the NTPv4
+  protocol \cite{rfc5905}. The TOE uses the reliable time stamps for itself.}
 
 \sfrsubsection{fpt_tdc.1/zert}
 \sfrdefinition{fpt_tdc.1.1/zert}{\sfrunmodifiedfrompp{6.2.3}}
@@ -29,7 +27,7 @@
 
 \intentionallyleftblank{}
 
-\hrefsubsection{sfr.def.selfprot}{Selbstschutz}
+\hrefsubsection{sfr.def.selfprot}{Self Protection}
 
 \sfrsubsection{fdp_rip.1}
 
@@ -39,10 +37,9 @@
     (and session keys) used for the VPN or for TLS-connections},
   \stassigned[list of objects]{no other objects}.}
 
-\refinement{Die sensitive Daten müssen mit konstanten oder zufälligen Werten
-  überschrieben werden, sobald sie nicht mehr verwendet werden.\par
-  \strefined{These sensitive objects are overwritten with constant or
-    pseudo-random values.}}
+\refinement{Sensitive data muse be overwritten with constant or random values as
+  soon as they are not in use anymore.\par
+  \strefined{These sensitive objects are overwritten with constant values.}}
 
 \sfrsubsection{fpt_tst.1}
 
@@ -81,11 +78,11 @@
 
 \sfrdefinition{ftp_trp.1.3/admin}{\sfrunmodifiedfrompp{6.2.6}}
 
-\applicationnote{\sfr{ftp_trp.1/admin}}{\label{appnote:clientcert} Der TOE
-  unterstützt beidseitige Authentisierung durch Zertifikate im TLS-Handshake.}
+\applicationnote{\sfr{ftp_trp.1/admin}}{\label{appnote:clientcert} The TOE
+  supports mutual authentication with certificates in the TLS handshake.}
 
 
-\hrefsubsection{sfr.def.crypto}{Kryptographische Basisdienste}
+\hrefsubsection{sfr.def.crypto}{Cryptographic Services}
 
 \sfrsubsection{fcs_cop.1/hash}
 
@@ -150,8 +147,7 @@
   of standards]{none}.}
 
 
-\hrefsubsection{sfr.def.cryptotls}{TLS-Kanäle unter Nutzung sicherer
-  kryptographischer Algorithmen}
+\hrefsubsection{sfr.def.cryptotls}{TLS-Channels With Secure Cyptographic Algorithms}
 
 \sfrsubsection{ftp_itc.1/tls}
 \sfrdefinition{ftp_itc.1.1/tls}{\sfrunmodifiedfrompp{6.2.8}}
@@ -163,9 +159,9 @@
   functions for which a trusted channel is required]{any
     connection specified in Table~\ref{tab:tlsconnections}.}}
 
-\applicationnote{\sfr{ftp_itc.1/tls}}{\label{appnote:brainpool} Der TOE
-  unterstützt den ECDHE-Schlüsselaustausch mit elliptischen Kurven. Die
-  verwendeten Kurven sind in \tableref{tab:elliptic-curves} aufgelistet.}
+\applicationnote{\sfr{ftp_itc.1/tls}}{\label{appnote:brainpool} The TOE supports
+  key exchange with elliptic curves.The supported curves are list in
+  \tableref{tab:elliptic-curves}.}
 
 
 \sfrsubsection{fpt_tdc.1/tls.zert}
@@ -174,9 +170,8 @@
   capability to consistently interpret
   
   \begin{sfrenumeration}
-  \item \ppassigned{X.509-Zertifikate für TLS-Verbindungen}
-  \item \ppassigned{Sperrinformationen zu Zertifikaten für TLS-Verbindungen, die
-    via OCSP erhalten werden}
+  \item \ppassigned{X.509 certificates for TLS connections}
+  \item \ppassigned{Revocation information for certificates for TLS connections received via OCSP.}
   \item \stassigned[additional list of data types]{no other data types}
   \end{sfrenumeration}
 
@@ -196,12 +191,11 @@
 \sfrdefinition{fcs_cop.1.1/tls.auth}{\sfrunmodifiedfrompp{6.2.8}}
 
 
-\hrefsubsection{sfr.def.additional}{Zusätzliche Sicherheitsanforderungen}
+\hrefsubsection{sfr.def.additional}{Additional Requirements}
 
-Dieser Abschnitt enthält Sicherheitsanforderungen, die zusätzlich zu denen des
-Schutzprofils definiert werden. Die Anforderungen werden hier um die in Kapitel
-\ref{comp.pp-fcsrng} definierte Anforderung \sfr{fcs_rng.1/hashdrbg}
-erweitert. 
+This section contains security requirements that are defined in addition to the
+Protection Profile. The requirements are extended by the component
+\sfr{fcs_rng.1/hashdrbg} defined in \chapterref{comp.pp-fcsrng}.
 
 \sfrsubsection{fcs_rng.1/hashdrbg}
 

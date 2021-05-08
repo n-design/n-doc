@@ -2,64 +2,61 @@
 %% Chapter 6 : SFR Definitions %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\hrefchapter{sfr}{Sicherheitsanforderungen}
+\hrefchapter{sfr}{Security Requirements}
 
-\hrefsection{sfr.intro}{Hinweise und Definitionen}
+\hrefsection{sfr.intro}{Definitions}
 
-Der größte Teil der Sicherheitsanforderungen wird ohne Anpassungen aus dem
-Schutzprofil übernommen. Anpassungen werden kenntlich gemacht. Bei denjenigen
-SFR, die das Schutzprofil bereits vorsieht, wird in diesem Security Target
-darauf verzichtet, die Hierarchie der Komponenten sowie deren Abhängigkeiten zu
-wiederholen. Diese Informationen sind dem Schutzprofil \citepp{} zu
-entnehmen. Bei Sicherheitsanforderungen, die durch das Security Target
-hinzugefügt werden, sind die Hierarchie- und Abhängigkeitsinformationen
-aufgeführt.
+Most security requirements are adopted from the Protection Profile without
+modification. For those SFR that are adopted from the PP, the hierarchy and
+dependencies are not repeated in this Security Target. For SFR that are added in
+the ST, the information is given.
 
-\hrefsubsection{sfr.intro.notc}{Hinweise zur Notation}
+\hrefsubsection{sfr.intro.notc}{Notation}
 
-Die typographischen Auszeichnungen für die Operationen an den SFR sind in
-\tableref{tab:sfr.intro.notc} beschrieben. ST-seitige Löschungen werden immer von
-einem Hinweis begleitet, wie die Löschung motiviert ist.
+The typographic styles for the operations of the SFR are described in
+\tableref{tab:sfr.intro.notc}. Deletions in the ST are always accompanied by an
+explanation why the deletion is necessary.
 
 \begin{table}[htb]
   \centering{}
   \begin{tabularx}{\textwidth}{@{}>{\small}l>{\small}l>{\small}X@{}}
     \toprule
-    Quelle & Art der Anpassung & Typographische Eigenschaften\\
+    Source & Operation & Typographic Styles\\
     \midrule
-    PP & Zuweisung (Assignment) & Zuweisungen des PP sind \ppassigned{unterstrichen} gesetzt.\\
-    & Auswahl (Selection) & Auswahlen des PP sind \ppselected{kursiv und unterstrichen} gesetzt.\\
-    & Verfeinerung (Refinement) & Verfeinerungen des PP sind \pprefined{fett} gesetzt.\\
-    & Löschung (Deletion) & Löschungen des PP sind \ppdeleted{fett und durchgestrichen} gesetzt.\\
+    PP & Assignment & Assignments made by the PP are typeset \ppassigned{underlined}. \\
+    & Selection & Selections made by the PP are typeset \ppselected{italics and underlined}. \\
+    & Refinement & Refinments made by the PP are typeset \pprefined{in bold face}. \\
+    & Deletion & Deletions made by the PP are typeset \ppdeleted{in bold face and struck through}. \\
     \midrule
-    ST & Zuweisung (Assignment) & Zuweisungen des ST sind \stassigned{in blauer Schrift und unterstrichen} gesetzt.\\
-    & Auswahl (Selection) & Auswahlen des ST sind \stselected{in blauer Schrift und kursiv} gesetzt.\\
-    & Verfeinerung (Refinement) & Verfeinerungen des ST sind \strefined{in blauer Schrift und fett} gesetzt.\\
-    & Löschung (Deletion) & Löschungen des ST sind \stdeleted{in blauer Schrift, fett und durchgestrichen} gesetzt.\\
+    ST & Assignment & Assignments made by the ST are typeset \stassigned{in blue colour and underlined}. \\
+    & Selection & Selections made by the PP are typeset \stselected{in blue colour, italics and underlined}. \\
+    & Refinement & Refinments made by the PP are typeset \strefined{in blue colour and in bold face}. \\
+    & Deletion & Deletions made by the PP are typeset \stdeleted{in blue colour, bold face and struck through}. \\
     \bottomrule
   \end{tabularx}
     \caption{Typographische Konventionen}
     \label{tab:sfr.intro.notc}
 \end{table}
 
-\hrefsubsection{sfr.intro.model}{Modellierung von Subjekten, Objekten,
-  Attributen und Operationen}
+\hrefsubsection{sfr.intro.model}{Modelling of Subjects, Objects, Attributes and Operations}
 
-Die Modellierungen des Schutzprofils \citepp{} gelten auch für dieses Security
-Target. Über das Schutzprofil hinaus werden die Subjekte, Objekte und Attribute
-in \tableref{tab:sfr.intro.model} angenommen.
+
+
+The modellings of the Protection Profile \citepp{} are valid in this Security
+Target. In addition to these modellings, this Security Target assumes the
+subjects, objects, attributes and operations in \tableref{tab:sfr.intro.model}.
 
 \begin{table}[htb]
   \centering{}
   \begin{tabularx}{\textwidth}{@{}lXX@{}}
     \toprule
-    Subjekt & Bechreibung & Attribut \\
+    Subject & Description & Attribute \\
     \midrule
-    \hypertarget{}{\subjobj{s_admin}} & \subjobjtext{s_admin} & (Kein) \\
-    \subjobj{s_zeitdienst} & \subjobjtext{s_zeitdienst} & (Kein) \\
+    \hypertarget{}{\subjobj{s_admin}} & \subjobjtext{s_admin} & (none) \\
+    \subjobj{s_timeservice} & \subjobjtext{s_timeservice} & (none) \\
     \bottomrule
   \end{tabularx}
-    \caption{Subjekte}
+    \caption{Subjects}
     \label{tab:sfr.intro.model}
 \end{table}
 
@@ -67,43 +64,42 @@ in \tableref{tab:sfr.intro.model} angenommen.
 
 
 
-\hrefsection{sfr.toe.eal}{Sicherheitsanforderungen an die
-  Vertrauenswürdigkeit des EVG}
+\hrefsection{sfr.toe.eal}{Security Assurance Requirements for the TOE}
 
-Die Sicherheitsanforderungen an die Vertrauenswürdigkeit für dieses Security
-Target entsprechen denen, die in \citepp{} definiert sind.
+The security assurance requirements for the TOE are defined in the Protection
+Profile \citepp{}.
 
-\hrefsection{sfr.ratio}{Erklärung der Sicherheitsanforderungen}
+\hrefsection{sfr.ratio}{Security Requirements Rationale}
 
-\hrefsubsection{sfr.ratio.dep}{Erklärung der Abhängigkeiten der SFR}
+\hrefsubsection{sfr.ratio.overview}{Overview of the coverage of SFR}
 
-Die Abhängigkeiten der in \sectref{sfr.def} aufgestellten funktionalen
-Sicherheitsanforderungen sind erfüllt. Es gelten dieselben Auflösungen von
-Abhängigkeiten, wie sie im Schutzprofil \citepp[Abschnitt~6.4.2]{} beschrieben
-sind.
+This Security Target adopts the mapping of objectives to SFR as defined in the
+Protection Profile. \tableref{tab:sfr.ratio.sfrtoobjmapping} shows these
+relations.
 
-Die Abhängigkeiten der über das Schutzprofil hinaus aufgenommenen
-Sicherheitsanforderungen sind bei der Definition des jeweiligen SFR
-notiert.  Die zusätzlich aufgenommenen SFR sind Iterationen
-bestehender Komponenten, sodass sich durch diese keine neuen
-Abhängigkeiten ergeben.
+\input{../ase/chapter_6/mapping_sfr_to_objectives}%
 
-Die in \sectref{comp.pp-fcsrng} neu eingeführte Komponente
-\secitem{FCS_RNG.1} hat keine Abhängigkeiten, die aufgelöst werden
-müssen.
+\hrefsubsection{sfr.ratio.dep}{SFR Dependency Rationale}
 
-Die Darstellungen in \tableref{tab:sfr.subjobj2sfr} und
-\tableref{tab:sfr.sfr2subjobj} zeigen, wie die zusätzlich angenommenen Subjekte
-aus \tableref{tab:sfr.intro.model} in Zusammenhang zu den
-Sicherheitsanforderungen stehen.
+The dependencies of the security functional requirements in \sectref{sfr.def}
+are fulfilled. This Security Target assumes the same resolutions as defined in
+the Protection Profile in \citepp[Section~6.4.2]{}.
+
+The extended component \secitem{FCS_RNG.1} defined in \sectref{comp.pp-fcsrng}
+has no dependencies that need to be resolved.
+
+\tableref{tab:sfr.subjobj2sfr} and \tableref{tab:sfr.sfr2subjobj} show the
+relations of the subjects defined in \tableref{tab:sfr.intro.model} to the SFR.
+
+\clearpage{}
 
 \begin{longtable}[c]{@{}l>{\centering}*{17}{c}<{\centering}@{}}
   \toprule
   \directlua{print_table_header('mainsfr', 'sfrlinknoindex')} \\
   % 
   \midrule \endhead
-  \midrule \caption{Abbildung der Subjekte auf SFR}  \endfoot
-  \bottomrule \caption{Abbildung der Subjekte auf SFR} \label{tab:sfr.subjobj2sfr} \endlastfoot
+  \midrule \caption{Mapping of subjects to SFR}  \endfoot
+  \bottomrule \caption{Mapping of subjects to SFR} \label{tab:sfr.subjobj2sfr} \endlastfoot
   \directlua{print_table_body('subjobj', 'mainsfr', 'subjobjlink', cc_core.getSubjobj2Sfr)}
 \end{longtable}
 
@@ -112,39 +108,15 @@ Sicherheitsanforderungen stehen.
   \directlua{print_table_header('subjobj', 'subjobjlink')} \\
   % 
   \midrule \endhead
-  \midrule \caption{Abbildung der SFR auf Subjekte}  \endfoot
-  \bottomrule \caption{Abbildung der SFR auf Subjekte} \label{tab:sfr.sfr2subjobj} \endlastfoot
+  \midrule \caption{Mapping of SFR to subjects}  \endfoot
+  \bottomrule \caption{Mapping of SFR to subjects} \label{tab:sfr.sfr2subjobj} \endlastfoot
   \directlua{print_table_body('mainsfr', 'subjobj', 'sfrlinknoindex', cc_core.getSfr2Subjobj)}
 \end{longtable}
 
 
+\hrefsection{sfr.ratio.eal}{Rationale for the selected EAL}
 
-\hrefsubsection{sfr.ratio.overview}{Überblick der Abdeckung von
-  Sicherheitszielen}
-
-
-Die Zuordnung von Sicherheitszielen zu Sicherheitsanforderungen entspricht
-weitestgehend der Zuordnung, die in \citepp{} getroffen
-wurde. \tableref{tab:sfr.ratio.sfrtoobjmapping} zeigt den Zusammenhang.
-
-\afterpage{%
-  \clearpage% Flush earlier floats (otherwise order might not be correct)
-  \centering % Center table
-  \input{../ase/chapter_6/mapping_sfr_to_objectives}%     
-  % \clearpage% Flush page
-}
-
-\hrefsubsection{sfr.ratio.obj}{Detaillierte Erklärung für die
-  Sicherheitsziele}
-
-Die detaillierte Erklärung der Sicherheitsziele wird unverändert aus \citepp{}
-übernommen.
-
-\hrefsection{sfr.ratio.eal}{Erklärung für die gewählte EAL-Stufe}
-
-Die Erklärung der gewählten EAL-Stufe wird unverändert aus dem Schutzprofil
-\citepp{} übernommen.
-
+The rationale for the selected EAL is adopted from the Protection Profile.
 
 %%% Local Variables:
 %%% mode: latex
