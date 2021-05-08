@@ -5,9 +5,9 @@ t.wan.client;o.vpn_vertraul;PP
 t.lan.admin;o.admin;PP
 t.lan.admin;o.tlscrypto;PP
 t.lan.admin;o.schutz;PP
-t.zert_prüf;o.zert_prüf;PP
-t.timesync;oe.echtzeituhr;PP
+t.mani_cert;o.zert_prüf;PP
+t.mani_time;oe.echtzeituhr;PP
 osp.tls;o.tlscrypto;PP
 osp.tls;o.schutz;PP
-osp.zeitdienst;oe.echtzeituhr;PP
+osp.timeservice;oe.echtzeituhr;PP
 a.guidance;;invalid

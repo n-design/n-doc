@@ -67,7 +67,7 @@ end
 function test_cc_core.test_spd()
    spd = "t.lan.admin"
    lu.assertEquals(cc_core.getSpd(spd), [[T.LAN.Admin]])
-   lu.assertEquals(cc_core.getSpdText(spd), "Datenverkehr zur Managementschnittstelle abhören")
+   lu.assertEquals(cc_core.getSpdText(spd), "Eavesdropping on the management interface")
    lu.assertEquals(cc_core.getSpdSource(spd), "3.2")
 end
 
