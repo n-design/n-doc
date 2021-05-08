@@ -48,7 +48,7 @@ resides in.
 
 The directories ``mwe_tds``, ``mwe_st``, ``mwe_fsp`` and ``mwe_arc`` contain
 documents that serve as __Minimal Working Examples__ (MWE, as is common at
-ink:https://tex.stackexchange.com/[TeX Stackexchange]). They provide the same
+link:https://tex.stackexchange.com/[TeX Stackexchange]). They provide the same
 macros as their "bigger" counterparts and serve as test environments for
 reproducing bugs or developing smaller chapters that are quicker to compile than
 the ADV documents themselves. The main documents ``mwe_tds/mwe_tds.tex``,
