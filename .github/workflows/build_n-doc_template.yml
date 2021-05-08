@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-20.04
     container: ndesign/n-doc:3.1.0
     volumes:
-      - /home/runner/work/n-doc_template/n-doc_template":"/data"
+      - /home/runner/work/n-doc_template/n-doc_template:/data
 
     steps:
 
