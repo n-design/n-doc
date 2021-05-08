@@ -1,10 +1,9 @@
-\chapter{TLS Verbindungen}\label{appendix.tls}
+\chapter{TLS Connections}\label{appendix.tls}
 
-Für die TLS-Verbindungen werden die im Schutzprofil genannten
-Cipher Suiten verwendet. Der TOE beherrscht genau diese Cipher Suiten
-und keine darüber hinaus. \tableref{tab:ciphersuites} listet diese
-Cipher Suiten auf. \tableref{tab:elliptic-curves} zeigt die elliptischen
-Kurven, die beim ECDHE Schlüsselaustausch zur Anwendung kommen.
+The Protection Profiles defines the cipher suites required for TLS
+connections. The TOE uses provides exactly those cipher suites and no other.
+\tableref{tab:ciphersuites} lists these cipher
+suites. \tableref{tab:elliptic-curves} lists the elliptic curves used for ECDHE.
 
 \begin{table}[htb]
   \centering
@@ -21,14 +20,14 @@ Kurven, die beim ECDHE Schlüsselaustausch zur Anwendung kommen.
     TLS\_ECDHE\_RSA\_WITH\_AES\_256\_GCM\_SHA384   & 0xc0,\,0x30  & \tcheck \tabularnewline
     \bottomrule
   \end{tabularx}
-  \caption{Cipher Suites der TLS Verbindungen des TOE}
+  \caption{Cipher suites for TLS connections}
   \label{tab:ciphersuites}
 \end{table}
 
 \begin{table}[htb]
   \centering
   \begin{tabularx}{0.7\linewidth}{X>{\ttfamily}cc}
-    \toprule Elliptische Kurve & \textrm{IANA\,ID} & Standard \\
+    \toprule Elliptic curve & \textrm{IANA\,ID} & Standard \\
     \midrule
     secp256r1 (P-256) & 23 & \cite{rfc8422, X9.62} \\
     secp384r1 (P-384) & 24 & \cite{rfc8422, X9.62} \\
@@ -36,38 +35,35 @@ Kurven, die beim ECDHE Schlüsselaustausch zur Anwendung kommen.
     brainpoolP384r1   & 27 & \cite{rfc7027} \\
     \bottomrule
   \end{tabularx}
-  \caption{Elliptische Kurven für die TLS Verbindungen des TOE}
+  \caption{Elliptic curves for TLS connections}
   \label{tab:elliptic-curves}
 \end{table}
 
 
-Der TOE kommuniziert mit anderen vertrauenswürdigen IT-Produkten über gesicherte
-Verbindungen. Die Integrität und die Vertrauenswürdigkeit der Verbindungen wird
-durch die Verwendung von TLS in der Version~1.2 und die in
-\tableref{tab:ciphersuites} genannten Algorithmen und Cipher Suiten
-sichergestellt. \tableref{tab:tlsconnections} listet die Verbindungen auf, die
-der TOE eingeht. Die Spalten dieser Tabelle werden in
-\tableref{tab:tlslegende} beschrieben.
+The TOE communicates with other trusted IT products over secure
+connections. Integrity and confidentiality of these connections is ensured by
+TLS~v1.2. \tableref{tab:tlsconnections} lists all connections the TOE can
+participate in. \tableref{tab:tlslegende} describes the columns of this table.
+
 
 \begin{table}[htb]
   \renewcommand{\arraystretch}{1.5}
   \centering
   \begin{tabularx}{0.9\linewidth}{lX}
-    \toprule Spalte & Beschreibung\\ \midrule
-    ID & Symbolischer Name der Verbindung \\
-    Schnittstelle & Logische Schnittstelle, deren Kommunikation abgesichert wird.\\
-    Rolle & Beschreibt, ob der TOE in dieser Verbindung Client oder Server ist.\\
-    Peer & Beschreibung des Partners in der TLS-Verbindung\\
-    Protokoll & Anwendungsprotokoll, das für die Verbindung genutzt wird. \\
-    \secitemformat{Subsystem::Modul} & Name des Subsystems und des Moduls, von dem die Verbindung ausgeht, bzw. das die Verbindung empfängt und behandelt. \\
-    Port & Port, den der TOE öffnet, um die Verbindung aufzubauen. Für Verbindungen, bei denen der TOE Server ist, steht hier eine Portnummer. Wenn der TOE Client ist, steht „dyn.“ für die ephemerische Portvergabe bei TCP-Verbindungen. „konfig.“ steht dafür, dass der Zielport konfigurierbar ist.\\
-    Schnittstelle & Logische Schnittstelle des TOE , über die die Verbindung läuft.\\
-    Identität des TOE & Zertifikat, mit dem sich der TOE gegenüber dem Peer authentisiert.\\
-    Identität des Peer & Zertifikat/Verfahren, mit dem sich der Peer gegenüber dem TOE authentisiert.\\
-    Authentifizierung des Peer durch & Verfahren, Datenquelle oder Subsystem/Modul, mit dem der TOE die Identität des Peers verifiziert.\\
+    \toprule Column & Descriptions\\ \midrule
+    ID & Smybolic name of this connection \\
+    Interface & Logical interface whose communication is secured.\\
+    Role & Describes client/serer role of the TOE.\\
+    Peer & Describes the peer in this TLS connection.\\
+    Protocol & Application protocol used in this connection. \\
+    \secitemformat{Subsystem::Module} & Name of the subsystem and the module from which the connection originates or that accepts the connections.\\
+    Port & IP-Port that the TOE opens for the connection. If the TOE is client, ``dyn.'' stands for ephemeral port assignment. ``config'' stands for a confgurable port number.\\
+    Identity of TOE & Certificate that the TOE uses to authenticate itself to the peer.\\
+    Identity of Peer & Certificate that the peer uses to authenticate itself to the TOE.\\
+    Authentication by & Process, data source or subsystem/module used by the TOE for authentication/verification.\\
     \bottomrule
   \end{tabularx}
-  \hypertarget{tab:o.tlslegende}{\caption{Legende zu den TLS Verbindungen}}
+  \hypertarget{tab:o.tlslegende}{\caption{Legend for TLS connections}}
   \label{tab:tlslegende}
 \end{table}
 

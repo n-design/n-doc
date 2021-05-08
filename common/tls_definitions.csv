@@ -1,2 +1,2 @@
 key;logicalintf;role;peer;protocol;submod;port;idtoe;idpeer;authpeer
-tls.admin;\lslanhttpmgmt{};Server;Browser;HTTP;mod.adminsystem.webserver;443;Zertifikat aus Mauve~CA;Benutzername/Passwort;Benutzerverwaltung im TOE
+tls.admin;\lslanhttpmgmt{};Server;Browser;HTTP;mod.adminsystem.webserver;443;Certificate from Mauve~CA;Username/password;User administration in TOE
