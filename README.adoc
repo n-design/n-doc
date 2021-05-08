@@ -1,240 +1,120 @@
 :icons: font
 :experimental:
 
-=  CC Dokumentation für den Mauve VPN Client
-Ein fiktionales Produkt als Vorlage für das n-doc Verfahren
+=  CC Documentation for the  Mauve VPN Client
+A fictional product as template for the n-doc process
 
-Dieses Repository enthält die Herstellerdokumente des CC Verfahrens für den
-Mauve VPN Client. Dieses Dokument und die verlinkten Anleitungen beschreiben das
-Dokumentationsverfahren und die verwendeten Werkzeuge.
+NOTE: This project is currently translated to English. Not all files have been translated. 
 
-== Übersetzen der Dokumente
+This repository contains the developer documentation for the CC evaluation of the 
+Mauve VPN Client. This file and the linked resources provide the documentation process and tools.
 
-* Clonen des Repo
+== Compiling the documents
 
-* Aufruf von `./runmake.sh`
+* Clone the repo
 
-* Ergebnisdokumente landen im Verzeichnis `deliverables`.
+* run `./runmake.sh`
 
-Zum Übersetzen der Dokumente nach PDF wird das Docker Image
-link:https://github.com/n-design/n-doc[n-doc] verwendet. Die Quellen der
-Dokumente müssen im aktuellen Verzeichnis liegen und das Verzeichnis muss unter
-dem Pfad `/data` in den Container gemountet werden (`runmake.sh` enthält diesen
-Aufruf):
+* Result documents are copied to `deliverables`.
+
+Use the Docker image link:https://github.com/n-design/n-doc[n-doc] to compile
+the documents to PDF. The root directory of this repo must be mounted under
+`/data` in to the container. `runmake.sh` contains this call:
 
 ----
-docker run --rm  --volume $(pwd):/data ndesign/n-doc make [-j <n> ] delivery
+docker run --rm  --volume $(pwd):/data ndesign/n-doc make -j4 delivery
 ----
 
+Use a specific document type (`st`, `tds` etc, see below) instead of delivery to build only a single document.
 
-Statt `delivery` kann auch ein Dokumenttyp (`st`, `tds` etc) verwendet
-werden.
+The optional parameter `-j` controlls the number of threads  (jobs), that GNU Make
+starts in parallel. Use the number of cores of your CPU. The more, the faster.
 
-Der optionale Parameter `-j` steuert die Anzahl der Threads (jobs), die GNU Make
-gleichzeitig startet. Hier muss eine Zahl angegeben werden: Die Anzahl der
-Builder in der CI-Plattform oder die Anzahl der Cores des Arbeitsplatzrechners.
+WARNING: Without a number after `-j` GNU Make uses all available resources of
+the host system. This might lead to a complete standstill.
 
-WARNING: Ohne eine Zahl hinter `-j` verwendet GNU Make die maximalen Ressourcen
-des Rechners und startet alle Jobs gleichzeitig. Das führt häufig zum Stillstand
-des Systems, weil die simultan laufenden PlantUML Prozesse den Speicher komplett
-auslasten.
+== Working on the docments / Structure of the repository
 
-== Arbeit an den Dokumenten / Struktur des Repositories
+Each developer document has its own subdirectory. The subdirectories have the
+same name as the document type: ``ase``, ``adv_tds`` etc. All files that are
+specific to that document type reside in that directory. Elements shared between
+documents are in the ``common`` directory. Lua programs are in ``lua``.
 
-Jedes Herstellerdokument hat sein eigenes Unterverzeichnis. Die
-Unterverzeichnisse heißen so wie der Dokumenttyp und das Schutzprofil,
-das mit dem jeweiligen Dokument bearbeitet wird.: ``ase``,
-``adv_tds`` etc. In diesen Verzeichnissen liegen alle Dateien,
-die spezifisch sind für das jeweilige Herstellerdokument. 
-
-Darüber hinaus gibt es von allen Dokumenten gemeinsam verwendete
-Elemente, die bei allen Herstellerdokumenten gleich sein sollen. Diese
-Elemente (z.B. Makros, Lua-Programme und CSV-Dateien für die
-Datenbank) liegen im Verzeichnis ``common``.
-
-Die Dokumente selbst sind modularisiert, also in möglichst sinnvolle Einheiten
-aufgeteilt. Es gibt jeweils ein Rahmen-Dokument (Master), das die anderen Teile
-einbindet. Dieses Master-Dokument muss so heißen wie das Unterverzeichnis, in
-dem es liegt. Im Fall des umfangreichen ADV_TDS geht die Unterteilung weiter,
-bis auf Modulebene. Ziel der Aufteilung ist es, die Dokumente handhabbarer zu
-machen: Jeder Autor soll möglichst nur einen kleinen Teil des Dokuments
-berühren, um das Zusammenführen der Änderungen hinterher zu erleichtern.
-
-Einen Überblick über die Arbeit am TDS gibt die Beschreibung in
-link:doku/arbeit-am-tds.adoc[``doku/arbeit-am-tds.adoc``]
-
-Unter
-link:adv_tds/module/tds_module_template.tex[``adv_tds/module/tds_module_template.tex``]
-liegt eine Schablone für eine Modulbeschreibung mit Kommentaren, wie
-ein Kapitel aufgebaut ist und welche Makros verwendet werden
-sollen. Eine link:doku/step-by-step.adoc[Schritt-für-Schritt
-Anleitung] erklärt das genaue Vorgehen.
+The documents are modularized. There is a main document that incorporates the
+other parts. This main document must have the same name as the directory it
+resides in.
 
 === Minimal Working Examples
 
-Neben den Verzeichnissen für die "produktiven" Dokumente gibt es noch
-Verzeichnisse ``mwe_tds``, ``mwe_st``, ``mwe_fsp`` und ``mwe_arc``. Diese
-Dokumente in diesen Verzeichnisse dienen dazu, Textfragmente zu setzen, ohne
-jeweils die umfangreichen und komplexen produktiven Dokumente kompilieren zu
-müssen. Sie stellen Testumgebungen dar, die -- in Anlehnung an die
-Gepflogenheiten auf link:https://tex.stackexchange.com/[TeX Stackexchange] --
-__Minimal Working Examples__ (MWE) genannt werden. Der Dokumentrahmen ist
-identisch zu dem Rahmen der adv/ase Dokumente: Dieselben Makros und Packages
-werden eingebunden.
-
-Die Rahmendokumente ``mwe_tds/mwe_tds.tex``, ``mwe_st/mwe_st.tex`` und
-``mwe_fsp/mwe_fsp.tex`` sollen nicht verändert werden. Stattdessen legt man eine
-Datei ``mwe_<dokumenttyp>_body.tex`` an, in die man den eigenen Text
-einträgt. Diese ``_body`` Datei wird von Git ignoriert, sodass durch Experimente
-keine Merge-Konflikte entstehen. Das make-Goal ``make mwe`` legt für alle MWEs
-die ``_body``-Dateien an.
+The directories ``mwe_tds``, ``mwe_st``, ``mwe_fsp`` and ``mwe_arc`` contain
+documents that serve as __Minimal Working Examples__ (MWE, as is common at
+link:https://tex.stackexchange.com/[TeX Stackexchange]). They provide the same
+macros as their "bigger" counterparts and serve as test environments for
+reproducing bugs or developing smaller chapters that are quicker to compile than
+the ADV documents themselves. The main documents ``mwe_tds/mwe_tds.tex``,
+``mwe_st/mwe_st.tex`` and ``mwe_fsp/mwe_fsp.tex`` should not be
+modified. Instead, create a file ``mwe_<documenttype>_body.tex`` that can be
+freely edited. This ``_body`` file is ignored by git so that there are no merge
+conflicts that result from experiments. The make goal ``make mwe`` creates
+``_body`` files for all MWE-types.
 
 
 == Build-Management
 
-Ziel ist es, das Generieren der PDF-Dokumente und das Release-Management
-weitgehend zu automatisieren. Dafür wird eine Kombination von Tools genutzt:
+The goal is to automate the generation of PDF documents and the release
+management as far as possible. A combination of tools is used for that:
 link:http://personal.psu.edu/jcc8/software/latexmk-jcc/[``latexmk``],
-link:https://www.gnu.org/software/make/[``make``] und verschiedene
-Shell-Skripte.
+link:https://www.gnu.org/software/make/[``make``] and an assortment of shell
+scripts.
 
-Auf der Ebene der einzelnen Dokumente wird ``latexmk`` verwendet, um ein
-Dokument zu erzeugen. Dabei startet es den Übersetzungsvorgang so häufig, wie es
-nötig ist, dass das Dokument vollständig erzeugt wird.
+``latexmk`` is used at the level of individual documents. To build several
+documents at once, ``latexmk`` is combined with ``make``.
 
-Um mehrere Dokumente zu erzeugen, wird ``latexmk`` mit ``make`` kombiniert: Das
-``Makefile`` auf der obersten Ebene des Repositories steuert die Erzeugung und
-die Abhängigkeiten. ``make`` steigt dabei in die Unterverzeichnisse der
-Dokumente ab und ruft dort -- über ein weiteres Makefile -- ``latexmk`` auf.
-
-Auf der obersten Ebene sind folgende Ziele im Makefile verankert:
+The following goals are availavble at the root level ``Makefile``:
 
 [cols="2,4", options="header"]
 |===
-|Ziel      | Verwendung
+| Goal      | Purpose
 
-| ``all``      | Erzeugt alle PDF-Dokumente und die DB-Datei in ihren Dokumentverzeichnissen
+| ``all``      | Creates all PDF-documents and the DB file in their respective directories
 
-| ``delivery`` | Erzeugt alle Dokumente und kopiert diese in das Verzeichnis ``deliverables``. 
-Die Dokumente werden so umbenannt, dass sie die Versionsnummer im Namen enthalten. Schließlich werden alle Dokumente in ein tar-Archiv gepackt.
+| ``delivery`` | Creates all PDF-documents and copies them to the directory ``deliverables``. Documents are renamed so that they have their version number in the name.
 
-| ``ase``  | Erzeugt das Security Target 
+| ``ase``  | Creates the Security Target 
 
-| ``fsp`` | Erzeugt die Funktionale Spezifikation (``adv_fsp``)
+| ``fsp`` | Creates the  Funktional Specification (``adv_fsp``)
 
-| ``tds`` | Erzeugt die Design Spezifikation (``adv_tds``)
+| ``tds`` | Creates the  Design Specification (``adv_tds``)
 
-| ``arc`` | Erzeugt die Sicherheitsarchitektur (``adv_arc``)
+| ``arc`` | Creates the  Security Architecture (``adv_arc``)
 
-| ``ate`` | Erzeugt die Testabdeckungstabellen (``ate_cov``) 
+| ``ate`` | Creates the  Test Coverage (``ate_cov``) 
 
-| ``ref`` | Erzeugt die Referenzenliste (``refliste``)
+| ``ref`` | Creates the  List of References (``refliste``)
 
-| ``clean`` | Löscht alle Dokumente (auch in ``deliverables``) und die von LaTeX erzeugten Hilfsdateien. 
+| ``clean`` | Removes all documents and auxiliary files
 
-| ``mwe`` | Erzeugt die "minimal working examples" (``mwe_*``). Dabei werden die ``_body`` Dateien aus einer Vorlage erzeugt.
+| ``mwe`` | Creates the "minimal working examples" (``mwe_*``) and their ``_body`` files.
 
-| ``cleanmwe`` | Löscht alle Dokumente und die von LaTeX erzeugten Hilfsdateien für die minimal working examples.
+| ``cleanmwe`` | Removes all documents and auxiliary files for the minimal working examples
 
 |===
 
-Neben dem Makefile gibt es noch Shell-Skripte, die beim Build-Management unterstützen
+The following shell scripts support the build management:
 
 [cols="1,4", options="header"]
 |===
-| Skript | Verwendung
+| Script | Purpose
 
-| ``scripts/release_documents.sh`` | Hebt die Versionsnummer der übergebenenen Dokumente an und setzt Tags in git. Entspricht in etwa dem Maven Release Plugin. Genaue Beschreibung des Verfahrens ist im Skript dokumentiert.
+| ``scripts/release_documents.sh`` | Creates a document release. Raises the version number and tags the repository.
 
-| ``scripts/renamereleases.sh`` | _Nicht vom Benutzer aufzurufen._ Ergänzt die Dokumente um die Versionsnummer im Dateinamen. Wird aus dem ``Makefile`` heraus aufgerufen. .
+| ``scripts/renamereleases.sh`` | _Not to be called by the user._ Adds the version number to the file name. Is called from the  ``Makefile``.
 
-| ``scripts/create_release_archive.sh`` | _Nicht vom Benutzer aufzurufen._ Erzeugt ein Archiv aus den auszuliefernden Dokumenten. Wird aus dem ``Makefile`` heraus aufgerufen.
+| ``scripts/create_release_archive.sh`` | _Not to be called by the user._ Creates an archive with the documents in ``deliverables``. Is called from the  ``Makefile``.
 
 |===
 
 
-== Releasemanagement
+== Release Management
 
-Das Erstellen von Releases der Dokumente wird in einer link:doku/creating-releases.adoc[separaten Anleitung] beschrieben. 
-
-
-== Details zur Infrastruktur und zum Verfahren
-
-=== LaTeX
-
-
-
-Zum Schreiben an den Dokumenten ist eine TeX-Installation erforderlich. Es gibt
-verschiedene Implementierungen und Distributionen. Der zentrale Ort für alle
-Dinge rund um LaTeX ist das Comprehensive TeX Archive Network (CTAN,
-https://ctan.org).
-
-Zum Übersetzen der CC-Dokumente ist zwingend die LuaLaTeX
-Implementierung zu verwenden. Hintergrund ist, dass für die Behandlung
-der SFR Lua-Code herangezogen wird. LuaLaTeX bietet gegenüber der
-Standard-Engine eine Schnittstelle zu einem Lua-Interpreter, der
-während des Übersetzungsvorgangs aufgerufen werden kann, um
-Lua-Funktionen auszuführen.
-
-
-=== Verwendung von LaTeX als Dokumentationswerkzeug
-
-Das Vorgehen beim Erstellen eines Dokuments mit LaTeX ähnelt eher dem
-Vorgehen bei der Softwareentwicklung als der "klassischen"
-Textverarbeitung, wie sie beispielsweise mit Word umgesetzt ist.
-
-Der Autor schreibt seinen Text in Form eines Quelltexts (mit dem
-Dateisuffix ``.tex``). Dieser Text enthält Befehle in Form von
-Makros. Diese Makros stellt entweder LaTeX selbst zur Verfügung, oder
-sie werden von externen Packages bereitgestellt, oder der Autor kann
-selbst Makros schreiben, um immer wiederkehrende Formatierungen oder
-Textelemente leichter handhabbar zu machen. Im vorliegenden Projekt
-gibt es eine Menge Makros, die explizit für unser CC Verfahren
-entwickelt wurden. Die einzelnen Autoren müssen nur diese handvoll
-Makros kennenlernen (wie eine API) und sich ansonsten um nicht viel
-kümmern. Besonders Dinge wie Formatierungen, Umbrüche etc. (die bei
-Word immer wieder Probleme machen) liegen gar nicht im
-Verantwortungsbereich des Autors. Dieses Vorgehen hier zu vertiefen,
-würde zu weit führen. Sprecht bei Bedarf bitte Alexander Krumeich für
-genauere Erläuterungen an.
-
-Im ersten Moment ist es ungewohnt, dass der Text nicht in Form von
-WYSIWYG verfasst wird. Doch daran gewöhnt man sich schnell... Einer
-der Vorteile dieses Verfahrens ist, dass jeder Autor seinen
-Lieblingseditor verwenden kann. 
-
-Das Dokument selbst wird mit Hilfe des Textprozessors in eine
-PDF-Datei übersetzt -- ganz ähnlich wie ein Compiler. Unter Umständen
-sind mehrere LaTeX Läufe notwendig, bis das Dokument vollständig
-übersetzt ist. Das liegt daran, dass Informationen über das
-Inhaltsverzeichnis, Abbildungsverzeichnisse oder andere Querverweise
-erst korrekt ausgewertet werden können, wenn das LaTeX eine
-Vorstellung davon hat, was alles im Dokument enthalten ist. Für das
-Erstellen des Literaturverzeichnisses muss ein weiteres Programm
-aufgeufen werden.
-
-Wenn die PDF-Datei schließlich fertig ist, kann sie mit einem
-beliebigen PDF-Viewer angeschaut werden.
-
-=== Lua
-
-Für einige Funktionen wird auf den in LuaLaTeX eingebauten Lua
-Interpreter zurückgegriffen. Hierfür müssen einmalig einige
-Komponenten installiert werden. Die Erklärung dafür befindet sich in
-einer separaten link:doku/using_luatex.adoc[Anleitung]
-
-=== Verwendbare Editoren
-
-Grundsätzlich kann jeder Editor für die Arbeit mit LaTeX verwendet
-werden. Viele Editoren bieten mehr oder weniger gelungene
-Integrationen für LaTeX, die von einfachem Syntax-Highlighting bis hin
-zu eingebauten PDF-Previews reichen.
-
-Wer mit link:https://www.gnu.org/software/emacs/[Emacs] umgehen mag, findet mit link:https://www.gnu.org/software/auctex/[AucTeX] und link:https://www.gnu.org/software/auctex/reftex.html[RefTeX] hervorragende und extrem produktive Pakete für die Arbeit mit LaTeX. Allerdings ist die Lernkurve hier sehr steil.
-
-Erfreulich gut ist auch die Einbindung von link:https://code.visualstudio.com/[Visual Studio Code]. Mit dem
-Paket link:https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop[LaTeX Workshop], das sich über den Marketplace installieren
-lässt, gibt es Syntax-Highlighting und automatisches Übersetzen nach
-dem Speichern. Einen PDF-Viewer für einfaches Preview gibt es auch.
-
-
+Creating releases is described in a link:doku/creating-releases.adoc[separate document].

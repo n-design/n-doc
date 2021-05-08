@@ -1,6 +1,4 @@
-% Allgemeine Makros für die Titelseite
-% Können nach einem ersten Release dokumentspezifisch
-% überschrieben werden.
+% General macros for the titlepage
 \newcommand{\documentdate}[1]{\directlua{getDocumentDate("#1")}}
 \newcommand{\documentversion}[1]{\directlua{getDocumentVersion("#1")}}
 \newcommand{\nosnapshot}[1]{\directlua{tex.sprint(get_version_number_for_refliste("#1"))}}
@@ -9,56 +7,54 @@
 % Markiert den übergebenen Text deutlich und setzt
 % einen Merker in die Randspalte.
 % define list of To Do items
-\DeclareNewTOC[listname={Offene Punkte}]{todo}
+
+% \todo creates a "to do" item. Add the item to the To Do list.  Paramter is the
+% text of the to do item. Optional parameter is the text printed in the "to do"
+% items list.
+\DeclareNewTOC[listname={To Do}]{todo}
 \newcommand{\todocolor}{magenta}
 \newcommand{\todo}[2][]{\marginpar{\textcolor{\todocolor}%
     {\fbox{\textbf{To Do}}}}\textcolor{\todocolor}{#2}
   \ifthenelse{\equal{#1}{}}{}{\addcontentsline{todo}{section}{#1}}}
 
-
-% Kann verwendet werden, wenn in eigenen Dokumenten Abschnitte leer
-% bleiben, aber die Kongruenz zum PP oder zu anderen CC Dokumenten
-% erhalten bleiben soll.
+% Denotes an empty section. Used to keep congruence with PP outline and section
+% numbers.
 \newcommand{\intentionallyleftblank}{(This section intentionally left blank.)}
 
-% Makro für Java (und anderen) Quelltext
+% Macros for Java (and other) source code
 \newcommand{\code}[1]{\texttt{#1}}
+% optional argument for package path is printed in a slightly smaller font
 \newcommand{\java}[2][]{\textsmaller[2]{\code{#1}}\code{#2}}
 \newcommand{\bundle}[1]{\footnotesize{\java{#1}}}
 
-% Makro für RFC. Argument ist die Nummer des RFC. Enthält das optionale
-% Argument den Buchstaben "c", wird auch eine Referenz auf das
-% Literaturverzeichnis eingefügt.
-% Achtung: Das Leerzeichen vor \autocite ist wichtig.
+% Macro for RFC. Argument is the RFC's number. When "c" is used as optional
+% argument, additionally a citation is printed. Note: The blank before \autocite
+% is important.
 \newcommand{\rfc}[2][false]{RFC\,#2%
   \ifthenelse{\equal{#1}{c}}{ \autocite{rfc#2}}{}}
 
+% Removes underscores from the argument
 \newcommand{\nounderscore}[1]{\directlua{replaceUnderscore("#1")}}
 \newcommand{\nohyphen}[1]{\directlua{remove_smart_hyphen([[#1]])}}
 
-% Makro für Schlüsselwörter, z.B. Konfigurationsparameter aus der
-% Admin-Anwendung.  Vieles, was man ansonsten in Anführungszeichen
-% schreiben würde, kann besser als \keyword{} ausgezeichnet werden.
-% Die Unterstriche werden automatisch mit einem Backslash maskiert.
-\newcommand{\keyword}[1]{\textsmaller[0.8]{\ccfont \textit{\directlua{replaceUnderscore("#1")}}}}
+% Macro for keywords
+\newcommand{\keyword}[1]{\textsmaller[0.8]{\ccfont\textit{\directlua{replaceUnderscore("#1")}}}}
 
-\newcommand{\errorcondition}[1]{{\keyword{#1}}}
-
-% Makro für Fehlercode mit Fehlertext
+% Macro for printing error messages defined in common/db/errors.csv
 \newcommand{\error}[1]{#1 -- \enquote{\directlua{getError("#1")}}}
 
-% Makro für Dateinamen
+% Macro for file names
 \newcommand{\filename}[1]{{\narrowfilefont #1}}
 
-% Links auf Abbildungen, Tabellen, Abschnitte
-\newcommand{\figureref}[1]{\hyperref[#1]{Abbildung~\ref*{#1}}}
-\newcommand{\tableref}[1]{\hyperref[#1]{Tabelle~\ref*{#1}}}
+% Links to figures, tables, sections, chapters, appendices
+\newcommand{\figureref}[1]{\hyperref[#1]{Figure~\ref*{#1}}}
+\newcommand{\tableref}[1]{\hyperref[#1]{Table~\ref*{#1}}}
 \newcommand{\listref}[1]{\hyperref[#1]{Listing~\ref*{#1}}}
-\newcommand{\sectref}[1]{\hyperref[#1]{Abschnitt~\ref*{#1}}}
-\newcommand{\chapterref}[1]{\hyperref[#1]{Kapitel~\ref*{#1}}}
-\newcommand{\appendixref}[1]{\hyperref[#1]{Anhang~\ref*{#1}}}
+\newcommand{\sectref}[1]{\hyperref[#1]{Section~\ref*{#1}}}
+\newcommand{\chapterref}[1]{\hyperref[#1]{Chapter~\ref*{#1}}}
+\newcommand{\appendixref}[1]{\hyperref[#1]{Appendix~\ref*{#1}}}
 
-% Überschriften, die direkt den Anker für einen Hyperlink enthalten
+% Macros for headlines. Creates a hypertext anchor in addition to the \label
 \newcommand{\hrefchapter}[2]{\hypertarget{#1}{\chapter{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
 \newcommand{\hrefsection}[2]{\hypertarget{#1}{\section{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
 \newcommand{\hrefsubsection}[2]{\hypertarget{#1}{\subsection{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
@@ -67,22 +63,14 @@
 \newcommand{\hrefsubparagraph}[2]{\hypertarget{#1}{\subparagraph{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
 
 
-% Allgemeines Format für Begriffe aus der CC:
-% Objectives (O.)
-% Objectives of the environment (OE.)
-% Threats (T.)
-% Assumptions (A.)
-% SFR
-% SF
-%
+% Macros for security related items.
 \newcommand{\secitemfont}[1]{{\ccfont #1}}
 \newcommand{\secitemformat}[1]{{\textsmaller[0.9]{\secitemfont{#1}}}}
 \newcommand{\secitem}[1]{\secitemformat{\nounderscore{#1}}}
 
 %% ------------------------------------------------------------
 %%
-%% Makros für
-%% Tabellen
+%% Macros for table entries
 %% 
 \newcommand{\tcheck}{\textsmaller[1]{\checkmark{}}}
 \newcommand{\tno}{\ldotp{}}
@@ -93,17 +81,17 @@
 
 %% ------------------------------------------------------------
 %%
-%% Makros für
-%% IDs der TLS Verbindungen
+%% Macros for
+%% IDs of TLS connections
+%% used in common/tls_connections.tex
 %%
-%% Aufbau der Tabelle
 \newcounter{tlsconnid}
 \renewcommand*\thetlsconnid{TLS.\arabic{tlsconnid}}
 \newcommand{\tlsconntablerow}[2]{\luadirect{getTlsConnectionTableRow("#1", "#2")}}
 \newcommand{\tlsid}[1]{\refstepcounter{tlsconnid}\secitemformat{\thetlsconnid}\label{#1}}
 
-% Drei Spaltentypen für Tabellen, mehrzeiligen Text mit erzwungenen Zeilenumbrüchen
-% erlauben. Vgl. https://tex.stackexchange.com/questions/12703/
+% Column definitions for tables, multi-line text with forced line breaks
+% See https://tex.stackexchange.com/questions/12703/
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
@@ -124,7 +112,7 @@
 }%
 }
 
-% Auslassungspunkte zwischen erster und zweiter Spalte einer Tabelle
+% Ellipses between first and second column of tables
 \makeatletter
 \newcommand \mydotfill {\leavevmode \cleaders \hb@xt@ .66em{\hss .\hss }\hfill \kern \z@}
 \makeatother

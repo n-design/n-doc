@@ -1,9 +1,11 @@
-% Name des Produkts in Kurz- und in Langform
+% Name of the product in short and long form
 \newcommand{\thisproduct}{MauveVPN Client}
 \newcommand{\thisproductlong}{MauveCorp MauveVPN Client}
 \newcommand{\thisdeveloper}{Mauve Corporation}
-\newcommand{\thiscompany}{MauveCorp\\Fliederweg 98\\50020 Köln\\\textsmaller{certification@mauvecorp.com}}
+\newcommand{\thiscompany}{MauveCorp\\Fliederweg 98\\D-50020 Köln\\\textsmaller{certification@mauvecorp.com}}
 
+% Shortcut macros for logical interfaces (TSFI)
+% ("ls" for "logische Schnittstelle" -> "logical interface")
 \newcommand{\lslan}{\tsfilink{ls.lan}}
 \newcommand{\lswan}{\tsfilink{ls.wan}}
 \newcommand{\lswandhcp}{\tsfilink{ls.wan.dhcp}}
@@ -11,8 +13,8 @@
 \newcommand{\lslantls}{\tsfilink{ls.lan.tls}}
 \newcommand{\lslanhttpmgmt}{\tsfilink{ls.lan.httpmgmt}}
 
-%% Makros für die Referenzierung einer TLS ID
-\newcommand{\tlsexample}{\intf{\ref{tls.example}}}
+%% Macros for referencing TLS connections
+\newcommand{\tlsadmin}{\intf{\ref{tls.admin}}}
 
 \newcommand{\rsaoaep}{RSAOAEP}
 \newcommand{\rsapkcs}{RSA RSAES-PKCS1-v1\_5}

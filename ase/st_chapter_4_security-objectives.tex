@@ -1,12 +1,12 @@
-\hrefchapter{obj}{Sicherheitsziele}
+\hrefchapter{obj}{Objectives}
 
-\hrefsection{obj.toe}{Sicherheitsziele des TOE}
+\hrefsection{obj.toe}{Objectives of the TOE}
 
 \objectivesubsection{o.tlscrypto}
 \objunmodifiedfrompp{o.tlscrypto}
 
-\objectivesubsection{o.schutz}
-\objunmodifiedfrompp{o.schutz}
+\objectivesubsection{o.protection}
+\objunmodifiedfrompp{o.protection}
 
 \objectivesubsection{o.admin}
 \objunmodifiedfrompp{o.admin}
@@ -14,38 +14,33 @@
 \objectivesubsection{o.vpn_auth}
 \objunmodifiedfrompp{o.vpn_auth}
 
-\objectivesubsection{o.vpn_integrität}
-\objunmodifiedfrompp{o.vpn_integrität}
+\objectivesubsection{o.vpn_integrity}
+\objunmodifiedfrompp{o.vpn_integrity}
 
-\objectivesubsection{o.vpn_vertraul}
-\objunmodifiedfrompp{o.vpn_vertraul}
+\objectivesubsection{o.vpn_conf}
+\objunmodifiedfrompp{o.vpn_conf}
 
-\objectivesubsection{o.zeitdienst}
-\objunmodifiedfrompp{o.zeitdienst}
+\objectivesubsection{o.timeservice}
+\objunmodifiedfrompp{o.timeservice}
 
-\objectivesubsection{o.zert_prüf}
-\objunmodifiedfrompp{o.zert_prüf}
-
-
-\hrefsection{obj.env}{Sicherheitsziele für die Umgebung des TOE}
-
-\objectivesubsection{oe.echtzeituhr}
-\objunmodifiedfrompp{oe.echtzeituhr}
+\objectivesubsection{o.cert_check}
+\objunmodifiedfrompp{o.cert_check}
 
 
-\hrefsection{obj.toe.ratio}{Erklärung der Sicherheitsziele des TOE}
+\hrefsection{obj.env}{Objectives for the environment of the TOE}
 
-\hrefsubsection{obj.toe.ratio.overview}{Abbildung der Bedrohungen, OSPs
-  und Annahmen auf Ziele}
+\objectivesubsection{oe.realtimeclock}
+\objunmodifiedfrompp{oe.realtimeclock}
 
-Die Abbildung der Bedrohungen, organisatorischen Sicherheitspolitiken und
-Annahmen auf Sicherheitsziele für den TOE entspricht den in \citepp{}
-beschriebenen Relationen. \tableref{tab:o.mapping} entspricht grundsätzlich der
-Übersicht im Schutzprofil.
 
-Das Schutzprofil beschreibt darüber hinaus, dass einige Bedrohungen
-durch Assurance-Komponenten der CC abgewehrt werden. Diese zusätzliche
-Sicherung gilt auch für dieses Security Target.
+\hrefsection{obj.toe.ratio}{Rationale for the Objectives of the TOE}
+
+\hrefsubsection{obj.toe.ratio.overview}{Mapping Threats, OSPs and Assumptions to
+  Objectives}
+
+The mapping of threats, OSPs and assumptions to objectives is the same as in the
+Protection Profile \citepp{}. \tableref{tab:o.mapping} is a rendition of the
+table in the Protection Profile.
 
 \afterpage{%
   \clearpage% Flush earlier floats (otherwise order might not be correct)
@@ -57,27 +52,23 @@ Sicherung gilt auch für dieses Security Target.
   \clearpage% Flush page
 }
 
-\hrefsubsection{obj.toe.ratio.changes}{Erklärung der Abweichungen
-  gegenüber dem Schutzprofil}
+\hrefsubsection{obj.toe.ratio.changes}{Explanation of deviations from the Proctection Profile}
 
-Für alle unmodifizerten Beziehungen, die dem Schutzprofil entnommen
-sind (in \tableref{tab:o.mapping} mit "`\tcheck{}"' markiert) gelten
-die Erklärungen, die im Schutzprofil beschrieben sind.
+For all unmodified relations that are taken from the Proctection Profile (marked
+with ``\tcheck{}'' in \tableref{tab:o.mapping}), the explanations are valid in
+  this Security Target.
+  
+\hrefsubsubsection{obj.toe.ratio.threats}{Defense against the Threats by the Objectives}
 
-\hrefsubsubsection{obj.toe.ratio.threats}{Abwehr der Bedrohungen
-  durch die Sicherheitsziele}
+\hrefsubsubsection{obj.toe.ratio.osps}{Mapping of OSPs to Objectives}
 
-\hrefsubsubsection{obj.toe.ratio.osps}{Abbildung der organisatorischen
-  Sicherheitspolitiken auf Sicherheitsziele}
+The mapping of organizational security policies to objectives in \citepp{} is
+valid without modification.
 
-Die Abbildungen der organisatorischen Sicherheitspolitiken auf Sicherheitsziele
-wird unverändert aus dem Schutzprofil übernommen.
+\hrefsubsubsection{obj.toe.ratio.assumption}{Mapping of Assumptions to Objectives}
 
-\hrefsubsubsection{obj.toe.ratio.changes.assumptions}{Abbildung der
-  Annahmen auf Sicherheitsziele für die Umgebung}
-
-Die Abbildung der Annahmen auf Sicherheitsziele der Umgebung wird
-unverändert aus dem Schutzprofil übernommen.
+The mapping of assumptions to objectives in \citepp{} is valid without
+modification.
 
 
 % !TEX root = ../ase

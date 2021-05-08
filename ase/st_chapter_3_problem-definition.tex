@@ -1,30 +1,24 @@
-\hrefchapter{spd}{Definition des Sicherheitsproblems}
+\hrefchapter{spd}{Definition Of The Security Problem}
 
-In diesem Abschnitt wird zunächst beschrieben, welche Werte der TOE
-schützen muss, welche externen Einheiten mit ihm interagieren und
-welche Objekte von Bedeutung sind. Auf dieser Basis wird danach
-beschrieben, welche Bedrohungen der TOE abwehren muss, welche
-organisatorischen Sicherheitspolitiken zu beachten sind und welche
-Annahmen an seine Einsatzumgebung getroffen werden können.
+This section firstly describes the assets that the TOE must protect and which
+external entities interact with the TOE. Following that, we discuss the threats
+to the TOE, the organizational security polices that have to be considered, and
+the assumptions about the operating environment.
 
-\hrefsection{spd.assets}{Werte}
+\hrefsection{spd.assets}{Assets}
 
-\hrefsubsection{spd.assets.assets}{Zu Schützende Werte}
+\hrefsubsection{spd.assets.assets}{Assets of the TOE}
 
-Die \emph{zu schützenden Werte} -- also Ressourcen und Daten, die der TOE
-schützt -- werden in \citepp{} beschrieben.  Die dort beschriebenen Werte gelten
-ohne Anpassung.
+The \emph{assets} (resources and data), that are protected by the TOE, are described in
+the Protection Profile \citepp{}. These assets are valid without modification.
 
-\hrefsubsection{spd.assets.users}{Benutzer des TOE}
+\hrefsubsection{spd.assets.users}{Users of the TOE}
 
-Die \emph{externen Entitäten, Subjekte und Objekte} des TOE werden in \citepp{}
-beschrieben. Die \emph{Benutzer} des TOE werden in
-\autocite[Abschnitt~3.1.1]{\thispp} beschrieben. Diese Beschreibung gilt ohne
-Anpassung.  Die Subjekte, die im Auftrag des Benutzers agieren, werden in
-\autocite[Abschnitt~6.1.2]{\thispp} modelliert. Auch diese Darstellung wird ohne
-Anpassung in das Security Target übernommen.
+The \emph{external entities, subjects and objects} of the TOE are in described in \citepp{}. \emph{Users} are described in 
+\autocite[Section~3.1.1]{\thispp}. The description holds without modification. The \emph{subjects}, that interact on behalf of the user, are modelled in 
+\autocite[Section~6.1.2]{\thispp}. This model is valid in this Security Target without moodification.
 
-\hrefsection{spd.threats}{Bedrohungen}
+\hrefsection{spd.threats}{Threats}
 
 \spdsubsection{t.wan.client}
 
@@ -34,26 +28,26 @@ Anpassung in das Security Target übernommen.
 
 \threatunmodifiedfrompp{t.lan.admin}
 
-\spdsubsection{t.zert_prüf}
+\spdsubsection{t.mani_cert}
 
-\threatunmodifiedfrompp{t.zert_prüf}
+\threatunmodifiedfrompp{t.mani_cert}
 
-\spdsubsection{t.timesync}
+\spdsubsection{t.mani_time}
 
-\threatunmodifiedfrompp{t.timesync}
+\threatunmodifiedfrompp{t.mani_time}
 
 
-\hrefsection{spd.osp}{Organisatorische Sicherheitspolitiken}
+\hrefsection{spd.osp}{Organisational Security Policies}
 
-\spdsubsection{osp.zeitdienst}
+\spdsubsection{osp.timeservice}
 
-\ospunmodifiedfrompp{osp.zeitdienst}
+\ospunmodifiedfrompp{osp.timeservice}
 
 \spdsubsection{osp.tls}
 
 \ospunmodifiedfrompp{osp.tls}
 
-\hrefsection{spd.assumptions}{Annahmen}
+\hrefsection{spd.assumptions}{Assumptions}
 
 \spdsubsection{a.guidance}
 

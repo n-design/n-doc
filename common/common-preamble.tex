@@ -32,30 +32,31 @@
 \typearea{11}
 \sloppy
 
-% Parameter zum Unterbinden der Meldungen
-% für Overfull/Underfull boxes
+% Prevent messages for Overfull/Underfull boxes
 \hfuzz=2000pt
 \hbadness=10000
 \vfuzz=20pt
 \vbadness=\maxdimen
 
-% Vereinbarung der Basisschriftarten
+% Definition of fonts
+% http://www.tug.dk/FontCatalogue/gnufreefontsans/
+
 \usepackage{fontspec} 
 \defaultfontfeatures{Ligatures=TeX}
 
-% "FreeSerif" als Standardschrift
+% "FreeSerif" as serif font
 \setmainfont{FreeSerif}
 
-% "FreeSans" als serifenlose Schrift
-% http://www.tug.dk/FontCatalogue/gnufreefontsans/
+% "FreeSans" as sans-serif font
 \setsansfont{FreeSans}
 
-% "Nimbus 15 Mono Narrow" als Monospaced Font
+% "Nimbus 15 Mono Narrow" as monospaced font
 % http://www.tug.dk/FontCatalogue/nimbus15mononarrow/
 \setmonofont{zcoN}[
 ItalicFont  = zcoN-Oblique,
 SlantedFont = zcoN-Oblique]
 
+% Used for secitems such as SFRs, TSFIs, 
 \newfontfamily\ccfont{RobotoCondensed}[
 ItalicFont = RobotoCondensed-Italic,
 SlantedFont = RobotoCondensed-Italic,
@@ -64,6 +65,7 @@ BoldItalicFont = RobotoCondensed-BoldItalic]
 \newfontfamily\codefont{lmmonoltcond10-regular.otf}
 \newfontfamily\narrowfilefont{lmmonoltcond10-oblique.otf}
 
+% Define defaults for printing listings with the minted package
 \usepackage{tocbasic}
 \usepackage[section]{minted}
 \setminted[java]{fontsize=\footnotesize,numbers=left,stepnumber=5,stepnumberfromfirst,autogobble=true,breaklines=true,frame=lines,framesep=1ex}
