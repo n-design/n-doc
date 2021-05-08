@@ -5,6 +5,7 @@ atbegshi
 atveryend
 auxhook
 babel-german
+babel-english
 biber
 biblatex
 bigintcalc
