@@ -1,47 +1,44 @@
-\hrefchapter{comp}{Definition der erweiterten Komponenten}
+\hrefchapter{comp}{Definition of Extended Components}
 
-\hrefsection{comp.pp-fcsrng}{\texorpdfstring{Definition der erweiterten Familie
-  \secitemfont{\nounderscore{FCS_RNG}}}{Definition der erweiterten Familie FCS\_RNG}}
+\hrefsection{comp.pp-fcsrng}{\texorpdfstring{Definition of the extended family
+  \secitemfont{\nounderscore{FCS_RNG}}}{Definition of the extended family FCS\_RNG}}
 
-\minisec{Familienverhalten}
+\minisec{Family Behaviour}
 
-Diese Familie definiert Anforderungen an die Erzeugung von
-Zufallszahlen, die für kryptographische Anwendungen vorgesehen sind.
+This family defines requirements to the creation of random numbers that are used
+for cryptographic applications.
 
-
-\minisec{Komponentenabstufung}
+\minisec{Component Leveling}
 
 \vspace{2ex}
-\framebox{\secitem{FCS_RNG} \hspace{2em} Zufallszahlenerzeugung}%
+\framebox{\secitem{FCS_RNG} \hspace{2em} Random number generation}%
 \rule[.5ex]{2cm}{0.1pt}%
 \framebox{1}
 \par
 \vspace{2ex}
 
-\secitem{FCS_RNG.1} "`Zufallszahlenerzeugung"' erfordert die Identifizierung
-des Typs des verwendeten Zufallszahlengenerators und eine Auflistung
-seiner Sicherheitsmerkmale. Für die erzeugten Zufallszahlen ist eine
-Qualitätsmetrik anzugeben, auf die sich ihre nachfolgende Verarbeitung
-und Bewertung abstützen kann.
+\secitem{FCS_RNG.1} ``random number generation'' requires the identification of
+the type of the random number generator and a list of its security capabilities. A
+quality metric for the generated random numbers must be specified. The
+evaluation and processing of the random numbers has to rely upon this quality
+metric.
 
 
 \minisec{Management: \secitem{FCS_RNG.1}}
 
-Für diese Komponente sind keine Management-Aktivitäten vorgesehen.
+There are not management activities foreseen for this component.
 
-\minisec{Protokollierung: \secitem{FCS_RNG.1}}
+\minisec{Audit: \secitem{FCS_RNG.1}}
 
-Es sind keine Ereignisse identifiziert, die protokollierbar sein
-sollen, wenn \formatsfr{FAU\_GEN} Generierung der Sicherheitsprotokolldaten
-Bestandteil des PP/des ST ist.
+There are no events identified that must be audited, if \formatsfr{FAU\_GEN} is part of the PP/ST.
 
-% (Für die Definition der extended components keine \sfr Makros verwenden,
-% da es sonst zu doppelten Definition der Hypertextanker kommt.
-\minisec{{\normalsize\secitem{FCS_RNG.1}}\nopagebreak\\{\small Zufallszahlenerzeugung}}
+% (Do not use \sfr macro for the definition of extended components.
+% This would result in duplicate hypertext anchors.
+\minisec{{\normalsize\secitem{FCS_RNG.1}}\nopagebreak\\{\small Random number generation}}
 \vspace{1ex}
 
-\hierarchicalto{Keine andere Komponente}
-\dependencies{Keine Abhängigkeiten}
+\hierarchicalto{No other component}
+\dependencies{No dependencies}
 
 \begin{sfrdefinitionlist}
 \item[{\normalfont{\small\secitem{FCS_RNG.1.1}}}] The TSF shall provide a {[}selection:
@@ -55,10 +52,10 @@ Bestandteil des PP/des ST ist.
   meet {[}assignment: a defined quality metric{]}.
 \end{sfrdefinitionlist}
 
-\minisec{Erklärung für die Einführung der erweiterten Familie}
+\minisec{Rationale for the introduction of the extended family}
 
-Laut der Definition von \objlink{oe.realtimeclock} in \citepp{} ist der TOE für die
-Zulieferung von Zufallszahlen verantwortlich.
+According to the definiton of \objlink{oe.realtimeclock} in \citepp{} the TOE is
+responsible for the generation of random numbers.
 
 %%% Local Variables:
 %%% mode: latex
