@@ -4,6 +4,8 @@
 =  CC Documentation for the  Mauve VPN Client
 A fictional product as template for the n-doc process
 
+NOTE: This project is currently translated to English. Not all files have been translated. 
+
 This repository contains the developer documentation for the CC evaluation of the 
 Mauve VPN Client. This file and the linked resources provide the documentation process and tools.
 
