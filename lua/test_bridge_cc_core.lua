@@ -119,15 +119,15 @@ function testbridge.test_getSecfuncText()
 end
 
 function testbridge.test_getObjective()
-   bridge_cc_core.getObjective("o.zeitdienst", tex.expected([[O.Zeitdienst]]))
+   bridge_cc_core.getObjective("o.timeservice", tex.expected([[O.Zeitdienst]]))
 end
 
 function testbridge.test_getObjectiveText()
-   bridge_cc_core.getObjectiveText("o.zeitdienst", tex.expected([[Nutzung eines sicheren Zeitdienstes]]))
+   bridge_cc_core.getObjectiveText("o.timeservice", tex.expected([[Nutzung eines sicheren Zeitdienstes]]))
 end
 
 function testbridge.test_getObjectiveSource()
-   bridge_cc_core.getObjectiveSource("o.zeitdienst", tex.expected([[4.1.1]]))
+   bridge_cc_core.getObjectiveSource("o.timeservice", tex.expected([[4.1.1]]))
 end
 
 function testbridge.test_getSubjobj()
@@ -169,12 +169,12 @@ function testbridge.test_print_sf_table_header()
 end
 
 function testbridge.test_print_obj_table_header()
-   local expected_result = [[& \rot{\textsmaller[1]{\objlink{o.admin}}} & \rot{\textsmaller[1]{\objlink{o.schutz}}} & \rot{\textsmaller[1]{\objlink{o.tlscrypto}}} & \rot{\textsmaller[1]{\objlink{o.vpn_auth}}} & \rot{\textsmaller[1]{\objlink{o.vpn_integrität}}} & \rot{\textsmaller[1]{\objlink{o.vpn_vertraul}}} & \rot{\textsmaller[1]{\objlink{o.zeitdienst}}} & \rot{\textsmaller[1]{\objlink{o.zert_prüf}}} & \rot{\textsmaller[1]{\objlink{oe.echtzeituhr}}} ]]
+   local expected_result = [[& \rot{\textsmaller[1]{\objlink{o.admin}}} & \rot{\textsmaller[1]{\objlink{o.cert_check}}} & \rot{\textsmaller[1]{\objlink{o.protection}}} & \rot{\textsmaller[1]{\objlink{o.timeservice}}} & \rot{\textsmaller[1]{\objlink{o.tlscrypto}}} & \rot{\textsmaller[1]{\objlink{o.vpn_auth}}} & \rot{\textsmaller[1]{\objlink{o.vpn_conf}}} & \rot{\textsmaller[1]{\objlink{o.vpn_integrity}}} & \rot{\textsmaller[1]{\objlink{oe.realtimeclock}}} ]]
    bridge_cc_core.print_table_header("obj", "objlink", tex.expected(expected_result:gsub("__1ex", "[1ex]")))
 end
 
 function testbridge.test_print_sfr_to_obj_table_body()
-   local expected_result = [[\textsmaller[1]{\sfrlinknoindex{fcs_ckm.1}} & \tno & \tno & \tcheck & \tcheck & \tcheck & \tcheck & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_ckm.2/ike}} & \tno & \tno & \tno & \tcheck & \tcheck & \tcheck & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_ckm.2/tls}} & \tno & \tno & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_ckm.4}} & \tno & \tno & \tcheck & \tcheck & \tcheck & \tcheck & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/hash}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tcheck & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/hmac}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tcheck & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/tls.aes}} & \tno & \tno & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/tls.auth}} & \tno & \tno & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_rng.1/hashdrbg}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fdp_rip.1}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fpt_tdc.1/tls.zert}} & \tno & \tno & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fpt_tdc.1/zert}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tcheck & \tno\\\textsmaller[1]{\sfrlinknoindex{fpt_stm.1}} & \tno & \tno & \tno & \tno & \tno & \tno & \tcheck & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fpt_tst.1}} & \tno & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{ftp_itc.1/tls}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{ftp_itc.1/vpn}} & \tno & \tno & \tno & \tcheck & \tcheck & \tcheck & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{ftp_trp.1/admin}} & \tcheck & \tno & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno\\]]
+   local expected_result = [[\textsmaller[1]{\sfrlinknoindex{fcs_ckm.1}} & \tno & \tno & \tno & \tno & \tcheck & \tcheck & \tcheck & \tcheck & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_ckm.2/ike}} & \tno & \tno & \tno & \tno & \tno & \tcheck & \tcheck & \tcheck & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_ckm.2/tls}} & \tno & \tno & \tno & \tno & \tcheck & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_ckm.4}} & \tno & \tno & \tno & \tno & \tcheck & \tcheck & \tcheck & \tcheck & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/hash}} & \tno & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/hmac}} & \tno & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/tls.aes}} & \tno & \tno & \tno & \tno & \tcheck & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_cop.1/tls.auth}} & \tno & \tno & \tno & \tno & \tcheck & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fcs_rng.1/hashdrbg}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fdp_rip.1}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fpt_tdc.1/tls.zert}} & \tno & \tno & \tno & \tno & \tcheck & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fpt_tdc.1/zert}} & \tno & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fpt_stm.1}} & \tno & \tno & \tno & \tcheck & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{fpt_tst.1}} & \tno & \tno & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{ftp_itc.1/tls}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\sfrlinknoindex{ftp_itc.1/vpn}} & \tno & \tno & \tno & \tno & \tno & \tcheck & \tcheck & \tcheck & \tno\\\textsmaller[1]{\sfrlinknoindex{ftp_trp.1/admin}} & \tcheck & \tno & \tno & \tno & \tcheck & \tno & \tno & \tno & \tno\\]]
    bridge_cc_core.print_table_body('mainsfr', 'obj', 'sfrlinknoindex', cc_core.getSfr2Obj, tex.expected(expected_result:gsub("__1ex", "[1ex]")))
 end
 
@@ -184,7 +184,7 @@ function testbridge.test_print_sfr_to_sf_table_body()
 end
 
 function testbridge.test_print_spd_to_obj_table_body()
-   local expected_result = [[\textsmaller[1]{\spdlink{t.wan.client}} & \tno & \tno & \tno & \tcheck & \tcheck & \tcheck & \tno & \tno & \tno\\\textsmaller[1]{\spdlink{t.lan.admin}} & \tcheck & \tcheck & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\spdlink{t.mani_cert}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tcheck & \tno\\\textsmaller[1]{\spdlink{t.mani_time}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tcheck\\\textsmaller[1]{\spdlink{osp.tls}} & \tno & \tcheck & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\spdlink{osp.timeservice}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tcheck\\\textsmaller[1]{\spdlink{a.guidance}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\]]
+   local expected_result = [[\textsmaller[1]{\spdlink{t.wan.client}} & \tno & \tno & \tno & \tno & \tno & \tcheck & \tcheck & \tcheck & \tno\\\textsmaller[1]{\spdlink{t.lan.admin}} & \tcheck & \tno & \tcheck & \tno & \tcheck & \tno & \tno & \tno & \tno\\\textsmaller[1]{\spdlink{t.mani_cert}} & \tno & \tcheck & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\\textsmaller[1]{\spdlink{t.mani_time}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tcheck\\\textsmaller[1]{\spdlink{osp.tls}} & \tno & \tno & \tcheck & \tno & \tcheck & \tno & \tno & \tno & \tno\\\textsmaller[1]{\spdlink{osp.timeservice}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tcheck\\\textsmaller[1]{\spdlink{a.guidance}} & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno & \tno\\]]
    bridge_cc_core.print_table_body("spd", "obj", "spdlink", cc_core.getSpd2Obj, tex.expected(expected_result:gsub("__1ex", "[1ex]")))
 end
 

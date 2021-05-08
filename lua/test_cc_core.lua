@@ -72,7 +72,7 @@ function test_cc_core.test_spd()
 end
 
 function test_cc_core.test_spd_to_obj()
-   lu.assertEquals(cc_core.getSpd2Obj("t.lan.admin"), {"o.admin", "o.tlscrypto", "o.schutz"})
+   lu.assertEquals(cc_core.getSpd2Obj("t.lan.admin"), {"o.admin", "o.tlscrypto", "o.protection"})
    lu.assertEquals(cc_core.getSpd2Obj("a.guidance"), {""})
 end
 
