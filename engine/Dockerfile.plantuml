@@ -1,0 +1,13 @@
+FROM ndesign/n-doc
+
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get install -y openjdk-11-jre-headless
+
+COPY plantuml.tar.gz /
+RUN tar x -C / -f /plantuml.tar.gz
+COPY plantuml-accessories.tar.gz /
+RUN tar x -C / -f /plantuml-accessories.tar.gz
+
+WORKDIR /data
+
+VOLUME ["/data"]
