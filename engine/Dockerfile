@@ -34,14 +34,10 @@ FROM ${baseimage}
 ARG ctanmirror=http://www.ctan.org/tex-archive
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime
-RUN apt-get update && apt-get -y upgrade
-RUN apt-get install -y make git sqlite perl graphviz curl python3-pygments
+RUN apt-get update && apt-get install -y make git sqlite perl graphviz curl python3-pygments
 
 COPY --from=buildbase /luarocks-3.7.0/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
 COPY --from=buildbase /luarocks-3.7.0/lua_modules/share/lua/5.3/ /usr/local/share/lua/5.3
-
-RUN echo ${ctanmirror}
 
 RUN curl -L ${ctanmirror}/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xz
 RUN mv install-tl-20* install-tl
