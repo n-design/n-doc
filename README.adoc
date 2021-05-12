@@ -1,102 +1,113 @@
 :icons: font
 :experimental:
 
-=  CC Documentation for the  Mauve VPN Client
-A fictional product as template for the n-doc process
+= n-doc: Creating CC Documentation with LaTeX
 
-NOTE: This project is currently translated to English. Not all files have been translated. 
+NOTE: This project is currently reorganized and all content is translated to
+English. Not all files have been translated and there might be some
+organizational errors.
 
-This repository contains the developer documentation for the CC evaluation of the 
-Mauve VPN Client. This file and the linked resources provide the documentation process and tools.
+This repository contains the developer documentation for the CC evaluation of
+the Mauve VPN Client, a fictional TOE serving as a template for the
+n-doc process. The developer documentation consists sample documents:
+
+* Security Target (ASE_ST)
+
+* Functional Specification (ADV_FSP)
+
+* TOE Design Specification (ADV_TDS)
+
+* Test Coverage (ATE_COV)
+
+* Reference List (Reflist)
+
+* Security Architecture (ADV_ARC)
+
+* Life Cycle (ADV_ARC)
+
+Those documents provide an outline that can be used when adapting the sample
+documents for your own purposes. Especially ASE_ST, ADV_FSP and ADV_TDS contain
+enough text to show the interaction between documents and database.
+
 
 == Compiling the documents
 
-* Clone the repo
+Call `./runmake.sh` to build the documents. Result documents are copied
+  to the directory `deliverables`.
 
-* run `./runmake.sh`
-
-* Result documents are copied to `deliverables`.
-
-Use the Docker image link:https://github.com/n-design/n-doc[n-doc] to compile
-the documents to PDF. The root directory of this repo must be mounted under
-`/data` in to the container. `runmake.sh` contains this call:
+`runmake.sh` starts a
+link:https://hub.docker.com/repository/docker/ndesign/n-doc[ndesign/n-doc]
+container. This container contains all the tools necessary for building the
+documents. There is no need to install any software on your computer. The
+current directory that contains the repository is mounted into the container:
 
 ----
 docker run --rm  --volume $(pwd):/data ndesign/n-doc make -j4 delivery
 ----
 
-Use a specific document type (`st`, `tds` etc, see below) instead of delivery to build only a single document.
+Use a specific document type instead of `delivery` to build only a single
+document (`ase`, `adv_tds` etc, see below) . The result document will be in the
+subdirectory with the same name.
 
-The optional parameter `-j` controlls the number of threads  (jobs), that GNU Make
+The optional parameter `-j` controls the number of threads  (jobs) that GNU Make
 starts in parallel. Use the number of cores of your CPU. The more, the faster.
 
 WARNING: Without a number after `-j` GNU Make uses all available resources of
 the host system. This might lead to a complete standstill.
 
+
 == Working on the docments / Structure of the repository
 
 Each developer document has its own subdirectory. The subdirectories have the
-same name as the document type: ``ase``, ``adv_tds`` etc. All files that are
+same name as the document type: `ase`, `adv_tds` etc. All files that are
 specific to that document type reside in that directory. Elements shared between
-documents are in the ``common`` directory. Lua programs are in ``lua``.
+documents are in the `common` directory. Lua programs are in `lua`. The
+`engine` subdirectory contains the resources needed to create the Docker image
+containing TeX Live and all other tools. See the separate documentation in
+link:engine/README.adoc[README.adoc] for details.
 
 The documents are modularized. There is a main document that incorporates the
 other parts. This main document must have the same name as the directory it
-resides in.
-
-=== Minimal Working Examples
-
-The directories ``mwe_tds``, ``mwe_st``, ``mwe_fsp`` and ``mwe_arc`` contain
-documents that serve as __Minimal Working Examples__ (MWE, as is common at
-link:https://tex.stackexchange.com/[TeX Stackexchange]). They provide the same
-macros as their "bigger" counterparts and serve as test environments for
-reproducing bugs or developing smaller chapters that are quicker to compile than
-the ADV documents themselves. The main documents ``mwe_tds/mwe_tds.tex``,
-``mwe_st/mwe_st.tex`` and ``mwe_fsp/mwe_fsp.tex`` should not be
-modified. Instead, create a file ``mwe_<documenttype>_body.tex`` that can be
-freely edited. This ``_body`` file is ignored by git so that there are no merge
-conflicts that result from experiments. The make goal ``make mwe`` creates
-``_body`` files for all MWE-types.
-
+resides in, e.g. `adv_tds/adv_tds.tex`.
 
 == Build-Management
 
-The goal is to automate the generation of PDF documents and the release
+The goal is to automate both the generation of PDF documents and the release
 management as far as possible. A combination of tools is used for that:
-link:http://personal.psu.edu/jcc8/software/latexmk-jcc/[``latexmk``],
-link:https://www.gnu.org/software/make/[``make``] and an assortment of shell
+link:http://personal.psu.edu/jcc8/software/latexmk-jcc/[`latexmk`],
+link:https://www.gnu.org/software/make/[`make`] and an assortment of shell
 scripts.
 
-``latexmk`` is used at the level of individual documents. To build several
-documents at once, ``latexmk`` is combined with ``make``.
+`latexmk` is used at the level of individual documents. To build several
+documents at once, `latexmk` is combined with `make`.
 
-The following goals are availavble at the root level ``Makefile``:
+The following goals are availavble at the root level `Makefile`:
 
-[cols="2,4", options="header"]
+[cols="1,4", options="header"]
 |===
 | Goal      | Purpose
 
-| ``all``      | Creates all PDF-documents and the DB file in their respective directories
+| `all`      | Creates all PDF-documents and the DB file in their respective directories
 
-| ``delivery`` | Creates all PDF-documents and copies them to the directory ``deliverables``. Documents are renamed so that they have their version number in the name.
+| `delivery` | Creates all PDF-documents and copies them to the directory `deliverables`. Documents are renamed so that they have their version number in the name.
 
-| ``ase``  | Creates the Security Target 
+| `ase`  | Creates the Security Target 
 
-| ``fsp`` | Creates the  Funktional Specification (``adv_fsp``)
+| `fsp` | Creates the  Funktional Specification (`adv_fsp`)
 
-| ``tds`` | Creates the  Design Specification (``adv_tds``)
+| `tds` | Creates the  Design Specification (`adv_tds`)
 
-| ``arc`` | Creates the  Security Architecture (``adv_arc``)
+| `arc` | Creates the  Security Architecture (`adv_arc`)
 
-| ``ate`` | Creates the  Test Coverage (``ate_cov``) 
+| `ate` | Creates the  Test Coverage (`ate_cov`) 
 
-| ``ref`` | Creates the  List of References (``refliste``)
+| `ref` | Creates the  List of References (`refliste`)
 
-| ``clean`` | Removes all documents and auxiliary files
+| `clean` | Removes all documents and auxiliary files
 
-| ``mwe`` | Creates the "minimal working examples" (``mwe_*``) and their ``_body`` files.
+| `mwe` | Creates the "minimal working examples" (`mwe_*`) and their `_body` files.
 
-| ``cleanmwe`` | Removes all documents and auxiliary files for the minimal working examples
+| `cleanmwe` | Removes all documents and auxiliary files for the minimal working examples
 
 |===
 
@@ -106,11 +117,11 @@ The following shell scripts support the build management:
 |===
 | Script | Purpose
 
-| ``scripts/release_documents.sh`` | Creates a document release. Raises the version number and tags the repository.
+| `scripts/release_documents.sh` | Creates a document release. Raises the version number and tags the repository.
 
-| ``scripts/renamereleases.sh`` | _Not to be called by the user._ Adds the version number to the file name. Is called from the  ``Makefile``.
+| `scripts/renamereleases.sh` | _Not to be called by the user._ Adds the version number to the file name. Is called from the  `Makefile`.
 
-| ``scripts/create_release_archive.sh`` | _Not to be called by the user._ Creates an archive with the documents in ``deliverables``. Is called from the  ``Makefile``.
+| `scripts/create_release_archive.sh` | _Not to be called by the user._ Creates an archive with the documents in `deliverables`. Is called from the  `Makefile`.
 
 |===
 
@@ -118,3 +129,19 @@ The following shell scripts support the build management:
 == Release Management
 
 Creating releases is described in a link:doku/creating-releases.adoc[separate document].
+
+== Minimal Working Examples
+
+The directories `mwe_tds`, `mwe_st`, `mwe_fsp` and `mwe_arc` contain
+documents that serve as __Minimal Working Examples__ (MWE, as is common at
+link:https://tex.stackexchange.com/[TeX Stackexchange]). They provide the same
+macros as their "bigger" counterparts and serve as test environments for
+reproducing bugs or developing smaller chapters that are quicker to compile than
+the ADV documents themselves. The main documents `mwe_tds/mwe_tds.tex`,
+`mwe_st/mwe_st.tex` and `mwe_fsp/mwe_fsp.tex` should not be
+modified. Instead, create a file `mwe_<documenttype>_body.tex` that can be
+freely edited. This `_body` file is ignored by git so that there are no merge
+conflicts that result from experiments. The make goal `make mwe` creates
+`_body` files for all MWE-types.
+
+
