@@ -1,73 +1,50 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Makros für die Autoren der TDS Module
-% =====================================
+% Macros for authoring the TOE Design Specification
+% =================================================
 %
-% Hier werden Makros definiert, die für die Beschreibung
-% der TDS Module notwendig sind. Diese Liste stellt
-% gewissermaßen die API dar. Bitte keine direkten
-% Formatierungen mit LaTeX Befehlen benutzen, sondern
-% schauen was
-% a) in dieser Datei
-% b) in /common/common-macros.tex
-% definiert ist. Im Zweifel bitte Rücksprache mit AKR
-% halten.
+% This file defines macros that are required for authoring the TDS modules.  
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-% Makro für "Provided"
+% Macro for "Provided"
 \newcommand{\provided}{\secitemfont{(Provided)}}
 
-% Makro für "Required"
+% Macro for "Required"
 \newcommand{\required}{\secitemfont{(Required)}}
 
-% Standardisiertes Einbinden der Grafik eines Subsystems
-% Argument 1: Label der Grafik für Referenzen auf das Bild
-% Argument 2: Pfad zur Grafikdatei
-% Argument 3: Name des dargestellten Subsystems
-\newcommand{\subsystemdecompositionfigure}[3]{%
-\ccFigure{#1}{subsysteme/#2}{Dekomposition des Subsystems #3 in Module}{0.5}}
+%% Headlines for the subsystem section The description of the subsystem should
+%% use exactly thse macros for headlines. They provide the correct level of
+%% outline and create hypertext anchors. Argument is the key of the subsystem as
+%% defined in the database in /common/db/subsystems.csv
 
-% Standardisiertes Einbinden der Grafik eines Moduls
-% Argument 1: Label der Grafik für Referenzen auf das Bild
-% Argument 2: Pfad zur Grafikdatei
-% Argument 3: Name des dargestellten Subsystems
-\newcommand{\moduledecompositionfigure}[3]{%
-\ccFigure{#1}{#2}{Dekomposition des Moduls #3}{1.0}}
+%% Note about the implementation: Direct Lua calls must be used here, no other macros. Texts are used as PDF bookmarks and macros are not resolved in PDF bookmarks. 
+\newcommand{\subsystemchapter}[1]{\clearpage\hrefsection{#1}{Subsystem \texorpdfstring{\secitemfont{\tdsplain{#1}}}{\directlua{replacelabelplain("#1", "no")}}}}
+\newcommand{\subsystemdescription}[1]{\subsection*{Description}\label{#1}}
+\newcommand{\subsystemsfr}[1]{\subsection*{Implemented SFR}\label{{#1}}}
+\newcommand{\subsysteminteract}[1]{\subsection*{Interaction With Other Subsystems}\label{#1}}
+\newcommand{\modulesforsubsystemchapter}[2]{\clearpage\section{\texorpdfstring{Modules for Subsystem \secitemfont{\directlua{replacelabel("#2", "no")}}}{Modules for Subsystem \directlua{replacelabelplain("#2", "no")}}}\label{#1}}
 
-%% Fest formulierte Überschriften für das Kapitel Subsysteme.
-%% Die Beschreibung jedes Subsystems muss genau diese Überschriften enthalten.
-%% zu übergebendes Argument: Das Label (der Hypertextanker) dieses Abschnitts.
+%% Headlines for the module section The description of the module should
+%% use exactly thse macros for headlines. They provide the correct level of
+%% outline and create hypertext anchors. Argument is the key of the module as
+%% defined in the database in /common/db/modules.csv
 %%
-%% Notiz zur Implementierung: Hier müssen direkte Lua-Aufrufe stehen, kein
-%% \tdsplain{} Makro, da sonst die unaufgelösten Strings in die PDF-Bookmarks
-%% übernommen werden.
-\newcommand{\subsystemkapitel}[1]{\clearpage\hrefsection{#1}{Subsystem \texorpdfstring{\secitemfont{\tdsplain{#1}}}{\directlua{replacelabelplain("#1", "no")}}}}
-\newcommand{\subsystembeschreibung}[1]{\subsection*{Beschreibung}\label{#1}}
-\newcommand{\subsystemsfr}[1]{\subsection*{Umgesetzte SFR}\label{{#1}}}
-\newcommand{\subsysteminteract}[1]{\subsection*{Interaktion mit anderen Subsystemen}\label{#1}}
-\newcommand{\modulefuersubsystemkapitel}[2]{\clearpage\section{\texorpdfstring{Module für Subsystem \secitemfont{\directlua{replacelabel("#2", "no")}}}{Module für Subsystem \directlua{replacelabelplain("#2", "no")}}}\label{#1}}
-
-%% Fest formulierte Überschriften für das Kapitel Module.
-%% Die Beschreibung jedes Moduls muss genau diese Überschriften enthalten.
-%% zu übergebendes Argument: Das Label (der Hypertextanker) dieses Abschnitts.
-%%
-\newcommand{\moduleKapitel}[1]{\hrefsubsection{#1}{Modul \texorpdfstring{\secitemfont{\directlua{replacelabel("#1", "fq")}}}{\directlua{replacelabelplain("#1", "x")}}}}
+\newcommand{\modulechapter}[1]{\hrefsubsection{#1}{Module \texorpdfstring{\secitemfont{\directlua{replacelabel("#1", "fq")}}}{\directlua{replacelabelplain("#1", "x")}}}}
   
-\newcommand{\moduleBeschreibung}[1]{\hrefsubsubsection{#1}{Beschreibung}}
-\newcommand{\moduleAblaeufe}[1]{\hrefsubsubsection{#1}{Abläufe des Moduls}}
-\newcommand{\moduleSchnittstellen}[1]{\hrefsubsubsection{#1}{Schnittstellen zu anderen Modulen}}
+\newcommand{\moduledescription}[1]{\hrefsubsubsection{#1}{Description}}
+\newcommand{\moduleprocesses}[1]{\hrefsubsubsection{#1}{Processes}}
+\newcommand{\moduleinterfaces}[1]{\hrefsubsubsection{#1}{Interfaces To Other Modules}}
 
-%% Fest formulierte Überschriften für die Modulbeschreibungen
+%% Fest formulierte Überschriften for die Modulbeschreibungen
 %% Argument 1: Das Label des Hypertextankers
 %% Argument 2: Der Text der Überschrift
 %%
 \newcommand{\modulAblauf}[2]{\hrefparagraph{#1}{#2}}
 \newcommand{\modulAblaufSchritt}[2]{\hrefsubparagraph{#1}{#2}}
 
-%% Fest formulierte Überschriften für die Beschreibung der
+%% Fest formulierte Überschriften for die Beschreibung der
 %% Schnittstellen eines Moduls.
 %% Parameter: Label der Schnittstelle
 %% Das Label muss in der Regel noch in die tdsDefinitions eingetragen werden.
@@ -77,7 +54,7 @@
 \newcommand{\generatesfrtable}[1]{%
   \noindent{}Das Modul erfüllt die Anforderungen, die durch die SFR in
   \tableref{tab:#1.sfr} an den EVG gestellt werden. Das Modul ist
-  \getModuleStatus{#1} für den TOE.\par{}
+  \getModuleStatus{#1} for den TOE.\par{}
   \captionsetup[table]{list=no}
   \begin{table}[htb]
     \centering

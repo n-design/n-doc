@@ -1,44 +1,35 @@
-\section*{Anmerkungen zur Notation}
+\section*{Remarks on Notation}
 
-Tabelle~\vref{tab:intro.notc} listet die in diesem Dokument verwendeten
-typographischen Auszeichnungen und ihre Verwendung auf. Oftmals ist die
-Abgrenzung zwischen den in der Tabelle aufgeführten Kategorien nicht ganz
-leicht: So kommt es gelegentlich vor, dass auf verschiedenen Abstraktionsebenen
-dieselben Begriffe verwendet werden. Es ist in solchen Fällen nicht auf den
-ersten Blick zu erkennen, auf welcher Abstraktionsebene der Begriff gerade
-verwendet wird. Beispielsweise kann ein Begriff gleichzeitig ein
-Konfigurationsparameter aus der Spezifikation und gleichzeitig der Name einer
-Variable im Code sein. Durch eine möglichst hohe typographische Konsistenz soll
-der jeweilige Kontext verdeutlicht werden. Die Hinweise in
-\tableref{tab:intro.notc} sollen helfen, die Begrifflichkeiten einzuordnen und
-voneinander abzugrenzen.
+Table~\vref{tab:intro.notc} lists the typographical conventions used in this
+document and their usage. Often the categories are not as clear-cut as they
+seem. Occasionally, the same term is used on different levels of abstraction. It
+is not always possible to determine that level at first glance. For example, a
+term can be both a keyword taken from the specification and the name of a
+variable in the code. Typographic consistency supports the reader in determining
+the level of abstraction. The explanations in \tableref{tab:intro.notc} shall
+motivate the differentiation.
 
-Module und Subsysteme werden durch doppelte Doppelpunkte in der Form
-\secitemformat{Sub\-sys\-tem::Mo\-dul} notiert. Wird in einem solchen Kontext
-auf eine Schnittstelle verwiesen, wird der Name der Schnittstelle durch zwei
-Schrägstriche vom Namen des Moduls getrennt:
-\secitemformat{Sub\-sys\-tem::Mo\-dul//Schnittstelle}.
+Subsystems and modules are separated by a double colon, as in
+\secitemformat{Sub\-sys\-tem::Mo\-dule}. Interfaces of modules are separated by
+two forward slashes: \secitemformat{Sub\-sys\-tem::Mo\-dule//Interface}.
 
-Die ihm Text zitierten Namen von Code-Elementen -- besonders die Komponenten im
-Java-Umfeld -- können zum Teil lang werden. In solchen Fällen werden die Namen
-der besseren Lesbarkeit halber mit Trennstrichen versehen, die in dieser Form
-nicht im Code sichtbar sind. Diese minimale Abweichung wird in Kauf genommen, um
-dem Text ein harmonisches Gesamtbild zu verleihen, das nicht durch übermäßigen
-Weißraum gestört wird.
+The quoted names of code elements -- especially of the Java-based components --
+tend to be quite long. In such cases, hyphens are used to split the name across
+lines, . This avoids extraneous amounts of white space and supports readability.
 
 \begin{table}[htb]
   \centering{}
   \begin{tabularx}{\textwidth}{@{}lX@{}}
     \toprule
-    Typographische Auszeichnung & Verwendung\\
+    Typographic Markup & Purpose \\
     \midrule
-    \keyword{Schlüsselwörter} & \keyword{Schlüsselwörter} sind solche Begriffe, die z.\,B. direkt aus der Spezifikation entnommen sind, dies können Konfigurationsparameter und ihre Werte sein. Aber auch andere Begriffe, die im Kontext des TOE eine hervorgehobene Bedeutung haben, sind so ausgezeichnet.\\
-    \code{Code-Elemente} & \code{Code-Elemente} sind solche Begriffe, die unmittelbar aus dem Source-Code des TOE entnommen sind. Dies können beispielsweise Java-Bundles, Klassen- oder Methodennamen sein, aber auch deren Parameter oder logische Strukturen in einer der verwendeten Programmiersprachen.\\
-    \filename{Dateinamen} & \filename{Dateinamen} beziehen sich auf Namen oder Namensteile von Elementen im Dateisystem.\\
-    \secitem{Sicherheitsbezogene Begriffe} & Begriffe, die in direktem Bezug zum Rahmenwerk der Common Criteria stehen, sind als \secitem{Sicherheitsbezogene Begriffe} gesetzt. Dies sind SFR, die Namen der SF und TSFI, aber auch die Namen der Subsysteme, Module und Schnittstellen, die den TOE konstituieren. Weiterhin sind Namen der vom TOE verwendeten Zertifikate und sonstigen Schlüsselmaterials in dieser Form gesetzt.\\
+    \keyword{keywords} & \keyword{Keywords} are terms that are directly taken from the specification. This can be the names of configuration parametes and their values. Also other highly specific terms can be typeset as \keyword{keywords}.\\
+    \code{code elements} & \code{code elements} are terms that are taken from the TOE's source code. This can be names of classes, methods and other types, but also their parameters or logical structures of the programming language employed by the TOE.\\
+    \filename{file names} & \filename{file names} relate to names of file system elements, such as files or directories.\\
+    \secitem{security terms} & Terms that are directly related to the Common Criteria framework are typeset as  \secitem{security terms}. This can be SFRs or the names of SF and TSFI. Furthermore, the names of subsystems and modules that constitute the TOE are typeset in this way. This holds also for the names of certficiates and other key material.\\
     \bottomrule
   \end{tabularx}
-    \caption{Typographische Konventionen}
+    \caption{Typographic Conventions}
     \label{tab:intro.notc}
 \end{table}
 

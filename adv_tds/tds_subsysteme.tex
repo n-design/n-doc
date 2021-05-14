@@ -1,14 +1,13 @@
 
-\hrefchapter{sub}{Beschreibung der Subsysteme}
+\hrefchapter{sub}{Description of Subsystems}
 
-Dieses Kapitel beschreibt die Unterteilung des TOE in seine Subsysteme.
+This chapter describes the division of the TOE into its subsystems.
 
-\subsystemkapitel{sub.vpn}
+\subsystemchapter{sub.vpn}
 
-\subsystembeschreibung{sub.vpn.desc}
+\subsystemdescription{sub.vpn.desc}
 
-Das Subsystem \tds{sub.vpn} stellt den VPN-Client bereit, mit dem VPN-Tunnel im
-WAN aufgebaut werden können.
+The subsystem \tds{sub.vpn} provides the VPN client that is used to create VPN tunnels in the WAN.
 
 \subsystemsfr{sub.vpn.sfr}
 
@@ -16,15 +15,16 @@ WAN aufgebaut werden können.
 
 \subsysteminteract{sub.vpn.interact}
 
-Das Subsystem ruft Funktionalität aus dem Subsystem \tdslink{sub.cryptsystem}
-auf.
+The subsystem \tds{sub.vpn} requires functionalities from the subsystems
+\tdslink{sub.cryptsystem}.
 
-\subsystemkapitel{sub.ntpclient}
 
-\subsystembeschreibung{sub.ntpclient.desc}
+\subsystemchapter{sub.ntpclient}
 
-Das Subsystem \tds{sub.ntpclient} stellt den VPN-Client bereit, mit dem die
-Systemzeit synchronisiert werden kann.
+\subsystemdescription{sub.ntpclient.desc}
+
+The subsystem \tds{sub.ntpclient} provides the NTP client that is used to
+synchronize the system time with an NTP server in the WAN.
 
 \subsystemsfr{sub.ntpclient.sfr}
 
@@ -32,14 +32,14 @@ Systemzeit synchronisiert werden kann.
 
 \subsysteminteract{sub.ntpclient.interact}
 
-\subsystemkapitel{sub.selfprotect}
+\subsystemchapter{sub.selfprotect}
 
-\subsystembeschreibung{sub.selfprotect.desc}
+\subsystemdescription{sub.selfprotect.desc}
 
-Das Subsystem \tds{sub.selfprotect} enthält die Funktionen zum Selbstschutz des
-TOE. Das Subsystem sorgt für Speicherbereinigung
-(\tdslink{mod.selfprotect.memory}) und Selbsttests
-(\tdslink{mod.selfprotect.selftest}).
+The subsystem \tds{sub.selfprotect} contains the functionalities that are used
+for the self-protection of the TOE. Provided are capabilities to diagnose the
+TOE with self-tests (\tdslink{mod.selfprotect.selftest} and for deleting
+residual information from the TOE's memory (\tdslink{mod.selfprotect.memory}).
 
 \subsystemsfr{sub.selfprotect.sfr}
 
@@ -47,12 +47,12 @@ TOE. Das Subsystem sorgt für Speicherbereinigung
 
 \subsysteminteract{sub.selfprotect.interact}
 
-\subsystemkapitel{sub.adminsystem}
+\subsystemchapter{sub.adminsystem}
 
-\subsystembeschreibung{sub.adminsystem.desc}
+\subsystemdescription{sub.adminsystem.desc}
 
-Das Subsystem \tds{sub.adminsystem} stellt die Administrationsanwendung und
-Managementfunktionen des TOE bereit.
+The subsystem \tds{sub.adminsystem} provides the administration application and
+management functions of the TOE.
 
 \subsystemsfr{sub.adminsystem.sfr}
 
@@ -60,11 +60,16 @@ Managementfunktionen des TOE bereit.
 
 \subsysteminteract{sub.adminsystem.interact}
 
-Das Subsystem ruft die Selbsttests des Subsystems \tdslink{sub.selfprotect} auf.
+This subsystem requires functionalities from the subsystem
+\tdslink{sub.selfprotect}.
 
-\subsystemkapitel{sub.cryptsystem}
+\subsystemchapter{sub.cryptsystem}
 
-\subsystembeschreibung{sub.cryptsystem.desc}
+\subsystemdescription{sub.cryptsystem.desc}
+
+The subsystem \tds{sub.cryptsystem} provides cryptographic base functions
+required by other functionalities of the TOE. The base functions comprise
+cryptographic algorithms, key management and random number generation.
 
 \subsystemsfr{sub.cryptsystem.sfr}
 
@@ -72,9 +77,12 @@ Das Subsystem ruft die Selbsttests des Subsystems \tdslink{sub.selfprotect} auf.
 
 \subsysteminteract{sub.cryptsystem.interact}
 
-\subsystemkapitel{sub.tls}
+\subsystemchapter{sub.tls}
 
-\subsystembeschreibung{sub.tls.desc}
+The subsystem \tds{sub.cryptsystem} provides TLS connections required to connect
+to the management functions in subsystem \tdslink{sub.adminsystem}.
+
+\subsystemdescription{sub.tls.desc}
 
 \subsystemsfr{sub.tls.sfr}
 
