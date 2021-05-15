@@ -5,31 +5,32 @@ cc_core = require "cc_core"
 tablegen = require "table_generator"
 
 function bridge_cc_core.replacelabel(key, fullyq, tex)
-   fq = false
+   local fq = false
    if fullyq == "fq" then
       fq = true
    end
-   replacedlabel = cc_core.replacelabel(key, fq)
+   local replacedlabel = cc_core.replacelabel(key, fq)
    tex.sprint(replacedlabel)
 end
 
 function bridge_cc_core.replacelabelplain(key, fullyq, tex)
-   fq = false
+   local fq = false
    if fullyq == "fq" then
       fq = true
    end
-   replacedlabel = cc_core.replacelabel(key, fq)
-   tex.sprint(string.gsub(replacedlabel, '\\%-', ''))
+   local replacedlabel = cc_core.replacelabel(key, fq)
+   local nohyphen = string.gsub(replacedlabel, '\\%-', '')
+   tex.sprint(nohyphen)
 end
 
 function bridge_cc_core.get_module_status(key, tex)
-   status = cc_core.get_module_status(key)
+   local status = cc_core.get_module_status(key)
    tex.sprint(status)
 end
 
 function bridge_cc_core.print_module_to_sfr_table(key, relationtype, tex)
-   relationtype = relationtype or "enf"
-   sfrs = cc_core.generate_table_module_to_sfr(key, relationtype)
+   local relationtype = relationtype or "enf"
+   local sfrs = cc_core.generate_table_module_to_sfr(key, relationtype)
    local result = tablegen.print_sfr_table_for_module(relationtype, sfrs)
    tex.print(result)
 end
@@ -37,8 +38,8 @@ end
 function bridge_cc_core.print_modules_for_sfr_rows(tex)
    local resulttable = {}
    for sfr in common.labels("mainsfr") do
-      enf_modules = cc_core.map_modules_to_sfr(sfr, "enf")
-      sup_modules = cc_core.map_modules_to_sfr(sfr, "sup")
+      local enf_modules = cc_core.map_modules_to_sfr(sfr, "enf")
+      local sup_modules = cc_core.map_modules_to_sfr(sfr, "sup")
       if #enf_modules > 0 or #sup_modules > 0 then
 	 local tablerow = tg.generate_modules_for_sfr_row(sfr, enf_modules, sup_modules)
 	 table.insert(resulttable, tablerow)
@@ -50,7 +51,7 @@ end
 function bridge_cc_core.print_tsfi_for_sfr_rows(tex)
    local resulttable = {}
    for sfr in common.labels("mainsfr") do
-      tsfi = cc_core.getSfr2Tsfi(sfr)
+      local tsfi = cc_core.getSfr2Tsfi(sfr)
       if #tsfi > 0 then
 	 local tablerow = tg.generate_tsfi_for_sfr_row(sfr, tsfi)
 	 table.insert(resulttable, tablerow)
@@ -62,7 +63,7 @@ end
 function bridge_cc_core.print_sfr_for_tsfi_rows(tex)
    local resulttable = {}
    for tsfi in common.labels("tsfi") do
-      sfr = cc_core.getTsfi2Sfr(tsfi)
+      local sfr = cc_core.getTsfi2Sfr(tsfi)
       if #sfr > 0 then
 	 local tablerow = tg.generate_sfr_for_tsfi_row(tsfi, sfr)
 	 table.insert(resulttable, tablerow)
@@ -72,26 +73,26 @@ function bridge_cc_core.print_sfr_for_tsfi_rows(tex)
 end
 
 function bridge_cc_core.print_subsys_to_sfr_table(key, relationtype, tex)
-   relationtype = relationtype or "enf"
-   sfrs = cc_core.generate_table_subsys_to_sfr(key, relationtype)
+   local relationtype = relationtype or "enf"
+   local sfrs = cc_core.generate_table_subsys_to_sfr(key, relationtype)
    local result = tablegen.print_sfr_table_for_subsys(relationtype, sfrs)
    tex.print(result)
 end
 
 function bridge_cc_core.print_module_to_bundle_table(key, tex)
-   bundles = cc_core.generate_table_module_to_bundle(key)
+   local bundles = cc_core.generate_table_module_to_bundle(key)
    local result = tablegen.print_bundle_table_for_module(bundles)
    tex.print(result)
 end
 
 function bridge_cc_core.print_sf_to_tsfi_table(key, tex)
-   tsfis = cc_core.getSf2Tsfi(key)
+   local tsfis = cc_core.getSf2Tsfi(key)
    local result = tablegen.print_item_list(tsfis, "tsfilink")
    tex.print(result)
 end
 
 function bridge_cc_core.print_tsfi_to_sf_table(key, tex)
-   sfs = cc_core.getTsfi2Sf(key)
+   local sfs = cc_core.getTsfi2Sf(key)
    local result = tablegen.print_item_list(sfs, "sflink")
    tex.print(result)
 end
@@ -227,21 +228,21 @@ function p(label, r)
 end
 
 
-function bridge_cc_core.print_table_body(label_row, label_header, macro, mapping_function, tex)
+function bridge_cc_core.print_table_body(table_params, tex)
    local resulttable = {}
-   for l in common.labels(label_row) do
-      local data_row = init_data_row(label_header)
-      local tupel = mapping_function(l)
+   for l in common.labels(table_params.label_row) do
+      local data_row = init_data_row(table_params.label_header)
+      local tupel = table_params.selector(l)
       for _,val in pairs(tupel) do
  	 data_row[val]=[[\tcheck]]
       end
       local tablerow={}
       table.insert(tablerow, [[\textsmaller[1]{\]])
-      table.insert(tablerow, macro)
+      table.insert(tablerow, table_params.macro)
       table.insert(tablerow, [[{]])
       table.insert(tablerow, l)
       table.insert(tablerow, [[}} & ]])
-      table.insert(tablerow, p(label_header, data_row))
+      table.insert(tablerow, p(table_params.label_header, data_row))
       table.insert(tablerow, [[\\]])
       table.insert(resulttable, table.concat(tablerow))
    end

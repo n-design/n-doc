@@ -31,7 +31,7 @@
 %% outline and create hypertext anchors. Argument is the key of the module as
 %% defined in the database in /common/db/modules.csv
 %%
-\newcommand{\modulechapter}[1]{\hrefsubsection{#1}{Module \texorpdfstring{\secitemfont{\directlua{replacelabel("#1", "fq")}}}{\directlua{replacelabelplain("#1", "x")}}}}
+\newcommand{\modulechapter}[1]{\hrefsubsection{#1}{Module \texorpdfstring{\secitemfont{\directlua{replacelabel("#1", "fq")}}}{\directlua{replacelabelplain("#1", "fq")}}}}
   
 \newcommand{\moduledescription}[1]{\hrefsubsubsection{#1}{Description}}
 \newcommand{\moduleprocesses}[1]{\hrefsubsubsection{#1}{Processes}}
