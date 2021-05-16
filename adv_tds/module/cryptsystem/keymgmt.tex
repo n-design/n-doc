@@ -42,11 +42,11 @@ Verfahren .......
 
 %% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
 %% sollte nicht zu lang, aber ausreichend verständlich sein.
-\modulAblauf{prc.cryptsystem.keymgmt.genkey}{Schlüssel erzeugen}
+\moduleprocess{prc.cryptsystem.keymgmt.genkey}{Schlüssel erzeugen}
 
 \implementedsfr{\sfrlink{fcs_ckm.1}}
 
-\modulAblauf{prc.cryptsystem.keymgmt.destroykey}{Schlüssel zerstören}
+\moduleprocess{prc.cryptsystem.keymgmt.destroykey}{Schlüssel zerstören}
 
 \implementedsfr{\sfrlink{fcs_ckm.4}}
 
@@ -82,11 +82,11 @@ Verfahren .......
 %% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
 %% die Schnittstelle an) oder required (das Modul nutzt die
 %% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
-\modulSchnittstelleProvided{int.cryptsystem.keymgmt.createkey}
+\moduleinterfaceprovided{int.cryptsystem.keymgmt.createkey}
 
 Über diese Schnittstelle wird ein Schlüssel erstellt.
 
-\modulSchnittstelleProvided{int.cryptsystem.keymgmt.destroykey}
+\moduleinterfaceprovided{int.cryptsystem.keymgmt.destroykey}
 
 Über diese Schnittstelle wird ein Schlüssel zerstört.
 

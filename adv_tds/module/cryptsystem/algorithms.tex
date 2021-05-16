@@ -42,13 +42,13 @@ Verfahren .......
 
 %% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
 %% sollte nicht zu lang, aber ausreichend verständlich sein.
-\modulAblauf{prc.cryptsystem.algorithms.hash}{Hashwerte berechnen}
+\moduleprocess{prc.cryptsystem.algorithms.hash}{Hashwerte berechnen}
 
 An dieser Stelle wird die Berechnung des HMAC beschrieben.
 
 \implementedsfr{\sfrlink{fcs_cop.1/hash}}
 
-\modulAblauf{prc.cryptsystem.algorithms.hmac}{HMAC berechnen}
+\moduleprocess{prc.cryptsystem.algorithms.hmac}{HMAC berechnen}
 
 An dieser Stelle wird die Berechnung des Hashwertes beschrieben.
 
@@ -64,11 +64,11 @@ An dieser Stelle wird die Berechnung des Hashwertes beschrieben.
 %% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
 %% die Schnittstelle an) oder required (das Modul nutzt die
 %% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
-\modulSchnittstelleProvided{int.cryptsystem.algorithms.gethash}
+\moduleinterfaceprovided{int.cryptsystem.algorithms.gethash}
 
 Über diese Schnittstelle werden Hashwerte berechnet (Ablauf in \sectref{prc.cryptsystem.algorithms.hash}).
 
-\modulSchnittstelleProvided{int.cryptsystem.algorithms.gethmac}
+\moduleinterfaceprovided{int.cryptsystem.algorithms.gethmac}
 
 Über diese Schnittstelle werden HMAC berechnet (Ablauf in \sectref{prc.cryptsystem.algorithms.hmac}).
 

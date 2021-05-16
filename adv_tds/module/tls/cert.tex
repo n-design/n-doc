@@ -42,7 +42,7 @@ Schnittstellen .......
 
 %% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
 %% sollte nicht zu lang, aber ausreichend verständlich sein.
-\modulAblauf{prc.tls.cert.checkcert}{Prüfung des Zertifikats}
+\moduleprocess{prc.tls.cert.checkcert}{Prüfung des Zertifikats}
 
 %% Hier folgt die ausführliche Beschreibung des SFR-relevanten
 %% Ablaufs.  Das sollte ordentlich in die Details des Verfahrens
@@ -77,11 +77,11 @@ Schnittstellen .......
 %% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
 %% die Schnittstelle an) oder required (das Modul nutzt die
 %% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
-\modulSchnittstelleProvided{int.tls.cert.checkcert}
+\moduleinterfaceprovided{int.tls.cert.checkcert}
 
 Über diese Schnittstelle wird das Zertifikat des Kommunikationspartners geprüft.
 
-\modulSchnittstelleRequired{int.cryptsystem.algorithms.gethash}
+\moduleinterfacerequired{int.cryptsystem.algorithms.gethash}
 
 Die Schnittstelle \tdslink[fq]{int.cryptsystem.algorithms.gethash} wird
 verwendet, um den Hash über das Zertifikat zu berechnen.

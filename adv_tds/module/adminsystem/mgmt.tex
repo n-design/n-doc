@@ -42,7 +42,7 @@ Schnittstellen .......
 
 %% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
 %% sollte nicht zu lang, aber ausreichend verständlich sein.
-\modulAblauf{prc.adminsystem.mgmt.setconfig}{Speichern der Konfiguration}
+\moduleprocess{prc.adminsystem.mgmt.setconfig}{Speichern der Konfiguration}
 
 %% Hier folgt die ausführliche Beschreibung des SFR-relevanten
 %% Ablaufs.  Das sollte ordentlich in die Details des Verfahrens
@@ -65,7 +65,7 @@ Schnittstellen .......
 %% hinzuweisen. Auf jeden Fall muss eine solche Zeile am Ende einer
 %% Ablaufbeschreibung stehen.
 
-\modulAblauf{prc.adminsystem.mgmt.connectdisconnect}{Auf- und Abbau der VPN-Verbindung}
+\moduleprocess{prc.adminsystem.mgmt.connectdisconnect}{Auf- und Abbau der VPN-Verbindung}
 
 Dieser Ablauf ruft den Verbindungsauf- und abbau auf. Die Schnittstelle
 \tdslink[fq]{int.vpn.core.connect} wird verwendet, um die VPN-Verbindung
@@ -73,7 +73,7 @@ aufzubauen. Die Schnittstelle \tdslink[fq]{int.vpn.core.disconnect} wird
 verwendet, um die VPN-Verbindung abzubauen.
 
 
-\modulAblauf{prc.adminsystem.mgmt.selftest}{Aufruf des Selbsttests}
+\moduleprocess{prc.adminsystem.mgmt.selftest}{Aufruf des Selbsttests}
 
 Die Schnittstelle \tdslink[fq]{int.selfprotect.selftest.runtest} wird
 verwendet, um den Selbsttest zu starten.
@@ -88,26 +88,26 @@ verwendet, um den Selbsttest zu starten.
 %% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
 %% die Schnittstelle an) oder required (das Modul nutzt die
 %% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
-\modulSchnittstelleProvided{int.adminsystem.mgmt.setconfig}
+\moduleinterfaceprovided{int.adminsystem.mgmt.setconfig}
 
 Über diese Schnittstelle wird die Konfiguration des Moduls
 \tds{mod.adminsystem.mgmt} verwaltet. Die Konfiguration kann darüber entweder
 gelesen oder geschrieben werden.
 
-\modulSchnittstelleProvided{int.adminsystem.mgmt.connectdisconnect}
+\moduleinterfaceprovided{int.adminsystem.mgmt.connectdisconnect}
 
 
-\modulSchnittstelleRequired{int.vpn.core.connect}
+\moduleinterfacerequired{int.vpn.core.connect}
 
 Die Schnittstelle \tdslink[fq]{int.vpn.core.connect} wird
 verwendet, um die VPN-Verbindung aufzubauen.
 
-\modulSchnittstelleRequired{int.vpn.core.disconnect}
+\moduleinterfacerequired{int.vpn.core.disconnect}
 
 Die Schnittstelle \tdslink[fq]{int.vpn.core.disconnect} wird
 verwendet, um die VPN-Verbindung abzubauen.
 
-\modulSchnittstelleRequired{int.selfprotect.selftest.runtest}
+\moduleinterfacerequired{int.selfprotect.selftest.runtest}
 
 Die Schnittstelle \tdslink[fq]{int.selfprotect.selftest.runtest} wird
 verwendet, um den Selbsttest zu starten.

@@ -42,15 +42,15 @@ Schnittstellen .......
 
 %% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
 %% sollte nicht zu lang, aber ausreichend verständlich sein.
-\modulAblauf{prc.tls.core.connect}{Aufbau einer TLS-Verbindung}
+\moduleprocess{prc.tls.core.connect}{Aufbau einer TLS-Verbindung}
 
 \implementedsfr{\sfrlink{ftp_itc.1/tls} & \sfrlink{fcs_cop.1/tls.aes}}
 
-\modulAblauf{prc.tls.core.auth}{Authentisieren des Kommunikationspartners}
+\moduleprocess{prc.tls.core.auth}{Authentisieren des Kommunikationspartners}
 
 \implementedsfr{\sfrlink{fcs_cop.1/tls.auth}}
 
-\modulAblauf{prc.tls.core.disconnect}{Abbau einer TLS-Verbindung}
+\moduleprocess{prc.tls.core.disconnect}{Abbau einer TLS-Verbindung}
 
 \implementedsfr{\sfrlink{ftp_itc.1/tls}}
 
@@ -86,25 +86,25 @@ Schnittstellen .......
 %% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
 %% die Schnittstelle an) oder required (das Modul nutzt die
 %% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
-\modulSchnittstelleProvided{int.tls.core.accept}
+\moduleinterfaceprovided{int.tls.core.accept}
 
 Über diese Schnittstelle wird eine TLS-Verbindung aufgebaut.
 
-\modulSchnittstelleProvided{int.tls.core.disconnect}
+\moduleinterfaceprovided{int.tls.core.disconnect}
 
 Über diese Schnittstelle wird eine TLS-Verbindung abgebaut.
 
-\modulSchnittstelleRequired{int.tls.cert.checkcert}
+\moduleinterfacerequired{int.tls.cert.checkcert}
 
 Die Schnittstelle \tdslink[fq]{int.tls.cert.checkcert} wird verwendet, um das
 Zertifikat des Kommunikationspartners zu prüfen.
 
-\modulSchnittstelleRequired{int.cryptsystem.keymgmt.createkey}
+\moduleinterfacerequired{int.cryptsystem.keymgmt.createkey}
 
 Die Schnittstelle \tdslink[fq]{int.cryptsystem.keymgmt.createkey} wird
 verwendet, um einen Verbindungsschlüssel zu erzeugen.
 
-\modulSchnittstelleRequired{int.cryptsystem.keymgmt.destroykey}
+\moduleinterfacerequired{int.cryptsystem.keymgmt.destroykey}
 
 Die Schnittstelle \tdslink[fq]{int.cryptsystem.keymgmt.destroykey} wird
 verwendet, um einen Verbindungsschlüssel zu zerstören.

@@ -42,7 +42,7 @@ Schnittstellen .......
 
 %% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
 %% sollte nicht zu lang, aber ausreichend verständlich sein.
-\modulAblauf{prc.adminsystem.webserver.httpcomm}{HTTP-Kommunikation mit dem
+\moduleprocess{prc.adminsystem.webserver.httpcomm}{HTTP-Kommunikation mit dem
   Administrator}
 
 %% Hier folgt die ausführliche Beschreibung des SFR-relevanten
@@ -77,17 +77,17 @@ Schnittstellen .......
 %% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
 %% die Schnittstelle an) oder required (das Modul nutzt die
 %% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
-\modulSchnittstelleProvided{int.adminsystem.webserver.httpendpoint}
+\moduleinterfaceprovided{int.adminsystem.webserver.httpendpoint}
 
 Über diese Schnittstelle wird die logische Schnittstelle \lslanhttpmgmt{}
 umgesetzt.
 
-\modulSchnittstelleRequired{int.adminsystem.mgmt.setconfig}
+\moduleinterfacerequired{int.adminsystem.mgmt.setconfig}
 
 Über die Schnittstelle \tdslink[fq]{int.adminsystem.mgmt.setconfig} speichert
 der HTTP-Server die Konfigurationsparameter.
 
-\modulSchnittstelleRequired{int.adminsystem.mgmt.connectdisconnect}
+\moduleinterfacerequired{int.adminsystem.mgmt.connectdisconnect}
 
 Über die Schnittstelle \tdslink[fq]{int.adminsystem.mgmt.connectdisconnect} ruft
 HTTP-Server die Funktion zum Auf- und Abbau der VPN-Verbindung auf.

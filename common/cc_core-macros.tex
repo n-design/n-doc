@@ -1,3 +1,5 @@
+\makeatletter{}
+
 \newcommand{\thispp}{vpnpp}
 \newcommand{\toeversion}{2.11}
 \newcommand{\thisTOE}{\thisproduct~\toeversion}
@@ -68,8 +70,8 @@
 % Macro for implemented/supported SFR. Paramter is in form of table lines, with
 % three items max. Can be used during process descriptions in adv_tds or in
 % ase_tss
-\newcommand{\implementedsfr}[1]{\enfsupsfrtable{Umgesetzte SFR}{#1}}
-\newcommand{\supportedsfr}[1]{\enfsupsfrtable{Unterstützte SFR}{#1}}
+\newcommand{\implementedsfr}[1]{\enfsupsfrtable{\ndoc@implementedsfr}{#1}}
+\newcommand{\supportedsfr}[1]{\enfsupsfrtable{\ndoc@supportedsfr}{#1}}
 
 % Not to be used by the user
 \newcommand{\enfsupsfrtable}[2]{
@@ -126,7 +128,7 @@
 \newcommand{\tdslink}[2][no]{\tds[#1]{#2}}
 
 
-
+\makeatother{}
 
 
 %%% Local Variables:

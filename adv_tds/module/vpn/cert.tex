@@ -42,7 +42,7 @@ Schnittstellen .......
 
 %% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
 %% sollte nicht zu lang, aber ausreichend verständlich sein.
-\modulAblauf{prc.vpn.cert.checkcert}{Prüfung des Zertifikats des
+\moduleprocess{prc.vpn.cert.checkcert}{Prüfung des Zertifikats des
   VPN-Konzentrators}
 
 Das Zertifikat wird auf mathematische Gültigkeit geprüft. Der Hash des
@@ -81,12 +81,12 @@ Zertifikats wird über die Funktion
 %% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
 %% die Schnittstelle an) oder required (das Modul nutzt die
 %% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
-\modulSchnittstelleProvided{int.vpn.cert.checkcert}
+\moduleinterfaceprovided{int.vpn.cert.checkcert}
 
 Über diese Schnittstelle das Zertifikat des VPN-Konzentrators geprüft
 (vgl. \sectref{prc.vpn.cert.checkcert}).
 
-\modulSchnittstelleRequired{int.cryptsystem.algorithms.gethash}
+\moduleinterfacerequired{int.cryptsystem.algorithms.gethash}
 
 Die Schnittstelle \tdslink[fq]{int.cryptsystem.algorithms.gethash} wird
 verwendet, um den Hash über das Zertifikat zu berechnen.

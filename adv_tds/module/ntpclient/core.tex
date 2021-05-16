@@ -43,7 +43,7 @@ Spezifikation \autocite[Abschnitt~3.2.6]{adv_fsp}.
 
 %% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
 %% sollte nicht zu lang, aber ausreichend verständlich sein.
-\modulAblauf{prc.ntpclient.core.sync}{Synchronisieren der Systemzeit}
+\moduleprocess{prc.ntpclient.core.sync}{Synchronisieren der Systemzeit}
 
 %% Hier folgt die ausführliche Beschreibung des SFR-relevanten
 %% Ablaufs.  Das sollte ordentlich in die Details des Verfahrens
@@ -77,7 +77,7 @@ Spezifikation \autocite[Abschnitt~3.2.6]{adv_fsp}.
 %% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
 %% die Schnittstelle an) oder required (das Modul nutzt die
 %% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
-\modulSchnittstelleProvided{int.ntpclient.core.synctime}
+\moduleinterfaceprovided{int.ntpclient.core.synctime}
 
 Über diese Schnittstelle wird die Synchroniation der Systemzeit gestartet
 (vgl. \sectref{prc.ntpclient.core.sync}).

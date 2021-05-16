@@ -7,6 +7,110 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\makeatletter
+\newcommand*\ndoc@description{\GetTranslation{ndoc@description}}
+\DeclareTranslationFallback {ndoc@description}{Description}
+\DeclareTranslation{English}{ndoc@description}{Description}
+\DeclareTranslation{German} {ndoc@description}{Beschreibung}
+
+\newcommand*\ndoc@implementedsfr{\GetTranslation{ndoc@implementedsfr}}
+\DeclareTranslationFallback {ndoc@implementedsfr}{Implemented SFR}
+\DeclareTranslation{English}{ndoc@implementedsfr}{Implemented SFR}
+\DeclareTranslation{German} {ndoc@implementedsfr}{Umgesetzte SFR}
+
+\newcommand*\ndoc@suppoprtedsfr{\GetTranslation{ndoc@suppoprtedsfr}}
+\DeclareTranslationFallback {ndoc@suppoprtedsfr}{Supported SFR}
+\DeclareTranslation{English}{ndoc@suppoprtedsfr}{Supported SFR}
+\DeclareTranslation{German} {ndoc@suppoprtedsfr}{Unterstützte SFR}
+
+\newcommand*\ndoc@interactionwithsubsystems{\GetTranslation{ndoc@interactionwithsubsystems}}
+\DeclareTranslationFallback {ndoc@interactionwithsubsystems}{Interaction With Other Subsystems}
+\DeclareTranslation{English}{ndoc@interactionwithsubsystems}{Interaction With Other Subsystems}
+\DeclareTranslation{German} {ndoc@interactionwithsubsystems}{Interaktion mit anderen Subsystemen}
+
+\newcommand*\ndoc@modulesforsubsystem{\GetTranslation{ndoc@modulesforsubsystem}}
+\DeclareTranslationFallback {ndoc@modulesforsubsystem}{Modules for Subsystem}
+\DeclareTranslation{English}{ndoc@modulesforsubsystem}{Modules for Subsystem}
+\DeclareTranslation{German} {ndoc@modulesforsubsystem}{Module für Subsystem}
+
+\newcommand*\ndoc@processes{\GetTranslation{ndoc@processes}}
+\DeclareTranslationFallback {ndoc@processes}{Processes}
+\DeclareTranslation{English}{ndoc@processes}{Processes}
+\DeclareTranslation{German} {ndoc@processes}{Abläufe}
+
+\newcommand*\ndoc@interfaces{\GetTranslation{ndoc@interfaces}}
+\DeclareTranslationFallback {ndoc@interfaces}{Interfaces To Other Modules}
+\DeclareTranslation{English}{ndoc@interfaces}{Interfaces To Other Modules}
+\DeclareTranslation{German} {ndoc@interfaces}{Schnittstellen zu anderen Modulen}
+
+\newcommand*\ndoc@modulesfrtable{\GetTranslation{ndoc@modulesfrtable}}
+\DeclareTranslationFallback {ndoc@modulesfrtable}{This module fulfills the requirements %
+  levied upon the TOE by the SFR in}
+\DeclareTranslation{English}{ndoc@modulesfrtable}{This module fulfills the requirements %
+  levied upon the TOE by the SFR in}
+\DeclareTranslation{German} {ndoc@modulesfrtable}{Das Modul erfüllt die Anforderungen, %
+  die durch die SFR in}
+
+\newcommand*\ndoc@subsystemsfrtable{\GetTranslation{ndoc@subsystemsfrtable}}
+\DeclareTranslationFallback {ndoc@subsystemsfrtable}{This subsystem fulfills the requirements %
+  levied upon the TOE by the SFR in}
+\DeclareTranslation{English}{ndoc@subsystemsfrtable}{This subsystem fulfills the requirements %
+  levied upon the TOE by the SFR in}
+\DeclareTranslation{German} {ndoc@subsystemsfrtable}{Das Subsystem erfüllt die Anforderungen, %
+  die durch die SFR in}
+
+\newcommand*\ndoc@themoduleis{\GetTranslation{ndoc@themoduleis}}
+\DeclareTranslationFallback {ndoc@themoduleis}{The module is}
+\DeclareTranslation{English}{ndoc@themoduleis}{The module is}
+\DeclareTranslation{German} {ndoc@themoduleis}{Das Modul ist}
+
+\newcommand*\ndoc@ofmodule{\GetTranslation{ndoc@ofmodule}}
+\DeclareTranslationFallback {ndoc@ofmodule}{of module}
+\DeclareTranslation{English}{ndoc@ofmodule}{of module}
+\DeclareTranslation{German} {ndoc@ofmodule}{des Moduls}
+
+\newcommand*\ndoc@subsystemmodule{\GetTranslation{ndoc@subsystemmodule}}
+\DeclareTranslationFallback {ndoc@subsystemmodule}{subsystem::module}
+\DeclareTranslation{English}{ndoc@subsystemmodule}{subsystem::module}
+\DeclareTranslation{German} {ndoc@subsystemmodule}{Subsystem::Modul}
+
+\newcommand*\ndoc@relation{\GetTranslation{ndoc@relation}}
+\DeclareTranslationFallback {ndoc@relation}{Relation}
+\DeclareTranslation{English}{ndoc@relation}{Relation}
+\DeclareTranslation{German} {ndoc@relation}{Relation}
+
+\newcommand*\ndoc@continuedonnextpage{\GetTranslation{ndoc@continuedonnextpage}}
+\DeclareTranslationFallback {ndoc@continuedonnextpage}{Continued on next page}
+\DeclareTranslation{English}{ndoc@continuedonnextpage}{Continued on next page}
+\DeclareTranslation{German} {ndoc@continuedonnextpage}{Weiter auf der nächsten Seite}
+
+\newcommand*\ndoc@mappingsfrtomodules{\GetTranslation{ndoc@mappingsfrtomodules}}
+\DeclareTranslationFallback {ndoc@mappingsfrtomodules}{Mapping of SFR to modules}
+\DeclareTranslation{English}{ndoc@mappingsfrtomodules}{Mapping of SFR to modules}
+\DeclareTranslation{German} {ndoc@mappingsfrtomodules}{Zuordnung von Modulen zu SFRs}
+
+\newcommand*\ndoc@enforcingsfrofsubsystem{\GetTranslation{ndoc@enforcingsfrofsubsystem}}
+\DeclareTranslationFallback {ndoc@enforcingsfrofsubsystem}{Enforcing SFR of subsystem}
+\DeclareTranslation{English}{ndoc@enforcingsfrofsubsystem}{Enforcing SFR of subsystem}
+\DeclareTranslation{German} {ndoc@enforcingsfrofsubsystem}{Enforcing SFR des Subsystems}
+
+\newcommand*\ndoc@supportingsfrofsubsystem{\GetTranslation{ndoc@supportingsfrofsubsystem}}
+\DeclareTranslationFallback {ndoc@supportingsfrofsubsystem}{Supporting SFR of subsystem}
+\DeclareTranslation{English}{ndoc@supportingsfrofsubsystem}{Supporting SFR of subsystem}
+\DeclareTranslation{German} {ndoc@supportingsfrofsubsystem}{Supporting SFR des Subsystems}
+
+\newcommand*\ndoc@bundlesformodules{\GetTranslation{ndoc@bundlesformodules}}
+\DeclareTranslationFallback {ndoc@bundlesformodules}{The module consists of the bundles listed in}
+\DeclareTranslation{English}{ndoc@bundlesformodules}{The module consists of the bundles listed in}
+\DeclareTranslation{German} {ndoc@bundlesformodules}{Das Modul besteht auf den Bundles in}
+
+\newcommand*\ndoc@bundlesofmodule{\GetTranslation{ndoc@bundlesofmodule}}
+\DeclareTranslationFallback {ndoc@bundlesofmodule}{Bundles of module}
+\DeclareTranslation{English}{ndoc@bundlesofmodule}{Bundles of module}
+\DeclareTranslation{German} {ndoc@bundlesofmodule}{Bundles des Moduls}
+
+
+
 
 % Macro for "Provided"
 \newcommand{\provided}{\secitemfont{(Provided)}}
@@ -21,10 +125,12 @@
 
 %% Note about the implementation: Direct Lua calls must be used here, no other macros. Texts are used as PDF bookmarks and macros are not resolved in PDF bookmarks. 
 \newcommand{\subsystemchapter}[1]{\clearpage\hrefsection{#1}{Subsystem \texorpdfstring{\secitemfont{\tdsplain{#1}}}{\directlua{replacelabelplain("#1", "no")}}}}
-\newcommand{\subsystemdescription}[1]{\subsection*{Description}\label{#1}}
-\newcommand{\subsystemsfr}[1]{\subsection*{Implemented SFR}\label{{#1}}}
-\newcommand{\subsysteminteract}[1]{\subsection*{Interaction With Other Subsystems}\label{#1}}
-\newcommand{\modulesforsubsystemchapter}[2]{\clearpage\section{\texorpdfstring{Modules for Subsystem \secitemfont{\directlua{replacelabel("#2", "no")}}}{Modules for Subsystem \directlua{replacelabelplain("#2", "no")}}}\label{#1}}
+\newcommand{\subsystemdescription}[1]{\subsection*{\ndoc@description}\label{#1}}
+\newcommand{\subsystemsfr}[1]{\subsection*{\ndoc@implementedsfr}\label{{#1}}}
+\newcommand{\subsysteminteract}[1]{\subsection*{\ndoc@interactionwithsubsystems}\label{#1}}
+\newcommand{\modulesforsubsystemchapter}[2]{\clearpage\section{%
+    \texorpdfstring{\ndoc@modulesforsubsystem \secitemfont{\directlua{replacelabel("#2", "no")}}}%
+    {\ndoc@modulesforsubsystem \directlua{replacelabelplain("#2", "no")}}}\label{#1}}
 
 %% Headlines for the module section The description of the module should
 %% use exactly thse macros for headlines. They provide the correct level of
@@ -33,34 +139,33 @@
 %%
 \newcommand{\modulechapter}[1]{\hrefsubsection{#1}{Module \texorpdfstring{\secitemfont{\directlua{replacelabel("#1", "fq")}}}{\directlua{replacelabelplain("#1", "fq")}}}}
   
-\newcommand{\moduledescription}[1]{\hrefsubsubsection{#1}{Description}}
-\newcommand{\moduleprocesses}[1]{\hrefsubsubsection{#1}{Processes}}
-\newcommand{\moduleinterfaces}[1]{\hrefsubsubsection{#1}{Interfaces To Other Modules}}
+\newcommand{\moduledescription}[1]{\hrefsubsubsection{#1}{\ndoc@description}}
+\newcommand{\moduleprocesses}[1]{\hrefsubsubsection{#1}{\ndoc@processes}}
+\newcommand{\moduleinterfaces}[1]{\hrefsubsubsection{#1}{\ndoc@interfaces}}
 
-%% Fest formulierte Überschriften for die Modulbeschreibungen
-%% Argument 1: Das Label des Hypertextankers
-%% Argument 2: Der Text der Überschrift
+%% Headlines for module processes
+%% Argument 1: Label of the hypertext anchor
+%% Argument 2: Headline text
 %%
-\newcommand{\modulAblauf}[2]{\hrefparagraph{#1}{#2}}
-\newcommand{\modulAblaufSchritt}[2]{\hrefsubparagraph{#1}{#2}}
+\newcommand{\moduleprocess}[2]{\hrefparagraph{#1}{#2}}
+\newcommand{\moduleprocessstep}[2]{\hrefsubparagraph{#1}{#2}}
 
-%% Fest formulierte Überschriften for die Beschreibung der
-%% Schnittstellen eines Moduls.
-%% Parameter: Label der Schnittstelle
-%% Das Label muss in der Regel noch in die tdsDefinitions eingetragen werden.
-\newcommand{\modulSchnittstelleProvided}[1]{\hrefparagraph{#1}{\tdsplain{#1}\,\provided{}}}
-\newcommand{\modulSchnittstelleRequired}[1]{\paragraph{\tdsplain{#1}\,\required{}}}
+%% Headlines for module interfaces
+%% Argument 1: Label of the hypertext anchor
+%% Argument 2: interface name
+%%
+\newcommand{\moduleinterfaceprovided}[1]{\hrefparagraph{#1}{\tdsplain{#1}\,\provided{}}}
+\newcommand{\moduleinterfacerequired}[1]{\paragraph{\tdsplain{#1}\,\required{}}}
 
 \newcommand{\generatesfrtable}[1]{%
-  \noindent{}Das Modul erfüllt die Anforderungen, die durch die SFR in
-  \tableref{tab:#1.sfr} an den EVG gestellt werden. Das Modul ist
-  \getModuleStatus{#1} for den TOE.\par{}
+  \noindent{}\ndoc@modulesfrtable{}
+  \tableref{tab:#1.sfr}. \ndoc@themoduleis{} \getModuleStatus{#1}. \par{}
   \captionsetup[table]{list=no}
   \begin{table}[htb]
     \centering
     \printModuleToSfrTable[enf]{#1}
     \printModuleToSfrTable[sup]{#1}
-    \caption{SFR des Moduls \tds[fq]{#1}}
+    \caption{SFR \ndoc@ofmodule{} \tds[fq]{#1}}
     \label{tab:#1.sfr}
   \end{table}
   \captionsetup[table]{list=yes}
@@ -69,49 +174,46 @@
 \newcommand{\generateSfrToModulesTable}{
   \begin{longtable}[c]{@{}ll@{\hskip 1cm}l@{}}
     \toprule
-    \secitem{SFR} &  Relation &  \secitem{Subsystem::Modul} \\ \endfirsthead
-    
-    \toprule \secitem{SFR} &  Relation &  \secitem{Subsystem::Modul} \\ \midrule \endhead
-    \multicolumn{3}{r}{\rule{0pt}{3ex}\emph{Weiter auf der nächsten Seite}} \endfoot
+    \secitem{SFR} &  \ndoc@relation{} &  \secitem{\ndoc@subsystemmodule{}} \\ \endfirsthead
+    \toprule \secitem{SFR} &  \ndoc@relation{} &  \secitem{\ndoc@subsystemmodule{}} \\ \midrule \endhead
+    \multicolumn{3}{r}{\rule{0pt}{3ex}\emph{\ndoc@continuedonnextpage{}}} \endfoot
     \endlastfoot
     \printModulesForSfrRows{}
     \bottomrule
-    \caption{Zuordnung von Modulen zu SFRs}
+    \caption{\ndoc@mappingsfrtomodules}
     \label{tab:sfr2modules}
   \end{longtable}
 }
 
-\newcommand{\generatesfrsubsystable}[1]{Das Subsystem erfüllt die
-  Anforderungen, die durch die SFR in \tableref{tab:#1.sfr.enf} und \tableref{tab:#1.sfr.sup} an den EVG
-  gestellt werden.\par
+\newcommand{\generatesfrsubsystable}[1]{\ndoc@subsystemsfrtable{} \tableref{tab:#1.sfr.enf}, \tableref{tab:#1.sfr.sup}. \par
   \captionsetup[table]{list=no}
   \begin{table}[p]
     \centering
     \printSubsystemToSfrTable[enf]{#1}
-    \caption{Enforcing SFR des Subsystems \tds[fq]{#1}}
+    \caption{\ndoc@enforcingsfrofsubsystem{} \tds[fq]{#1}}
     \label{tab:#1.sfr.enf}
   \end{table}
   \begin{table}[bp]
     \centering
     \printSubsystemToSfrTable[sup]{#1}{}
-    \caption{Supporting SFR des Subsystems \tds[fq]{#1}}
+    \caption{\ndoc@supportingsfrofsubsystem{} \tds[fq]{#1}}
     \label{tab:#1.sfr.sup}
   \end{table}
   \captionsetup[table]{list=yes}
 }
 
-\newcommand{\generatebundletable}[1]{Das Modul setzt sich aus den Bundles zusammen, die in \tableref{tab:#1.bundles} aufgezählt sind.
+\newcommand{\generatebundletable}[1]{\ndoc@bundlesformodules{} \tableref{tab:#1.bundles}
   \captionsetup[table]{list=no}
   \begin{table}[htb]
     \centering
     \printModuleToBundleTable{#1}
-    \caption{Dekomposition des Moduls \tds[fq]{#1} in Bundles}
+    \caption{\ndoc@bundlesofmodule \tds[fq]{#1}}
     \label{tab:#1.bundles}
   \end{table}
   \captionsetup[table]{list=yes}
 }
 
-
+\makeatother{}
 
 % !TEX root = adv_tds
 %%% Local Variables:
