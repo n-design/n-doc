@@ -25,8 +25,8 @@
 \newcommand{\subsystemsfr}[1]{\subsection*{\ndoc@implementedsfr}\label{{#1}}}
 \newcommand{\subsysteminteract}[1]{\subsection*{\ndoc@interactionwithsubsystems}\label{#1}}
 \newcommand{\modulesforsubsystemchapter}[2]{\clearpage\section{%
-    \texorpdfstring{\ndoc@modulesforsubsystem \secitemfont{\directlua{replacelabel("#2", "no")}}}%
-    {\ndoc@modulesforsubsystem \directlua{replacelabelplain("#2", "no")}}}\label{#1}}
+    \texorpdfstring{\ndoc@modulesforsubsystem{} \secitemfont{\directlua{replacelabel("#2", "no")}}}%
+    {\ndoc@modulesforsubsystem{} \directlua{replacelabelplain("#2", "no")}}}\label{#1}}
 
 %% Headlines for the module section The description of the module should
 %% use exactly thse macros for headlines. They provide the correct level of

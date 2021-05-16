@@ -1,98 +1,52 @@
-%% Beispieldatei für die Beschreibung eines TDS Moduls.
-%% Das wichtigste an dieser Stelle ist, genau das Kürzel des Moduls
-%% zu kennen, das beschrieben wird. Module heißen immer
-%%
-%% mod.<subsystem>.<modul>
-%%
-%% wobei die entsprechenden Definitionen in der Datei
-%% modules.csv stehen.
-%%
-%% Kleiner Tipp: Diese Datei hat als Vorlage
-%%
-%% mod.vpn.core
-%%
-%% Mit einem Suche/Ersetze Lauf zum Austausch des Template-Codes
-%% kann man sich schon eine Menge Arbeit sparen.
-
-
 \modulechapter{mod.vpn.core}
 
-%% Generiert die Tabelle der SFR, die dieses Modul umsetzt oder
-%% unterstützt.
 \generatesfrtable{mod.vpn.core}
-
-%% Generiert die Tabelle der Bundles, aus denen sich dieses Modul
-%% zusammensetzt
-%\generatebundletable{mod.vpn.core}
 
 \moduledescription{mod.vpn.core.desc}
 
-Über das Modul \tds{mod.vpn.core} des Subsystems
-\tdslink{sub.vpn} stellt der TOE
-Schnittstellen .......
+The module \tds{mod.vpn.core} of subsystem \tdslink{sub.vpn} provides interfaces and processes to…
 
-% Hier die Funktionen des Moduls beschreiben: Was macht es? Welche
-% Rolle spielt es im Gesamtsystem? Noch nicht in die Details gehen,
-% diese werden später bei den Abläufen erklärt.
-
-%% Nach der Beschreibung des Moduls folgt die Beschreibung der
-%% Abläufe.  Diese Überschrift leitet den entsprechenden Abschnitt
-%% ein.
 \moduleprocesses{prc.vpn.core}
 
-%% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
-%% sollte nicht zu lang, aber ausreichend verständlich sein.
-\moduleprocess{prc.vpn.core.connect}{Verbindung zum VPN-Konzentrator aufbauen}
+\moduleprocess{prc.vpn.core.connect}{Open Connection to VPN concentrator}
 
-Der Ablauf baut die Verbindung zum VPN-Konzentrator auf. Das Zertifikat des
-Konzentrators wird über die Schnittstelle \tdslink[fq]{int.vpn.cert.checkcert}
-geprüft.
+This process opens a connection to the VPN concentrator. The concentrator's
+certificate is verified using the interface
+\tdslink[fq]{int.vpn.cert.checkcert}.
 
 \implementedsfr{\sfrlink{ftp_itc.1/vpn} & \sfrlink{fcs_ckm.2/ike}}
 
-%% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
-%% sollte nicht zu lang, aber ausreichend verständlich sein.
-\moduleprocess{prc.vpn.core.disconnect}{Verbindung zum VPN-Konzentrator abbbauen}
+\moduleprocess{prc.vpn.core.disconnect}{Close Connection to VPN concentrator}
 
-Der Ablauf baut die Verbindung zum VPN-Konzentrator ab.
+This process opens a connection to the VPN concentrator.
 
 \implementedsfr{\sfrlink{ftp_itc.1/vpn}}
 
 
-%% Der nächste wichtige Abschnitt in der Modulbeschreibung: Die
-%% Schnittstellen.
 \moduleinterfaces{int.vpn.core}
 
-
-%% Jede Schnittstelle hat einen Bezeichner, der mit "int."
-%% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
-%% die Schnittstelle an) oder required (das Modul nutzt die
-%% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
 \moduleinterfaceprovided{int.vpn.core.connect}
 
-Über diese Schnittstelle wird die VPN-Verbindung aufgebaut
-(vgl. \sectref{prc.vpn.core.connect}).
+This interface triggers the creation of a new VPN connection (see \sectref{prc.vpn.core.connect}).
 
 \moduleinterfaceprovided{int.vpn.core.disconnect}
 
-Über diese Schnittstelle wird die VPN-Verbindung abgebaut (vgl. \sectref{prc.vpn.core.disconnect}).
+This interface closes the VPN connection (see \sectref{prc.vpn.core.disconnect}).
 
-%% Ab hier: Die Liste der Schnittstellen, die entweder über die
-%% Blueprint-Konfiguration oder programmatisch herangezogen werden.
 \moduleinterfacerequired{int.vpn.cert.checkcert}
 
-Die Schnittstelle \tdslink[fq]{int.vpn.cert.checkcert} wird
-verwendet, um das Zertifikat des VPN-Konzentrators zu prüfen.
+The interface \tdslink[fq]{int.vpn.cert.checkcert} is required for checking
+validity of the certificate of the VPN concentrator.
 
 \moduleinterfacerequired{int.cryptsystem.keymgmt.createkey}
 
-Die Schnittstelle \tdslink[fq]{int.cryptsystem.keymgmt.createkey} wird
-verwendet, um einen Verbindungsschlüssel zu erzeugen.
+The interface \tdslink[fq]{int.cryptsystem.keymgmt.createkey} is required for
+creating an ephemeral key pair for the connection.
 
 \moduleinterfacerequired{int.cryptsystem.keymgmt.destroykey}
 
-Die Schnittstelle \tdslink[fq]{int.cryptsystem.keymgmt.destroykey} wird
-verwendet, um einen Verbindungsschlüssel zu zerstören.
+The interface \tdslink[fq]{int.cryptsystem.keymgmt.destroykey} is required for
+destroying the connection keys.
 
 
 % !TEX root = "../../adv_tds"
