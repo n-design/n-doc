@@ -1,18 +1,35 @@
 \hrefsection{tsfi.ls.wan}{\tsfisectionname{ls.wan}}
 
-In diesem Abschnitt werden die Protokolle beschrieben, die der TOE über seine
-Schnittstelle \lswan{} abwickelt. \tableref{tab:ls.wan.protocols-ports} listet
-diese Protokolle und die dafür verwendeten Portnummern.
-\figureref{fig:tsfi.ls.wan.protocols} stellt die Protokolle dar, welche die
-sicherheitsrelevanten Aspekte des TSFI ausmachen (vgl. die einleitende Bemerkung
-zu \chapterref{tsfi.ls}).
+\lswan{} is a logical interface to the IT products in the WAN. It is 
+accessible via the physical interface \intf{PS.WAN}. The interface comprises the
+protocols listed in \tableref{tab:ls.lwan.protocols-ports} together with their
+port numbers. \figureref{fig:tsfi.ls.lwan.protocols} depicts the protocols that
+contribute to the security aspects of the TSFI (see also the introductory
+remarks in \chapterref{tsfi.ls}.
+
 
 \afterpage{%
   \clearpage% Flush earlier floats (otherwise order might not be correct)
   \begin{landscape}% Landscape page
     \centering % Center table
     {
-      \input{../adv_fsp/chapter_3/ls_wan-protokolle.tex}
+      \label{tab:ls.wan.protocols-ports}
+      \begin{longtable}{@{}lcllcclp{6cm}@{}}
+        \toprule
+        Service & In/Out & Protocol & via & Source port & Dest. port & TSFI & Note \\ \midrule \endhead
+        \bottomrule \caption*{Protocols und port numbers for IP/TCP/UDP on \formatintf{LS.WAN}} \endfoot
+        \bottomrule \caption{Protocols und port numbers for IP/TCP/UDP on \formatintf{LS.WAN}} \endlastfoot
+        Base protocols & -- & IEEE802.3 &  -- & -- & -- &    \tsfilink{ls.wan.ether} \\
+                & -- & IPv4 & IEEE802.3 & -- & -- &    \tsfilink{ls.wan.ip} \\
+                & -- & TCP &  IPv4 & -- & -- &    \tsfilink{ls.wan.tcp} \\
+                & -- & UDP &  IPv4 & -- & -- &    \tsfilink{ls.wan.udp} \\[2ex]
+        IPSec & Out & IKEv2 & UDP & dyn. & 500 & \tsfilink{ls.wan.ipsec} \\
+                & Out & IKEv2 & UDP & dyn. & 4500 & \tsfilink{ls.wan.ipsec} & for UDP-Encapsulation\\
+                & -- & ESP & IPv4 & -- & -- &   \tsfilink{ls.wan.ipsec} \\
+                & -- & ESP & UDP & dyn. &  4500 & \tsfilink{ls.wan.ipsec} & for UDP-Encapsulation\\[2ex]
+        Zeitdienst   & Out & NTP  & UDP & -- & 123 &    \tsfilink{ls.wan.ntp} \\[2ex]
+        DHCP-Service & Out & DHCP & UDP & 68 & 67 &    \tsfilink{ls.wan.dhcp} \\[2ex]
+      \end{longtable}
     }
   \end{landscape}
   \clearpage% Flush page
@@ -23,23 +40,23 @@ zu \chapterref{tsfi.ls}).
 \begin{tikzpicture}
     [c/.style={midway,align=center,font=\sffamily},
       tsfi/.style={fill=orange!20},
-      nontsf/.style={fill=yellow!20},
+      nontsfi/.style={fill=yellow!20},
       none/.style={},      
       layer/.style={fill=gray!5}]
 
-  \draw[layer] (0,0) rectangle ++(3,1) node[c]{Netzzugang};
-  \draw[tsfi] (3,0) rectangle ++(10.5,1) node[c]{\hyperlink{tsfi.ls.wan.ether}{Ethernet}};
+  \draw[layer] (0,0) rectangle ++(3,1) node[c]{Link};
+  \draw[nontsfi] (3,0) rectangle ++(10.5,1) node[c]{\hyperlink{tsfi.ls.wan.ether}{Ethernet}};
 
   \draw[layer] (0,1) rectangle ++(3,1) node[c]{Internet};
-  \draw[tsfi] (3,1) rectangle ++(10.5,1) node[c]{\hyperlink{tsfi.ls.wan.ip}{IPv4}};
+  \draw[nontsfi] (3,1) rectangle ++(10.5,1) node[c]{\hyperlink{tsfi.ls.wan.ip}{IPv4}};
 
   \draw[layer] (0,2) rectangle ++(3,1) node[c]{Transport};
-  \draw[tsfi] (3,2) rectangle ++(6,1) node[c]{\hyperlink{tsfi.ls.wan.udp}{UDP}};
-  \draw[tsfi] (9,2) rectangle ++(3,1) node[c]{\hyperlink{tsfi.ls.wan.tcp}{TCP}};
+  \draw[nontsfi] (3,2) rectangle ++(6,1) node[c]{\hyperlink{tsfi.ls.wan.udp}{UDP}};
+  \draw[nontsfi] (9,2) rectangle ++(3,1) node[c]{\hyperlink{tsfi.ls.wan.tcp}{TCP}};
   \draw[tsfi] (12,2) rectangle ++(1.5,1) node[c]{\hyperlink{tsfi.ls.wan.ipsec.esp}{ESP}};
 
-  \draw[layer] (0,3) rectangle ++(3,2) node[c]{Anwendung};
-  \draw[tsfi] (3,3) rectangle ++(1.5,2) node[c]{\hyperlink{tsfi.ls.wan.dhcp}{DHCP} \\ (Client)};
+  \draw[layer] (0,3) rectangle ++(3,2) node[c]{Application};
+  \draw[nontsfi] (3,3) rectangle ++(1.5,2) node[c]{\hyperlink{tsfi.ls.wan.dhcp}{DHCP} \\ (Client)};
   \draw[tsfi] (4.5,3) rectangle ++(1.5,2) node[c]{\hyperlink{tsfi.ls.wan.ntp}{NTP} \\ (Client)};
   \draw[tsfi] (6,3) rectangle ++(1.5,2) node[c]{\hyperlink{tsfi.ls.wan.ipsec.ikev2}{IKEv2} \\ (Client)};
   \draw[tsfi] (7.5,3) rectangle ++(1.5,2) node[c]{\hyperlink{tsfi.ls.wan.ipsec.esp}{ESP}};
@@ -47,7 +64,7 @@ zu \chapterref{tsfi.ls}).
   \draw[none] (12,3) rectangle ++(1.5,2) node[c]{---};
 
 \end{tikzpicture}
-  \caption{Protokolle auf \formatintf{LS.WAN} für die sicherheitsfunktionalen Anteile}
+  \caption{Protocols on \formatintf{LS.LAN} for the TSFI}
   \label{fig:tsfi.ls.wan.protocols}
 \end{figure}
 
@@ -72,80 +89,58 @@ zu \chapterref{tsfi.ls}).
 
 \tsfipurpose{tsfi.ls.wan.dhcp}
 
-Der TOE bietet die Möglichkeit, auf der WAN-Schnittstelle als
-DHCP-Client zu agieren. Der TOE kann also seine IP-Adresse von einem
-DHCP-Server im WAN beziehen. Diese Funktion ist auf der Managementoberfläche
-(de-)aktivierbar.
+The TOE provides the capability to act as an DHCP client on the WAN
+interface. The TOE obtain its IP address from a DHCP server in the WAN. This function can be activated/deactivated with the management interface \lslanhttpmgmt{}.
 
 \calledsfmanual{ls.wan.dhcp}{\secfunclink{sf.networkservices}}
 
 \tsfiparameters{tsfi.ls.wan.dhcp}
 
-Das DHCP-Protokoll setzt auf dem UDP-Protokoll auf und ist in
-\rfc[c]{2131} beschrieben. Die Beschreibungen enthalten
-insbesondere das Format einer DHCP-Nachricht und die darin
-enthaltenen Felder, die verschiedenen Nachrichtentypen und den Ablauf
-der Kommunikation.
-
-Das \rfc[c]{2132} dokumentiert zudem weitere DHCP-Optionen,
-die der DHCP-Server mit dem DHCP-Client austauschen kann.
+DHCP is implemented according to \rfc[c]{2131}.
 
 \hrefsubsection{tsfi.ls.wan.ntp}{\tsfisectionname{ls.wan.ntp}}
 
 \tsfipurpose{tsfi.ls.wan.ntp}
 
-Die Schnittstelle wird genutzt, um die Systemzeit mit Zeitservern aus dem
-Internet zu synchronisieren. (\sfrlink{fpt_stm.1})
+This interface is used to synchronize the system time with time servers in the
+WAN.
 
 \calledsf{ls.wan.ntp}
 
 \tsfiparameters{tsfi.ls.wan.ntp}
 
-Die Protokollbeschreibung ist in \rfc[c]{5905}
-dokumentiert. Der Zielport für den Client ist UDP-Port~123.
+The protocol is specified in \rfc[c]{5905} dokumentiert. The destination port
+for the client is UDP port~123.
 
 \hrefsubsection{tsfi.ls.wan.ipsec}{\tsfisectionname{ls.wan.ipsec}}
 
 \tsfipurpose{tsfi.ls.wan.ipsec}
 
-Der TOE verwendet die WAN-Schnittstelle für den Aufbau des VPN-Kanals Der TOE
-bietet dafür IPsec als VPN-Client an der WAN-Schnittstelle an.
+The TOE uses the WAN interface to establish the VPN channel with IPsec.
 
 \calledsf{ls.wan.ipsec}
 
 \tsfiparameters{tsfi.ls.wan.ipsec}
 
-IPSec berücksichtigt die Vorgaben aus \rfc[c]{4301}. Der TOE verwendet
-für IPSec zwei Protokolle. Zum Schlüsselaustausch wird das Protokoll
-Internet Key Exchange (IKE) in der Version 2 nach \rfc[c]{7296}
-am UDP-Port~500 verwendet. Für die Übertragung der Nutzdaten wird das
-Encapsulation Security Payload (ESP) nach \rfc[c]{4303}
-(IP-Protokollnummer 50, bzw. UDP-Port 4500) umgesetzt.
+The TOE fulfills the requirements from \rfc[c]{4301}. It uses two protocols for
+IPsec. Key exchange is implemented by IKE version 2 according to
+\rfc[c]{7296}. User data is tranmitted via the Encapsulation Security Payload
+(ESP) according to\rfc[c]{4303}. 
 
 \hrefsubsubsection{tsfi.ls.wan.ipsec.ikev2}{Internet Key Exchange Version 2 (IKEv2)}
 
-IKE selbst ist nicht für die Übertragung von Nutzdaten verantwortlich, sondern
-lediglich für die Verteilung von geeignetem Schlüsselmaterial und die
-Authentifizierung der zwei Parteien. Die Übertragung der eigentlichen Nutzdaten
-ist die Aufgabe des ESP-Protokolls
-(vgl. Abschnitt~\vref{tsfi.ls.wan.ipsec.esp}).
-
-Der TOE als Initiator der VPN-Verbindungen schlägt zu Beginn des IKE-Protokolls
-die zu verwendenden Algorithmen vor.
+IKE is used for the distribution of key material and the authentication of the
+peers. The TOE is initiator of VPN connections and thus submits the suitable algorithms.
 
 
 \hrefsubsubsection{tsfi.ls.wan.ipsec.esp}{Encrypted Security Payload (ESP)}
 
-Das ESP-Protokoll gewährleistet Authentizität, Integrität und
-Vertraulichkeit der übermittelten Daten. Dabei werden getrennte
-Algorithmen für Verschlüsselung und Integritätssicherung verwendet.
-
-Die in IKE für ESP ausgehandelte SA inklusive der benötigen Schlüssel
-und Algorithmen wird nun verwendet, um die IP-Pakete, die über den
-Tunnel verschickt werden sollen, zu sichern. Dazu wird die Struktur
-des ESP-Headers verwendet, wie in
-\figureref{fig:tsfi.ls.wan.ipsec.esp.header} dargestellt
-(s.\,a. \cite[Figure~2]{rfc4303})
+ESP provides authenticity, integrity and confidentiality for the transmitted
+data. Separate algorithms for encryption and integrity protection are used. The
+negotiated SA including the required keys and algorithm are used to secure the
+and IP packets sent over the tunnel. ESP headers have the structure shown in
+\figureref{fig:tsfi.ls.wan.ipsec.esp.header} (see also
+\cite[Figure~2]{rfc4303}).
 
 
 \begin{figure}[htbp]
@@ -193,20 +188,20 @@ des ESP-Headers verwendet, wie in
 
   \draw[none] (0,8) rectangle ++(16,1) node[c]{Security Parameter Index};
 
-  \draw[none] (0,7) rectangle ++(16,1) node[c]{Sequenznummer};
+  \draw[none] (0,7) rectangle ++(16,1) node[c]{Sequence Number};
 
-  \draw[none] (0,6) rectangle ++(16,1) node[c]{Initialisierungsvektor (IV)};
+  \draw[none] (0,6) rectangle ++(16,1) node[c]{Initialisation Vector (IV)};
 
   \draw[none] (0,5) rectangle ++(16,1) node[c]{IP Datagram};
 
-  \draw[none] (3,4) rectangle ++(13,1) node[c]{TFC Padding (variabel)};
+  \draw[none] (3,4) rectangle ++(13,1) node[c]{TFC Padding (variable)};
   \draw[none] (0,4) rectangle ++(3,1) node[c]{IP Datagram};
 
   \draw[none] (6,3) rectangle ++(10,1) node[c]{Padding~(0--255 Bytes)};
-  \draw[none] (0,3) rectangle ++(6,1) node[c]{TFC Padding (variabel)};
+  \draw[none] (0,3) rectangle ++(6,1) node[c]{TFC Padding (variable)};
 
-  \draw[none] (12,2) rectangle ++(4,1) node[c]{Nächster Header};
-  \draw[none] (8,2) rectangle ++(4,1) node[c]{Paddinglänge};
+  \draw[none] (12,2) rectangle ++(4,1) node[c]{Next Header};
+  \draw[none] (8,2) rectangle ++(4,1) node[c]{Padding length};
   \draw[none] (0,2) rectangle ++(8,1) node[c]{Padding~(0--255 Bytes)};
 
   \draw[none] (0,0) rectangle ++(16,2) node[c]{Integrity Check Value};

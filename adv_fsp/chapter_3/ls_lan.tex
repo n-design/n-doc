@@ -2,10 +2,10 @@
 
 
 
-\lslan{} is a logical interface to the IT products in the LAN, that is
-accessible via the physical interface \intf{PS.LAN}. The interface comprises the
-protocols listed in \tableref{tab:ls.lan.protocols-ports} together with their
-port numbers. \figureref{fig:tsfi.ls.lan.protocols} depicts the protocols that
+\lslan{} is a logical interface to the IT products in the LAN. It is accessible
+via the physical interface \intf{PS.LAN}. The interface comprises the protocols
+listed in \tableref{tab:ls.lan.protocols-ports} together with their port
+numbers. \figureref{fig:tsfi.ls.lan.protocols} depicts the protocols that
 contribute to the security aspects of the TSFI (see also the introductory
 remarks in \chapterref{tsfi.ls}.
 
@@ -27,7 +27,19 @@ detail. Figure~\vref{fig:tsfi.ls.lan.protocols} shows the protocols of interface
   \begin{landscape}% Landscape page
     \centering % Center table
     {
-      \input{../adv_fsp/chapter_3/ls_lan-protokolle.tex}
+      \label{tab:ls.lan.protocols-ports}
+      \begin{longtable}{@{}lcllcclp{6cm}@{}}
+        \toprule
+        Service & In/Out & Protocol & via & Source port & Dest. port & TSFI & Note \\ \midrule \endhead
+        \bottomrule \caption*{Protocols und port numbers for IP/TCP/UDP on \formatintf{LS.LAN}} \endfoot
+        \bottomrule \caption{Protocols und port numbers for IP/TCP/UDP on \formatintf{LS.LAN}} \endlastfoot
+        Base protocols & -- & IEEE802.3 &  -- & -- & -- &    \tsfilink{ls.lan.ether} \\
+                & -- & IPv4 & IEEE802.3 & -- & -- &    \tsfilink{ls.lan.ip} \\
+                & -- & TCP &  IPv4 & -- & -- &    \tsfilink{ls.lan.tcp} \\
+                & -- & UDP &  IPv4 & -- & -- &    \tsfilink{ls.lan.udp} \\[2ex]
+        Administration & In & TLS & TCP & any & 9443 & \tsfilink{ls.lan.tls} & \\ 
+                & In & HTTP & TLS & any & 9443 &  \tsfilink{ls.lan.httpmgmt} \\[2ex]
+      \end{longtable}
     }
   \end{landscape}
   \clearpage% Flush page
