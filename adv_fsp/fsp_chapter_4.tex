@@ -2,13 +2,13 @@
 
 \hrefsection{sf.vpn}{\secfuncheadline{sf.vpn}}
 
-\aufrufschnittstellen{sf.vpn}
-\konfigurationsparameter{sf.vpn.cfgparams}
+\callerinterfaces{sf.vpn}
+\configparams{sf.vpn.cfgparams}
 
 Die Konfiguration der Sicherheitsfunktion wird im Administratorhandbuch
 beschrieben \autocite[Abschnitt~7.4.3.3 VPN (Virtual Private Network)]{agd_adm}.
 
-\sfbeschreibung{}
+\sfdescription{}
 
 Der TOE stellt einen VPN Service (Client) bereit, mit dem der TOE sichere Kanäle
 zwischen sich selbst und VPN-Konzentratoren aufbauen kann. Diese Kanäle werden
@@ -46,14 +46,14 @@ der Sperrstatus der Zertifikate unter Verwendung von CRLs geprüft
 
 \hrefsection{sf.networkservices}{\secfuncheadline{sf.networkservices}}
 
-\aufrufschnittstellen{sf.networkservices}
+\callerinterfaces{sf.networkservices}
 
-\konfigurationsparameter{sf.networkservices.cfgparams}
+\configparams{sf.networkservices.cfgparams}
 
 Die Konfiguration der Sicherheitsfunktion wird im Administratorhandbuch
 beschrieben \autocite[Abschnitt~7.4]{agd_adm}.
 
-\sfbeschreibung{}
+\sfdescription{}
 
 Der TOE stellt die folgenden Dienste im Netzwerk zur Verfügung (In Klammern das
 entsprechende Kapitel im Administratorhandbuch \autocite{agd_adm}):
@@ -78,13 +78,13 @@ Administratorhandbuch beschrieben \autocite{agd_adm}.
 
 \hrefsection{sf.selfprotection}{\secfuncheadline{sf.selfprotection}}
 
-\aufrufschnittstellen{sf.selfprotection}
+\callerinterfaces{sf.selfprotection}
 
-\konfigurationsparameter{sf.selfprotection.cfgparams}
+\configparams{sf.selfprotection.cfgparams}
 
 Die Sicherheitsfunktion verfügt über keine Konfigurationsparameter.
 
-\sfbeschreibung{}
+\sfdescription{}
 
 Diese Sicherheitsfunktion ist verantwortlich für den Selbstschutz des
 TOE und für den Schutz von Daten, die durch den TOE übertragen werden.
@@ -111,28 +111,28 @@ Zur Laufzeit kann die Durchführung der Tests durch den Administrator
 
 \hrefsection{sf.administration}{\secfuncheadline{sf.administration}}%
 
-\aufrufschnittstellen{sf.administration}
+\callerinterfaces{sf.administration}
 
-\konfigurationsparameter{sf.administration.cfgparams}
+\configparams{sf.administration.cfgparams}
 
 Die Funktionalität zur Konfiguration des TOE wird im Administratorhandbuch
 beschrieben \autocite[Abschnitte~7.3 bis~7.6]{agd_adm}. 
 
-\sfbeschreibung{}
+\sfdescription{}
 
 Im TOE bieten die Dienste ihre Managementfunktionen jeweils über eine dedizierte
 Schnittstelle an, die durch den Administrationsdienst angesprochen wird.
 
 \hrefsection{sf.cryptographicservices}{\secfuncheadline{sf.cryptographicservices}}%
 
-\aufrufschnittstellen{sf.cryptographicservices}
+\callerinterfaces{sf.cryptographicservices}
 
-\konfigurationsparameter{sf.cryptographicservices.cfgparams}
+\configparams{sf.cryptographicservices.cfgparams}
 
 Die Aufgabe von \secfunc{sf.cryptographicservices} ist das
 Bereitstellen von TLS-Verbindungen zur Managementanwendung.
 
-\sfbeschreibung{}
+\sfdescription{}
 
 Der TOE stellt kryptographische Funktionen bereit, die von den anderen
 Sicherheitsfunktionen verwendet werden.

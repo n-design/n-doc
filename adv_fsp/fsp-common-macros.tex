@@ -12,29 +12,19 @@
 \newcommand{\printTsfiToSf}[1]{\directlua{print_tsfi_to_sf_table("#1")}}
 
 
-\newcommand{\aufrufschnittstellen}[1]{\minisec{\ndoc@sfinterfaces}%
-  Der Aufruf der Sicherheitsfunktion \secfunc{#1} erfolgt über: \printSfToTsfi{#1}.\par{}}
+\newcommand{\callerinterfaces}[1]{\minisec{\ndoc@sfinterfaces}%
+  \ndoc@thesf{} \secfunc{#1} \ndoc@iscalledvia{} \printSfToTsfi{#1}.\par{}}
 
-\newcommand{\aufrufschnittstellenmanual}[2]{\minisec{\ndoc@sfinterfaces}%
-  Der Aufruf der Sicherheitsfunktion \secfunc{#1} erfolgt über:
-  #2.\footnote{Diese Zuordnung lässt sich nicht durch die gemeinsame Zuordnung
-    eines SFR nachvollziehen.}\par{}}
+\newcommand{\calledsf}[1]{\minisec{\ndoc@calledsf}%
+  \ndoc@calledsf{} \tsfi{#1}: \printTsfiToSf{#1}}
 
+\newcommand{\calledsfmanual}[2]{\minisec{\ndoc@calledsf}%
+  \ndoc@calledsf{} \tsfi{#1}: \printTsfiToSf{#1}\footnote{}: #2}
 
-\newcommand{\aufgerufenesf}[1]{\minisec{Über das Interface aufgerufene Sicherheitsfunktionen}%
-  Sicherheitsfunktionen, die aufgerufen werden über das Interface \tsfi{#1}: \printTsfiToSf{#1}}
+\newcommand{\configparams}[1]{\minisec{\ndoc@configparametersofsf}\label{#1}}
+\newcommand{\hasnoconfigparams}{(\ndoc@thesf{} \ndoc@hasnoconfigparams{}.)}
 
-\newcommand{\aufgerufenesfmanual}[2]{\minisec{Über das Interface aufgerufene
-    Sicherheitsfunktionen}%
-  Sicherheitsfunktionen, die über das Interface \tsfi{#1} aufgerufen
-  werden\footnote{Diese Zuordnung lässt sich nicht durch die gemeinsame
-    Zuordnung eines SFR nachvollziehen.}: #2}
-
-
-\newcommand{\konfigurationsparameter}[1]{\minisec{Konfigurationsparameter der Sicherheitsfunktion}\label{#1}}
-\newcommand{\keinekonfigurationsparameter}{(Die Sicherheitsfunktion verfügt über keine Konfigurationsparameter)}
-
-\newcommand{\sfbeschreibung}{\minisec{Beschreibung der Sicherheitsfunktion}}
+\newcommand{\sfdescription}{\minisec{\ndoc@descriptionofsf}}
 
 \newcommand{\sameprotocol}[3]{Die Implementierung von #1 an der
   #2-Schnittstelle entspricht in allen Aspekten der Implementierung an
@@ -43,19 +33,19 @@
 \newenvironment{configvaluestable}%
 {\begin{tabularx}{1\linewidth}{@{}lp{1.5cm}Xl@{}}%
     \toprule
-    Parameter & Werte & Beschreibung & Default \\ \midrule}%
+    \ndoc@parameter{} & \ndoc@values{} & \ndoc@description{} & \ndoc@default{} \\ \midrule}%
     {\bottomrule\end{tabularx}}
 
 \newcommand{\generateSfrToTsfiTable}{
   \begin{longtable}[c]{@{}ll@{\hskip .3cm}>{\small}p{6cm}@{}}
     \toprule
     \secitem{SFR} &  \secitem{TSFI} & Verwendung \\ \endfirsthead
-    \toprule \secitem{SFR} & \secitem{TSFI} & Verwendung \\ \midrule \endhead
-    \multicolumn{3}{r}{\rule{0pt}{3ex}\emph{Weiter auf der nächsten Seite}} \endfoot
+    \toprule \secitem{SFR} & \secitem{TSFI} & \ndoc@use{} \\ \midrule \endhead
+    \multicolumn{3}{r}{\rule{0pt}{3ex}\emph{\ndoc@continuedonnextpage}} \endfoot
     \endlastfoot
     \printTsfiForSfrRows{}
     \bottomrule
-    \caption{Zuordnung von SFR zu TSFI}
+    \caption{\ndoc@mappingsfrtotsfi{}Zuordnung von SFR zu TSFI}
     \label{tab:sfr2tsfi}
   \end{longtable}
 }

@@ -83,7 +83,7 @@ function tg.print_sfr_table_for_subsys(enfsup, sfrs)
 	 table.insert(result, table.concat(row))
       end
    else
-      table.insert(result,"(Keine)")
+      table.insert(result,[[\ndocnone]])
       table.insert(result, eol)
    end
    table.insert(result,"\\end{enfsfrsubsystable}")
@@ -112,7 +112,7 @@ function tg.print_sfr_table_for_module(enfsup, sfrs)
 	 table.insert(result, table.concat(row))
       end
    else
-      table.insert(result,"(Keine)")
+      table.insert(result,[[\ndocnone]])
       table.insert(result, eol)
    end
    table.insert(result,"\\end{enfsfrtable}")
@@ -138,7 +138,7 @@ end
 function tg.print_item_list(items, itemtype, outputparams)
    local result = {}
    local sepchar = outputparams and outputparams["sepchar"] or ", "
-   local emptyitem = outputparams and outputparams["emptyitem"] or "(keine)"
+   local emptyitem = outputparams and outputparams["emptyitem"] or [[\ndocnone]]
    for _,item in pairs(items) do
       table.insert(result, tg.itemformatters[itemtype](item))
    end
@@ -171,7 +171,7 @@ function appendmodules(modules, result)
             table.insert(result, ps_eol)
         end
     else
-        table.insert(result,"(Keine)")
+       table.insert(result,[[\ndocnone]])
         table.insert(result, ps_eol)
     end
 end
@@ -200,7 +200,7 @@ function appendtsfi(tsfi, result)
             table.insert(result, ps_eol)
         end
     else
-        table.insert(result,"(Keine)")
+       table.insert(result,[[\ndocnone]])
         table.insert(result, ps_eol)
     end
 end
@@ -230,7 +230,7 @@ function appendsfr(sfr, result)
             table.insert(result, ps_eol)
         end
     else
-        table.insert(result,"(Keine)")
+       table.insert(result,[[\ndocnone]])
         table.insert(result, ps_eol)
     end
 end
