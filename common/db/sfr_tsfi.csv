@@ -1,23 +1,23 @@
 sfr;tsfi;purpose
-fcs_ckm.1;ls.lan.tls;Schlüsselaushandlung für TLS
-fcs_ckm.2/tls;ls.lan.tls;Schlüsselverteilung für TLS
-fcs_ckm.4;ls.lan.tls;TLS Verbindungen im LAN abbauen
-fcs_ckm.1;ls.wan.ipsec;Schlüsselaushandlung für VPN
-fcs_ckm.2/ike;ls.wan.ipsec;Schlüsselverteilung für VPN
-fcs_ckm.4;ls.wan.ipsec;IPSEC Verbindungen im WAN abbauen
-fcs_cop.1/hash;ls.wan.ipsec;IPSec Hash Operationen
-fcs_cop.1/hmac;ls.wan.ipsec;IPSec HMAC Operationen
-fcs_cop.1/hash;ls.lan.tls;TLS Hash Operationen
-fcs_cop.1/hmac;ls.lan.tls;TLS HMAC Operationen
-fcs_cop.1/tls.aes;ls.lan.tls;TLS Verbindungen
-fcs_cop.1/tls.auth;ls.lan.tls;TLS Verbindungen
-fcs_rng.1/hashdrbg;ls.lan.tls;TLS Verbindungen
-fcs_rng.1/hashdrbg;ls.wan.ipsec;Schlüsselaushandlung für VPN
-fdp_rip.1;no_tsfi;Sicheres Löschen nicht von außen aufrufbar
-fpt_stm.1;ls.wan.ntp;Zugang zum Zeitdienst
-fpt_tdc.1/tls.zert;ls.lan.tls;TLS Zertifikate prüfen
-fpt_tdc.1/zert;ls.wan.ipsec;VPN Zertifikate prüfen
-fpt_tst.1;ls.lan.httpmgmt;Aufruf des Selbsttests
-ftp_itc.1/vpn;ls.wan.ipsec;Sicherer IPSec Tunnel
-ftp_itc.1/tls;ls.lan.tls;Sichere Verbindung zur Managemantschnittstelle
-ftp_trp.1/admin;ls.lan.httpmgmt;Verbindung zur Managemantschnittstelle
+fcs_ckm.1;ls.lan.tls;Key negotiation for TLS
+fcs_ckm.2/tls;ls.lan.tls;Key distribution for TLS
+fcs_ckm.4;ls.lan.tls;Close TLS connections in the LAN
+fcs_ckm.1;ls.wan.ipsec;Key negotiation for VPN
+fcs_ckm.2/ike;ls.wan.ipsec;Key distribution for VPN
+fcs_ckm.4;ls.wan.ipsec;Close IPSec connections in the WAN
+fcs_cop.1/hash;ls.wan.ipsec;IPSec Hash Operations
+fcs_cop.1/hmac;ls.wan.ipsec;IPSec HMAC Operations
+fcs_cop.1/hash;ls.lan.tls;TLS Hash Operations
+fcs_cop.1/hmac;ls.lan.tls;TLS HMAC Operations
+fcs_cop.1/tls.aes;ls.lan.tls;AES encryption for TLS
+fcs_cop.1/tls.auth;ls.lan.tls;Peer authentication for TLS
+fcs_rng.1/hashdrbg;ls.lan.tls;Random numbers for TLS
+fcs_rng.1/hashdrbg;ls.wan.ipsec;Key negotiation for VPN
+fdp_rip.1;no_tsfi;Cannot be called from outside the TOE
+fpt_stm.1;ls.wan.ntp;Accessing the NTP server
+fpt_tdc.1/tls.zert;ls.lan.tls;Check TLS certificates
+fpt_tdc.1/zert;ls.wan.ipsec;Check VPN certificates
+fpt_tst.1;ls.lan.httpmgmt;Start the self-test
+ftp_itc.1/vpn;ls.wan.ipsec;Create a secure IPSec tunnel
+ftp_itc.1/tls;ls.lan.tls;Secure connection to the management interface
+ftp_trp.1/admin;ls.lan.httpmgmt;User data to the management interface

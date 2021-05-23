@@ -15,4 +15,4 @@ ls.wan.tcp;LS.WAN.TCP;sup
 ls.wan.udp;LS.WAN.UDP;sup
 ls.wan.ntp;LS.WAN.NTP;sup
 ls.wan;LS.WAN;enf
-no_tsfi;Keine TSFI;none
+no_tsfi;no TSFI;none
