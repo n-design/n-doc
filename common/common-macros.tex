@@ -47,12 +47,13 @@
 \newcommand{\filename}[1]{{\narrowfilefont #1}}
 
 % Links to figures, tables, sections, chapters, appendices
-\newcommand{\figureref}[1]{\hyperref[#1]{Figure~\ref*{#1}}}
-\newcommand{\tableref}[1]{\hyperref[#1]{Table~\ref*{#1}}}
-\newcommand{\listref}[1]{\hyperref[#1]{Listing~\ref*{#1}}}
-\newcommand{\sectref}[1]{\hyperref[#1]{Section~\ref*{#1}}}
-\newcommand{\chapterref}[1]{\hyperref[#1]{Chapter~\ref*{#1}}}
-\newcommand{\appendixref}[1]{\hyperref[#1]{Appendix~\ref*{#1}}}
+% Most translations are read from the translation package's dictionary
+\newcommand{\figureref}[1]{\hyperref[#1]{\GetTranslation{Figure}~\ref*{#1}}}
+\newcommand{\tableref}[1]{\hyperref[#1]{\GetTranslation{Table}~\ref*{#1}}}
+\newcommand{\listref}[1]{\hyperref[#1]{\GetTranslation{Listing}~\ref*{#1}}}
+\newcommand{\sectref}[1]{\hyperref[#1]{\GetTranslation{Section}~\ref*{#1}}}
+\newcommand{\chapterref}[1]{\hyperref[#1]{\GetTranslation{Chapter}~\ref*{#1}}}
+\newcommand{\appendixref}[1]{\hyperref[#1]{\GetTranslation{Appendix}~\ref*{#1}}}
 
 % Macros for headlines. Creates a hypertext anchor in addition to the \label
 \newcommand{\hrefchapter}[2]{\hypertarget{#1}{\chapter{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
