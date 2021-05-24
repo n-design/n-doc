@@ -58,7 +58,10 @@
   \end{sfrdefinitionlist}}
 
 
-
+% Should be localized, see https://github.com/cgnieder/translations/issues/15
+%
+%\DeclareNewTOC[listname={\GetTranslation{ndoc@listofapplicationnotes}}]{appnote}
+%
 \DeclareNewTOC[listname={List of ST Application Notes}]{appnote}
 
 \newcounter{appnotenumber}
@@ -66,11 +69,11 @@
 \newcommand{\applicationnote}[3][]{%
   \refstepcounter{appnotenumber}
   \begin{sfrdefinitionlist}
-  \item[{\normalfont ST-Anwendungshinweis \arabic{appnotenumber}}] #3
+  \item[{\normalfont \GetTranslation{ndoc@applicationnote} \arabic{appnotenumber}}] #3
   \end{sfrdefinitionlist}
   \addcontentsline{appnote}{section}{\arabic{appnotenumber}\quad{}#2 \isnotempty{#1}{#1}}}
 
-\newcommand{\appnoteref}[1]{ST-Anwendungshinweis~\ref*{#1}}
+\newcommand{\appnoteref}[1]{\GetTranslation{ndoc@applicationnote}~\ref*{#1}}
 
 \newcommand{\hierarchicalto}[1]{%
   \begin{sfrdefinitionlist}
