@@ -1,7 +1,11 @@
+\makeatletter
 \input{../common/common-packages.tex}
 \input{../common/mauvevpn-macros.tex}
+\input{../common/cc_core-l10n.tex}
+\input{../common/common-l10n.tex}
 \input{../common/common-macros.tex}
 \input{../common/cc_core-macros.tex}
+\makeatother{}
 
 \DeclareFieldFormat{labelalpha}{\thefield{label}}
 
@@ -37,6 +41,12 @@
 \hbadness=10000
 \vfuzz=20pt
 \vbadness=\maxdimen
+
+\usepackage{noindentafter}
+\NoIndentAfterEnv{itemize}
+\NoIndentAfterEnv{description}
+\NoIndentAfterEnv{enumerate}
+
 
 % Definition of fonts
 % http://www.tug.dk/FontCatalogue/gnufreefontsans/

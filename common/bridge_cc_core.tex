@@ -146,8 +146,9 @@
     bridge_cc_core.print_table_header(label, macro, tex)
   end
 
-  function print_table_body(label_row, label_header, macro, mapping_function)
-    bridge_cc_core.print_table_body(label_row, label_header, macro, mapping_function, tex)
+  function print_table_body(_label_row, _label_header, _macro, _selector, _checker)
+  local table_params={label_row=_label_row, label_header=_label_header, macro=_macro, selector=_selector}
+    bridge_cc_core.print_table_body(table_params, tex)
   end
 
 \end{luacode}

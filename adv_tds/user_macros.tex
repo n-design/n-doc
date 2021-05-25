@@ -1,89 +1,67 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Makros für die Autoren der TDS Module
-% =====================================
+% Macros for authoring the TOE Design Specification
+% =================================================
 %
-% Hier werden Makros definiert, die für die Beschreibung
-% der TDS Module notwendig sind. Diese Liste stellt
-% gewissermaßen die API dar. Bitte keine direkten
-% Formatierungen mit LaTeX Befehlen benutzen, sondern
-% schauen was
-% a) in dieser Datei
-% b) in /common/common-macros.tex
-% definiert ist. Im Zweifel bitte Rücksprache mit AKR
-% halten.
+% This file defines macros that are required for authoring the TDS modules.  
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-% Makro für "Provided"
+% Macro for "Provided"
 \newcommand{\provided}{\secitemfont{(Provided)}}
 
-% Makro für "Required"
+% Macro for "Required"
 \newcommand{\required}{\secitemfont{(Required)}}
 
-% Standardisiertes Einbinden der Grafik eines Subsystems
-% Argument 1: Label der Grafik für Referenzen auf das Bild
-% Argument 2: Pfad zur Grafikdatei
-% Argument 3: Name des dargestellten Subsystems
-\newcommand{\subsystemdecompositionfigure}[3]{%
-\ccFigure{#1}{subsysteme/#2}{Dekomposition des Subsystems #3 in Module}{0.5}}
+%% Headlines for the subsystem section The description of the subsystem should
+%% use exactly thse macros for headlines. They provide the correct level of
+%% outline and create hypertext anchors. Argument is the key of the subsystem as
+%% defined in the database in /common/db/subsystems.csv
 
-% Standardisiertes Einbinden der Grafik eines Moduls
-% Argument 1: Label der Grafik für Referenzen auf das Bild
-% Argument 2: Pfad zur Grafikdatei
-% Argument 3: Name des dargestellten Subsystems
-\newcommand{\moduledecompositionfigure}[3]{%
-\ccFigure{#1}{#2}{Dekomposition des Moduls #3}{1.0}}
+%% Note about the implementation: Direct Lua calls must be used here, no other macros. Texts are used as PDF bookmarks and macros are not resolved in PDF bookmarks. 
+\newcommand{\subsystemchapter}[1]{\clearpage\hrefsection{#1}{Subsystem \texorpdfstring{\secitemfont{\tdsplain{#1}}}{\directlua{replacelabelplain("#1", "no")}}}}
+\newcommand{\subsystemdescription}[1]{\subsection*{\ndoc@description}\label{#1}}
+\newcommand{\subsystemsfr}[1]{\subsection*{\ndoc@implementedsfr}\label{{#1}}}
+\newcommand{\subsysteminteract}[1]{\subsection*{\ndoc@interactionwithsubsystems}\label{#1}}
+\newcommand{\modulesforsubsystemchapter}[2]{\clearpage\section{%
+    \texorpdfstring{\ndoc@modulesforsubsystem{} \secitemfont{\directlua{replacelabel("#2", "no")}}}%
+    {\ndoc@modulesforsubsystem{} \directlua{replacelabelplain("#2", "no")}}}\label{#1}}
 
-%% Fest formulierte Überschriften für das Kapitel Subsysteme.
-%% Die Beschreibung jedes Subsystems muss genau diese Überschriften enthalten.
-%% zu übergebendes Argument: Das Label (der Hypertextanker) dieses Abschnitts.
+%% Headlines for the module section The description of the module should
+%% use exactly thse macros for headlines. They provide the correct level of
+%% outline and create hypertext anchors. Argument is the key of the module as
+%% defined in the database in /common/db/modules.csv
 %%
-%% Notiz zur Implementierung: Hier müssen direkte Lua-Aufrufe stehen, kein
-%% \tdsplain{} Makro, da sonst die unaufgelösten Strings in die PDF-Bookmarks
-%% übernommen werden.
-\newcommand{\subsystemkapitel}[1]{\clearpage\hrefsection{#1}{Subsystem \texorpdfstring{\secitemfont{\tdsplain{#1}}}{\directlua{replacelabelplain("#1", "no")}}}}
-\newcommand{\subsystembeschreibung}[1]{\subsection*{Beschreibung}\label{#1}}
-\newcommand{\subsystemsfr}[1]{\subsection*{Umgesetzte SFR}\label{{#1}}}
-\newcommand{\subsysteminteract}[1]{\subsection*{Interaktion mit anderen Subsystemen}\label{#1}}
-\newcommand{\modulefuersubsystemkapitel}[2]{\clearpage\section{\texorpdfstring{Module für Subsystem \secitemfont{\directlua{replacelabel("#2", "no")}}}{Module für Subsystem \directlua{replacelabelplain("#2", "no")}}}\label{#1}}
-
-%% Fest formulierte Überschriften für das Kapitel Module.
-%% Die Beschreibung jedes Moduls muss genau diese Überschriften enthalten.
-%% zu übergebendes Argument: Das Label (der Hypertextanker) dieses Abschnitts.
-%%
-\newcommand{\moduleKapitel}[1]{\hrefsubsection{#1}{Modul \texorpdfstring{\secitemfont{\directlua{replacelabel("#1", "fq")}}}{\directlua{replacelabelplain("#1", "x")}}}}
+\newcommand{\modulechapter}[1]{\hrefsubsection{#1}{Module \texorpdfstring{\secitemfont{\directlua{replacelabel("#1", "fq")}}}{\directlua{replacelabelplain("#1", "fq")}}}}
   
-\newcommand{\moduleBeschreibung}[1]{\hrefsubsubsection{#1}{Beschreibung}}
-\newcommand{\moduleAblaeufe}[1]{\hrefsubsubsection{#1}{Abläufe des Moduls}}
-\newcommand{\moduleSchnittstellen}[1]{\hrefsubsubsection{#1}{Schnittstellen zu anderen Modulen}}
+\newcommand{\moduledescription}[1]{\hrefsubsubsection{#1}{\ndoc@description}}
+\newcommand{\moduleprocesses}[1]{\hrefsubsubsection{#1}{\ndoc@processes}}
+\newcommand{\moduleinterfaces}[1]{\hrefsubsubsection{#1}{\ndoc@interfacestoothermodules}}
 
-%% Fest formulierte Überschriften für die Modulbeschreibungen
-%% Argument 1: Das Label des Hypertextankers
-%% Argument 2: Der Text der Überschrift
+%% Headlines for module processes
+%% Argument 1: Label of the hypertext anchor
+%% Argument 2: Headline text
 %%
-\newcommand{\modulAblauf}[2]{\hrefparagraph{#1}{#2}}
-\newcommand{\modulAblaufSchritt}[2]{\hrefsubparagraph{#1}{#2}}
+\newcommand{\moduleprocess}[2]{\hrefparagraph{#1}{#2}}
+\newcommand{\moduleprocessstep}[2]{\hrefsubparagraph{#1}{#2}}
 
-%% Fest formulierte Überschriften für die Beschreibung der
-%% Schnittstellen eines Moduls.
-%% Parameter: Label der Schnittstelle
-%% Das Label muss in der Regel noch in die tdsDefinitions eingetragen werden.
-\newcommand{\modulSchnittstelleProvided}[1]{\hrefparagraph{#1}{\tdsplain{#1}\,\provided{}}}
-\newcommand{\modulSchnittstelleRequired}[1]{\paragraph{\tdsplain{#1}\,\required{}}}
+%% Headlines for module interfaces
+%% Argument 1: Label of the hypertext anchor
+%% Argument 2: interface name
+%%
+\newcommand{\moduleinterfaceprovided}[1]{\hrefparagraph{#1}{\tdsplain{#1}\,\provided{}}}
+\newcommand{\moduleinterfacerequired}[1]{\paragraph{\tdsplain{#1}\,\required{}}}
 
 \newcommand{\generatesfrtable}[1]{%
-  \noindent{}Das Modul erfüllt die Anforderungen, die durch die SFR in
-  \tableref{tab:#1.sfr} an den EVG gestellt werden. Das Modul ist
-  \getModuleStatus{#1} für den TOE.\par{}
+  \noindent{}\ndoc@modulesfrtable{}
+  \tableref{tab:#1.sfr}. \ndoc@themoduleis{} \getModuleStatus{#1}. \par{}
   \captionsetup[table]{list=no}
   \begin{table}[htb]
     \centering
     \printModuleToSfrTable[enf]{#1}
     \printModuleToSfrTable[sup]{#1}
-    \caption{SFR des Moduls \tds[fq]{#1}}
+    \caption{SFR \ndoc@ofmodule{} \tds[fq]{#1}}
     \label{tab:#1.sfr}
   \end{table}
   \captionsetup[table]{list=yes}
@@ -92,49 +70,44 @@
 \newcommand{\generateSfrToModulesTable}{
   \begin{longtable}[c]{@{}ll@{\hskip 1cm}l@{}}
     \toprule
-    \secitem{SFR} &  Relation &  \secitem{Subsystem::Modul} \\ \endfirsthead
-    
-    \toprule \secitem{SFR} &  Relation &  \secitem{Subsystem::Modul} \\ \midrule \endhead
-    \multicolumn{3}{r}{\rule{0pt}{3ex}\emph{Weiter auf der nächsten Seite}} \endfoot
+    \secitem{SFR} &  \ndoc@relation{} &  \secitem{\ndoc@subsystemmodule{}} \\ \endfirsthead
+    \toprule \secitem{SFR} &  \ndoc@relation{} &  \secitem{\ndoc@subsystemmodule{}} \\ \midrule \endhead
+    \multicolumn{3}{r}{\rule{0pt}{3ex}\emph{\ndoc@continuedonnextpage{}}} \endfoot
     \endlastfoot
     \printModulesForSfrRows{}
     \bottomrule
-    \caption{Zuordnung von Modulen zu SFRs}
+    \caption{\ndoc@mappingsfrtomodules}
     \label{tab:sfr2modules}
   \end{longtable}
 }
 
-\newcommand{\generatesfrsubsystable}[1]{Das Subsystem erfüllt die
-  Anforderungen, die durch die SFR in \tableref{tab:#1.sfr.enf} und \tableref{tab:#1.sfr.sup} an den EVG
-  gestellt werden.\par
+\newcommand{\generatesfrsubsystable}[1]{\ndoc@subsystemsfrtable{} \tableref{tab:#1.sfr.enf}, \tableref{tab:#1.sfr.sup}. \par
   \captionsetup[table]{list=no}
   \begin{table}[p]
     \centering
     \printSubsystemToSfrTable[enf]{#1}
-    \caption{Enforcing SFR des Subsystems \tds[fq]{#1}}
+    \caption{\ndoc@enforcingsfrofsubsystem{} \tds[fq]{#1}}
     \label{tab:#1.sfr.enf}
   \end{table}
   \begin{table}[bp]
     \centering
     \printSubsystemToSfrTable[sup]{#1}{}
-    \caption{Supporting SFR des Subsystems \tds[fq]{#1}}
+    \caption{\ndoc@supportingsfrofsubsystem{} \tds[fq]{#1}}
     \label{tab:#1.sfr.sup}
   \end{table}
   \captionsetup[table]{list=yes}
 }
 
-\newcommand{\generatebundletable}[1]{Das Modul setzt sich aus den Bundles zusammen, die in \tableref{tab:#1.bundles} aufgezählt sind.
+\newcommand{\generatebundletable}[1]{\ndoc@bundlesformodules{} \tableref{tab:#1.bundles}
   \captionsetup[table]{list=no}
   \begin{table}[htb]
     \centering
     \printModuleToBundleTable{#1}
-    \caption{Dekomposition des Moduls \tds[fq]{#1} in Bundles}
+    \caption{\ndoc@bundlesofmodule \tds[fq]{#1}}
     \label{tab:#1.bundles}
   \end{table}
   \captionsetup[table]{list=yes}
 }
-
-
 
 % !TEX root = adv_tds
 %%% Local Variables:

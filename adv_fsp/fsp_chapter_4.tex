@@ -1,219 +1,174 @@
-\chapter{Sicherheitsfunktionen des TOE}\label{sf}
+\chapter{Security Functions of the TOE}\label{sf}
 
 \hrefsection{sf.vpn}{\secfuncheadline{sf.vpn}}
 
-\aufrufschnittstellen{sf.vpn}
-\konfigurationsparameter{sf.vpn.cfgparams}
+\callerinterfaces{sf.vpn}
+\configparams{sf.vpn.cfgparams}
 
-Die Konfiguration der Sicherheitsfunktion wird im Administratorhandbuch
-beschrieben \autocite[Abschnitt~7.4.3.3 VPN (Virtual Private Network)]{agd_adm}.
+Configuration of the security function is documented in the administrator guide
+\autocite[Section~7.4.3.3 VPN (Virtual Private Network)]{agd_adm}.
 
-\sfbeschreibung{}
+\sfdescription{}
 
-Der TOE stellt einen VPN Service (Client) bereit, mit dem der TOE sichere Kanäle
-zwischen sich selbst und VPN-Konzentratoren aufbauen kann. Diese Kanäle werden
-logisch von anderen Kanälen getrennt gehalten und stellen eine Identifikation
-und Authentisierung der Endpunkte des Kanals sicher.  Durch den Kanal werden die
-übertragenen Daten in Bezug auf ihre Integrität und Vertraulichkeit
-geschützt. Der Aufbau geschieht über die Schnittstelle \lswan{}.
+The TOE provides a VPN client that enables the TOE to establish secure channels
+between itself and other IT products of type VPN concentrator. These channels
+are separated logically from other channels and provide identification and
+authentication of their end points. Integrity and confidentiality of transmitted
+data is guaranteed. VPN conections are established on the interface \lswan{}.
  
-\subsection{Authentifizierung und Schlüsselaushandlung via IKE}\label{sf.vpn.ike}
+\subsection{Authentication and Key Negotiation with IKE}\label{sf.vpn.ike}
 
-Die Schlüsselvereinbarung wird mittels IKEv2-Protokoll nach \rfc[c]{4306} umgesetzt. 
-Hierbei wird alleinig die Diffie-Hellman-Gruppe~14 nach \rfc[c]{3526} unterstützt. 
-Der TOE verwendet für den Schlüsselaustausch einen DH-Exponent der Länge 384~Bit.
+Key neogtiation is implemented by the IKEv2 protocol according to
+\rfc[c]{4306}. The TOE requires the peer to accept Diffie-Hellman-Group~14
+according to \rfc[c]{3526}. The TOE uses a DH exponent of 384~bit. Initiator
+(TOE) and responder (VPN concentrator) are authenticated mutually with
+certificate authentication. Signature validation is performed by the security
+function \secfunclink{sf.cryptographicservices}
+(see section~\vref{sf.cryptographicservices}).
 
-Bereits verwendete Diffie-Hellman-Schlüssel werden nicht erneut verwendet, 
-um (Perfect) Forward Secrecy zu gewährleisten.
+\implementedsfr{\sfr{ftp_itc.1/vpn} & \sfr{fcs_ckm.2/ike}}
 
-Initiator (TOE) und Responder (VPN-Konzentrator) werden im Rahmen des
-IKE-Protokolls gegenseitig zertifikatsbasiert authentifiziert
-(\sfr{ftp_itc.1/vpn}, \sfr{fcs_ckm.2/ike}) und handeln Schlüssel für die
-Verschlüsselung und Integritätssicherung der Nutzdaten aus.  Die Signaturprüfung
-mit öffentlichen Schlüsseln und die symmetrischen Algorithmen werden in Software
-umgesetzt (s.~Abschnitt~\vref{sf.cryptographicservices}).
+\subsection{Certificate Verification}\label{sf.vpn.certverification}
 
-Der TOE erzeugt die entsprechenden symmetrischen Schlüssel, die notwendig 
-sind, um die Daten des IKE-Protokolls und des ESP-Protokolls zu verschlüsseln 
-und HMACs für die Integritätssicherung zu erzeugen.
+Certificates of the VPN concentrators are checked for their mathematical
+correctness, their expiry date and the revocation
+information.
 
-\subsection{Gültigkeitsprüfung von Zertifikaten}\label{sf.vpn.certverification}
-
-Die Zertifikate der Konzentratoren werden durch den TOE sowohl auf ihre
-mathematische Korrektheit, auf ihre zeitliche Gültigkeit geprüft. Außerdem wird
-der Sperrstatus der Zertifikate unter Verwendung von CRLs geprüft
-(\sfr{FPT_TDC.1/Zert}).
+\implementedsfr{\sfr{fpt_tdc.1/zert}}.
 
 \hrefsection{sf.networkservices}{\secfuncheadline{sf.networkservices}}
 
-\aufrufschnittstellen{sf.networkservices}
+\callerinterfaces{sf.networkservices}
 
-\konfigurationsparameter{sf.networkservices.cfgparams}
+\configparams{sf.networkservices.cfgparams}
 
-Die Konfiguration der Sicherheitsfunktion wird im Administratorhandbuch
-beschrieben \autocite[Abschnitt~7.4]{agd_adm}.
+Configuration of the security function is documented in the administrator guide
+\autocite[Section~7]{agd_adm}.
 
-\sfbeschreibung{}
+\sfdescription{}
 
-Der TOE stellt die folgenden Dienste im Netzwerk zur Verfügung (In Klammern das
-entsprechende Kapitel im Administratorhandbuch \autocite{agd_adm}):
+This security function implements several protocols and services that support
+secure TOE operation by providing access to network services offered by other IT
+products in the WAN.
 
-\begin{itemize}
-\item NTP-Client (Abschnitt~7.4.3.4)
-\end{itemize}
+\hypertarget{sf.networkservices.ntp}{\subsection{NTP Client}\label{sf.networkservices.ntp}}
 
-\hypertarget{sf.networkservices.ntp}{\subsection{NTP-Client}\label{sf.networkservices.ntp}}
+The TOE provides a client for the NTP protocol. The TOE uses this service to
+synchronize the system time with NTP servers in the WAN. This is required by the
+audit log which requires reliable time stamps.
 
-Der TOE implementiert einen NTP-Client. Die Sicherheitsfunktion
-\secfunc{sf.networkservices} stellt anderen Komponenten des TOE
-die genaue Uhrzeit bereit (\sfrlink{FPT_STM.1}).
+\implementedsfr{\sfrlink{fpt_stm.1}}
 
-\subsection{DHCP-Client}\label{sf.networkservices.dhcpclient}
+\subsection{DHCP Client}\label{sf.networkservices.dhcpclient}
 
-Der TOE bietet an WAN-Schnittstelle (\lswandhcp{}) jeweils die Möglichkeit
-DHCP nach \rfc[c]{2131} und \rfc[c]{2132} zu nutzen, um IP-Adressen,
-Default-Routen und DNS-Server zu beziehen. Die Konfiguration wird im
-Administratorhandbuch beschrieben \autocite{agd_adm}.
-
+The TOE provides a DHCP client on its WAN interface \lswandhcp{} to obtain IP
+addresses and routing information according to \rfc[c]{2131} und \rfc[c]{2132}.
 
 \hrefsection{sf.selfprotection}{\secfuncheadline{sf.selfprotection}}
 
-\aufrufschnittstellen{sf.selfprotection}
+\callerinterfaces{sf.selfprotection}
 
-\konfigurationsparameter{sf.selfprotection.cfgparams}
+\configparams{sf.selfprotection.cfgparams}
 
-Die Sicherheitsfunktion verfügt über keine Konfigurationsparameter.
+This security function has no configuration parameters.
 
-\sfbeschreibung{}
+\sfdescription{}
 
-Diese Sicherheitsfunktion ist verantwortlich für den Selbstschutz des
-TOE und für den Schutz von Daten, die durch den TOE übertragen werden.
+The security function is responsible for the self protection of the TOE and for
+the protection of data transmitted via the TOE between IT products in the LAN
+and WAN.
 
-\subsection{Speicheraufbereitung}\label{sf.selfprotection.rip}
+\subsection{Secure Memory Deallocation}\label{sf.selfprotection.rip}
 
-Sensible Daten wie kryptografische Schlüssel werden sicher aus dem Speicher des
-TOE gelöscht sobald diese nicht mehr verwendet werden.
+Sensitive data and cryptographic keys are erased securely from the TOE's memory
+as soon as they are not used anymore. Deletion is implemented by overwriting the
+memory areas with null bytes. This security function has no TSFI and is only
+called from within the TOE.
 
-Die Löschung wird durch aktives Überschreiben der entsprechenden
-Speicherbereiche mit Nullen erreicht (\sfrlink{FDP_RIP.1}). Die jeweiligen
-Implementierungen des sicheren Löschens für die verschiedenen Module des TOE
-sind in der Design-Spezifikation beschrieben \cite{adv_tds}.
+\implementedsfr{\sfrlink{fdp_rip.1}}
 
-Diese Funktionalität hat keinerlei öffentlich verfügbare
-Schnittstelle. 
-\subsection{Selbsttests}\label{sf.selfprotection.selftest}
+\subsection{Self-Tests}\label{sf.selfprotection.selftest}
 
-Der TOE implementiert Selbsttests, mit denen die Integrität und die
-korrekte Funktionsweise des TOE überprüft werden kann.
+The TOE implements self-tess that can be used to check integrity and correct
+functionality of the TSF. The administrator can run the self-tests by calling
+them via the management interface \lslanhttpmgmt{}.
 
-Zur Laufzeit kann die Durchführung der Tests durch den Administrator
-über die Managementanwendung gestartet werden (\sfr{FPT_TST.1}).
+\implementedsfr{\sfr{fpt_tst.1}}
 
 \hrefsection{sf.administration}{\secfuncheadline{sf.administration}}%
 
-\aufrufschnittstellen{sf.administration}
+\callerinterfaces{sf.administration}
 
-\konfigurationsparameter{sf.administration.cfgparams}
+\configparams{sf.administration.cfgparams}
 
-Die Funktionalität zur Konfiguration des TOE wird im Administratorhandbuch
-beschrieben \autocite[Abschnitte~7.3 bis~7.6]{agd_adm}. 
+Configuration of the security function is documented in the administrator guide
+\autocite[Section~7]{agd_adm}.
 
-\sfbeschreibung{}
+\sfdescription{}
 
-Im TOE bieten die Dienste ihre Managementfunktionen jeweils über eine dedizierte
-Schnittstelle an, die durch den Administrationsdienst angesprochen wird.
+This security function provides an interface and processes for configuration of
+the TOE. All operational parameters can be set with this function.
 
 \hrefsection{sf.cryptographicservices}{\secfuncheadline{sf.cryptographicservices}}%
 
-\aufrufschnittstellen{sf.cryptographicservices}
+\callerinterfaces{sf.cryptographicservices}
 
-\konfigurationsparameter{sf.cryptographicservices.cfgparams}
+\configparams{sf.cryptographicservices.cfgparams}
 
-Die Aufgabe von \secfunc{sf.cryptographicservices} ist das
-Bereitstellen von TLS-Verbindungen zur Managementanwendung.
+This security function has no configuration parameters.
 
-\sfbeschreibung{}
+\sfdescription{}
 
-Der TOE stellt kryptographische Funktionen bereit, die von den anderen
-Sicherheitsfunktionen verwendet werden.
+The security function provides cryptographic services that can be used by other TSF.
 
-\subsection{Zufallszahlen}%
+\subsection{Random Number Generation}%
 \label{sf.cryptographicservices.rng}
 
-Der TOE enthält einen DRNG nach \sfrlink{fcs_rng.1/hashdrbg}, um
-Zufallszahlen hoher Qualität zu erzeugen \autocite{SP80090A}.
+The TOE contains a DRNG to generate random numbers of high quality
+\autocite{SP80090A}. This RNG is used to generate the random numbers and nonces
+used for establishing TLS and IPSec connections.
 
-Der von \secfunc{sf.cryptographicservices} bereitgestellte Zufallsgenerator wird
-verwendet, um die Zufallszahlen und Nonces beim TLS-Verbindungsaufbau
-(\sfrlink{fcs_ckm.1} und \sfrlink{fcs_cop.1/tls.aes}) zu erzeugen. Über den
-TLS-Verbindungsaufbau hinaus wird der Zufallsgenerator immer dann herangezogen,
-wenn Schlüssel erzeugt werden müssen.
+\implementedsfr{\sfrlink{fcs_rng.1/hashdrbg}}
 
-\subsection{HMAC-Algorithmen}%
+\supportedsfr{\sfrlink{fcs_ckm.1} & \sfrlink{fcs_cop.1/tls.aes}}
+
+\subsection{HMAC Algorithms}%
 \label{sf.cryptographicservices.hmac}
 
-Die Funktion bietet Implementierungen der Algorithmen für die
-HMAC-Generierung, wobei der Hash-Algorithmus
-HMAC-SHA-256(-128) umgesetzt wird (\sfrlink{fcs_cop.1/hmac}).
+The security function provides implementations of algorithms for HMAC
+generation. The TOE supports HMAC-SHA-256(-128).
 
-\subsection{Signaturverifikation}%
+\implementedsfr{\sfrlink{fcs_cop.1/hmac}}
+
+
+\subsection{Signature Verification}%
 \label{sf.cryptographicservices.sigver}
 
-Der TOE unterstützt die Verifikation von Signaturen.
+The TOE supports signature verification. This is used during certificate
+validation.
 
-
-\subsubsection{Pseudo Random Function für die Generierung
-  symmetrischer Schlüssel (PRF)}%
-\label{sf.cryptographicservices.ipsec.prf}
-
-Der TOE erzeugt pseudozufällige Zahlen für die Erzeugung von symmetrischem
-Schlüssel für Verschlüsselung und Integritätssicherung im Rahmen der Protokolle
-IKE (\secitem{IKE_ENCR} und \secitem{IKE_INTEG}) und ESP (\secitem{ESP_ENCR} und
-\secitem{ESP_INTEG}).
-
-Der Algorithmus PRF-HMAC-SHA-256 wird vom TOE unterstützt.
-
-\rfc{2104} spezifiziert den HMAC-Algorithmus für beliebige Hash-Algorithmen
-\cite{rfc2104}.  FIPS180-4 \cite{FIPS180-4} spezifiziert die verwendeten
-Hash-Algorithmen. \cite{rfc4868} beschreibt die PRFs auf Basis der HMACs, wie
-sie bei IKE eingesetzt werden (\sfrlink{fcs_ckm.1}, \sfrlink{fcs_ckm.2/ike}).
-
-
-\subsubsection{Schlüsselaustausch für IKE (Diffie-Hellman)}%
+\subsubsection{Key Exchange for  IKE (Diffie-Hellman)}%
 \label{sf.cryptographicservices.ipsec.keyexc}
 
-Der TOE implementiert den Diffie-Hellman-Algorithmus für den Schlüsselaustausch
-im Rahmen des IKE-Protokolls IKEv2 \cite{rfc7296}.  Der TOE stellt zudem sicher,
-dass Diffie-Hellman-Schlüssel nur für eine Sitzung verwendet werden und danach
-neu erzeugt werden, um (Perfect) Forward Secrecy zu
-gewährleisten. (\sfrlink{fcs_ckm.2/ike})
+The TOE implements the Diffie-Hellman algorithm for key exchange used by the IKE
+protocol. The TOE does not reuse DH-keys and thus provides perfect forward
+secrecy.
 
-\subsubsection{Schlüsselzerstörung}%
+\implementedsfr{\sfrlink{fcs_ckm.2/ike}}
+
+\subsubsection{Key destruction}%
 \label{sf.cryptographicservices.ipsec.keydest}
 
-Der TOE zerstört die symmetrischen Schlüssel für IKE und ESP und die
-Diffie-Hellman-Schlüssel, die im Rahmen von IKE erzeugt werden, indem er die
-verwendeten Speicherbereiche nach der Verwendung komplett mit Nullen
-überschreibt. (\sfrlink{fcs_ckm.4})
+The TOE destroys symmetric keys for IKE, ESP and TLS by overwriting the memory
+areas with null bytes.
+
+\implementedsfr{\sfrlink{fcs_ckm.4}}
 
 \hrefsection{sf.tls}{\secfuncheadline{sf.tls}}
 
-Der TOE implementiert das TLS-Protokoll in der Version~1.2. Dabei werden die
-Cipher Suites in \tableref{tab:ciphersuites} unterstützt.  Transport Layer
-Security Version~1.2 ist in \rfc{5246} spezifiziert \cite{rfc5246}. Weiterhin
-relevant sind \rfc{8017} (RSA) für den Nachweis des Schlüsselbesitzes
-\cite{rfc8017} sowie \rfc{3526}. Neben dem Schlüsselaustausch mit Primzahlen
-nach Diffie-Hellman beherrscht der TOE auch das ECDHE-Verfahren, bei dem Punkte
-auf elliptischen Kurven berechnet und ausgetauscht werden. Für dieses Verfahren
-werden die Kurven secp256r1, secp384r1 \cite{rfc8422, X9.62} und
-brainpoolP256r1, brainpoolP384r1 \cite{rfc7027} genutzt. Alle TLS-Parameter sind
-in den Tabellen in Anhang~\ref{appendix.tls} zusammengefasst.
-
-Im Rahmen des sicheren Löschen von geheimen Schlüsselmaterial muss die
-Speicherverwaltung berücksichtig werden. Die Details zur sicheren
-Schlüssellöschung sind in \autocite{adv_tds} dokumentiert.
-(\sfrlink{fcs_ckm.4})
-
+The TOE implements a TLS server in protocol version~1.2 according to
+\rfc[c]{5246}. All TLS connections and their parameters are listed in
+\appendixref{appendix.tls}.
 
 
 % !TEX root = adv_fsp

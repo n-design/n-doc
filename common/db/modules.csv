@@ -1,13 +1,13 @@
 subsystem;label;name;plainname
 vpn;core;Core;Core
-vpn;cert;Zertifikatsdienst;Zertifikatsdienst
+vpn;cert;Certificate Service;Certificate Service
 ntpclient;core;Core;Core
-selfprotect;memory;Speicherschutz;Speicherschutz
-selfprotect;selftest;Selbsttest;Selbsttest
+selfprotect;memory;Memory Protection;Memory Protection
+selfprotect;selftest;Self Test;Self Test
 adminsystem;webserver;HTTP-Server;HTTP-Server
-adminsystem;mgmt;Management-Anwendung;Management-Anwendung
-cryptsystem;algorithms;Al\-go\-rith\-men;Algorithmen
-cryptsystem;keymgmt;Key-Services;Key-Services
-cryptsystem;rng;Zufallszahlen;Zufallszahlen
+adminsystem;mgmt;Management-App;Management-App
+cryptsystem;algorithms;Algorithms;Algorithms
+cryptsystem;keymgmt;Key Management;Key Management
+cryptsystem;rng;Random Number Generator;Random Number Generator
 tls;core;Core;Core
-tls;cert;Zertifikatsdienst;Zertifikatsdienst
+tls;cert;Certificate Service;Certificate Service

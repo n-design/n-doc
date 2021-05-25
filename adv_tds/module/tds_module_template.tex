@@ -15,7 +15,7 @@
 %% kann man sich schon eine Menge Arbeit sparen.
 
 
-\moduleKapitel{mod.subxxx.modyyy}
+\modulechapter{mod.subxxx.modyyy}
 
 %% Generiert die Tabelle der SFR, die dieses Modul umsetzt oder
 %% unterstützt.
@@ -25,7 +25,7 @@
 %% zusammensetzt
 \generatebundletable{mod.subxxx.modyyy}
 
-\moduleBeschreibung{mod.subxxx.modyyy.desc}
+\moduledescription{mod.subxxx.modyyy.desc}
 
 Über das Modul \tds{mod.subxxx.modyyy} des Subsystems
 \tdslink{sub.subxxx} stellt der TOE
@@ -38,11 +38,11 @@ Schnittstellen .......
 %% Nach der Beschreibung des Moduls folgt die Beschreibung der
 %% Abläufe.  Diese Überschrift leitet den entsprechenden Abschnitt
 %% ein.
-\moduleAblaeufe{prc.subxxx.modyyy}
+\moduleprocesses{prc.subxxx.modyyy}
 
 %% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
 %% sollte nicht zu lang, aber ausreichend verständlich sein.
-\modulAblauf{prc.subxxx.modyyy.validateUserInput}{Prüfung auf
+\moduleprocess{prc.subxxx.modyyy.validateUserInput}{Prüfung auf
   Gültigkeit der Benutzereingaben}
 
 %% Hier folgt die ausführliche Beschreibung des SFR-relevanten
@@ -70,20 +70,20 @@ Schnittstellen .......
 
 %% Der nächste wichtige Abschnitt in der Modulbeschreibung: Die
 %% Schnittstellen.
-\moduleSchnittstellen{int.subxxx.modyyy}
+\moduleinterfaces{int.subxxx.modyyy}
 
 
 %% Jede Schnittstelle hat einen Bezeichner, der mit "int."
 %% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
 %% die Schnittstelle an) oder required (das Modul nutzt die
 %% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
-\modulSchnittstelleProvided{int.subxxx.modyyy.icfgmgmt}
+\moduleinterfaceprovided{int.subxxx.modyyy.icfgmgmt}
 
 Über diese Schnittstelle wird die Konfiguration des Moduls
 \tds{mod.subxxx.modyyy} verwaltet. Die Konfiguration kann darüber entweder
 gelesen oder geschrieben werden.
 
-\modulSchnittstelleProvided{int.subxxx.modyyy.iaas}
+\moduleinterfaceprovided{int.subxxx.modyyy.iaas}
 
 Über diese Schnittstelle bietet \tds{mod.subxxx.modyyy} den anderen Modulen
 des TOE Dienste für Zugriffsberechtigungen auf dynamische und
@@ -91,7 +91,7 @@ statische Aspekte des Informationsmodells an.
 
 %% Ab hier: Die Liste der Schnittstellen, die entweder über die
 %% Blueprint-Konfiguration oder programmatisch herangezogen werden.
-\modulSchnittstelleRequired{int.cardservice.core.icardservice}
+\moduleinterfacerequired{int.cardservice.core.icardservice}
 
 Die Schnittstelle \tdslink[fq]{int.cardservice.core.icardservice} wird
 verwendet, um Informationen über die zur Verfügung stehenden Smart

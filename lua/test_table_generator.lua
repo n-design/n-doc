@@ -9,7 +9,7 @@ lu = require('luaunit')
 testtg = {}
 
 function testtg.testitemprinter()
-   lu.assertEquals(tg.print_item_list({}, "tsfi"), "(keine)")
+   lu.assertEquals(tg.print_item_list({}, "tsfi"), [[\ndocnone]])
    lu.assertEquals(tg.print_item_list({}, "tsfi", {emptyitem="\\todo{Bewerten}"}), "\\todo{Bewerten}")
    lu.assertEquals(tg.print_item_list({"ls.vpnsis"}, "tsfi"), "\\tsfi{ls.vpnsis}")
    lu.assertEquals(tg.print_item_list({"ls.vpnsis"}, "tsfilink"), "\\tsfilink{ls.vpnsis}")
@@ -69,7 +69,7 @@ function testtg.test_modules_for_sfr_row()
     sup_mods = {}
     enf_mods = {"mod.cardservice.core", "mod.cardservice.ctservice", "mod.signservice.core", "mod.signservice.jnrgen"}
 
-    expected_sfr_row = [[\midrule\relax\index{\sfrplain{fta_tab.1/jobnummer}@\sfr{fta_tab.1/jobnummer}|textbf}\hypertarget{fta_tab.1/jobnummer}{\sfr{fta_tab.1/jobnummer}} & Enforcing & \tdslink[fq]{mod.cardservice.core}\\& & \tdslink[fq]{mod.cardservice.ctservice}\\& & \tdslink[fq]{mod.signservice.core}\\& & \tdslink[fq]{mod.signservice.jnrgen}\\& Supporting & (Keine)\\]]
+    expected_sfr_row = [[\midrule\relax\index{\sfrplain{fta_tab.1/jobnummer}@\sfr{fta_tab.1/jobnummer}|textbf}\hypertarget{fta_tab.1/jobnummer}{\sfr{fta_tab.1/jobnummer}} & Enforcing & \tdslink[fq]{mod.cardservice.core}\\& & \tdslink[fq]{mod.cardservice.ctservice}\\& & \tdslink[fq]{mod.signservice.core}\\& & \tdslink[fq]{mod.signservice.jnrgen}\\& Supporting & \ndocnone\\]]
 
     lu.assertEquals(tg.generate_modules_for_sfr_row(sfr, enf_mods, sup_mods), expected_sfr_row)
 end

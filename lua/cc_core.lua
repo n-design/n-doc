@@ -477,7 +477,7 @@ function cc_core.check_for_errors_in_lists(result, key)
     if result[1] == "__error__" then
         result = {}
     end
-    --   result[1] = string.gsub(result[1], ".*__error__.*", "(Keine)")
+    --   result[1] = string.gsub(result[1], ".*__error__.*", [[\ndocnone]])
    return result
 end
 

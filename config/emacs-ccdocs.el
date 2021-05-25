@@ -95,11 +95,11 @@ return `nil'."
 (setq reftex-section-levels
             (cons '("moduleSchnittstellen" . 4) reftex-section-levels))
 (setq reftex-section-levels
-            (cons '("modulAblauf" . 5) reftex-section-levels))
+            (cons '("moduleprocess" . 5) reftex-section-levels))
 (setq reftex-section-levels
-            (cons '("modulSchnittstelleProvided" . 5) reftex-section-levels))
+            (cons '("moduleinterfaceprovided" . 5) reftex-section-levels))
 (setq reftex-section-levels
-            (cons '("modulSchnittstelleRequired" . 5) reftex-section-levels))
+            (cons '("moduleinterfacerequired" . 5) reftex-section-levels))
 
 (setq enable-recursive-minibuffers 't)
 (defun ccdoc-get-tex-master (key pp) "" (interactive "MCC Document (afst): \nMPP (78): ")

@@ -1,15 +1,17 @@
 \documentclass[a4paper]{scrreprt}
 \input{../common/common-preamble}
 
+\makeatletter{}
 \input{internal_macros.tex}
 \input{user_macros.tex}
 
 \input{../common/common-sfr-index.tex}
-
+\makeatother{}
 \newcommand{\thisdocument}{adv_tds}
 \newcommand{\documenttitle}{TOE Design Specification}
 
 \begin{document}
+\selectlanguage{english}
 
 \input{../common/titlepage}
 
@@ -19,11 +21,11 @@
 
 \cleardoublepage{}
 
-\listoftoc{lot}  % Tabellenverzeichnis
+\listoftoc{lot}  % List of Tables
 
 \cleardoublepage{}
 
-\listoftoc{lof}  % Abbildungsverzeichnis
+\listoftoc{lof}  % List of Figures
 
 \cleardoublepage{}
 

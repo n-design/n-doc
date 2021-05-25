@@ -1,101 +1,40 @@
-%% Beispieldatei für die Beschreibung eines TDS Moduls.
-%% Das wichtigste an dieser Stelle ist, genau das Kürzel des Moduls
-%% zu kennen, das beschrieben wird. Module heißen immer
-%%
-%% mod.<subsystem>.<modul>
-%%
-%% wobei die entsprechenden Definitionen in der Datei
-%% modules.csv stehen.
-%%
-%% Kleiner Tipp: Diese Datei hat als Vorlage
-%%
-%% mod.subxxx.modyyy
-%%
-%% Mit einem Suche/Ersetze Lauf zum Austausch des Template-Codes
-%% kann man sich schon eine Menge Arbeit sparen.
+\modulechapter{mod.adminsystem.webserver}
 
-
-\moduleKapitel{mod.adminsystem.webserver}
-
-%% Generiert die Tabelle der SFR, die dieses Modul umsetzt oder
-%% unterstützt.
 \generatesfrtable{mod.adminsystem.webserver}
 
-%% Generiert die Tabelle der Bundles, aus denen sich dieses Modul
-%% zusammensetzt
 %\generatebundletable{mod.adminsystem.webserver}
 
-\moduleBeschreibung{mod.adminsystem.webserver.desc}
+\moduledescription{mod.adminsystem.webserver.desc}
 
-Über das Modul \tds{mod.adminsystem.webserver} des Subsystems
-\tdslink{sub.adminsystem} stellt der TOE
-Schnittstellen .......
+The module \tds{mod.adminsystem.webserver} of subsystem
+\tdslink{sub.adminsystem} provides an HTTP Server for the management interface.
 
-% Hier die Funktionen des Moduls beschreiben: Was macht es? Welche
-% Rolle spielt es im Gesamtsystem? Noch nicht in die Details gehen,
-% diese werden später bei den Abläufen erklärt.
+\moduleprocesses{prc.adminsystem.webserver}
 
-%% Nach der Beschreibung des Moduls folgt die Beschreibung der
-%% Abläufe.  Diese Überschrift leitet den entsprechenden Abschnitt
-%% ein.
-\moduleAblaeufe{prc.adminsystem.webserver}
-
-%% Für jeden Ablauf gibt es eine solche Überschrift. Der letzte Teil
-%% sollte nicht zu lang, aber ausreichend verständlich sein.
-\modulAblauf{prc.adminsystem.webserver.httpcomm}{HTTP-Kommunikation mit dem
+\moduleprocess{prc.adminsystem.webserver.httpcomm}{HTTP Communication With an
   Administrator}
 
-%% Hier folgt die ausführliche Beschreibung des SFR-relevanten
-%% Ablaufs.  Das sollte ordentlich in die Details des Verfahrens
-%% gehen. Es ist nicht wichtig, auf Implementationsdetails
-%% herumzureiten. Hingegen ist es für den Evaluator hilfreich, wenn
-%% bestimmte Namen genannt werden, weil das einen
-%% schönen Anker für das Lesen des Codes bildet. Auf keinen Fall
-%% sollten hier Zeilennummern genannt werden. Diese müssten jedesmal
-%% wieder angepasst und korrigiert werden.
-%%
-%% Wenn auf Code verwiesen wird, bitte mit dem Makro \code{}
-%% einschließen. Ggf. kann es notwendig sein, Trennhilfen
-%% vorzugeben. Diese bitte mit "\-" an den entsprechenden Stellen
-%% einfügen:  \code{get\-Card\-Terminals()}
-%%
+This process implements the HTTP protocol.
 
-
-%% Wenn an einzelnen Stellen besonders deutlich erkennbar ist, dass
-%% ein SFR umgesetzt wird, ist es hilfreich, den Evaluator darauf
-%% hinzuweisen. Auf jeden Fall muss eine solche Zeile am Ende einer
-%% Ablaufbeschreibung stehen.
 \implementedsfr{\sfrlink{ftp_trp.1/admin}}
 
+\moduleinterfaces{int.adminsystem.webserver}
 
-%% Der nächste wichtige Abschnitt in der Modulbeschreibung: Die
-%% Schnittstellen.
-\moduleSchnittstellen{int.adminsystem.webserver}
+\moduleinterfaceprovided{int.adminsystem.webserver.httpendpoint}
 
+This interface implements the logical interface \lslanhttpmgmt{}.
 
-%% Jede Schnittstelle hat einen Bezeichner, der mit "int."
-%% anfängt. Eine Schnittstelle ist entweder provided (das Modul bietet
-%% die Schnittstelle an) oder required (das Modul nutzt die
-%% Schnittstelle). Die Provided-Schnittstellen kommen zuerst.
-\modulSchnittstelleProvided{int.adminsystem.webserver.httpendpoint}
+\moduleinterfacerequired{int.adminsystem.mgmt.setconfig}
 
-Über diese Schnittstelle wird die logische Schnittstelle \lslanhttpmgmt{}
-umgesetzt.
+The interface \tdslink[fq]{int.adminsystem.mgmt.setconfig} is required for
+saving configuration parameters.
 
-\modulSchnittstelleRequired{int.adminsystem.mgmt.setconfig}
+\moduleinterfacerequired{int.adminsystem.mgmt.connectdisconnect}
 
-Über die Schnittstelle \tdslink[fq]{int.adminsystem.mgmt.setconfig} speichert
-der HTTP-Server die Konfigurationsparameter.
-
-\modulSchnittstelleRequired{int.adminsystem.mgmt.connectdisconnect}
-
-Über die Schnittstelle \tdslink[fq]{int.adminsystem.mgmt.connectdisconnect} ruft
-HTTP-Server die Funktion zum Auf- und Abbau der VPN-Verbindung auf.
+The interface \tdslink[fq]{int.adminsystem.mgmt.connectdisconnect} is required
+by the HTTP server for opening/closing connections to the VPN concentrator.
 
 
-% !TEX root = "../../adv_tds"
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../adv_tds"
-%%% TeX-engine: luatex
-%%% End:
+
+
+

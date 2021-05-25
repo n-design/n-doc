@@ -34,6 +34,11 @@ function common.generate_label_list(thelabel)
     return labels
 end
 
+function common.count_labels(thelabel)
+    local labels = common.get_relations_by_query_key(thelabel .."_all_labels")
+    return #labels
+end
+
 function common.getError(key)
     return common.get_by_query_key("error", key)
  end

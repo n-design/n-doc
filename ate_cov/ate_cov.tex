@@ -2,18 +2,39 @@
 \input{../common/common-preamble}
 
 \newcommand{\thisdocument}{ate_cov}
-\newcommand{\documenttitle}{Testabdeckung ATE\_COV}
+\newcommand{\documenttitle}{Test Coverage ATE\_COV}
 
 
-% Links zu Modulen und Subsystemen ausschalten.
-\renewcommand{\tdslink}[2][]{\tds[#1]{#2}}
-% Dateinamen immer in schmaler Schrift setzen
+% Print file names in narrow font
 \renewcommand{\filename}[1]{{\narrowfilefont #1}}
 
 \usepackage[paper=a4paper, landscape]{geometry}
 \KOMAoptions{paper=a4,paper=landscape,usegeometry}
 
+
+
+\newcommand*\ndocNumberOfTestcasesPer{\GetTranslation{ndoc@NumberOfTestcasesPer}}
+\DeclareTranslationFallback {ndoc@NumberOfTestcasesPer}{Number of Test Cases per}
+\DeclareTranslation{English}{ndoc@NumberOfTestcasesPer}{Number of Test Cases per}
+\DeclareTranslation{German} {ndoc@NumberOfTestcasesPer}{Anzahl der Testfälle pro}
+
+\DeclareTranslationFallback {ndoc@testcases}{Test Cases}
+\DeclareTranslation{English}{ndoc@testcases}{Test Cases}
+\DeclareTranslation{German} {ndoc@testcases}{Testfälle}
+
+\newcommand*\ndocNumber{\GetTranslation{ndoc@number}}
+\DeclareTranslationFallback {ndoc@number}{\#}
+\DeclareTranslation{English}{ndoc@number}{\#}
+\DeclareTranslation{German} {ndoc@number}{Anz.}
+
+\newcommand*\ndocModule{\GetTranslation{ndoc@module}}
+\DeclareTranslationFallback {ndoc@module}{Module}
+\DeclareTranslation{English}{ndoc@module}{Module}
+\DeclareTranslation{German} {ndoc@module}{Modul}
+
+
 \begin{document}
+\selectlanguage{english}
 
 \input{../common/titlepage-landscape}
 
@@ -25,57 +46,70 @@
 
 \newgeometry{left=1.5cm, right=1.5cm, top=1.5cm, bottom=3cm}
 
-\hrefchapter{intro}{Einführung}
+\hrefchapter{intro}{\GetTranslation{Introduction}}
 
-Das vorliegende Dokument ist die ATE\_COV zu \thisproductlong{}. Die Tabellen in den
-folgenden Abschnitten zeigen die Testabdeckung des TOE. Dabei werden dieselben
-Daten unterschiedlich aufbereitet. \sectref{tests} listet jeden Testfall auf und
-benennt dazu das TDS-Modul, die SFR und die TSFI, die von diesem Testfall
-abgedeckt werden. Zuvor zeigen die Tabellen in \sectref{summary}
-Zusammenfassungen an: Die Anzahl der Testfälle pro TDS-Modul, pro SFR und pro
-TSFI. Alle Tabellen basieren auf Abfragen der Datenbank
-\filename{mauvecorp\_vpn\_client.db}. Weiter gehende Abfragen für den Evaluationsprozess können
-daraus erstellt werden. Die relevanten Tabellen sind \code{testcases},
-\code{testcase\_module}, \code{testcase\_sfr} und \code{testcase\_tsfi}.
+This document is the test coverage \secitemformat{ATE\_COV} for
+\thisproductlong{}. The tables in the following sections show the TOE's test
+coverage. The tables show different representations of the same
+data. \sectref{tests} lists each test case and sets it into relation to the TDS
+module, the SFR and TSFI, that are covered by this test case. Before that, the
+tables in \sectref{summary} show summaries: The number of test cases per TDS
+module, per SFR and per TSFI. All tables are based on the entities and relations
+defined in the database \filename{mauvecorp\_vpn\_client.db}. Further quieries
+in the evaluation process can be generated from the tables \code{testcases},
+\code{testcase\_module}, \code{testcase\_sfr} and \code{testcase\_tsfi}.
 
-\hrefchapter{summary}{Zusammenfassung}
 
-\hrefsection{summary.nummodules}{Anzahl der Testfälle pro TDS-Modul}
+% Das vorliegende Dokument ist die \secitemformat{ATE\_COV} zu
+% \thisproductlong{}. Die Tabellen in den folgenden Abschnitten zeigen die
+% Testabdeckung des TOE. Dabei werden dieselben Daten unterschiedlich
+% aufbereitet. \sectref{tests} listet jeden Testfall auf und benennt dazu das
+% TDS-Modul, die SFR und die TSFI, die von diesem Testfall abgedeckt werden. Zuvor
+% zeigen die Tabellen in \sectref{summary} Zusammenfassungen an: Die Anzahl der
+% Testfälle pro TDS-Modul, pro SFR und pro TSFI. Alle Tabellen basieren auf
+% Abfragen der Datenbank \filename{mauvecorp\_vpn\_client.db}. Weiter gehende
+% Abfragen für den Evaluationsprozess können daraus erstellt werden. Die
+% relevanten Tabellen sind \code{testcases}, \code{testcase\_module},
+% \code{testcase\_sfr} und \code{testcase\_tsfi}.
+ 
+\hrefchapter{summary}{\GetTranslation{Summary}}
+
+\hrefsection{summary.nummodules}{\ndocNumberOfTestcasesPer{} TDS Module}
 
 {\footnotesize
 \begin{longtable}{@{}L{5.8cm}>{\tiny}lrL{5.8cm}>{\tiny}lrL{5.8cm}>{\tiny}lr@{}}
-  \toprule Modul & {\footnotesize Status} & Anz. & Modul & {\footnotesize Status} & Anz. & Modul & {\footnotesize Status} & Anz. \\ \midrule \endhead
+  \toprule Modul & {\footnotesize Status} & \ndocNumber & Modul & {\footnotesize Status} & \ndocNumber & Modul & {\footnotesize Status} & \ndocNumber \\ \midrule \endhead
   \bottomrule \endfoot
   \directlua{print_module_to_num_testcase_table()}
 \end{longtable}
 }
 
-\clearpage\hrefsection{summary.numsfr}{Anzahl der Testfälle pro SFR}
+\clearpage\hrefsection{summary.numsfr}{\ndocNumberOfTestcasesPer{} SFR}
 
 {\footnotesize
 \begin{longtable}{@{}L{3.4cm}r@{\hspace{1.3cm}}L{3.4cm}r@{\hspace{1.3cm}}L{3.4cm}r@{\hspace{1.3cm}}L{3.4cm}r@{}}
-  \toprule SFR & Anzahl & SFR & Anzahl & SFR & Anzahl & SFR & Anzahl\\ \midrule \endhead
+  \toprule SFR & \ndocNumber & SFR & \ndocNumber & SFR & \ndocNumber & SFR & \ndocNumber\\ \midrule \endhead
   \bottomrule \endfoot
   \directlua{print_sfr_to_num_testcase_table()}
 \end{longtable}
 }
 
-\clearpage\hrefsection{summary.numtsfi}{Anzahl der Testfälle pro TSFI}
+\clearpage\hrefsection{summary.numtsfi}{\ndocNumberOfTestcasesPer{} TSFI}
 
 {\footnotesize
 \begin{longtable}{@{}L{4cm}r@{\hspace{1.5cm}}L{4cm}r@{\hspace{1.5cm}}L{4cm}r@{}}
-  \toprule TSFI & Anzahl & TSFI & Anzahl & TSFI & Anzahl \\ \midrule \endhead
+  \toprule TSFI & \ndocNumber & TSFI & \ndocNumber & TSFI & \ndocNumber \\ \midrule \endhead
   \bottomrule \endfoot
   \directlua{print_tsfi_to_num_testcase_table()}
 \end{longtable}
 }
 
 
-\hrefchapter{tests}{Testfälle}
+\hrefchapter{tests}{\GetTranslation{ndoc@testcases}}
 
 {\footnotesize
 \begin{longtable}{@{}lL{7cm}L{9cm}L{7cm}@{}}
-  \toprule ID & Subsystem::Modul & SFR & TSFI \\ \midrule \endhead
+  \toprule ID & \GetTranslation{ndoc@subsystemmodule} & SFR & TSFI \\ \midrule \endhead
   \bottomrule \endfoot
   \directlua{print_testcase_table()}
 \end{longtable}

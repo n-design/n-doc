@@ -72,6 +72,7 @@ minibox
 minted
 multirow
 nimbus15
+noindentafter
 oberdiek
 pdfescape
 pdflscape
@@ -89,6 +90,7 @@ substr
 tocloft
 tools
 threeparttable
+translations
 trimspaces
 truncate
 uniquecounter
