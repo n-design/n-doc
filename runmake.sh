@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 theversion=$(grep 'container: ndesign/n-doc:' .github/workflows/build_n-doc_template.yml | cut -d ':' -f3)
 
