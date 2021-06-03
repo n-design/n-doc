@@ -26,32 +26,35 @@ RUN ./configure && make build && make install && \
     luarocks install luaunit && \
     luarocks install ftcsv
 
-FROM ${baseimage}
-ARG ctanmirror=http://www.ctan.org/tex-archive
+FROM ${baseimage} as ndocbase
 
-ENV DEBIAN_FRONTEND=noninteractive
+ARG TARGETPLATFORM
+ARG TARGETARCH
+ARG TARGETOS
+
+WORKDIR /install-tl
+COPY texlive.profile-$TARGETARCH-linux /install-tl/texlive.profile
+ENV PATH=/usr/local/texlive/bin/x86_64-linux:/usr/local/texlive/bin/aarch64-linux:$PATH
 
 COPY --from=buildbase /luarocks-3.7.0/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
 COPY --from=buildbase /luarocks-3.7.0/lua_modules/share/lua/5.3/ /usr/local/share/lua/5.3
 
-COPY texlive.profile /
-COPY texlive.packages /
-
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y make sqlite3 git graphviz curl python3-pygments
 
-WORKDIR /install-tl
+ARG ctanmirror=http://ftp.fau.de/ctan
 
 RUN curl -L ${ctanmirror}/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xz --strip-components 1 && \
-    ./install-tl -profile=/texlive.profile -repository=${ctanmirror}/systems/texlive/tlnet/ && \
+    ./install-tl -profile=texlive.profile -repository=${ctanmirror}/systems/texlive/tlnet/ && \
     cd / && \
-    rm -r /install-tl && \
-    /usr/local/texlive/bin/x86_64-linux/tlmgr install $(cat /texlive.packages) && \
+    rm -r /install-tl
+
+COPY texlive.packages /
+RUN tlmgr install $(cat /texlive.packages) && \
     rm /texlive.packages
 
 ENV TEXMFCACHE=./.texmfcache
 ADD l.sh /usr/local/bin
-
-ENV PATH=/usr/local/texlive/bin/x86_64-linux:$PATH
 
 WORKDIR /data
 
