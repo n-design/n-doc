@@ -90,8 +90,8 @@ if [[ -z $dry && -n "$(git status --porcelain)" ]]; then
     echo "Uncommitted changes in repository. Please commit first. Aborting."
     exit 2
 fi
-if [[ -z $dry && $(git rev-parse --abbrev-ref HEAD) != "master" ]]; then
-    echo "Not on branch 'master'. Aborting."
+if [[ -z $dry && $(git rev-parse --abbrev-ref HEAD) != "main" ]]; then
+    echo "Not on branch 'main'. Aborting."
     exit 3
 fi
 
