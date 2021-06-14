@@ -15,6 +15,7 @@ booktabs
 caption
 catchfile
 collectbox
+colortbl
 csquotes
 datatool
 dirtree
@@ -93,6 +94,7 @@ threeparttable
 translations
 trimspaces
 truncate
+ulem
 uniquecounter
 upquote
 url
