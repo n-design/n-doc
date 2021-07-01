@@ -17,6 +17,7 @@
 dry=${DRYRUN:-''}
 RELEASE_DB=common/db/releases.csv
 require_user_confirmation=true
+mainbranch=master
 
 declare -A alldocs
 
@@ -90,8 +91,8 @@ if [[ -z $dry && -n "$(git status --porcelain)" ]]; then
     echo "Uncommitted changes in repository. Please commit first. Aborting."
     exit 2
 fi
-if [[ -z $dry && $(git rev-parse --abbrev-ref HEAD) != "main" ]]; then
-    echo "Not on branch 'main'. Aborting."
+if [[ -z $dry && $(git rev-parse --abbrev-ref HEAD) != "$mainbranch" ]]; then
+    echo "Not on branch „${mainbranch}“. Aborting."
     exit 3
 fi
 
@@ -129,7 +130,7 @@ fi
 
 # Step 1: Remove "-SNAPSHOT" for each document 
 # (thus setting the version)
-for doc in ${alldocs[@]}; do
+for doc in "${alldocs[@]}"; do
     documentkey=$doc
     currentversion=$(get_version $documentkey)
     taggedversion=${currentversion%-SNAPSHOT}
@@ -143,16 +144,18 @@ $dry git commit -a -m "Increased versions for release" >/dev/null
 to_be_tagged=$(git rev-parse HEAD)
 
 # Step 3: tag the HEAD commit for each document
-for doc in ${alldocs[@]}; do
+for doc in "${alldocs[@]}"; do
     taggedversion=$(get_version $doc)
     echo "Tagging $doc with ${doc^^}/v$taggedversion"
     $dry git tag -m "Increased ${doc^^} version to v$taggedversion" "${doc^^}/v$taggedversion" ${to_be_tagged}
+    $dry git push origin "${doc^^}/v$taggedversion"
 done
 
-$dry git tag -m "Dokumente zu ${this_release_tag}" ${this_release_tag} ${to_be_tagged}
+$dry git tag -m "Documents for ${this_release_tag}" "${this_release_tag}" ${to_be_tagged}
+$dry git push origin "${this_release_tag}"
 
 # Step 4: Increase version to next snapshot
-for doc in ${alldocs[@]}; do
+for doc in "${alldocs[@]}"; do
     documentkey=$doc
     currentversion=$(get_version $documentkey)
     nextversion=$(get_next_version $currentversion)
@@ -162,7 +165,6 @@ done
 # Step 5: Commit new version and push tags
 $dry git commit -a -m "Increased versions for next snapshot" >/dev/null
 $dry git push
-$dry git push --tags
 
 # Cleanup after dry-run
 if [[ -n "$dry" ]]; then
