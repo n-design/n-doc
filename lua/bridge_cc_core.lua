@@ -227,6 +227,10 @@ function p(label, r)
    return table.concat(result, " & ")
 end
 
+function bridge_cc_core.print_number_of_labels(label, tex)
+   local result = common.generate_label_list(label);
+   tex.sprint(#result)
+end
 
 function bridge_cc_core.print_table_body(table_params, tex)
    local resulttable = {}
