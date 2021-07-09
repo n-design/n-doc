@@ -93,7 +93,7 @@ relations of the subjects defined in \tableref{tab:sfr.intro.model} to the SFR.
 
 \clearpage{}
 
-\begin{longtable}[c]{@{}l>{\centering}*{17}{c}<{\centering}@{}}
+\begin{longtable}[c]{@{}l>{\centering}*{\directlua{print_number_of_labels("mainsfr")}}{c}<{\centering}@{}}
   \toprule
   \directlua{print_table_header('mainsfr', 'sfrlinknoindex')} \\
   % 
@@ -103,7 +103,7 @@ relations of the subjects defined in \tableref{tab:sfr.intro.model} to the SFR.
   \directlua{print_table_body('subjobj', 'mainsfr', 'subjobjlink', cc_core.getSubjobj2Sfr)}
 \end{longtable}
 
-\begin{longtable}[c]{@{}l>{\centering}*{2}{c}<{\centering}@{}}
+\begin{longtable}[c]{@{}l>{\centering}*{\directlua{print_number_of_labels("subjobj")}}{c}<{\centering}@{}}
   \toprule
   \directlua{print_table_header('subjobj', 'subjobjlink')} \\
   % 
