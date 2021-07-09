@@ -47,6 +47,9 @@ RUN curl -L ${ctanmirror}/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xz -
     /usr/local/texlive/bin/x86_64-linux/tlmgr install $(cat /texlive.packages) && \
     rm /texlive.packages
 
+ENV TEXMFCACHE=./.texmfcache
+ADD l.sh /usr/local/bin
+
 ENV PATH=/usr/local/texlive/bin/x86_64-linux:$PATH
 
 WORKDIR /data
