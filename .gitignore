@@ -74,6 +74,7 @@ Icon*
 *.db-journal
 *.fop
 _minted-*/
+.DS_Store
 
 # Custom lists
 *.todo
