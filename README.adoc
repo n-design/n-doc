@@ -8,8 +8,8 @@ English. Not all files have been translated and there might be some
 organizational errors.
 
 This repository contains the developer documentation for the CC evaluation of
-the Mauve VPN Client, a fictional TOE serving as a template for the
-n-doc process. The developer documentation consists sample documents:
+the Ingenico NextGen e-Health Card Terminal. The developer documentation
+consists sample documents:
 
 * Security Target (ASE_ST)
 
@@ -124,6 +124,57 @@ The following shell scripts support the build management:
 | `scripts/create_release_archive.sh` | _Not to be called by the user._ Creates an archive with the documents in `deliverables`. Is called from the  `Makefile`.
 
 |===
+
+
+== Collaborating with Others
+
+=== Branching
+
+All the work is done in feature branches. No direct pushes to the `main` branch
+are accepted. Feature branches are spun off the `main` branch. Their names
+should reflect the purpose, e.g. a ticket number or a short description such as
+`fix-st-todos`. Sometimes it is helpful to prefix branch names with the editor's
+name.
+
+When a feature description is complete and the branch is pushed to the upstream
+repository, the editor creates a pull request (Depending on the git server used
+in the project, this is called either a _merge request_ or a _pull
+request_. These terms mean the same thing.) The pull request is assigned to the
+coordinating editor. They can review the changes and merge the changeset into
+the `main` branch. To facilitate a clean repository structure, it is recommended
+to _rebase_ the feature branch before accepting the pull request. This can be
+done either by using `git rebase` or `git pull --rebase`. Both are acceptable
+and it is a matter of personal taste which one is used.
+
+=== Patch Workflow
+
+Not all editors have access to the central git servers that host this document
+repository. For external editors, who cannot directly push their changes to the
+upstream repo, there is a patch workflow that is implemented by shell scripts.
+
+Instead of pushing a branch and submitting a pull request, the external editor
+creates a patch file that incorporates all commits of their feature branch. This
+patch file is sent to the coordinating editor who will recreate the feature
+branch by applying the patch file. They then create the pull request themselves.
+
+To create a patch file, call `scripts/create-patch.sh` with the feature branch
+ checked out. The script accepts a single optional argument `-f` or `--file`
+ followed by a file name. If no file name is given, the script will use the
+ branch name to derive a file name. In the patch file, every commit of the
+ feature branch since the spin off from `main` has its own patch.
+
+To process a patch file, call `scripts/process-patch.sh`. This script requires
+the name of a patch file. With no other arguments, the script checks whether the
+patch file can be applied to the `main` branch. It will also print the names of
+the files that are modified by each commit in the patch file.
+
+If called with `-a` (or `--apply`) the patch file is not only verified, but also
+applied to the repository. A feature branch is created, the script derives the
+branch name from the name of the patch file. The script can optionally be called
+with the `-b` switch followed by a branch name.
+
+It makes no sense to check commit the patch files. Files with the extension
+`*.patch` are ignored in the `.gitignore` file.
 
 
 == Release Management
