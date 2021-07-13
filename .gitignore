@@ -28,6 +28,9 @@ doku/*.html
 # Target directory for delivery
 deliverables/
 
+# Patch files for sharing content
+*.patch
+
 # TeX auxiliary files
 *.aux
 *.bbl
