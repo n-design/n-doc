@@ -17,7 +17,7 @@
 dry=${DRYRUN:-''}
 RELEASE_DB=common/db/releases.csv
 require_user_confirmation=true
-mainbranch=master
+mainbranch=main
 
 declare -A alldocs
 
@@ -87,11 +87,11 @@ function processCmdLine() {
 processCmdLine $@
 
 # Only proceed if no changes in working directory
-if [[ -z $dry && -n "$(git status --porcelain)" ]]; then
+if [[ -z "$dry" && -n "$(git status --porcelain)" ]]; then
     echo "Uncommitted changes in repository. Please commit first. Aborting."
     exit 2
 fi
-if [[ -z $dry && $(git rev-parse --abbrev-ref HEAD) != "$mainbranch" ]]; then
+if [[ -z "$dry" && $(git rev-parse --abbrev-ref HEAD) != "$mainbranch" ]]; then
     echo "Not on branch „${mainbranch}“. Aborting."
     exit 3
 fi
