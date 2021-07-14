@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 function usage() {
     echo 'Usage: $0 [-f|--file <outputfile>]'
@@ -12,11 +12,11 @@ function processCmdLine() {
             *) usage && exit 1;;
         esac
     done
-    branch=$(git branch --show-current)
+    current=$(git branch --show-current)
     outputfile="${outputfile:-${current//\//_}.patch}"
 }
 
 processCmdLine $@
 
-spinoff=$(git merge-base $branch main)
+spinoff=$(git merge-base $current main)
 git format-patch $spinoff --stdout >"${outputfile}"
