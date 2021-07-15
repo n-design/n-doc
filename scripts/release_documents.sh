@@ -18,6 +18,7 @@ dry=${DRYRUN:-''}
 RELEASE_DB=common/db/releases.csv
 require_user_confirmation=true
 mainbranch=main
+remote=origin
 
 declare -A alldocs
 
@@ -49,7 +50,7 @@ function set_version() {
 }
 
 function usage() {
-    echo "Usage: $0 [--assume-yes] [--dry-run] (--all|<document>...)"
+    echo "Usage: $0 [--assume-yes] [--dry-run] [--remote <name>] (--all|<document>...)"
     exit 1
 }
 
@@ -73,6 +74,7 @@ function processCmdLine() {
         case $1 in 
             --all) get_all_documents; shift;;
 	    --assume-yes) require_user_confirmation=false; shift;;
+            --remote) remote=$2; shift; shift;;
 	    --help) usage && exit 0;;
 	    --dry-run) dry="echo"; shift;;
 	    -*) usage && exit 0;;
@@ -148,11 +150,11 @@ for doc in "${alldocs[@]}"; do
     taggedversion=$(get_version $doc)
     echo "Tagging $doc with ${doc^^}/v$taggedversion"
     $dry git tag -m "Increased ${doc^^} version to v$taggedversion" "${doc^^}/v$taggedversion" ${to_be_tagged}
-    $dry git push origin "${doc^^}/v$taggedversion"
+    $dry git push $remote "${doc^^}/v$taggedversion"
 done
 
 $dry git tag -m "Documents for ${this_release_tag}" "${this_release_tag}" ${to_be_tagged}
-$dry git push origin "${this_release_tag}"
+$dry git push $remote "${this_release_tag}"
 
 # Step 4: Increase version to next snapshot
 for doc in "${alldocs[@]}"; do
@@ -164,7 +166,7 @@ done
 
 # Step 5: Commit new version and push tags
 $dry git commit -a -m "Increased versions for next snapshot" >/dev/null
-$dry git push
+$dry git push $remote $mainbranch
 
 # Cleanup after dry-run
 if [[ -n "$dry" ]]; then
