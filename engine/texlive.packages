@@ -60,6 +60,7 @@ logreq
 ltablex
 ltxcmds
 luacode
+luacolor
 luahbtex
 lualatex-truncate
 luapackageloader
