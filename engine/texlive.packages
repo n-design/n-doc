@@ -18,6 +18,7 @@ collectbox
 colortbl
 csquotes
 datatool
+datetime2
 dirtree
 enumitem
 environ
@@ -92,6 +93,8 @@ substr
 tocloft
 tools
 threeparttable
+threeparttablex
+tracklang
 translations
 trimspaces
 truncate
