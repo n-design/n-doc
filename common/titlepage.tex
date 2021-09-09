@@ -6,7 +6,9 @@
 
 \subtitle{\vspace{1.0cm}\textsf{\textsc{\thisproductlong{}}\\Version \toeversion{}}}
 
-\date{\GetTranslation{ndoc@DocumentVersion} \documentversion{\thisdocument}\directlua{gitCommitId("\thisdocument")}\\\gitCommitterDate}
+\date{\GetTranslation{ndoc@DocumentVersion} \documentversion{\thisdocument} \\
+  \DTMUsedate{gitdate}
+  \directlua{gitCommitId("\thisdocument")}}
 
 \author{\thiscompany{}}
 
