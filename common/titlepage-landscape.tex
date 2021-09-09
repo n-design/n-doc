@@ -20,7 +20,9 @@
 
     \vspace{0.5cm}
 
-    \GetTranslation{ndoc@DocumentVersion} \documentversion{\thisdocument}\directlua{gitCommitId("\thisdocument")}\\\gitCommitterDate
+    \GetTranslation{ndoc@DocumentVersion} \documentversion{\thisdocument} \\
+    \DTMUsedate{gitdate}
+    \directlua{gitCommitId("\thisdocument")}
   \end{center}
 \end{titlepage}
 
