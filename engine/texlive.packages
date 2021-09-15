@@ -19,6 +19,8 @@ colortbl
 csquotes
 datatool
 datetime2
+datetime2-german
+datetime2-english
 dirtree
 enumitem
 environ
