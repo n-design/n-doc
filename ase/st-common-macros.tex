@@ -26,27 +26,27 @@
 \newcommand{\ppselected}[1]{\selected{\textit{#1}}}
 
 \renewcommand{\sfrlink}[2][]{%
-  \index{\sfrmain{#2}@\sfrindex{#2}}%
+  \index{\sfrmain{\directlua{toLower('#2')}}@\sfrindex{\directlua{toLower('#2')}}}%
   \hyperlink{\sfrmain{#2}}{\sfr[#1]{#2}}}
 
 \newcommand{\sfrlinknoindex}[2][]{%
-  \hyperlink{\directlua{removeSfrSubComponent("#2")}}{\sfr[#1]{#2}}}
+  \hyperlink{\directlua{removeSfrSubComponent('#2')}}{\sfr[#1]{#2}}}
 
-\newcommand{\objsource}[1]{\directlua{getObjectiveSource("#1")}}
+\newcommand{\objsource}[1]{\directlua{getObjectiveSource('#1')}}
 
-\newcommand{\sfrsubsection}[1]{\index{\sfrplain{#1}@\sfr{#1}|textbf}%
-  \label{\directlua{toLower("#1")}}%
-  \hypertarget{\directlua{toLower("#1")}}%
+\newcommand{\sfrsubsection}[1]{\index{\sfrplain{\directlua{toLower('#1')}}@\sfr{\directlua{toLower('#1')}}|textbf}%
+  \label{\directlua{toLower('#1')}}%
+  \hypertarget{\directlua{toLower('#1')}}%
   {\minisec{{\normalsize\sfrplain{#1}}\nopagebreak\\{\small\sfrtext{#1}}}%
     \vspace{1ex}}}
 
-\newcommand{\objectivesubsection}[1]{\hypertarget{\directlua{toLower("#1")}}%
-  {\minisec{{\normalsize\obj{#1}} {\small{(\objtext{#1})}}}%
-    \label{\directlua{toLower("#1")}}}}
+\newcommand{\objectivesubsection}[2][ppformat]{\hypertarget{\directlua{toLower('#2')}}%
+  {\minisec{{\normalsize\csname #1\endcsname{\obj{#2}} {}}}%
+    \label{\directlua{toLower('#2')}}}}
 
-\newcommand{\spdsubsection}[1]{\hypertarget{\directlua{toLower("#1")}}%
-  {\minisec{{\normalsize\spd{#1}} {\small{(\spdtext{#1})}}}%
-    \label{\directlua{toLower("#1")}}}}
+\newcommand{\spdsubsection}[1]{\hypertarget{\directlua{toLower('#1')}}%
+  {\minisec{{\normalsize\spd{#1}} {}}%
+    \label{\directlua{toLower('#1')}}}}
 
 
 \newlist{sfrdefinitionlist}{description}{1}
@@ -125,7 +125,7 @@
 \newcolumntype{O}{p{2.3mm}}
 \newcolumntype{T}{p{2.7mm}}
 
-\newcommand{\tracehead}[1]{\rot{\hyperlink{\directlua{toLower("#1")}}%
+\newcommand{\tracehead}[1]{\rot{\hyperlink{\directlua{toLower('#1')}}%
     {\textsmaller[2]{\textsf{\objplain{#1}}}}}}
 
 \newcounter{compreq}

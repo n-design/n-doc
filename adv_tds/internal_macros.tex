@@ -9,32 +9,32 @@
 % Makro für Verweise auf andere Teile des Dokuments, wobei der Text
 % des Links aus dem Kürzel des übergebenen Labels expandiert wird.
 % vgl. ursprüngluiche Definition in common/common-macros.tex
-\renewcommand{\tdslink}[2][no]{\hyperlink{#2}{\secitemformat{\directlua{replacelabel("#2", "#1")}}}}
+\renewcommand{\tdslink}[2][no]{\hyperlink{#2}{\secitemformat{\directlua{replacelabel('#2', '#1')}}}}
 
 \renewcommand{\sfrlink}[2][]{%
-  \index{\sfrplain{\directlua{removeSfrSubComponent("#2")}}@\sfr{\directlua{removeSfrSubComponent("#2")}}}%
-  \hyperlink{\directlua{removeSfrSubComponent("#2")}}{\sfr[#1]{#2}}}
+  \index{\sfrplain{\directlua{removeSfrSubComponent('#2')}}@\sfr{\directlua{removeSfrSubComponent('#2')}}}%
+  \hyperlink{\directlua{removeSfrSubComponent('#2')}}{\sfr[#1]{#2}}}
 
 \newcommand{\sfrlinknoindex}[2][]{%
-  \hyperlink{\directlua{removeSfrSubComponent("#2")}}{\sfr[#1]{#2}}}
+  \hyperlink{\directlua{removeSfrSubComponent('#2')}}{\sfr[#1]{#2}}}
 
-\newcommand{\getModuleStatus}[1]{\directlua{get_module_status("#1")}}
+\newcommand{\getModuleStatus}[1]{\directlua{get_module_status('#1')}}
 
-\newcommand{\printModuleToSfrTable}[2][enf]{\directlua{print_module_to_sfr_table("#2", "#1")}}
+\newcommand{\printModuleToSfrTable}[2][enf]{\directlua{print_module_to_sfr_table('#2', '#1')}}
 
-\newcommand{\printModulesForSfrRows}[1]{\directlua{print_modules_for_sfr_rows("#1")}}
+\newcommand{\printModulesForSfrRows}[1]{\directlua{print_modules_for_sfr_rows('#1')}}
 
 \newenvironment{enfsfrtable}%
 {\begin{tabular*}{0.9\textwidth}{@{}lll@{}}\toprule}
    {\bottomrule\end{tabular*}}
 
-\newcommand{\printSubsystemToSfrTable}[2][enf]{\directlua{print_subsys_to_sfr_table("#2", "#1")}}
+\newcommand{\printSubsystemToSfrTable}[2][enf]{\directlua{print_subsys_to_sfr_table('#2', '#1')}}
 
 \newenvironment{enfsfrsubsystable}%
 {\begin{tabular*}{\textwidth}{@{}p{0.3\textwidth}L{0.68\textwidth-\tabcolsep}@{}}\toprule}
    {\bottomrule\end{tabular*}}
 
-\newcommand{\printModuleToBundleTable}[1]{\directlua{print_module_to_bundle_table("#1")}}
+\newcommand{\printModuleToBundleTable}[1]{\directlua{print_module_to_bundle_table('#1')}}
 
 \newenvironment{bundletable}%
 {\begin{tabular*}{0.9\textwidth}{@{}l@{}}\toprule}
