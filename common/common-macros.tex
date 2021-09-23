@@ -1,7 +1,7 @@
 % General macros for the titlepage
-\newcommand{\documentdate}[1]{\directlua{getDocumentDate("#1")}}
-\newcommand{\documentversion}[1]{\directlua{getDocumentVersion("#1")}}
-\newcommand{\nosnapshot}[1]{\directlua{tex.sprint(get_version_number_for_refliste("#1"))}}
+\newcommand{\documentdate}[1]{\directlua{getDocumentDate('#1')}}
+\newcommand{\documentversion}[1]{\directlua{getDocumentVersion('#1')}}
+\newcommand{\nosnapshot}[1]{\directlua{tex.sprint(get_version_number_for_refliste('#1'))}}
 
 % Als Erinnerung für später zu erledigende Aufgaben
 % Markiert den übergebenen Text deutlich und setzt
@@ -34,14 +34,14 @@
   \ifthenelse{\equal{#1}{c}}{ \autocite{rfc#2}}{}}
 
 % Removes underscores from the argument
-\newcommand{\nounderscore}[1]{\directlua{replaceUnderscore("#1")}}
+\newcommand{\nounderscore}[1]{\directlua{replaceUnderscore('#1')}}
 \newcommand{\nohyphen}[1]{\directlua{remove_smart_hyphen([[#1]])}}
 
 % Macro for keywords
-\newcommand{\keyword}[1]{\textsmaller[0.8]{\ccfont\textit{\directlua{replaceUnderscore("#1")}}}}
+\newcommand{\keyword}[1]{\textsmaller[0.8]{\ccfont\textit{\directlua{replaceUnderscore('#1')}}}}
 
 % Macro for printing error messages defined in common/db/errors.csv
-\newcommand{\error}[1]{#1 -- \enquote{\directlua{getError("#1")}}}
+\newcommand{\error}[1]{#1 -- \enquote{\directlua{getError('#1')}}}
 
 % Macro for file names
 \newcommand{\filename}[1]{{\narrowfilefont #1}}
@@ -88,7 +88,7 @@
 %%
 \newcounter{tlsconnid}
 \renewcommand*\thetlsconnid{TLS.\arabic{tlsconnid}}
-\newcommand{\tlsconntablerow}[2]{\luadirect{getTlsConnectionTableRow("#1", "#2")}}
+\newcommand{\tlsconntablerow}[2]{\luadirect{getTlsConnectionTableRow('#1', '#2')}}
 \newcommand{\tlsid}[1]{\refstepcounter{tlsconnid}\secitemformat{\thetlsconnid}\label{#1}}
 
 % Column definitions for tables, multi-line text with forced line breaks

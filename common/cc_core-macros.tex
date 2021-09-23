@@ -17,23 +17,24 @@
 
 % Macros for resolving names of security objectives. The parameter references
 % the database entries defined in common/db/obj.csv
-\newcommand{\obj}[1]{\secitemformat{\directlua{getObjective("#1")}}}
-\newcommand{\objtext}[1]{\directlua{getObjectiveText("#1")}}
-\newcommand{\objplain}[1]{\directlua{getObjective("#1")}}
-\newcommand{\objlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\obj{#1}}}
+\newcommand{\obj}[1]{\secitemformat{\directlua{getObjective('#1')}}}
+\newcommand{\objtext}[1]{\directlua{getObjectiveText('#1')}}
+\newcommand{\objplain}[1]{\directlua{getObjective('#1')}}
+\newcommand{\objlink}[1]{\hyperlink{\directlua{toLower('#1')}}{\obj{#1}}}
 
 % Macros for resolving names of security problems. The parameter references
 % the database entries defined in common/db/spd.csv
-\newcommand{\spd}[1]{\secitemformat{\directlua{getSpd("#1")}}}
-\newcommand{\spdtext}[1]{\directlua{getSpdText("#1")}}
-\newcommand{\spdsource}[1]{\directlua{getSpdSource("#1")}}
-\newcommand{\spdlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\spd{#1}}}
+\newcommand{\spd}[1]{\secitemformat{\directlua{getSpd('#1')}}}
+\newcommand{\spdtext}[1]{\directlua{getSpdText('#1')}}
+\newcommand{\spdsource}[1]{\directlua{getSpdSource('#1')}}
+\newcommand{\spdlink}[1]{\hyperlink{\directlua{toLower('#1')}}{\spd{#1}}}
 
 % Macros for resolving names of subjects and objects (in adv_tds). The parameter
 % references the database entries defined in common/db/subjobj.csv
-\newcommand{\subjobj}[1]{\secitemformat{\directlua{getSubjobj("#1")}}}
-\newcommand{\subjobjtext}[1]{\directlua{getSubjobjText("#1")}}
-\newcommand{\subjobjlink}[1]{\hyperlink{\directlua{toLower("#1")}}{\subjobj{#1}}}
+\newcommand{\subjobj}[1]{\secitemformat{\directlua{getSubjobj('#1')}}}
+\newcommand{\subjobjtext}[1]{\directlua{getSubjobjText('#1')}}
+\newcommand{\subjobjlink}[1]{\hyperlink{\directlua{toLower('#1')}}{\subjobj{#1}}}
+
 
 %% ------------------------------------------------------------
 %%
@@ -46,7 +47,7 @@
 % parameter is used to specify sub-elements: FDP_ACF.1.2(2)
 
 % Prints the SFR with no formatting
-\newcommand{\sfrplain}[2][]{\directlua{getSfr("#2")}#1}
+\newcommand{\sfrplain}[2][]{\directlua{getSfr('#2')}#1}
 
 % Formats an SFR. Macro is seldom used by the user.
 \newcommand{\formatsfr}[1]{{\secitemformat{#1}}}
@@ -55,14 +56,14 @@
 \newcommand{\sfr}[2][]{\formatsfr{\sfrplain[#1]{#2}}}
 
 % Prints the SFR and formats the SFR. Also creates a Hyperlink
-\newcommand{\sfrlink}[2][]{\hyperlink{\sfrmain{#2}}{\sfr[#1]{#2}}}
+\newcommand{\sfrlink}[2][]{\hyperlink{\sfrmain{\directlua{toLower('#2')}}}{\sfr[#1]{#2}}}
 
 % Prints the SFR without its sub-components.
 % FDP_ACF.1.2 -> FDP_ACF.1
-\newcommand{\sfrmain}[1]{\directlua{removeSfrSubComponent("#1")}}
+\newcommand{\sfrmain}[1]{\directlua{removeSfrSubComponent('#1')}}
 
 % Prints the text associated with the SFR
-\newcommand{\sfrtext}[1]{\directlua{getSfrText("#1")}}
+\newcommand{\sfrtext}[1]{\directlua{getSfrText('#1')}}
 
 % Used for printing indices. Not intended for the end user
 \newcommand{\sfrindex}[1]{\textsmaller[1.5]{\secitemfont{\sfrplain{\sfrmain{#1}}}}}
@@ -92,7 +93,7 @@
 % references the database entries defined in common/db/tsfi.csv
 \newcommand{\formatintf}[1]{{\ccfont #1}}
 \newcommand{\intf}[1]{\secitemformat{#1}}
-\newcommand{\tsfi}[1]{\intf{\directlua{getTsfi("#1")}}}
+\newcommand{\tsfi}[1]{\intf{\directlua{getTsfi('#1')}}}
 \newcommand{\tsfilink}[1]{\hyperlink{tsfi.#1}{\tsfi{#1}}}
 
 %% ------------------------------------------------------------
@@ -103,10 +104,10 @@
 
 % Macros for resolving names of TOE Security Functions (SF). The parameter
 % references the database entries defined in common/db/sf.csv
-\newcommand{\secfunc}[1]{\formatsecfunc{\directlua{getSecfunc("#1")}}}
-\newcommand{\secfuncplain}[1]{\directlua{getSecfunc("#1")}}
-\newcommand{\secfunctext}[1]{\directlua{getSecfuncText("#1")}}
-\newcommand{\secfunclink}[1]{\hyperlink{\directlua{toLower("#1")}}{\secfunc{#1}}}
+\newcommand{\secfunc}[1]{\formatsecfunc{\directlua{getSecfunc('#1')}}}
+\newcommand{\secfuncplain}[1]{\directlua{getSecfunc('#1')}}
+\newcommand{\secfunctext}[1]{\directlua{getSecfuncText('#1')}}
+\newcommand{\secfunclink}[1]{\hyperlink{\directlua{toLower('#1')}}{\secfunc{#1}}}
 \newcommand{\formatsecfunc}[1]{{\secitemformat{#1}}}
 
 % Creates a headline based on a key in sf.csv
@@ -118,9 +119,9 @@
 % parameter denotes the key defined in
 % common/db/{subsystems,modules,interfaces}.csv, e.g.
 % "sub.vpn", "mod.vpn.core" or "int.vpn.core.connect"
-\newcommand{\tds}[2][no]{\secitemformat{\directlua{replacelabel("#2", "#1")}}}
-\newcommand{\tdsplain}[2][no]{\directlua{replacelabel("#2", "#1")}}
-\newcommand{\tdsplaintext}[2][no]{\directlua{replacelabelplain("#2", "#1")}}
+\newcommand{\tds}[2][no]{\secitemformat{\directlua{replacelabel('#2', '#1')}}}
+\newcommand{\tdsplain}[2][no]{\directlua{replacelabel('#2', '#1')}}
+\newcommand{\tdsplaintext}[2][no]{\directlua{replacelabelplain('#2', '#1')}}
 
 % Creates a link to a TDS entity (see above). Usually only relevant within TDS.
 % Defined here for compatibility reasons. Macro is redefined in
