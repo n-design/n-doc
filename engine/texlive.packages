@@ -38,6 +38,10 @@ fvextra
 geometry
 gettitlestring
 gitinfo2
+glossaries
+glossaries-german
+glossaries-english
+glossaries-extra
 gnu-freefont
 graphics
 grffile
@@ -92,6 +96,7 @@ roboto
 splitindex
 stringenc
 substr
+textcase
 tocloft
 tools
 threeparttable

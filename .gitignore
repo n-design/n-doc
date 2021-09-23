@@ -52,6 +52,7 @@ deliverables/
 *.out
 *.pyg
 *.toc
+*.xdy
 .texmfcache/
 
 # Emacs specific files
