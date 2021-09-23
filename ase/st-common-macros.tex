@@ -2,12 +2,16 @@
 
 \newcommand{\citepp}{\autocite{\thispp}}
 
+% Bolder strike-through line. Original value: .45ex instead of .65ex
+\newunderlinetype\beginStrikeThroughBold{\leaders\hbox{\vrule height .65ex depth -.45ex}}
+ \NewDocumentCommand\strikeThroughBold{+m}{{\beginStrikeThroughBold#1}}
+
 \newcommand{\stformat}[1]{\textcolor{RoyalBlue}{#1}}
 \newcommand{\ppformat}[1]{#1}
 \newcommand{\assigned}[1]{\underLine{#1}}
 \newcommand{\selected}[1]{\underLine{\textit{#1}}}
 \newcommand{\refined}[1]{\textbf{#1}}
-\newcommand{\deleted}[1]{\refined{\strikeThrough{#1}}}
+\newcommand{\deleted}[1]{\refined{\strikeThroughBold{#1}}}
 
 \makeatletter
 \newcommand{\isempty}[2]{%
