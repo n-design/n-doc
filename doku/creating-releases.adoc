@@ -1,66 +1,72 @@
 :icons: font
 :experimental:
 
-= Erstellen eines Dokumenten-Releases
+= Creating a Document Release
 
-Das Erstellen eines Releases der Dokumentation ist ein mehrschrittiger
-Prozess, der in unregelmäßigen Abständen durchgeführt wird. Dieses Dokument
-beschreibt die notwendigen Schritte, jeweils mit den notwendigen Vorbedingungen.
+Creating a document release is a multi-step process. This document describes the
+necessary steps and their preconditions.
 
-== Prüfen der Dokumente
+== Checking the Documents
 
-Vor einem Release sollten möglichst alle "To Do" Einträge entfernt werden. Auch
-dürfen keine unaufgelösten Referenzen ("... is undefined") in den Dokumenten
-stehen.
+Before the documents are released, they should be thoroughly checked. All "to
+do" entries should be removed. Also, there should be no unresolved references in
+the documents ("... is undefined").
 
-=== Vorbedingungen
+=== Preconditions
 
-* Alle Dokumente müssen als PDF Dokumente aktuell übersetzt vorliegen.
+* All documents have been compiled to PDF.
 
-=== Durchführung
+=== Execution
 
-* Das Skript `scripts/sanity_check.sh` durchsucht die PDF-Dokumente nach den
-  Textstellen "is undefined" und "To Do". Treffer werden auf der Kommandozeile
-  ausgegeben.
-
-
-== Versionieren / Taggen
-
-Das zentrale Element des Prozesses ist das Vergeben einer Versionsnummer für die
-auszuliefernden Dokumente. Das Verfahren sieht vor, dass die verschiedenen
-Dokumente unterschiedliche Versionen tragen. Die Verfahren ist an das
-Versionierungsschema von Maven angelegt: Arbeitsversionen tragen "-SNAPSHOT" in
-der Versionsnummer. Beim Release wird "-SNAPSHOT" entfernt. Damit ist der
-Dokumentenstand, der die Version ausmacht, festgelegt. Im nächsten Schritt wird
-die Versionsnummer erhöht und "-SNAPSHOT" wieder angehängt.
-
-Außerdem wird für jedes Dokument ein Git-Tag gesetzt, aus dem Dokumentenname und Version hervorgehen.
-
-=== Vorbedingungen
-
-* Das Repository muss komplett commitet sein.
-
-* Der Branch "master" muss ausgecheckt sein.
-
-* Der Benutzer, der die Version erstellt, muss die Rolle _Maintainer_ auf das
-  Repository haben -- ansonsten schlägt der ``push`` fehl.
+* The script `scripts/sanity_check.sh` searches all PDF documents for
+  occurrences of "is undefined" and "To Do" and prints the file names to the
+  console.
 
 
-=== Durchführung
+== Versioning / Tagging
 
-==== Setzen der Version
+The central part of the release process is increasing the version number for the
+documents to be released. Every document has its own version number independent
+of the version number of other documents. The release process and versioning
+scheme is similar to Apache Maven, a popular build tool in the Java world.
 
-Das Skript ``scripts/release_documents.sh`` automatisiert diesen Prozess
-weitestgehend. Das Skript wird mit den Kennungen der zu taggenden Dokumente
-aufgerufen (s. Beispiel unten). Es ist nicht notwendig, eine Versionsnummer zu
-übergeben, diese wird für jedes Dokument aus ``common/db/releases.csv``
-ermittelt. Diese Datei wird von diesem Skript auch angepasst.  Mit dem
-Kommandozeilenschalter `--all` werden die Versionen aller Dokumente angehoben,
-ohne dass der genaue Dokumentname übergeben werden muss.
+Documents are in a snapshot state most of the time. Only when documents are
+released, they have a non-snapshot state. However, immediately after the
+release, they enter a snapshot state again. Technically, this is shown by adding
+the qualifier `-SNAPSHOT` to the version number. When a document is released,
+the qualifier `-SNAPSHOT` is removed. Immediately after that, the version number
+is increased and the qualifier `-SNAPSHOT` is appended to the
+version. Furthermore, each document is tagged with a git tag.
 
-Das Skript prüft die Vorbedingungen für das Repository, stellt die zu
-vergebenden Versionsnummern fest und gibt die Aktionen aus. Der Benutzer muss
-mit ``yes`` bestätigen, ansonsten endet der Prozess.
+The script ``scripts/release_documents.sh`` automates the release process. The
+script is called from the root directory of the repository. The name of each
+document to be released is an argument on the command line (see below for
+examples). It is not necessary to provide a version number. The version number
+is calculated from the database file ``common/db/releases.csv``. The release
+script updates this file.
+
+The script verifies the preconditions. If they are not fulfilled, the script
+aborts. The script calculates the version number and prints all actions to the
+console. The user must confirm these actions with `yes`, otherwise the script
+aborts and the release process terminates without any changes to the repository.
+
+
+=== Preconditions
+
+* The repository state must be committed and the workspace must be clean (as reported by `git status`)
+
+* The `main` branch must be checked out.
+
+* The user creating the release must be authorized to push to the `main`
+  branch. Often, the `main` branch is protected on the remote repository,
+  resulting in failed pushes if the user does not have necessary privileges.
+
+=== Execution
+
+==== Increasing the Version Number
+
+
+
 
 Ein Beispielaufruf, in dem das Security Targets und das ADV_TDS Dokument
 neu versioniert werden (Dieser Beispielaufruf zeigt die Situation, in der der
