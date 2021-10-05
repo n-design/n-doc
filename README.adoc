@@ -11,7 +11,7 @@ This repository contains the developer documentation for the CC evaluation of
 the Ingenico NextGen e-Health Card Terminal. The developer documentation
 consists sample documents:
 
-* Security Target (ASE_ST)
+* Security Target (ASE)
 
 * Functional Specification (ADV_FSP)
 
@@ -19,14 +19,14 @@ consists sample documents:
 
 * Test Coverage (ATE_COV)
 
-* Reference List (Reflist)
-
 * Security Architecture (ADV_ARC)
 
-* Life Cycle (ADV_ARC)
+* Life Cycle (ALC)
+
+* Reference List (Reflist)
 
 Those documents provide an outline that can be used when adapting the sample
-documents for your own purposes. Especially ASE_ST, ADV_FSP and ADV_TDS contain
+documents for your own purposes. Especially ASE, ADV_FSP and ADV_TDS contain
 enough text to show the interaction between documents and database.
 
 
