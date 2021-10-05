@@ -75,6 +75,7 @@ function processCmdLine() {
             --all) get_all_documents; shift;;
 	    --assume-yes) require_user_confirmation=false; shift;;
             --remote) remote=$2; shift; shift;;
+            --local) local=true; shift;;
 	    --help) usage && exit 0;;
 	    --dry-run) dry="echo"; shift;;
 	    -*) usage && exit 0;;
@@ -122,6 +123,13 @@ for doc in "${alldocs[@]}"; do
     echo "Tagging $doc with ${doc^^}/v$taggedversion (and updating from $currentversion to $nextversion)"
 done
 echo "Finally, tagging release with ${this_release_tag}"
+if [ -n "$local" ]; then
+    echo -n "No changes";
+else
+    echo -n "All changes";
+fi
+echo " will be pushed to the remote repository";
+
 if [ "$require_user_confirmation" = "true" ]; then
     read -p "Enter 'yes' to Continue -> " isok
     if [ "${isok^^}" != 'YES' ]; then
@@ -150,11 +158,11 @@ for doc in "${alldocs[@]}"; do
     taggedversion=$(get_version $doc)
     echo "Tagging $doc with ${doc^^}/v$taggedversion"
     $dry git tag -m "Increased ${doc^^} version to v$taggedversion" "${doc^^}/v$taggedversion" ${to_be_tagged}
-    $dry git push $remote "${doc^^}/v$taggedversion"
+    if [ -z "$local" ]; then $dry git push $remote "${doc^^}/v$taggedversion"; fi
 done
 
 $dry git tag -m "Documents for ${this_release_tag}" "${this_release_tag}" ${to_be_tagged}
-$dry git push $remote "${this_release_tag}"
+if [ -z "$local" ]; then $dry git push $remote "${this_release_tag}"; fi
 
 # Step 4: Increase version to next snapshot
 for doc in "${alldocs[@]}"; do
@@ -166,7 +174,7 @@ done
 
 # Step 5: Commit new version and push tags
 $dry git commit -a -m "Increased versions for next snapshot" >/dev/null
-$dry git push $remote $mainbranch
+if [ -z "$local" ]; then $dry git push $remote $mainbranch; fi
 
 # Cleanup after dry-run
 if [[ -n "$dry" ]]; then
