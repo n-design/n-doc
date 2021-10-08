@@ -38,22 +38,26 @@ the qualifier `-SNAPSHOT` is removed. Immediately after that, the version number
 is increased and the qualifier `-SNAPSHOT` is appended to the
 version. Furthermore, each document is tagged with a git tag.
 
-The script ``scripts/release_documents.sh`` automates the release process. The
+The script `scripts/release_documents.sh` automates the release process. The
 script is called from the root directory of the repository. The name of each
 document to be released is an argument on the command line (see below for
 examples). It is not necessary to provide a version number. The version number
-is calculated from the database file ``common/db/releases.csv``. The release
+is calculated from the database file `common/db/releases.csv`. The release
 script updates this file.
 
 The script verifies the preconditions. If they are not fulfilled, the script
-aborts. The script calculates the version number and prints all actions to the
-console. The user must confirm these actions with `yes`, otherwise the script
-aborts and the release process terminates without any changes to the repository.
+aborts. If the preconditions are met, the script calculates the version number
+for each document and prints all actions to the console. The user must confirm
+these actions with `yes`, otherwise the script aborts and the release process
+terminates without any changes to the repository. If confirmed, all two commits
+are created: one in which the `-SNAPSHOT` qualifier is removed, one in which the
+version number is increased and the `-SNAPSHOT` qualifier is appended.
 
 
 === Preconditions
 
-* The repository state must be committed and the workspace must be clean (as reported by `git status`)
+* The repository state must be committed and the workspace must be clean (as
+  reported by `git status`)
 
 * The `main` branch must be checked out.
 
@@ -63,40 +67,42 @@ aborts and the release process terminates without any changes to the repository.
 
 === Execution
 
-==== Increasing the Version Number
+Call the script `scripts/release-documents.sh` with the names of the documents
+to be inclusded in the release. The script takes the following arguments.
 
+[cols="1,3"]
+|===
+| --dry-run       | Don't make acutal changes
+| --all           | Release all documents
+| --remote <name> | Push changes to remote repo <name>. Default: origin
+| --local         | Create a local release, do not push changes
+| --assume-yes    | Do not ask for confirmation. DANGEROUS! For use in scripted environment only.
+|===
 
-
-
-Ein Beispielaufruf, in dem das Security Targets und das ADV_TDS Dokument
-neu versioniert werden (Dieser Beispielaufruf zeigt die Situation, in der der
-Benutzer nicht berechtigt ist, den Push auszuführen.):
+A typical would look like this:
 
 ----
-[cc-mauvevpn (master)]$ ./scripts/release_documents.sh ase adv_tds // <1>
-Tagging ase with ASE/v1.3 (and updating from 1.3-SNAPSHOT to 1.4-SNAPSHOT)
+./scripts/release_documents.sh --dry-run ase adv_tds
+----
+
+This call creates a release of the Security Target ASE and the Design
+Specification ADV_TDS. However, this is a dry run so all actions are simulated
+only.
+
+----
+16:50 $ ./scripts/release_documents.sh --dry-run ase adv_tds
 Tagging adv_tds with ADV_TDS/v1.0 (and updating from 1.0-SNAPSHOT to 1.1-SNAPSHOT)
-Enter 'yes' to Continue -> yes  // <2>
-Tagging ase with ASE/v1.3
+Tagging ase with ASE/v1.0 (and updating from 1.0-SNAPSHOT to 1.1-SNAPSHOT)
+Finally, tagging release with Release/01
+All changes will be pushed to the remote repository
+Enter 'yes' to Continue -> yes
 Tagging adv_tds with ADV_TDS/v1.0
-Counting objects: 10, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (10/10), done.
-Writing objects: 100% (10/10), 857 bytes | 857.00 KiB/s, done.
-Total 10 (delta 9), reused 0 (delta 0)
-remote: GitLab: You are not allowed to push code to protected branches on this project.
-To gitlab.mauvecorp.com:cc/cc-mauvevpn.git
- ! [remote rejected] master -> master (pre-receive hook declined) // <3>
-error: failed to push some refs to 'git@gitlab.mauvecorp.com:cc/cc-mauvevpn.git'
-Counting objects: 8, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (8/8), done.
-Writing objects: 100% (8/8), 756 bytes | 756.00 KiB/s, done.
-Total 8 (delta 6), reused 0 (delta 0)
-To gitlab.mauvecorp.com:cc/cc-mauvevpn.git
- * [new tag]         ADV_TDS/v1.0 -> ADV_TDS/v1.0
- * [new tag]         ASE/v1.3 -> ASE/v1.3
+git tag -m Increased ADV_TDS version to v1.0 ADV_TDS/v1.0 fe96b9f8c9c4d1d6ff7fc4097dea232e5e907855
+git push origin ADV_TDS/v1.0
+Tagging ase with ASE/v1.0
+git tag -m Increased ASE version to v1.0 ASE/v1.0 fe96b9f8c9c4d1d6ff7fc4097dea232e5e907855
+git push origin ASE/v1.0
+git tag -m Documents for Release/01 Release/01 fe96b9f8c9c4d1d6ff7fc4097dea232e5e907855
+git push origin Release/01
+git push origin main
 ----
-<1> Aufruf des Skripts durch den Benutzer
-<2> Sicherheitsabfrage, mit `yes` beantworten, sonst Abbruch
-<3> Fehlermeldung, wenn der Benutzer nicht die Rolle _Master_ auf dem Repository hat.

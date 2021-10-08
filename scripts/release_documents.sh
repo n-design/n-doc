@@ -50,7 +50,7 @@ function set_version() {
 }
 
 function usage() {
-    echo "Usage: $0 [--assume-yes] [--dry-run] [--remote <name>] (--all|<document>...)"
+    echo "Usage: $0 [--assume-yes] [--dry-run] [--local] [--remote <name>] (--all|<document>...)"
     exit 1
 }
 
@@ -110,9 +110,9 @@ for doc in "${alldocs[@]}"; do
     fi
 done    
 
-last_release=$(git tag --list | grep Auslieferung/ | cut -f 2 -d '/' | sort -n | tail -1)
+last_release=$(git tag --list | grep Release/ | cut -f 2 -d '/' | sort -n | tail -1)
 this_release=$(printf "%02d" $(expr ${last_release:-0} + 1))
-this_release_tag="Auslieferung/$this_release"
+this_release_tag="Release/$this_release"
 
 # Sanity check
 for doc in "${alldocs[@]}"; do
