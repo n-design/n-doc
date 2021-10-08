@@ -32,10 +32,11 @@ ALL_DIRS = $(LUA_DIR) $(PDF_DIRS) $(DB_DIR)
 # Kommando zum Erstellen der PDFs
 MAKE_CMD = $(MAKE) -C $@
 
-# Notwendige git Hooks
+# Notwendige git Hooks und Metadaten
 HOOKS = post-commit post-checkout post-merge
 GIT_HOOK_DIR = .git/hooks/
 GIT_HOOKS = $(addprefix $(GIT_HOOK_DIR), $(HOOKS))
+GIT_INFO = .git/gitHeadInfo.gin
 
 .PHONY: st fsp tds agd clean all delivery subdirs db mwe cleanmwe wsdpdf hooks info $(MWE_DIRS) $(ALL_DIRS)
 
@@ -78,7 +79,7 @@ $(MWE_DIRS):
 cleanmwe: 
 	./scripts/cleanup.sh $(MWE_DIRS)
 
-hooks: $(GIT_HOOKS)
+hooks: $(GIT_HOOKS) $(GIT_INFO)
 
 .git/hooks/post-merge:
 	cp config/hooks/post-merge $(GIT_HOOK_DIR)
@@ -88,6 +89,9 @@ hooks: $(GIT_HOOKS)
 
 .git/hooks/post-commit:
 	cp config/hooks/post-commit $(GIT_HOOK_DIR)
+
+$(GIT_INFO):
+	git checkout
 
 clean:
 	rm -rf $(DELIVERY_DIR)
