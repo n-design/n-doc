@@ -1,129 +1,116 @@
-= Lua in n-doc verwenden
+= Using Lua in n-doc
 
-Bei der Übersetzung der LaTeX Dokumente wird an einigen Stellen auf
-den in LuaTeX eingebauten Lua-Interpreter zurückgegriffen. Besonders
-deutlich wird das bei der Auflösung von TDS-Elementen und SFR. Da
-dieses Vorgehen nicht alltäglich bei der Verwendung von LaTeX ist, wird
-hier erklärt, wie diese Komponenten zusammenspielen.
+This document explains how the Lua Interpreter in LuaTeX is used during the
+n-doc typesetting process.
 
-== Architektur der Lua Anteile der Plattform
+== Architecture of the Lua components if the platform
 
-In LuaLaTeX gibt es verschiedene Verfahren, den Lua Interpreter
-aufzurufen. Die grundsätzliche Einbindung des Interpreters in TeX wird in link:http://dante.ctan.org/tex-archive/info/luatex/lualatex-doc/lualatex-doc.pdf[der Dokumentation des Programms] anschaulich beschrieben.
+There are several methods for calling the Lua interpreter in LuaTeX. The general
+procedure is described very clearly in
+link:http://dante.ctan.org/tex-archive/info/luatex/lualatex-doc/lualatex-doc.pdf[the
+documentation on CTAN].
 
-Am gängigsten ist die Verwendung des Makros ``\directlua{}``. Der Inhalt
-des Makros ist Lua-Code, der beim Verarbeiten des Makros ausgeführt
-wird. Darüber hinaus gibt es noch Zusatzpakete, die andere Umgebungen
-bereitstellen, in denen Lua Code untergebracht werden kann. Wir
-verwenden das link:https://dante.ctan.org/ctan/macros/luatex/latex/luacode/luacode.pdf[Luacode] Package.
+The most common use is the `\directlua{}` macro. The arguments of the macro are
+handed over to the Lua interpreter and executed there. Furthermore, there are
+additional packages that add more ways of providing Lua code. n-doc uses the
+link:https://dante.ctan.org/ctan/macros/luatex/latex/luacode/luacode.pdf[Luacode]
+package.
 
-In unseren Dokumenten findet die Einbindung folgendermaßen statt
-(beispielhaft an ADV_TDS, alle anderen Dokumente funktionieren
-identisch):
+In our documents the inclusion of Lua code follows this schema. Example here is
+ADV_TDS, all other documents work identically.
 
-``adv_tds/adv_tds.tex``:: ist das Rahmendokument, es bindet die
-gemeinsam genutzten Packages und Makro-Dateien ein.
+``adv_tds/adv_tds.tex``:: is the main document. It includes the common preamble.
 
-``common/common-packages.tex``:: enthält die Präambel (also alles, was vor dem
-``\begin{document}`` kommt) der Dokumente. Hier werden Packages geladen, die von
-allen Dokumenten verwendet werden. Weiterhin wird hier der Suchpfad für die Lua
-Module gesetzt. Lua hat ein eigenes Verfahren zum Laden von Modulen, das im
-Detail weiter unten beschrieben wird.
+``common/common-preamble.tex``:: contains the preamble (everything that comes
+before `\begin{document}`) that is identical for all documents. This file
+includes all packages and macro definition files. It also sets the module path
+for loading Lua libraries.
 
-Der Lua-Code ist in n-doc in verschiedene Pakete aufgeteilt:
+The Lua code is distributed over several _n-doc packages_:
 
-``common``:: enthält Utility-Funktionen, die allen anderen Paketen verwendet
-  werden. ``common`` soll keine fachlichen Funktionen enthalten.
+`common`:: contains utility functions used by all other packages. `common`
+  should not contain any logic that is particular to any certification scheme.
 
-``cc_core``:: enthät Funktionen, die in einem CC-Verfahren notwendig sind
+`cc_core`:: contains the business logic specific to the CC scheme.
 
-``documents``:: enthält Funktionen für die Versionierung der Dokumente
+`documents`:: contains business logic for maintaining document versions.
 
-Jedes dieser Pakete umfasst dieselbe Struktur an Komponenten;  hier erklärt anhand des Pakets `cc_core`. 
+Each of the n-doc packages has the same structure of components. The example
+used here is the n-doc package `cc_core`:
 
+`common/cc_core-macros`:: This file contains all the macro definitions for CC
+specific use cases.
 
-``common/bridge_cc_core.tex``:: In diesem Modul werden Funktionen definiert, die
-von den LaTeX Makros aufgerufen werden. Diese Funktionen wiederum stellen eine
-Brücke zu den anderen Lua Module dar, die über `require` Statements geladen
-werden. Die Ergebnisse der Aufrufe dieser Module werden über ``tex.sprint()`` an
-den TeX Prozessor übergeben und in den Textsatz eingebracht. Man kann hier ganz
-grob von API-Funktionen sprechen.
+`common/bridge_cc_core.tex`:: This file contains Lua functions directly related
+to the macros in `cc_core-macros.tex`. These functions contain no business logic
+but are simple adapters. They represent a bridge to other modules that are
+loaded via a `require` statement. These functions call an identically named
+function and use `tex.sprint()` to print the result of that call into the output
+channel (the PDF file). This is similar to an API.
 
-``lua/bridge_cc_core.lua``:: In diesem Modul liegen die fachlichen Funktionen,
-die aus `bridge_cc_core.tex` aufgerufen werden. 
+`lua/bridge_cc_core.lua`:: This module contains the business logic functions
+called by `bridge_cc_core.tex`. Functions in this module call the database, the
+table generator and other modules. 
 
+`lua/cc_core.lua`:: Contains the code for accessing the database. The module
+comprises the tables definitions, the provisioning and the queries. There should
+not be any business logic in here, just database access.
 
-``lua/cc_core.lua``:: Enthält den Code für den Zugriff auf die Datenbank. Das
-Modul umfasst die Tabellendefinition, die Anweisungen für die Provisionierung
-der Tabellen und die Abfragefunktionen, inklusive der SQL-Statements für die
-Querys.
+`lua/test_bridge_cc_core.lua`:: This module contains integration tests for the business
+logic. These tests are integration tests, because they test for correctly
+generated LaTeX code.
 
-`lua/test_bridge_cc_core.lua``:: In diesem Modul liegen die Tests der fachlichen
-Funktionen. Sie haben den Charakter von Integrationstests, weil hier auf korrekt
-produzierten LaTeX Code getestet wird.
-
-
-``lua/test_cc_core.lua``:: In dieses Modul sind die Unit-Tests für den Zugriff
-auf die Datenbank. Hier wird auf Lua-Datenstrukturen getestet.
-
+`lua/test_cc_core.lua`:: This module contain the unit tests for the accessing
+the database. These tests are unit tests, because they test for correct Lua data
+structures.
 
 == Infrastruktur
 
-Verschiedene Komponenten spielen bei der Ausführung von Lua Code
-zusammen. Hier wird erklärt, welche Programme installiert sein müssen,
-um die Dokumente zu übersetzen. Grundsätzlich gilt, dass in LuaTeX ein
-ganz normaler, vollwertiger Lua Interpreter eingebaut ist. In der bei
-uns verwendeten TeX Distribution TeXLive 2019 hat der Interpreter den
-Versionsstand 5.3.
+Different components work together when executing Lua code. This section
+explains which programs must be installed to build the documents. If you use the
+Docker image, none of this applies, because all tools are already installed in
+the image. LuaTeX contains a fully fledged Lua 5.3 interpreter. However, we need
+additional libraries:
 
-Allerdings brauchen wir für unsere Dokumente auch externe
-Bibliotheken, die zusätzlich installiert werden müssen. Wir erklären
-das am Beispiel der Bibliothek `libsqlite3`. Dies ist ein Paket, das
-eine Lua API für den Zugriff auf Sqlite Datenbanken anbietet.
+* `libsqlite3` for accessing SQLite
+* `ftcsv` to parse CSV files
+* `luaunit` to run Lua unit tests.
 
-Die Bibliothek `libsqlite3` wird über den Lua Package Manager `luarocks`
-installiert. Er lädt Quellpakete, übersetzt diese spezifisch für die vorliegende
-Lua Version und installiert sie in standardisierten Suchpfaden. Leider
-funktionieren die von den Linux Distributionen ausgelieferten luarocks
-Installationen nicht zuverlässig, weswegen es sich empfiehlt, luarocks selbst zu
-installieren.
+These libraries are installed using the `luarocks` package manager. It loads
+source packages, compiles and installs them. Because of version conflicts with
+the luarocks installations provided by the Linux distributions, it is
+recommended to install luarocks from source.
 
-Wenn luarocks installiert ist, kann man damit fortgefahren, die Bibliotheken zu
-installieren.
+Follow these steps to install the tool chain:
 
-Nun die Schritte im einzelnen:
 
-=== Installieren der notwendigen Linux Packages (Ubuntu)
+=== Install the necessary Linux Packages (Ubuntu)
 
-Wir brauchen Lua und seine Entwicklungsbibliotheken in der Version 5.3:
+We need Lua and its development libraries in version 5.3:
 
 ----
 sudo apt install lua5.3 liblua5.3-dev
 ----
 
-Außerdem benötigen wir eine sqlite3 Installation inklusive der Quellen:
+Furthermore, we require an sqlite3 installation together with the source files:
 
 ----
 sudo apt install sqlite3 libsqlite3-0 libsqlite3-dev
 ----
 
+=== Install luarocks
 
-=== Installieren von luarocks
-
-Den Paketmanager luarocks installiert man am besten direkt aus den Quellen:
 
 ----
-wget http://luarocks.github.io/luarocks/releases/luarocks-2.4.3.tar.gz
-tar xzvf luarocks-2.4.3.tar.gz 
-cd luarocks-2.4.3/
+wget http://luarocks.github.io/luarocks/releases/luarocks-3.7.0.tar.gz
+tar xzvf luarocks-3.7.0.tar.gz 
+cd luarocks-3.7.0/
 ./configure 
 make build
 sudo make install
 ----
 
-=== Installieren von libsqlite3, ftcsv, luaunit
-
-Die Bibliothek für den Zugriff auf sqlite3 Datenbanken, der Parser für CSV-Dateien und das Testframework werden anschließend über luarocks installiert:
+=== Install libsqlite3, ftcsv, luaunit
 
 ----
 sudo luarocks install lsqlite3
@@ -132,19 +119,16 @@ sudo luarocks install luaunit
 ----
 
 
-Ob alles geklappt hat, lässt sich über einen kleinen Integrationstest festellen:
+Check if everything was installed correctly by running a small integration test:
 ----
-cc-autor@cc-vm:~$ lua
+cc-author@cc-vm:~$ lua
 Lua 5.3.5  Copyright (C) 1994-2018 Lua.org, PUC-Rio
 > l = require "lsqlite3"
 > print (l)
 table: 0x5580b5f885e0
 ----
 
-Wenn der Interpreter die Biblitohek laden und referenzieren kann, wird
-die Adresse des Moduls ausgegeben. Ansonsten gibt es eine
-Fehlermeldung (beispielhaft für die nicht existierende Bibliothek
-lsqlite3a:
+When the interpreter has loaded the lsqlite3 library correctly, it prints the addess of the table containing the module as in the version above. If something went wrong, there will be an error message (example for a non-existing library `lsqlite3a`):
 
 ----
 > x = require "lsqlite3a"
@@ -168,62 +152,31 @@ stack traceback:
 	[C]: in ?
 ----
 
-=== Installation unter macOS
+=== Installation on macOS
 
-Die Komponenten, die unter Linux mit einem Paketmanager installiert
-werden, können grundsätzlich auch unter macOS mit einem Paketmanager
-(z.B. link:https://brew.sh/[Homebrew]) installiert werden:
+The components that are installed with a package manager in Linux can also be installed with a package manager on macOS (e.g. link:https://brew.sh/[Homebrew]):
 
 ----
 brew install lua
 ----
 
-Zudem ist sqlite3 im Lieferumfang von macOS enthalten. Allerdings
-fehlen dann die Header-Dateien an den von Luarocks, bzw. lsqlite3
-erwarteten Stellen. Daher hat es sich bewährt, sqlite3 selbst zu
-kompilieren und zu installieren. Dafür ist eine Compilerumgebung
-erforderlich, sodass man am besten XCode installiert.
+It is recommended to install a custom SQLite3 because the stock SQLite3 on macOS
+lacks the header files. You need a compiler for that. Use either the XCode
+command line utilities or install a tool chain via brew. Explaining this is out
+of scope for this manual.
+
+Once you have a C compiler running, download and compile SQLite3 (choose a newer version : 
 
 ----
-curl -O https://sqlite.org/2017/sqlite-autoconf-3200100.tar.gz
-tar xzvf sqlite-autoconf-3200100.Tar
-cd sqlite-autoconf-3200100
+curl -O https://sqlite.org/2021/sqlite-autoconf-3360000.tar.gz
+tar xzvf sqlite-autoconf-3360000.tar
+cd sqlite-autoconf-3360000
 ./configure; make
 sudo make install
 ----
 
-Alle weiteren Punkte funktionieren genau wie in der Installation unter Linux.
+From then on, follow the instructions for Linux.
 
+=== Installation on Windows
 
-
-=== Integration der Lua Module in LuaTeX
-
-Jetzt wird es trickreich: Der in LuaTeX eingebaute Lua Interpreter
-wird beim Start mit einem anderen Mechanismus für das Laden der
-Packages konfiguriert: Standard Lua verwendet die globale Variable
-package.path, die (in etwa) eine Liste von Pfaden enthält, in denen
-nach Modulen gesucht wird. LuaTeX hingegen verwendet den
-Suchmechanismus KPSE, der insgesamt in der TeXLive Distribution
-verwendet wird, um Packages, Schriftarten, Makrodateien, TeX Dateien
-und vieles mehr zu laden. Er bildet eine Reihe
-von sog. TEXMF-Verzeichnisbäumen, in denen die Dateien liegen. KPSE
-ist ein ausgefeilter Mechanismus, der uns in der CC-Dokumentation
-leider Knüppel zwischen die Beine wirft: Das Verzeichnis ``../lua/``,
-in dem sich alle unsere Lua Dateien und die davon abhängigen CSV
-Dateien befinden, liegt nicht in einem TEXMF-Baum und somit nicht in
-den Suchpfaden. Daher muss der Suchpfad angepasst werden, was wir in
-``common-packages.tex`` vornehmen:
-
-----
-\directlua{package.path = "../lua/?.lua;./?.lua;" .. package.path}
-\directlua{package.cpath = "./?.so;" .. package.cpath}
-----
-
-Mit diesen Befehlen wird der Suchpfad `package.path` erweitert. Danach
-wird ein Package geladen, das den ursprünglichen Lua Suchmechanismus
-für Module wieder herstellt, bzw. den KPSE basierten Mechanismus
-ergänzt. So können wir eigene Module aus unserem Dokumenten-Repository
-einbinden, ohne die Module an eine Stelle im TEXMF-Baum zu kopieren
-und damit aus dem Git-Repository zu lösen.
-
-
+Sorry, no experience there. Use the Docker image. It works very well.
