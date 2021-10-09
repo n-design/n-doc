@@ -179,7 +179,7 @@ It makes no sense to check commit the patch files. Files with the extension
 
 == Release Management
 
-Creating releases is described in a link:doku/creating-releases.adoc[separate document].
+Creating releases is described in a link:documentation/creating-releases.adoc[separate document].
 
 == Minimal Working Examples
 
