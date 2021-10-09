@@ -1,0 +1,182 @@
+= Using Lua in n-doc
+
+This document explains how the Lua Interpreter in LuaTeX is used during the
+n-doc typesetting process.
+
+== Architecture of the Lua components if the platform
+
+There are several methods for calling the Lua interpreter in LuaTeX. The general
+procedure is described very clearly in
+link:http://dante.ctan.org/tex-archive/info/luatex/lualatex-doc/lualatex-doc.pdf[the
+documentation on CTAN].
+
+The most common use is the `\directlua{}` macro. The arguments of the macro are
+handed over to the Lua interpreter and executed there. Furthermore, there are
+additional packages that add more ways of providing Lua code. n-doc uses the
+link:https://dante.ctan.org/ctan/macros/luatex/latex/luacode/luacode.pdf[Luacode]
+package.
+
+In our documents the inclusion of Lua code follows this schema. Example here is
+ADV_TDS, all other documents work identically.
+
+``adv_tds/adv_tds.tex``:: is the main document. It includes the common preamble.
+
+``common/common-preamble.tex``:: contains the preamble (everything that comes
+before `\begin{document}`) that is identical for all documents. This file
+includes all packages and macro definition files. It also sets the module path
+for loading Lua libraries.
+
+The Lua code is distributed over several _n-doc packages_:
+
+`common`:: contains utility functions used by all other packages. `common`
+  should not contain any logic that is particular to any certification scheme.
+
+`cc_core`:: contains the business logic specific to the CC scheme.
+
+`documents`:: contains business logic for maintaining document versions.
+
+Each of the n-doc packages has the same structure of components. The example
+used here is the n-doc package `cc_core`:
+
+`common/cc_core-macros`:: This file contains all the macro definitions for CC
+specific use cases.
+
+`common/bridge_cc_core.tex`:: This file contains Lua functions directly related
+to the macros in `cc_core-macros.tex`. These functions contain no business logic
+but are simple adapters. They represent a bridge to other modules that are
+loaded via a `require` statement. These functions call an identically named
+function and use `tex.sprint()` to print the result of that call into the output
+channel (the PDF file). This is similar to an API.
+
+`lua/bridge_cc_core.lua`:: This module contains the business logic functions
+called by `bridge_cc_core.tex`. Functions in this module call the database, the
+table generator and other modules. 
+
+`lua/cc_core.lua`:: Contains the code for accessing the database. The module
+comprises the tables definitions, the provisioning and the queries. There should
+not be any business logic in here, just database access.
+
+`lua/test_bridge_cc_core.lua`:: This module contains integration tests for the business
+logic. These tests are integration tests, because they test for correctly
+generated LaTeX code.
+
+`lua/test_cc_core.lua`:: This module contain the unit tests for the accessing
+the database. These tests are unit tests, because they test for correct Lua data
+structures.
+
+== Infrastruktur
+
+Different components work together when executing Lua code. This section
+explains which programs must be installed to build the documents. If you use the
+Docker image, none of this applies, because all tools are already installed in
+the image. LuaTeX contains a fully fledged Lua 5.3 interpreter. However, we need
+additional libraries:
+
+* `libsqlite3` for accessing SQLite
+* `ftcsv` to parse CSV files
+* `luaunit` to run Lua unit tests.
+
+These libraries are installed using the `luarocks` package manager. It loads
+source packages, compiles and installs them. Because of version conflicts with
+the luarocks installations provided by the Linux distributions, it is
+recommended to install luarocks from source.
+
+Follow these steps to install the tool chain:
+
+
+=== Install the necessary Linux Packages (Ubuntu)
+
+We need Lua and its development libraries in version 5.3:
+
+----
+sudo apt install lua5.3 liblua5.3-dev
+----
+
+Furthermore, we require an sqlite3 installation together with the source files:
+
+----
+sudo apt install sqlite3 libsqlite3-0 libsqlite3-dev
+----
+
+=== Install luarocks
+
+
+----
+wget http://luarocks.github.io/luarocks/releases/luarocks-3.7.0.tar.gz
+tar xzvf luarocks-3.7.0.tar.gz 
+cd luarocks-3.7.0/
+./configure 
+make build
+sudo make install
+----
+
+=== Install libsqlite3, ftcsv, luaunit
+
+----
+sudo luarocks install lsqlite3
+sudo luarocks install ftcsv
+sudo luarocks install luaunit
+----
+
+
+Check if everything was installed correctly by running a small integration test:
+----
+cc-author@cc-vm:~$ lua
+Lua 5.3.5  Copyright (C) 1994-2018 Lua.org, PUC-Rio
+> l = require "lsqlite3"
+> print (l)
+table: 0x5580b5f885e0
+----
+
+When the interpreter has loaded the lsqlite3 library correctly, it prints the addess of the table containing the module as in the version above. If something went wrong, there will be an error message (example for a non-existing library `lsqlite3a`):
+
+----
+> x = require "lsqlite3a"
+stdin:1: module 'lsqlite3a' not found:
+	no field package.preload['lsqlite3a']
+	no file '/usr/local/share/lua/5.2/lsqlite3a.lua'
+	no file '/usr/local/share/lua/5.2/lsqlite3a/init.lua'
+	no file '/usr/local/lib/lua/5.2/lsqlite3a.lua'
+	no file '/usr/local/lib/lua/5.2/lsqlite3a/init.lua'
+	no file '/usr/share/lua/5.2/lsqlite3a.lua'
+	no file '/usr/share/lua/5.2/lsqlite3a/init.lua'
+	no file './lsqlite3a.lua'
+	no file '/usr/local/lib/lua/5.2/lsqlite3a.so'
+	no file '/usr/lib/x86_64-linux-gnu/lua/5.2/lsqlite3a.so'
+	no file '/usr/lib/lua/5.2/lsqlite3a.so'
+	no file '/usr/local/lib/lua/5.2/loadall.so'
+	no file './lsqlite3a.so'
+stack traceback:
+	[C]: in function 'require'
+	stdin:1: in main chunk
+	[C]: in ?
+----
+
+=== Installation on macOS
+
+The components that are installed with a package manager in Linux can also be installed with a package manager on macOS (e.g. link:https://brew.sh/[Homebrew]):
+
+----
+brew install lua
+----
+
+It is recommended to install a custom SQLite3 because the stock SQLite3 on macOS
+lacks the header files. You need a compiler for that. Use either the XCode
+command line utilities or install a tool chain via brew. Explaining this is out
+of scope for this manual.
+
+Once you have a C compiler running, download and compile SQLite3 (choose a newer version : 
+
+----
+curl -O https://sqlite.org/2021/sqlite-autoconf-3360000.tar.gz
+tar xzvf sqlite-autoconf-3360000.tar
+cd sqlite-autoconf-3360000
+./configure; make
+sudo make install
+----
+
+From then on, follow the instructions for Linux.
+
+=== Installation on Windows
+
+Sorry, no experience there. Use the Docker image. It works very well.
