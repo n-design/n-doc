@@ -10,9 +10,10 @@ The module \tds{mod.vpn.core} of subsystem \tdslink{sub.vpn} provides interfaces
 
 \moduleprocess{prc.vpn.core.connect}{Open Connection to VPN concentrator}
 
-This process opens a connection to the VPN concentrator. The concentrator's
-certificate is verified using the interface
-\tdslink[fq]{int.vpn.cert.checkcert}.
+This process opens a connection to the VPN concentrator using IPSec and
+IKEv2. During the connection process, the peer presents its identity in the form
+of an X.509 certificate which must be verified. It is verified using the
+functionality reached by the interface \tdslink[fq]{int.vpn.cert.checkcert}.
 
 \implementedsfr{\sfrlink{ftp_itc.1/vpn} & \sfrlink{fcs_ckm.2/ike}}
 
