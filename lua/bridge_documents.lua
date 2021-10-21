@@ -17,8 +17,8 @@ function bridge_documents.getDocumentDate(key, tex)
    tex.sprint(documents.getDocumentDate(key))
 end
 
-function bridge_documents.get_version_number_for_refliste(version)
-   return documents.get_version_number_for_refliste(version)
+function bridge_documents.get_version_number_for_reflist(version)
+   return documents.get_version_number_for_reflist(version)
 end
 
 return bridge_documents

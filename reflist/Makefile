@@ -1,4 +1,4 @@
-MASTER=refliste.pdf
+MASTER=reflist.pdf
 
 include ../Makefile.rules
 

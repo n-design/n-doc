@@ -101,7 +101,7 @@ The following goals are availavble at the root level `Makefile`:
 
 | `ate` | Creates the  Test Coverage (`ate_cov`) 
 
-| `ref` | Creates the  List of References (`refliste`)
+| `ref` | Creates the  List of References (`reflist`)
 
 | `clean` | Removes all documents and auxiliary files
 
