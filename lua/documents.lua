@@ -50,7 +50,7 @@ function documents.getDocumentVersion(key)
    return cmn.get_by_query_key("docversion", key)
 end
 
-function documents.get_version_number_for_refliste(version)
+function documents.get_version_number_for_reflist(version)
    local nosnap, is_snapshot = string.gsub(version, "-SNAPSHOT", "")
    local major, minor = split_at_dot(nosnap)
    if is_snapshot > 0 and tonumber(minor) > 0 then

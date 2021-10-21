@@ -1,7 +1,7 @@
 % General macros for the titlepage
 \newcommand{\documentdate}[1]{\directlua{getDocumentDate('#1')}}
 \newcommand{\documentversion}[1]{\directlua{getDocumentVersion('#1')}}
-\newcommand{\nosnapshot}[1]{\directlua{tex.sprint(get_version_number_for_refliste('#1'))}}
+\newcommand{\nosnapshot}[1]{\directlua{tex.sprint(get_version_number_for_reflist('#1'))}}
 
 % Als Erinnerung für später zu erledigende Aufgaben
 % Markiert den übergebenen Text deutlich und setzt
