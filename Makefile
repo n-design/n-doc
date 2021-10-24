@@ -42,7 +42,7 @@ GIT_INFO = .git/gitHeadInfo.gin
 
 all: $(ALL_DIRS)
 
-alc: $(ALC_DIR)
+#alc: $(ALC_DIR) # no need for this
 
 arc: $(ARC_DIR)
 
