@@ -21,6 +21,7 @@ mwe_ate/mwe_ate_body.tex
 mwe_*/*.pdf
 
 # Intermediate PDF files
+documentation/*.pdf
 
 # Generated HTML files
 doku/*.html
