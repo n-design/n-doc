@@ -56,12 +56,54 @@
 \newcommand{\appendixref}[1]{\hyperref[#1]{\GetTranslation{Appendix}~\ref*{#1}}}
 
 % Macros for headlines. Creates a hypertext anchor in addition to the \label
-\newcommand{\hrefchapter}[2]{\hypertarget{#1}{\chapter{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
-\newcommand{\hrefsection}[2]{\hypertarget{#1}{\section{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
-\newcommand{\hrefsubsection}[2]{\hypertarget{#1}{\subsection{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
-\newcommand{\hrefsubsubsection}[2]{\hypertarget{#1}{\subsubsection{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
-\newcommand{\hrefparagraph}[2]{\hypertarget{#1}{\paragraph{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
-\newcommand{\hrefsubparagraph}[2]{\hypertarget{#1}{\subparagraph{\texorpdfstring{#2}{\nohyphen{#2}}}\label{#1}}}
+
+% These versions of the command can be called with a star "*", so that headlines
+% without numberings are created. Only use these macros. They take two mandatory
+% arguments: First the name of the label, second the name of the headline.
+
+\makeatletter
+\newcommand{\hrefchapter}{%
+  \@ifstar
+  {\hrefchapterStar}%
+  {\hrefchapterNoStar}}
+\newcommand{\hrefsection}{%
+  \@ifstar
+  {\hrefsectionStar}%
+  {\hrefsectionNoStar}}
+\newcommand{\hrefsubsection}{%
+  \@ifstar
+  {\hrefsubsectionStar}%
+  {\hrefsubsectionNoStar}}
+\newcommand{\hrefsubsubsection}{%
+  \@ifstar
+  {\hrefsubsubsectionStar}%
+  {\hrefsubsubsectionNoStar}}
+\newcommand{\hrefparagraph}{%
+  \@ifstar
+  {\hrefparagraphStar}%
+  {\hrefparagraphNoStar}}
+\newcommand{\hrefsubparagraph}{%
+  \@ifstar
+  {\hrefsubparagraphStar}%
+  {\hrefsubparagraphNoStar}}
+\makeatother
+
+
+%% Not to be called by the user, see section above
+\newcommand{\hrefchapterNoStar}[2]{\hypertarget{#1}{\chapter{#2}\label{#1}}}
+\newcommand{\hrefsectionNoStar}[2]{\hypertarget{#1}{\section{#2}\label{#1}}}
+\newcommand{\hrefsubsectionNoStar}[2]{\hypertarget{#1}{\subsection{#2}\label{#1}}}
+\newcommand{\hrefsubsubsectionNoStar}[2]{\hypertarget{#1}{\subsubsection{#2}\label{#1}}}
+\newcommand{\hrefparagraphNoStar}[2]{\hypertarget{#1}{\paragraph{#2}\label{#1}}}
+\newcommand{\hrefsubparagraphNoStar}[2]{\hypertarget{#1}{\subparagraph{#2}\label{#1}}}
+\newcommand{\hrefchapterStar}[2]{\hypertarget{#1}{\chapter*{#2}\label{#1}}}
+\newcommand{\hrefsectionStar}[2]{\hypertarget{#1}{\section*{#2}\label{#1}}}
+\newcommand{\hrefsubsectionStar}[2]{\hypertarget{#1}{\subsection*{#2}\label{#1}}}
+\newcommand{\hrefsubsubsectionStar}[2]{\hypertarget{#1}{\subsubsection*{#2}\label{#1}}}
+\newcommand{\hrefparagraphStar}[2]{\hypertarget{#1}{\paragraph*{#2}\label{#1}}}
+\newcommand{\hrefsubparagraphStar}[2]{\hypertarget{#1}{\subparagraph*{#2}\label{#1}}}
+%% Cleared. End of macros not to be called by the user
+
 
 
 % Macros for security related items.
