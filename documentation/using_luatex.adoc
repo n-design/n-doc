@@ -119,38 +119,48 @@ sudo luarocks install luaunit
 ----
 
 
-Check if everything was installed correctly by running a small integration test:
-----
-cc-author@cc-vm:~$ lua
-Lua 5.3.5  Copyright (C) 1994-2018 Lua.org, PUC-Rio
-> l = require "lsqlite3"
-> print (l)
-table: 0x5580b5f885e0
-----
-
-When the interpreter has loaded the lsqlite3 library correctly, it prints the addess of the table containing the module as in the version above. If something went wrong, there will be an error message (example for a non-existing library `lsqlite3a`):
+Check if everything was installed correctly by running a small integration
+test. This test starts an in-memory database, creates a table, adds values and
+finally prints the values to the console:
 
 ----
-> x = require "lsqlite3a"
-stdin:1: module 'lsqlite3a' not found:
-	no field package.preload['lsqlite3a']
-	no file '/usr/local/share/lua/5.2/lsqlite3a.lua'
-	no file '/usr/local/share/lua/5.2/lsqlite3a/init.lua'
-	no file '/usr/local/lib/lua/5.2/lsqlite3a.lua'
-	no file '/usr/local/lib/lua/5.2/lsqlite3a/init.lua'
-	no file '/usr/share/lua/5.2/lsqlite3a.lua'
-	no file '/usr/share/lua/5.2/lsqlite3a/init.lua'
-	no file './lsqlite3a.lua'
-	no file '/usr/local/lib/lua/5.2/lsqlite3a.so'
-	no file '/usr/lib/x86_64-linux-gnu/lua/5.2/lsqlite3a.so'
-	no file '/usr/lib/lua/5.2/lsqlite3a.so'
-	no file '/usr/local/lib/lua/5.2/loadall.so'
-	no file './lsqlite3a.so'
-stack traceback:
-	[C]: in function 'require'
-	stdin:1: in main chunk
-	[C]: in ?
+$ texlua test_luatex_sqlite.lua
+1 : Hello World
+2 : Hello Lua
+3 : Hello Sqlite3
 ----
+
+Now run the same integration test, but this time as a LaTeX document
+
+----
+$ lualatex --shell-escape test_luatex_sqlite
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)
+ system commands enabled.
+(./test_luatex_sqlite.tex
+LaTeX2e <2021-06-01> patch level 1
+ L3 programming layer <2021-07-12>
+(/usr/local/texlive/2021/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2021/texmf-dist/tex/latex/base/size10.clo))
+(/usr/local/texlive/texmf-local/tex/latex/local/luapackageloader/luapackageload
+er.sty (/usr/local/texlive/2021/texmf-dist/tex/generic/iftex/ifluatex.sty
+(/usr/local/texlive/2021/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/local/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-luatex.def)
+No file test_luatex_sqlite.aux.
+(/usr/local/texlive/2021/texmf-dist/tex/latex/base/ts1cmr.fd) [1{/usr/local/tex
+live/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(./test_luatex_sqlite.aux))
+ 406 words of node memory still in use:
+   3 hlist, 1 vlist, 1 rule, 2 glue, 3 kern, 1 glyph, 4 attribute, 48 glue_spec
+, 4 attribute_list, 1 write nodes
+   avail lists: 2:23,3:4,4:2,5:23,6:2,7:122,9:18
+</usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.
+otf>
+Output written on test_luatex_sqlite.pdf (1 page, 4420 bytes).
+Transcript written on test_luatex_sqlite.log.
+----
+
+The resulting PDF-file contains the same `Hello` statements as above.
 
 === Installation on macOS
 
