@@ -29,24 +29,19 @@ RUN ./configure && make build && make install && \
     luarocks install luaunit && \
     luarocks install ftcsv
 
-FROM --platform=linux/amd64 ${baseimage} as ndocbase-amd64
+FROM --platform=linux/amd64 ${baseimage} as ndocbase
 
 WORKDIR /install-tl
 COPY texlive.profile-x86_64-linux /install-tl/texlive.profile
 ENV PATH=/usr/local/texlive/bin/x86_64-linux:$PATH
 
-FROM --platform=linux/arm64 ${baseimage} as ndocbase-arm64
+FROM --platform=linux/arm64 ${baseimage} as ndocbase
 
 WORKDIR /install-tl
 COPY texlive.profile-aarch64-linux /install-tl/texlive.profile
 ENV PATH=/usr/local/texlive/bin/aarch64-linux:$PATH
 
-FROM ndocbase-$TARGETARCH
-
-ARG TARGETPLATFORM
-ARG TARGETARCH
-ARG TARGETOS
-
+FROM ndocbase
 
 COPY --from=buildbase /luarocks-3.7.0/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
 COPY --from=buildbase /luarocks-3.7.0/lua_modules/share/lua/5.3/ /usr/local/share/lua/5.3
