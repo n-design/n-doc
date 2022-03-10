@@ -24,10 +24,10 @@
 \newcommand{\stassigned}[2][]{\stformat{\assigned{#2}}\isnotempty{#1}{\footnote{Assignment: \emph{#1}}}}
 \newcommand{\stselected}[2][]{\stformat{\selected{#2}}\isnotempty{#1}{\footnote{Selection: \emph{#1}}}}
 \newcommand{\stdeleted}[2][]{\stformat{\deleted{#2}}\isnotempty{#1}{\footnote{Deletion: \emph{#1}}}}
-\newcommand{\pprefined}[1]{\refined{#1}}
-\newcommand{\ppdeleted}[1]{\deleted{#1}}
-\newcommand{\ppassigned}[1]{\assigned{#1}}
-\newcommand{\ppselected}[1]{\selected{\textit{#1}}}
+\newcommand{\pprefined}[2][]{\ppformat{\refined{#2}}\isnotempty{#1}{\footnote{Refinement: \emph{#1}}}}
+\newcommand{\ppassigned}[2][]{\ppformat{\assigned{#2}}\isnotempty{#1}{\footnote{Assignment: \emph{#1}}}}
+\newcommand{\ppselected}[2][]{\ppformat{\selected{#2}}\isnotempty{#1}{\footnote{Selection: \emph{#1}}}}
+\newcommand{\ppdeleted}[2][]{\ppformat{\deleted{#2}}\isnotempty{#1}{\footnote{Deletion: \emph{#1}}}}
 
 \renewcommand{\sfrlink}[2][]{%
   \index{\sfrmain{\directlua{toLower('#2')}}@\sfrindex{\directlua{toLower('#2')}}}%
