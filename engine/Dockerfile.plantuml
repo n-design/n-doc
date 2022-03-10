@@ -1,7 +1,7 @@
 FROM ndesign/n-doc
 
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get install -y openjdk-11-jre-headless
+RUN apt-get install -y openjdk-17-jre-headless
 
 COPY plantuml.tar.gz /
 RUN tar x -C / -f /plantuml.tar.gz && rm -f /plantuml.tar.gz
