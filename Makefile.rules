@@ -1,11 +1,10 @@
-TEXMFCACHEDIR  = ./.texmfcache
 LATEXMK        = latexmk $(LATEXMKFLAGS)
 CLEANFLAGS     = -C
 
 .PHONY: snippets wsdpdf clean FORCE_MAKE
 
 $(MASTER) : wsdpdf FORCE_MAKE
-	TEXMFCACHE=$(TEXMFCACHEDIR) $(LATEXMK)
+	$(LATEXMK)
 
 wsdpdf: 
 	../scripts/transform-wsd.sh pdf $(shell pwd)
