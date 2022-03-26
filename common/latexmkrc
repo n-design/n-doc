@@ -1,3 +1,5 @@
+$hash_calc_ignore_pattern{'luc'}='^';
+
 push @generated_exts, "lol", "run.xml", 'glo', 'gls', 'glg', 'acn', 'acr', 'alg', "xdy", "appnote";
 
 $pdf_mode = 4; $postscript_mode = $dvi_mode = 0;
