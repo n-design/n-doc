@@ -98,6 +98,10 @@ interface. The TOE obtain its IP address from a DHCP server in the WAN. This fun
 
 DHCP is implemented according to \rfc[c]{2131}.
 
+\tsfiactions{tsfi.ls.wan.dhcp}
+
+\tsfierrormessages{tsfi.ls.wan.dhcp}
+
 \hrefsubsection{tsfi.ls.wan.ntp}{\tsfisectionname{ls.wan.ntp}}
 
 \tsfipurpose{tsfi.ls.wan.ntp}
@@ -111,6 +115,11 @@ WAN.
 
 The protocol is specified in \rfc[c]{5905} dokumentiert. The destination port
 for the client is UDP port~123.
+
+\tsfiactions{tsfi.ls.wan.ntp}
+
+\tsfierrormessages{tsfi.ls.wan.ntp}
+
 
 \hrefsubsection{tsfi.ls.wan.ipsec}{\tsfisectionname{ls.wan.ipsec}}
 
@@ -126,6 +135,11 @@ The TOE fulfills the requirements from \rfc[c]{4301}. It uses two protocols for
 IPsec. Key exchange is implemented by IKE version 2 according to
 \rfc[c]{7296}. User data is tranmitted via the Encapsulation Security Payload
 (ESP) according to\rfc[c]{4303}. 
+
+\tsfiactions{tsfi.ls.wan.ipsec}
+
+\tsfierrormessages{tsfi.ls.wan.ipsec}
+
 
 \hrefsubsubsection{tsfi.ls.wan.ipsec.ikev2}{Internet Key Exchange Version 2 (IKEv2)}
 

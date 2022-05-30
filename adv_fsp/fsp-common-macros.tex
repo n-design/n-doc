@@ -6,6 +6,8 @@
 
 \newcommand{\tsfipurpose}[1]{\hrefsubsubsection{#1.terms}{\ndoc@purposeandterms}}
 \newcommand{\tsfiparameters}[1]{\hrefsubsubsection{#1.params}{\ndoc@parameters}}
+\newcommand{\tsfiactions}[1]{\hrefsubsubsection{#1.actions}{\ndoc@actions}}
+\newcommand{\tsfierrormessages}[1]{\hrefsubsubsection{#1.errormessages}{\ndoc@errormessages}}
 
 % Prints mapping tables 
 \newcommand{\printSfToTsfi}[1]{\directlua{print_sf_to_tsfi_table('#1')}}
@@ -14,6 +16,13 @@
 
 \newcommand{\callerinterfaces}[1]{\minisec{\ndoc@sfinterfaces}%
   \ndoc@thesf{} \secfunc{#1} \ndoc@iscalledvia{} \printSfToTsfi{#1}.\par{}}
+
+
+\newcommand{\calledenforcingsfr}[1]{\minisec{\ndoc@calledenforcingsfr}%
+  \ndoc@calledenforcingsfr{} \tsfi{#1}: \printTsfiToEnfSfr{#1}}
+
+\newcommand{\calledsupportingsfr}[1]{\minisec{\ndoc@calledsupportingsfr}%
+  \ndoc@calledsupportingsfr{} \tsfi{#1}: \printTsfiToSupSfr{#1}}
 
 \newcommand{\calledsf}[1]{\minisec{\ndoc@calledsf}%
   \ndoc@calledsf{} \tsfi{#1}: \printTsfiToSf{#1}}

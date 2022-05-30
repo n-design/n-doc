@@ -96,6 +96,11 @@ This interface servers as the \emph{data link layer} to the ethernet network.
 This interface implements the ethernet protocol as specified in
 \autocite{IEEE802.3}.
 
+\tsfiactions{tsfi.ls.lan.ether}
+
+\tsfierrormessages{tsfi.ls.lan.ether}
+
+
 \hrefsubsection{tsfi.ls.lan.ip}{\tsfisectionname{ls.lan.ip}}
 
 \tsfipurpose{tsfi.ls.lan.ip}
@@ -111,6 +116,11 @@ The implementation of IPv4 fulfills the requirements from \rfc[c]{791},
 \rfc[c]{1812} and the update in \rfc[c]{2644}. ICMP is specified in
 \rfc[c]{792}. The Linux kernel provides the protocol implementation.
 
+\tsfiactions{tsfi.ls.lan.ip}
+
+\tsfierrormessages{tsfi.ls.lan.ip}
+
+
 \hrefsubsection{tsfi.ls.lan.tcp}{\tsfisectionname{ls.lan.tcp}}
 
 \tsfipurpose{tsfi.ls.lan.tcp}
@@ -125,6 +135,11 @@ Transmission Control Protocol.
 The implementation of TCP fulfills the requirements from \rfc[c]{793}. The Linux
 kernel provides the protocol implementation.
 
+\tsfiactions{tsfi.ls.lan.tcp}
+
+\tsfierrormessages{tsfi.ls.lan.tcp}
+
+
 \hrefsubsection{tsfi.ls.lan.udp}{\tsfisectionname{ls.lan.udp}}
 
 \tsfipurpose{tsfi.ls.lan.udp}
@@ -138,6 +153,10 @@ User Datagram Protocol (UDP).
 
 The implementation of UDP fulfills the requirements from \rfc[c]{768}. The Linux
 kernel provides the protocol implementation.
+
+\tsfiactions{tsfi.ls.lan.udp}
+
+\tsfierrormessages{tsfi.ls.lan.udp}
 
 \hrefsubsection{tsfi.ls.lan.tls}{\tsfisectionname{ls.lan.tls}}
 
@@ -155,6 +174,10 @@ The implementation of TLS fulfills the requirements from \rfc[c]{5246}. The
 description of the TLS implementation and all TLS connections of the TOE are
 documented in \sectref{sf.tls}.
 
+\tsfiactions{tsfi.ls.lan.tls}
+
+\tsfierrormessages{tsfi.ls.lan.tls}
+
 \hrefsubsection{tsfi.ls.lan.httpmgmt}{\tsfisectionname{ls.lan.httpmgmt}}
 
 \tsfipurpose{tsfi.ls.lan.httpmgmt}
@@ -171,6 +194,10 @@ is described in detail in the Security Architecture \autocite{adv_arc}.
 The HTTP server implements \rfc[c]{2616}. The parameters of the REST API are
 documented in the guidance documentation \autocite{agd_adm}. JSON is specified
 in \rfc[c]{7159}.
+
+\tsfiactions{tsfi.ls.lan.httpmgmt}
+
+\tsfierrormessages{tsfi.ls.lan.httpmgmt}
 
 
 % !TEX root = "../adv_fsp"
