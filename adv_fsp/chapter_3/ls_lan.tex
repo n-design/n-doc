@@ -91,6 +91,10 @@ This interface servers as the \emph{data link layer} to the ethernet network.
 
 \calledsf{ls.lan.ether}
 
+\calledenforcingsfr{ls.lan.ether}
+
+\calledsupportingsfr{ls.lan.ether}
+
 \tsfiparameters{tsfi.ls.lan.ether}
 
 This interface implements the ethernet protocol as specified in
@@ -110,6 +114,10 @@ TOE supports IPv4. Additionally, the TOE supports ICMP (which is part of IP).
 
 \calledsf{ls.lan.ip}
 
+\calledenforcingsfr{ls.lan.ip}
+
+\calledsupportingsfr{ls.lan.ip}
+
 \tsfiparameters{tsfi.ls.lan.ip}
 
 The implementation of IPv4 fulfills the requirements from \rfc[c]{791},
@@ -127,6 +135,10 @@ The implementation of IPv4 fulfills the requirements from \rfc[c]{791},
 
 This interface implements the \emph{transport layer}. The TOE implements the
 Transmission Control Protocol.
+
+\calledenforcingsfr{ls.lan.tcp}
+
+\calledsupportingsfr{ls.lan.tcp}
 
 \calledsf{ls.lan.tcp}
 
@@ -147,6 +159,10 @@ kernel provides the protocol implementation.
 This interface implements the \emph{transport layer}. The TOE implements the
 User Datagram Protocol (UDP).
 
+\calledenforcingsfr{ls.lan.udp}
+
+\calledsupportingsfr{ls.lan.udp}
+
 \calledsf{ls.lan.udp}
 
 \tsfiparameters{tsfi.ls.lan.udp}
@@ -165,6 +181,10 @@ kernel provides the protocol implementation.
 \lslantls{} is used to secure the communications to other IP products in the
 LAN. TLS provides confidentiality and integrity to the connections. An overview
 of the TLS connections of the TOE in listed in \tableref{tab:tlsconnections}.
+
+\calledenforcingsfr{ls.lan.tls}
+
+\calledsupportingsfr{ls.lan.tls}
 
 \calledsf{ls.lan.tls}
 
@@ -186,6 +206,10 @@ The TOE implements an HTTP server for communication with the management web
 application. Confguration data is transported in JSON notation. The protocol is
 defined as a REST API. Measures are taken to prevent XSS and CSRF attacks. This
 is described in detail in the Security Architecture \autocite{adv_arc}.
+
+\calledenforcingsfr{ls.lan.httpmgmt}
+
+\calledsupportingsfr{ls.lan.httpmgmt}
 
 \calledsf{ls.lan.httpmgmt}
 

@@ -92,6 +92,10 @@ remarks in \chapterref{tsfi.ls}.
 The TOE provides the capability to act as an DHCP client on the WAN
 interface. The TOE obtain its IP address from a DHCP server in the WAN. This function can be activated/deactivated with the management interface \lslanhttpmgmt{}.
 
+\calledenforcingsfr{ls.wan.dhcp}
+
+\calledsupportingsfr{ls.wan.dhcp}
+
 \calledsfmanual{ls.wan.dhcp}{\secfunclink{sf.networkservices}}
 
 \tsfiparameters{tsfi.ls.wan.dhcp}
@@ -108,6 +112,10 @@ DHCP is implemented according to \rfc[c]{2131}.
 
 This interface is used to synchronize the system time with time servers in the
 WAN.
+
+\calledenforcingsfr{ls.wan.ntp}
+
+\calledsupportingsfr{ls.wan.ntp}
 
 \calledsf{ls.wan.ntp}
 
@@ -126,6 +134,10 @@ for the client is UDP port~123.
 \tsfipurpose{tsfi.ls.wan.ipsec}
 
 The TOE uses the WAN interface to establish the VPN channel with IPsec.
+
+\calledenforcingsfr{ls.wan.ipsec}
+
+\calledsupportingsfr{ls.wan.ipsec}
 
 \calledsf{ls.wan.ipsec}
 

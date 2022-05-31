@@ -91,6 +91,21 @@ function testbridge.test_print_tsfi_to_sf_table()
    bridge_cc_core.print_tsfi_to_sf_table("ls.lan.tls", tex.expected(expectedresult))
 end
 
+function testbridge.test_print_tsfi_to_enf_sfr_table()
+   local expectedresult = [[\sfrlink{fcs_cop.1/hash}, \sfrlink{fcs_cop.1/hmac}, \sfrlink{fcs_cop.1/tls.aes}, \sfrlink{fcs_cop.1/tls.auth}, \sfrlink{fpt_tdc.1/tls.zert}, \sfrlink{ftp_itc.1/tls}]]
+   bridge_cc_core.print_tsfi_to_sfr_table("ls.lan.tls", "enf", tex.expected(expectedresult))
+end
+
+function testbridge.test_print_tsfi_to_sup_sfr_table()
+   local expectedresult = [[\sfrlink{fcs_ckm.1}, \sfrlink{fcs_ckm.2/tls}, \sfrlink{fcs_ckm.4}, \sfrlink{fcs_rng.1/hashdrbg}]]
+   bridge_cc_core.print_tsfi_to_sfr_table("ls.lan.tls", "sup", tex.expected(expectedresult))
+end
+
+function testbridge.test_print_tsfi_to_all_sfr_table()
+   local expectedresult = [[\sfrlink{fcs_ckm.1}, \sfrlink{fcs_ckm.2/tls}, \sfrlink{fcs_ckm.4}, \sfrlink{fcs_cop.1/hash}, \sfrlink{fcs_cop.1/hmac}, \sfrlink{fcs_cop.1/tls.aes}, \sfrlink{fcs_cop.1/tls.auth}, \sfrlink{fcs_rng.1/hashdrbg}, \sfrlink{fpt_tdc.1/tls.zert}, \sfrlink{ftp_itc.1/tls}]]
+   bridge_cc_core.print_tsfi_to_sfr_table("ls.lan.tls", "", tex.expected(expectedresult))
+end
+
 function testbridge.test_getSfr()
    bridge_cc_core.getSfr("fcs_cop.1.1/hmac", tex.expected([[FCS\_COP.1.1/HMAC]]))
 end

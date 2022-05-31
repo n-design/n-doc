@@ -12,11 +12,13 @@
 % Prints mapping tables 
 \newcommand{\printSfToTsfi}[1]{\directlua{print_sf_to_tsfi_table('#1')}}
 \newcommand{\printTsfiToSf}[1]{\directlua{print_tsfi_to_sf_table('#1')}}
+\newcommand{\printTsfiToEnfSfr}[1]{\directlua{print_tsfi_to_sfr_table('#1', "enf")}}
+\newcommand{\printTsfiToSupSfr}[1]{\directlua{print_tsfi_to_sfr_table('#1', "sup")}}
+
 
 
 \newcommand{\callerinterfaces}[1]{\minisec{\ndoc@sfinterfaces}%
   \ndoc@thesf{} \secfunc{#1} \ndoc@iscalledvia{} \printSfToTsfi{#1}.\par{}}
-
 
 \newcommand{\calledenforcingsfr}[1]{\minisec{\ndoc@calledenforcingsfr}%
   \ndoc@calledenforcingsfr{} \tsfi{#1}: \printTsfiToEnfSfr{#1}}
@@ -44,7 +46,7 @@
 \newcommand{\generateSfrToTsfiTable}{
   \begin{longtable}[c]{@{}ll@{\hskip .3cm}>{\small}p{6cm}@{}}
     \toprule
-    \secitem{SFR} &  \secitem{TSFI} & Verwendung \\ \endfirsthead
+    \secitem{SFR} &  \secitem{TSFI} & \ndocpurpose \\ \endfirsthead
     \toprule \secitem{SFR} & \secitem{TSFI} & \ndoc@use{} \\ \midrule \endhead
     \multicolumn{3}{r}{\rule{0pt}{3ex}\emph{\ndoc@continuedonnextpage}} \endfoot
     \endlastfoot

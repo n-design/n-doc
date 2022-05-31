@@ -99,19 +99,19 @@ end
 
 function test_cc_core.test_sfr_to_tsfi()
    lu.assertEquals(cc_core.getSfr2Tsfi("fcs_ckm.4"), --
-		   {{label = "ls.lan.tls", purpose = "Terminate TLS connections to LAN", relationtype = "enf"},
-		      {label = "ls.wan.ipsec", purpose = "Terminate IPSEC connections to WAN", relationtype = "enf"}})
+		   {{label = "ls.lan.tls", purpose = "Terminate TLS connections to LAN", relationtype = "sup"},
+		      {label = "ls.wan.ipsec", purpose = "Terminate IPSEC connections to WAN", relationtype = "sup"}})
    lu.assertEquals(cc_core.getSfr2Tsfi("fmt_msa.3.1/sig"), {})
 end
 
 function test_cc_core.test_tsfi_to_sfr()
    lu.assertEquals(cc_core.getTsfi2Sfr("ls.wan.ipsec"), --
-		   {{label = "fcs_ckm.1", purpose = "Key negotiation for VPN", relationtype = "enf"},
-		      {label = "fcs_ckm.2/ike", purpose = "Key distribution for VPN", relationtype = "enf"},
-		      {label = "fcs_ckm.4", purpose = "Terminate IPSEC connections to WAN", relationtype = "enf"},
+		   {{label = "fcs_ckm.1", purpose = "Key negotiation for VPN", relationtype = "sup"},
+		      {label = "fcs_ckm.2/ike", purpose = "Key distribution for VPN", relationtype = "sup"},
+		      {label = "fcs_ckm.4", purpose = "Terminate IPSEC connections to WAN", relationtype = "sup"},
 		      {label = "fcs_cop.1/hash", purpose = "IPSec hash operations", relationtype = "enf"},
 		      {label = "fcs_cop.1/hmac", purpose = "IPSec HMAC operations", relationtype = "enf"},
-		      {label = "fcs_rng.1/hashdrbg", purpose = "Key negotiation for VPN", relationtype = "enf"},
+		      {label = "fcs_rng.1/hashdrbg", purpose = "Key negotiation for VPN", relationtype = "sup"},
 		      {label = "fpt_tdc.1/zert", purpose = "Validate VPN certificate", relationtype = "enf"},
 		      {label = "ftp_itc.1/vpn", purpose = "Secure IPSec tunnel", relationtype = "enf"}})
    lu.assertEquals(cc_core.getTsfi2Sfr("ls.lan.cetp"), {})

@@ -1,18 +1,18 @@
 sfr;tsfi;purpose;relationtype
-fcs_ckm.1;ls.lan.tls;Key negotiation for TLS;enf
-fcs_ckm.2/tls;ls.lan.tls;Key distribution for TLS;enf
-fcs_ckm.4;ls.lan.tls;Terminate TLS connections to LAN;enf
-fcs_ckm.1;ls.wan.ipsec;Key negotiation for VPN;enf
-fcs_ckm.2/ike;ls.wan.ipsec;Key distribution for VPN;enf
-fcs_ckm.4;ls.wan.ipsec;Terminate IPSEC connections to WAN;enf
+fcs_ckm.1;ls.lan.tls;Key negotiation for TLS;sup
+fcs_ckm.2/tls;ls.lan.tls;Key distribution for TLS;sup
+fcs_ckm.4;ls.lan.tls;Terminate TLS connections to LAN;sup
+fcs_ckm.1;ls.wan.ipsec;Key negotiation for VPN;sup
+fcs_ckm.2/ike;ls.wan.ipsec;Key distribution for VPN;sup
+fcs_ckm.4;ls.wan.ipsec;Terminate IPSEC connections to WAN;sup
 fcs_cop.1/hash;ls.wan.ipsec;IPSec hash operations;enf
 fcs_cop.1/hmac;ls.wan.ipsec;IPSec HMAC operations;enf
 fcs_cop.1/hash;ls.lan.tls;TLS hash operations;enf
 fcs_cop.1/hmac;ls.lan.tls;TLS HMAC operations;enf
 fcs_cop.1/tls.aes;ls.lan.tls;TLS connections;enf
 fcs_cop.1/tls.auth;ls.lan.tls;TLS connections;enf
-fcs_rng.1/hashdrbg;ls.lan.tls;TLS connections;enf
-fcs_rng.1/hashdrbg;ls.wan.ipsec;Key negotiation for VPN;enf
+fcs_rng.1/hashdrbg;ls.lan.tls;TLS connections;sup
+fcs_rng.1/hashdrbg;ls.wan.ipsec;Key negotiation for VPN;sup
 fdp_rip.1;no_tsfi;Not accessible via TSFI;enf
 fpt_stm.1;ls.wan.ntp;Access to time service;enf
 fpt_tdc.1/tls.zert;ls.lan.tls;Validate TLS certificate;enf
