@@ -10,8 +10,8 @@ CREATE TABLE sf ( `label` TEXT, `name` TEXT, `description` TEXT, PRIMARY KEY(`la
 CREATE TABLE sfr_sf ( `sfr` TEXT,  `sf` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`sf`) REFERENCES `sf`(`label`) );
 CREATE TABLE obj ( `label` TEXT, `name` TEXT, `description` TEXT, `PP` TEXT, PRIMARY KEY(`label`) );
 CREATE TABLE sfr_obj ( `sfr` TEXT, `obj` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`obj`) REFERENCES `obj`(`label`) );
-CREATE TABLE tsfi ( `label` TEXT, `name` TEXT, `relationtype` TEXT, PRIMARY KEY(`label`) );
-CREATE TABLE sfr_tsfi ( `sfr` TEXT,  `tsfi` TEXT, `purpose` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`tsfi`) REFERENCES `tsfi`(`label`) );
+CREATE TABLE tsfi ( `label` TEXT, `name` TEXT, PRIMARY KEY(`label`) );
+CREATE TABLE sfr_tsfi ( `sfr` TEXT,  `tsfi` TEXT, `purpose` TEXT, `relationtype` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`tsfi`) REFERENCES `tsfi`(`label`) );
 CREATE TABLE errors ( `code` TEXT, `type` TEXT, `severity` TEXT, `msg` TEXT, PRIMARY KEY(`code`) );
 CREATE TABLE testcases ( `label` TEXT, `name` TEXT, `block` TEXT, `desc` TEXT, `quelle` TEXT, PRIMARY KEY(`label`) );
 CREATE TABLE testcase_module ( `testcase` TEXT, `subsystem` TEXT, `module` TEXT, FOREIGN KEY(`testcase`) REFERENCES `testcases`(`label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) , FOREIGN KEY(`module`) REFERENCES `modules`(`label`) );

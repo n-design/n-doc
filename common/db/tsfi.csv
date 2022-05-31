@@ -1,18 +1,18 @@
-label;name;relationtype
-ls.led;LS.LED;enf
-ls.lan.ether;LS.LAN.Ether;sup
-ls.lan.httpmgmt;LS.LAN.HTTP\_MGMT;enf
-ls.lan.ip;LS.LAN.IP;sup
-ls.lan.tcp;LS.LAN.TCP;sup
-ls.lan.tls;LS.LAN.TLS;enf
-ls.lan.udp;LS.LAN.UDP;sup
-ls.lan;LS.LAN;enf
-ls.wan.dhcp;LS.WAN.DHCP;sup
-ls.wan.ether;LS.WAN.Ether;sup
-ls.wan.ip;LS.WAN.IP;sup
-ls.wan.ipsec;LS.WAN.IPSec;enf
-ls.wan.tcp;LS.WAN.TCP;sup
-ls.wan.udp;LS.WAN.UDP;sup
-ls.wan.ntp;LS.WAN.NTP;sup
-ls.wan;LS.WAN;enf
-no_tsfi;no TSFI;none
+label;name
+ls.led;LS.LED
+ls.lan.ether;LS.LAN.Ether
+ls.lan.httpmgmt;LS.LAN.HTTP\_MGMT
+ls.lan.ip;LS.LAN.IP
+ls.lan.tcp;LS.LAN.TCP
+ls.lan.tls;LS.LAN.TLS
+ls.lan.udp;LS.LAN.UDP
+ls.lan;LS.LAN
+ls.wan.dhcp;LS.WAN.DHCP
+ls.wan.ether;LS.WAN.Ether
+ls.wan.ip;LS.WAN.IP
+ls.wan.ipsec;LS.WAN.IPSec
+ls.wan.tcp;LS.WAN.TCP
+ls.wan.udp;LS.WAN.UDP
+ls.wan.ntp;LS.WAN.NTP
+ls.wan;LS.WAN
+no_tsfi;Keine TSFI
