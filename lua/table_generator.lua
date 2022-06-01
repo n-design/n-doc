@@ -187,14 +187,18 @@ function tg.generate_tsfi_for_sfr_row(sfr, tsfi)
     return table.concat(result)
 end
 
+local relationtypeformatters = {enf = [[\ndocenfabbrev]], sup = [[\ndocsupabbrev]]}
+
 function appendtsfi(tsfi, result)
     if #tsfi > 0 then
-        local formattsfi = tg.itemformatters["tsfilink"]
+       local formattsfi = tg.itemformatters["tsfilink"]
         for i, ls in pairs(tsfi) do
             if i > 1 then
                 table.insert(result, "&")
             end
             table.insert(result, formattsfi(ls.label))
+            table.insert(result, "&")
+            table.insert(result, relationtypeformatters[ls.relationtype])
             table.insert(result, "&")
             table.insert(result, ls.purpose)
             table.insert(result, ps_eol)
