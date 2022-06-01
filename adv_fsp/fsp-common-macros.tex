@@ -6,14 +6,25 @@
 
 \newcommand{\tsfipurpose}[1]{\hrefsubsubsection{#1.terms}{\ndoc@purposeandterms}}
 \newcommand{\tsfiparameters}[1]{\hrefsubsubsection{#1.params}{\ndoc@parameters}}
+\newcommand{\tsfiactions}[1]{\hrefsubsubsection{#1.actions}{\ndoc@actions}}
+\newcommand{\tsfierrormessages}[1]{\hrefsubsubsection{#1.errormessages}{\ndoc@errormessages}}
 
 % Prints mapping tables 
 \newcommand{\printSfToTsfi}[1]{\directlua{print_sf_to_tsfi_table('#1')}}
 \newcommand{\printTsfiToSf}[1]{\directlua{print_tsfi_to_sf_table('#1')}}
+\newcommand{\printTsfiToEnfSfr}[1]{\directlua{print_tsfi_to_sfr_table('#1', "enf")}}
+\newcommand{\printTsfiToSupSfr}[1]{\directlua{print_tsfi_to_sfr_table('#1', "sup")}}
+
 
 
 \newcommand{\callerinterfaces}[1]{\minisec{\ndoc@sfinterfaces}%
   \ndoc@thesf{} \secfunc{#1} \ndoc@iscalledvia{} \printSfToTsfi{#1}.\par{}}
+
+\newcommand{\calledenforcingsfr}[1]{\minisec{\ndoc@calledenforcingsfr}%
+  \ndoc@calledenforcingsfr{} \tsfi{#1}: \printTsfiToEnfSfr{#1}}
+
+\newcommand{\calledsupportingsfr}[1]{\minisec{\ndoc@calledsupportingsfr}%
+  \ndoc@calledsupportingsfr{} \tsfi{#1}: \printTsfiToSupSfr{#1}}
 
 \newcommand{\calledsf}[1]{\minisec{\ndoc@calledsf}%
   \ndoc@calledsf{} \tsfi{#1}: \printTsfiToSf{#1}}
@@ -33,9 +44,9 @@
     {\bottomrule\end{tabularx}}
 
 \newcommand{\generateSfrToTsfiTable}{
-  \begin{longtable}[c]{@{}ll@{\hskip .3cm}>{\small}p{6cm}@{}}
+  \begin{longtable}[c]{@{}lll@{\hskip .3cm}>{\small}p{6cm}@{}}
     \toprule
-    \secitem{SFR} &  \secitem{TSFI} & Verwendung \\ \endfirsthead
+    \secitem{SFR} &  \secitem{TSFI} & \ndocpurpose \\ \endfirsthead
     \toprule \secitem{SFR} & \secitem{TSFI} & \ndoc@use{} \\ \midrule \endhead
     \multicolumn{3}{r}{\rule{0pt}{3ex}\emph{\ndoc@continuedonnextpage}} \endfoot
     \endlastfoot

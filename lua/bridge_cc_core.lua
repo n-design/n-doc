@@ -97,6 +97,17 @@ function bridge_cc_core.print_tsfi_to_sf_table(key, tex)
    tex.print(result)
 end
 
+function bridge_cc_core.print_tsfi_to_sfr_table(key, relationtype, tex)
+   local reltype = relationtype or ".*"
+   local sfrs = cc_core.getTsfi2Sfr(key)
+   local sfrlist = {}
+   for _,y in pairs(sfrs) do
+      if string.find(y.relationtype, reltype) then table.insert(sfrlist, y.label) end
+   end
+   local result = tablegen.print_item_list(sfrlist, "sfr")
+   tex.print(result)
+end
+
 function bridge_cc_core.getSfr(key, tex)
    tex.sprint(cc_core.getSfr(key))
 end

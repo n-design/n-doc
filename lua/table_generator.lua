@@ -69,7 +69,7 @@ tg.itemformatters = {
 function tg.print_sfr_table_for_subsys(enfsup, sfrs)
    local result = {"\\begin{enfsfrsubsystable}"}
    table.insert(result, relationtypes[enfsup])
-   table.insert(result, "~SFR & Beschreibung\\\\\\midrule\\relax")
+   table.insert(result, [[~SFR & \ndocpurpose \\\midrule\relax]])
    if #sfrs > 0 then
       local formatsfr = tg.itemformatters["sfrnoindex"]
       for _,v in pairs(sfrs) do
@@ -187,14 +187,18 @@ function tg.generate_tsfi_for_sfr_row(sfr, tsfi)
     return table.concat(result)
 end
 
+local relationtypeformatters = {enf = [[\ndocenfabbrev]], sup = [[\ndocsupabbrev]]}
+
 function appendtsfi(tsfi, result)
     if #tsfi > 0 then
-        local formattsfi = tg.itemformatters["tsfilink"]
+       local formattsfi = tg.itemformatters["tsfilink"]
         for i, ls in pairs(tsfi) do
             if i > 1 then
                 table.insert(result, "&")
             end
             table.insert(result, formattsfi(ls.label))
+            table.insert(result, "&")
+            table.insert(result, relationtypeformatters[ls.relationtype])
             table.insert(result, "&")
             table.insert(result, ls.purpose)
             table.insert(result, ps_eol)

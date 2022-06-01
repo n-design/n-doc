@@ -32,8 +32,8 @@ cc_core.table_definitions = {
    [[CREATE TABLE sfr_sf ( `sfr` TEXT,  `sf` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`sf`) REFERENCES `sf`(`label`))]],
    [[CREATE TABLE obj ( `label` TEXT, `name` TEXT, `description` TEXT, `PP` TEXT, PRIMARY KEY(`label`))]],
    [[CREATE TABLE sfr_obj ( `sfr` TEXT, `obj` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`obj`) REFERENCES `obj`(`label`))]],
-   [[CREATE TABLE tsfi ( `label` TEXT, `name` TEXT, `relationtype` TEXT, PRIMARY KEY(`label`))]],
-   [[CREATE TABLE sfr_tsfi ( `sfr` TEXT,  `tsfi` TEXT, `purpose` TEXT,  FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`tsfi`) REFERENCES `tsfi`(`label`))]],
+   [[CREATE TABLE tsfi ( `label` TEXT, `name` TEXT, PRIMARY KEY(`label`))]],
+   [[CREATE TABLE sfr_tsfi ( `sfr` TEXT,  `tsfi` TEXT, `purpose` TEXT, `relationtype` TEXT, FOREIGN KEY(`sfr`) REFERENCES `sfr`(`label`), FOREIGN KEY(`tsfi`) REFERENCES `tsfi`(`label`))]],
    [[CREATE TABLE errors ( `code` TEXT, `type` TEXT, `severity` TEXT, `msg` TEXT, PRIMARY KEY(`code`))]],
    [[CREATE TABLE testcases ( `label` TEXT, `name` TEXT, `block` TEXT, `desc` TEXT, `quelle` TEXT, PRIMARY KEY(`label`))]],
    [[CREATE TABLE testcase_module ( `testcase` TEXT, `subsystem` TEXT, `module` TEXT, FOREIGN KEY(`testcase`) REFERENCES `testcases`(`label`), FOREIGN KEY(`subsystem`) REFERENCES `subsystems`(`label`) , FOREIGN KEY(`module`) REFERENCES `modules`(`label`))]],
@@ -68,8 +68,8 @@ cc_core.populate_info = {
    {st=[[INSERT INTO sfr_sf VALUES (:sfr, :sf)]], csv = "sfr_sf.csv"},
    {st=[[INSERT INTO obj VALUES (:label, :name, :description, :PP)]], csv = "obj.csv"},
    {st=[[INSERT INTO sfr_obj VALUES (:sfr, :obj)]], csv = "sfr_obj.csv"},
-   {st=[[INSERT INTO tsfi VALUES (:label, :name, :relationtype)]], csv = "tsfi.csv"},
-   {st=[[INSERT INTO sfr_tsfi VALUES (:sfr, :tsfi, :purpose)]], csv = "sfr_tsfi.csv"},
+   {st=[[INSERT INTO tsfi VALUES (:label, :name)]], csv = "tsfi.csv"},
+   {st=[[INSERT INTO sfr_tsfi VALUES (:sfr, :tsfi, :purpose, :relationtype)]], csv = "sfr_tsfi.csv"},
    {st=[[INSERT INTO errors VALUES (:code, :type, :severity, :msg)]], csv = "errors.csv"},
    {st=[[INSERT INTO testcases VALUES (:label, :name, :block, :desc, :quelle)]], csv = "testcases.csv"},
    {st=[[INSERT INTO testcase_module VALUES (:testcase, :subsystem, :module)]], csv = "testcase_module.csv"},
@@ -156,7 +156,7 @@ where bundle=:bundle
 ]], mapper = cc_core.mod_mapper},
 
     {name="tsfi2sfr", st=[[
-select distinct sfr_tsfi.sfr as label, purpose as purpose from sfr_tsfi
+select distinct sfr_tsfi.sfr as label, purpose as purpose, relationtype from sfr_tsfi
   where sfr_tsfi.tsfi=:tsfi
 ]], mapper = cc_core.verbatim_mapper},
 
@@ -173,7 +173,7 @@ select distinct sf as label from sfr_tsfi
 ]], resultitem = "label"},
 
     {name="sfr2tsfi", st=[[
-select distinct tsfi as label, purpose as purpose from sfr_tsfi
+select distinct tsfi as label, purpose as purpose, relationtype from sfr_tsfi
   where sfr = :sfr
 ]], mapper = cc_core.verbatim_mapper},
 

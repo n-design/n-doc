@@ -91,10 +91,19 @@ This interface servers as the \emph{data link layer} to the ethernet network.
 
 \calledsf{ls.lan.ether}
 
+\calledenforcingsfr{ls.lan.ether}
+
+\calledsupportingsfr{ls.lan.ether}
+
 \tsfiparameters{tsfi.ls.lan.ether}
 
 This interface implements the ethernet protocol as specified in
 \autocite{IEEE802.3}.
+
+\tsfiactions{tsfi.ls.lan.ether}
+
+\tsfierrormessages{tsfi.ls.lan.ether}
+
 
 \hrefsubsection{tsfi.ls.lan.ip}{\tsfisectionname{ls.lan.ip}}
 
@@ -105,11 +114,20 @@ TOE supports IPv4. Additionally, the TOE supports ICMP (which is part of IP).
 
 \calledsf{ls.lan.ip}
 
+\calledenforcingsfr{ls.lan.ip}
+
+\calledsupportingsfr{ls.lan.ip}
+
 \tsfiparameters{tsfi.ls.lan.ip}
 
 The implementation of IPv4 fulfills the requirements from \rfc[c]{791},
 \rfc[c]{1812} and the update in \rfc[c]{2644}. ICMP is specified in
 \rfc[c]{792}. The Linux kernel provides the protocol implementation.
+
+\tsfiactions{tsfi.ls.lan.ip}
+
+\tsfierrormessages{tsfi.ls.lan.ip}
+
 
 \hrefsubsection{tsfi.ls.lan.tcp}{\tsfisectionname{ls.lan.tcp}}
 
@@ -118,12 +136,21 @@ The implementation of IPv4 fulfills the requirements from \rfc[c]{791},
 This interface implements the \emph{transport layer}. The TOE implements the
 Transmission Control Protocol.
 
+\calledenforcingsfr{ls.lan.tcp}
+
+\calledsupportingsfr{ls.lan.tcp}
+
 \calledsf{ls.lan.tcp}
 
 \tsfiparameters{tsfi.ls.lan.tcp}
 
 The implementation of TCP fulfills the requirements from \rfc[c]{793}. The Linux
 kernel provides the protocol implementation.
+
+\tsfiactions{tsfi.ls.lan.tcp}
+
+\tsfierrormessages{tsfi.ls.lan.tcp}
+
 
 \hrefsubsection{tsfi.ls.lan.udp}{\tsfisectionname{ls.lan.udp}}
 
@@ -132,12 +159,20 @@ kernel provides the protocol implementation.
 This interface implements the \emph{transport layer}. The TOE implements the
 User Datagram Protocol (UDP).
 
+\calledenforcingsfr{ls.lan.udp}
+
+\calledsupportingsfr{ls.lan.udp}
+
 \calledsf{ls.lan.udp}
 
 \tsfiparameters{tsfi.ls.lan.udp}
 
 The implementation of UDP fulfills the requirements from \rfc[c]{768}. The Linux
 kernel provides the protocol implementation.
+
+\tsfiactions{tsfi.ls.lan.udp}
+
+\tsfierrormessages{tsfi.ls.lan.udp}
 
 \hrefsubsection{tsfi.ls.lan.tls}{\tsfisectionname{ls.lan.tls}}
 
@@ -147,6 +182,10 @@ kernel provides the protocol implementation.
 LAN. TLS provides confidentiality and integrity to the connections. An overview
 of the TLS connections of the TOE in listed in \tableref{tab:tlsconnections}.
 
+\calledenforcingsfr{ls.lan.tls}
+
+\calledsupportingsfr{ls.lan.tls}
+
 \calledsf{ls.lan.tls}
 
 \tsfiparameters{tsfi.ls.lan.tls}
@@ -154,6 +193,10 @@ of the TLS connections of the TOE in listed in \tableref{tab:tlsconnections}.
 The implementation of TLS fulfills the requirements from \rfc[c]{5246}. The
 description of the TLS implementation and all TLS connections of the TOE are
 documented in \sectref{sf.tls}.
+
+\tsfiactions{tsfi.ls.lan.tls}
+
+\tsfierrormessages{tsfi.ls.lan.tls}
 
 \hrefsubsection{tsfi.ls.lan.httpmgmt}{\tsfisectionname{ls.lan.httpmgmt}}
 
@@ -164,6 +207,10 @@ application. Confguration data is transported in JSON notation. The protocol is
 defined as a REST API. Measures are taken to prevent XSS and CSRF attacks. This
 is described in detail in the Security Architecture \autocite{adv_arc}.
 
+\calledenforcingsfr{ls.lan.httpmgmt}
+
+\calledsupportingsfr{ls.lan.httpmgmt}
+
 \calledsf{ls.lan.httpmgmt}
 
 \tsfiparameters{tsfi.ls.lan.httpmgmt}
@@ -171,6 +218,10 @@ is described in detail in the Security Architecture \autocite{adv_arc}.
 The HTTP server implements \rfc[c]{2616}. The parameters of the REST API are
 documented in the guidance documentation \autocite{agd_adm}. JSON is specified
 in \rfc[c]{7159}.
+
+\tsfiactions{tsfi.ls.lan.httpmgmt}
+
+\tsfierrormessages{tsfi.ls.lan.httpmgmt}
 
 
 % !TEX root = "../adv_fsp"
