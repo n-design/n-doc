@@ -69,7 +69,7 @@ tg.itemformatters = {
 function tg.print_sfr_table_for_subsys(enfsup, sfrs)
    local result = {"\\begin{enfsfrsubsystable}"}
    table.insert(result, relationtypes[enfsup])
-   table.insert(result, "~SFR & Beschreibung\\\\\\midrule\\relax")
+   table.insert(result, [[~SFR & \ndocpurpose \\\midrule\relax]])
    if #sfrs > 0 then
       local formatsfr = tg.itemformatters["sfrnoindex"]
       for _,v in pairs(sfrs) do
