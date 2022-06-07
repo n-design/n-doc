@@ -44,10 +44,11 @@
     {\bottomrule\end{tabularx}}
 
 \newcommand{\generateSfrToTsfiTable}{
-  \begin{longtable}[c]{@{}lll@{\hskip .3cm}>{\small}p{6cm}@{}}
+  \begin{longtable}[c]{@{}llc@{\hskip .3cm}>{\small}p{6cm}@{}}
     \toprule
-    \secitem{SFR} &  \secitem{TSFI} & \ndocpurpose \\ \endfirsthead
-    \toprule \secitem{SFR} & \secitem{TSFI} & \ndoc@use{} \\ \midrule \endhead
+    \secitem{SFR} & \secitem{TSFI} & \ndoc@relation{} & \ndoc@use{} \\ \endfirsthead
+    \toprule
+    \secitem{SFR} & \secitem{TSFI} & \ndoc@relation{} & \ndoc@use{} \\ \midrule \endhead
     \multicolumn{3}{r}{\rule{0pt}{3ex}\emph{\ndoc@continuedonnextpage}} \endfoot
     \endlastfoot
     \printTsfiForSfrRows{}
