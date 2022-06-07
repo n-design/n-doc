@@ -8,8 +8,8 @@ English. Not all files have been translated and there might be some
 organizational errors.
 
 This repository contains the developer documentation for the CC evaluation of
-the Ingenico NextGen e-Health Card Terminal. The developer documentation
-consists sample documents:
+the Mauve VPN Client, a fictional TOE serving as a template for the
+n-doc process. The developer documentation consists sample documents:
 
 * Security Target (ASE)
 
