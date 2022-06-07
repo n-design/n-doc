@@ -8,8 +8,8 @@ English. Not all files have been translated and there might be some
 organizational errors.
 
 This repository contains the developer documentation for the CC evaluation of
-the Ingenico NextGen e-Health Card Terminal. The developer documentation
-consists sample documents:
+the Mauve VPN Client, a fictional TOE serving as a template for the
+n-doc process. The developer documentation consists sample documents:
 
 * Security Target (ASE)
 
@@ -28,6 +28,11 @@ consists sample documents:
 Those documents provide an outline that can be used when adapting the sample
 documents for your own purposes. Especially ASE, ADV_FSP and ADV_TDS contain
 enough text to show the interaction between documents and database.
+
+In 2021 the link:https://www.ccusersforum.org[Common Criteria Users Forum] has
+invited us to present n-doc at the 20th CCUF Workshop
+(see link:https://github.com/n-design/n-doc/files/8854636/CCUF_presentation_n-doc_AlexanderKrumeich.pdf[presentation
+slides] and link:https://www.youtube.com/watch?v=ltZikycGoAs[recording]).
 
 
 == Compiling the documents
