@@ -45,6 +45,11 @@ examples). It is not necessary to provide a version number. The version number
 is calculated from the database file `common/db/releases.csv`. The release
 script updates this file.
 
+TIP: The script `config/n-doc_bash_completions.sh` defines bash completions for
+the `release_documents.sh` script. Hitting kbd:[Tab] will show and complete all
+available options and document types. Add `source
+/path/to/n-doc/config/n-doc_bash_completions.sh` to your `~/.bashrc` file.
+
 The script verifies the preconditions. If they are not fulfilled, the script
 aborts. If the preconditions are met, the script calculates the version number
 for each document and prints all actions to the console. The user must confirm
