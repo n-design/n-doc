@@ -105,9 +105,7 @@
 \newcommand{\formatsecfunc}[1]{{\secitemformat{#1}}}
 
 % Creates a headline based on a key in sf.csv
-\newcommand{\secfuncheadline}[1]{\texorpdfstring%
-  {\secfunctext{#1}\hspace{1em}(\secitemfont{\secfuncplain{#1}})}%
-  {\secfunctext{#1} (\secfuncplain{#1})}}
+\newcommand{\secfuncheadline}[1]{\texorpdfstring{\secfunctext{#1}\hspace{1em}(\secitemfont{\secfuncplain{#1}})}{\nohyphen{\secfunctext{#1}} (\nohyphen{\secfuncplain{#1}})}}
 
 % Macros for referencing TDS subsystems, modules and interfaces.  The obligatory
 % parameter denotes the key defined in
