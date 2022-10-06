@@ -1,5 +1,8 @@
-# Liste der Verzeichnisse für Dokumente
-# Neue Dokumente nur hier hinzufügen
+# List of directories for documents
+# Add new documents here
+
+# Each directory contains the source data for creating
+# a single artefact, such as a PDF file or the DB file
 
 ARC_DIR := adv_arc
 ST_DIR  := ase
@@ -18,28 +21,35 @@ MWE_ST_DIR   := mwe_st
 README       := common/README.md
 LUA_DIR  := lua
 
+# Directories with production PDF files
 PDF_DIRS := $(ATE_DIR) $(TDS_DIR) $(ST_DIR) $(FSP_DIR) $(ALC_DIR) $(ARC_DIR) $(REF_DIR)
+
+# Directories with minimal working examples / test documents (PDF)
 MWE_DIRS := $(MWE_TDS_DIR) $(MWE_FSP_DIR) $(MWE_ARC_DIR) $(MWE_ST_DIR) $(MWE_ATE_DIR)
 
-# Verzeichnis, in dem die ausgelieferten PDFs liegen
-DELIVERY_DIR = deliverables
-
-# Namen der erzeugten PDF-Dokumente in ihren Verzeichnissen
+# Names of the PDF documents within their respective directories
 DELIVERABLES = $(foreach dir,$(PDF_DIRS),$(dir)/$(dir).pdf)
 
+# All directories with artefacts relevant for delivery
 ALL_DIRS = $(LUA_DIR) $(PDF_DIRS) $(DB_DIR)
 
-# Kommando zum Erstellen der PDFs
+# Directory containing the deliverables: PDFs, DB-File
+# Ship the content of this directory to the evaluator
+DELIVERY_DIR = deliverables
+
+# Command for creating the artefacts
 MAKE_CMD = $(MAKE) -C $@
 
-# Notwendige git Hooks und Metadaten
+# Required git Hooks and metadata
 HOOKS = post-commit post-checkout post-merge
 GIT_HOOK_DIR = .git/hooks/
 GIT_HOOKS = $(addprefix $(GIT_HOOK_DIR), $(HOOKS))
 GIT_INFO = .git/gitHeadInfo.gin
 
+# Convenience goals to be called at the prompt
 .PHONY: st fsp tds agd clean all delivery subdirs db mwe cleanmwe wsdpdf hooks info $(MWE_DIRS) $(ALL_DIRS)
 
+# Make them all
 all: $(ALL_DIRS)
 
 #alc: $(ALC_DIR) # no need for this

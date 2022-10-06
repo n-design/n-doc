@@ -1,7 +1,7 @@
 label;name;description
-sf.networkservices;SF.Net\-work\-Ser\-vices;Netzbasierte Sicherheitsfunktionen
+sf.networkservices;SF.Net\-work\-Ser\-vices;Network Services 
 sf.administration;SF.Ad\-mi\-ni\-stra\-tion;Administration
-sf.cryptographicservices;SF.Cryp\-to\-gra\-phic\-Ser\-vices;Kryptografische Dienste
-sf.tls;SF.TLS;TLS-Service
-sf.selfprotection;SF.Self\-Pro\-tec\-tion;Selbstschutz
-sf.vpn;SF.VPN;VPN-Client
+sf.cryptographicservices;SF.Cryp\-to\-gra\-phic\-Ser\-vices;Cryptographic Services
+sf.tls;SF.TLS;TLS Service
+sf.selfprotection;SF.Self\-Pro\-tec\-tion;Self Protection
+sf.vpn;SF.VPN;VPN Client

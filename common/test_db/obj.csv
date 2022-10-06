@@ -1,10 +1,10 @@
 label;name;description;PP
-o.admin;O.Admin;Administration nur nach Autorisierung und über sicheren Kanal;4.1.1
-o.tlscrypto;O.TLS\_Krypto;TLS-Kanäle mit sicheren kryptographische Algorithmen;4.1.1
-o.protection;O.Schutz;Selbstschutz, Selbsttest und Schutz von Benutzerdaten;4.1.1
-o.timeservice;O.Zeitdienst;Nutzung eines sicheren Zeitdienstes;4.1.1
-o.vpn_auth;O.VPN\_Auth;Gegenseitige Authentisierung im VPN-Tunnel;4.1.2
-o.vpn_integrity;O.VPN\_Integrität;Integritätsschutz von Daten im VPN-Tunnel;4.1.2
-o.vpn_conf;O.VPN\_Vertraul;Schutz der Vertraulichkeit von Daten im VPN-Tunnel;4.1.2
-o.cert_check;O.Zert\_Prüf;Gültigkeitsprüfung für VPN-Zertifikate;4.1.2
-oe.realtimeclock;OE.Echtzeituhr;Bereitstellung einer Echtzeituhr;4.4
+o.admin;O.Admin;Authenticated administration via secure channel;4.1.1
+o.tlscrypto;O.TLS\_Crypto;TLS-channels with secure cyptographic algorithms;4.1.1
+o.protection;O.Protection;Self-protection, self-test and protection of user data;4.1.1
+o.timeservice;O.Time\_Service;Using a secure time service;4.1.1
+o.vpn_auth;O.VPN\_Auth;Mutual authentication in the VPN tunnel;4.1.2
+o.vpn_integrity;O.VPN\_Integrity;Integrity of data in the VPN tunnel;4.1.2
+o.vpn_conf;O.VPN\_Conf;Confidentiality of data in the VPN tunnel;4.1.2
+o.cert_check;O.Cert\_Check;Validity check for certificates;4.1.2
+oe.realtimeclock;OE.Real\_Time\_Clock;Providing a real time clock;4.4

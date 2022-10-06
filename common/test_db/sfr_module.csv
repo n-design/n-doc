@@ -1,20 +1,21 @@
 sfr;relationtype;subsystem;module;purpose
-fcs_ckm.1;enf;cryptsystem;keymgmt;Key generation for VPN and TLS
-fcs_ckm.2/ike;enf;vpn;core;Connection establishment, key distribution für VPN
-fcs_ckm.2/tls;enf;tls;core;Connection establishment, key distribution für TLS
-fcs_ckm.4;enf;cryptsystem;keymgmt;Key destruction VPN und TLS
-fcs_cop.1/hash;enf;cryptsystem;algorithms;Provide hash algorithms
-fcs_cop.1/hmac;enf;cryptsystem;algorithms;Provide HMAC algorithms
+fcs_ckm.1;enf;cryptsystem;keymgmt;Key creation for VPN and TLS
+fcs_ckm.2/ike;enf;vpn;core;Connection establishment, key distribution for VPN
+fcs_ckm.2/tls;enf;tls;core;Connection establishment, key distribution for TLS
+fcs_ckm.4;enf;cryptsystem;keymgmt;Key destruction for VPN and TLS
+fcs_cop.1/hash;enf;cryptsystem;algorithms;Provide Hash-Algorithms
+fcs_cop.1/hmac;enf;cryptsystem;algorithms;Provide HMAC-Algorithms
 fcs_cop.1/tls.aes;enf;tls;core;Provide AES for TLS
 fcs_cop.1/tls.auth;enf;tls;core;Authentication of TLS peer
-fcs_rng.1/hashdrbg;enf;cryptsystem;rng;Create random numbers
-fdp_rip.1;enf;selfprotect;memory;Speicher bereinigen
+fcs_rng.1/hashdrbg;enf;cryptsystem;rng;Random number creation
+fdp_rip.1;enf;selfprotect;memory;Memory cleanup
 fpt_tdc.1/tls.zert;enf;tls;cert;Certificate validation
 fpt_tdc.1/zert;enf;vpn;cert;Certificate validation
-fpt_stm.1;enf;ntpclient;core;Time service
-fpt_tst.1;enf;selfprotect;selftest;Run self-test
+fpt_stm.1;enf;ntpclient;core;Tiem service
+fpt_tst.1;enf;selfprotect;selftest;Run self test
 ftp_itc.1/tls;enf;tls;core;Establish/terminate TLS connections
 ftp_itc.1/vpn;enf;vpn;core;Establish/terminate VPN connections
 ftp_itc.1/vpn;sup;adminsystem;mgmt;Manage VPN connections
 ftp_trp.1/admin;enf;adminsystem;webserver;Provide management application
 ftp_trp.1/admin;sup;vpn;core;Establish/terminate VPN connections
+fpt_tst.1;sup;selfprotect;selftest;Run self test

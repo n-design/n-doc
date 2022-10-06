@@ -1,24 +1,24 @@
 label;name;block;desc;quelle
-vpn1;VPN_1;6.3.3.4;VPN Aufbau -- Gutfall;mauve
-vpn2;VPN_2;6.3.3.4;VPN Aufbau -- Schlechtfall;mauve
-vpn3;VPN_3;6.3.3.4;VPN Zertifikat gültig;mauve
-vpn4;VPN_4;6.3.3.4;VPN Zertifikat ungültig;mauve
-vpn5;VPN_5;6.3.3.4;VPN Zertifikat abgelaufen;mauve
-ntp1;NTP_1;6.3.3.2;Zeitsynchro gelingt;mauve
-ntp2;NTP_2;6.3.3.2;Zeitsynchro schlägt fehl;mauve
-selfprotect1;Selfprotect_1;6.3.3.x;Speicher überschreiben;mauve
-selfprotect2;Selfprotect_2;6.3.3.x;Selbsttest aufrufen;mauve
-adminsystem1;Adminsystem_1;6.3.3.x;Server antwortet;mauve
+vpn1;VPN_1;6.3.3.4;Establish VPN conn positive test;mauve
+vpn2;VPN_2;6.3.3.4;Establish VPN conn negative test;mauve
+vpn3;VPN_3;6.3.3.4;VPN certificate valid;mauve
+vpn4;VPN_4;6.3.3.4;VPN certificate invalid;mauve
+vpn5;VPN_5;6.3.3.4;VPN certificate expired;mauve
+ntp1;NTP_1;6.3.3.2;Tiem synch works;mauve
+ntp2;NTP_2;6.3.3.2;Tiem synch fails;mauve
+selfprotect1;Selfprotect_1;6.3.3.x;Overwrite memory;mauve
+selfprotect2;Selfprotect_2;6.3.3.x;Run self test;mauve
+adminsystem1;Adminsystem_1;6.3.3.x;Server responds;mauve
 adminsystem2;Adminsystem_2;6.3.3.x;Server down;mauve
-adminsystem3;Adminsystem_3;6.3.3.x;Server Zertifikat abgelaufen;mauve
-cryptsystem1;Cryptsystem_1;6.3.3.x;Hash berechnen SHA-256;mauve
-cryptsystem2;Cryptsystem_2;6.3.3.x;Hash berechnen SHA-512;mauve
-cryptsystem3;Cryptsystem_3;6.3.3.x;HMAC berechnen;mauve
-cryptsystem4;Cryptsystem_4;6.3.3.x;Key erzeugen;mauve
-cryptsystem5;Cryptsystem_5;6.3.3.x;Key zerstören;mauve
-cryptsystem6;Cryptsystem_6;6.3.3.x;1000 Zufallszahlen erzeugen;mauve
-tls1;TLS_1;6.3.3.4;TLS Aufbau -- Gutfall;mauve
-tls2;TLS_2;6.3.3.4;TLS Aufbau -- Schlechtfall;mauve
-tls3;TLS_3;6.3.3.4;TLS Zertifikat gültig;mauve
-tls4;TLS_4;6.3.3.4;TLS Zertifikat ungültig;mauve
-tls5;TLS_5;6.3.3.4;TLS Zertifikat abgelaufen;mauve
+adminsystem3;Adminsystem_3;6.3.3.x;Server certificate expired;mauve
+cryptsystem1;Cryptsystem_1;6.3.3.x;Calculate Hash SHA-256;mauve
+cryptsystem2;Cryptsystem_2;6.3.3.x;Calculate Hash SHA-512;mauve
+cryptsystem3;Cryptsystem_3;6.3.3.x;Calculate HMAC;mauve
+cryptsystem4;Cryptsystem_4;6.3.3.x;Create Key;mauve
+cryptsystem5;Cryptsystem_5;6.3.3.x;Destroy Key;mauve
+cryptsystem6;Cryptsystem_6;6.3.3.x;Create 1,000,000 random numbers;mauve
+tls1;TLS_1;6.3.3.4;Establish TLS conn positive test;mauve
+tls2;TLS_2;6.3.3.4;Establish TLS conn negative test;mauve
+tls3;TLS_3;6.3.3.4;TLS certificate valid;mauve
+tls4;TLS_4;6.3.3.4;TLS certificate invalid;mauve
+tls5;TLS_5;6.3.3.4;TLS certificate expired;mauve
