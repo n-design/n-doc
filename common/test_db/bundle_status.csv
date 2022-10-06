@@ -1,4 +1,4 @@
 label;name
-0;Eigenentwicklung
-1;Third Party unverändert
-2;Third Party angepasst
+0;Developer Code
+1;Third Party unchanged
+2;Third Party modified

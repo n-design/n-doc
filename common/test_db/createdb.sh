@@ -1,23 +1,23 @@
 #!/bin/bash
 
-# Skript zum Erstellen einer persistierten Datenbank
-# aus den CSV-Dateien.
+# Skript for creating a persisted database file
+# from the CSV files.
 #
-# Wird verwendet, um eine aktuelle DB-Datei zu
-# erzeugen, die mit dem SQLite Browser betrachtet
-# werden kann.
+# Creates a DB-file suitable for viewing with SQLite
+# Browser
 #
-# Diese Datei bitte nicht einchecken, da sie immer
-# aus aktuellen Quellen erzeugt werden sollte
+# Do not commit the resulting DB-file to the repository.
+# This file should always be created fresh from current data
 
 
-
+# Change the file name to reflect your organization/product
 DB_FILE=${1:-mauvecorp_vpn_client.db}
+
 TMP_PREFIX="_tmp"
 
 rm -f "$DB_FILE"
 for i in *.csv; do
-  # Herausschneiden der ersten Zeile mit den Header-Feldern
+  # Remove header line with field names
   tail -n +2 "$i" > "${TMP_PREFIX}_${i}"
 done
 sqlite3 << EOF

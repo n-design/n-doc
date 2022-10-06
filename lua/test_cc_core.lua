@@ -42,15 +42,15 @@ end
 
 function test_cc_core.test_objectives()
    obj = "o.tlscrypto"
-   lu.assertEquals(cc_core.getObjective(obj), [[O.TLS\_Krypto]])
-   lu.assertEquals(cc_core.getObjectiveText(obj), "TLS-Kanäle mit sicheren kryptographische Algorithmen")
+   lu.assertEquals(cc_core.getObjective(obj), [[O.TLS\_Crypto]])
+   lu.assertEquals(cc_core.getObjectiveText(obj), "TLS-channels with secure cyptographic algorithms")
    lu.assertEquals(cc_core.getObjectiveSource(obj), "4.1.1")
 end
 
 function test_cc_core.test_subjobj()
    subject = "s_admin"
    lu.assertEquals(cc_core.getSubjobj(subject), [[S\_Administrator]])
-   lu.assertEquals(cc_core.getSubjobjText(subject), "Subjekt, das für einen Administrator handelt.")
+   lu.assertEquals(cc_core.getSubjobjText(subject), "Subject that acts for an administrator.")
 end
 
 function test_cc_core.test_subjobj_to_sfr()
@@ -78,13 +78,13 @@ end
 
 function test_cc_core.test_secfunc()
    lu.assertEquals(cc_core.getSecfunc("sf.cryptographicservices"), [[SF.Cryp\-to\-gra\-phic\-Ser\-vices]])
-   lu.assertEquals(cc_core.getSecfuncText("sf.cryptographicservices"), "Kryptografische Dienste")
+   lu.assertEquals(cc_core.getSecfuncText("sf.cryptographicservices"), "Cryptographic Services")
    lu.assertEquals(cc_core.getSecfunc("sf.xxx"), "\\textcolor{red}{sf.xxx is undefined}")
 end
 
 function test_cc_core.test_tsfi()
-   lu.assertEquals(cc_core.getTsfi("ls.lan.tls"), "LS.LAN.TLS")
-   lu.assertEquals(cc_core.getTsfi("ls.wan.ipsec"), "LS.WAN.IPSec")
+   lu.assertEquals(cc_core.getTsfi("ls.lan.tls"), "LI.LAN.TLS")
+   lu.assertEquals(cc_core.getTsfi("ls.wan.ipsec"), "LI.WAN.IPSec")
 end
 
 function test_cc_core.test_sf_to_tsfi()
