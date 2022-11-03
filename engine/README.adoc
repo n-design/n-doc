@@ -1,72 +1,32 @@
-= n-doc
-TeXLive, SQLite, Lua, PlantUML und Werkzeuge für CC-Dokumentation
+= n-doc Image: TeXLive, SQLite, Lua, PlantUML and tools for CC documents
 
-== Überblick
+== Overview
 
-Die Dateien in diesem Repository bilden die Grundlage für Docker Images zum
-Erstellen der CC-Dokumentation mit
-link:https://github.com/n-design/n-doc_template[n-doc_template]. Das Image
-paketiert eine reduzierte Fassung von TeXLive, der Datenbank SQLite, Lua und der
-Bibliotheken für die Verwendung von SQLite in Lua. 
+The files in this directory are used to create the Docker image for n-doc. The
+image contains a custom installation of link:https://www.tug.org/texlive/[TeX
+Live], the link:https://www.sqlite.org/[SQLite] database, and the Lua libraries
+required to build documents with n-doc.
 
-== Aufruf
+== Creating the image
 
-=== Erstellen des Images
-
-Das n-doc Image wird über das Ziel `n-doc` des Makefiles erstellt. Dabei wird
-das Image mit dem Label `ndesign/n-doc:latest` versehen:
+The n-doc image is created with the `n-doc` goal of the `Makefile`. The
+resulting image will be tagged as `ndesign/n-doc:latest`:
 
 ----
 make n-doc
 ----
 
-Zusätzlich kann -- auf `ndesign/n-doc` basierend -- eine zweite Variante gebaut
-werden, die link:https://plantuml.com/[PlantUML] bereitstellt. PlantUML steht unter LGPL Lizenz. Es ist ca. 200 MB größer als die einfache Variante. Diese Variante trägt das Tag `ndesign/n-doc:latest-plantuml`:
+Additionally, there is a second variant of the n-doc image that contains
+link:https://plantuml.com/[PlantUML]. Beware that the resulting images is
+significantly bigger than the plain image. This variant is tagged as
+`ndesign/n-doc:latest-plantuml`:
 
 ----
 make n-doc-plantuml
 ----
 
-Das Makefile sieht eine Umgebungsvariable vor, um den kompletten Build ohne
-gecachte Zwischen-Images zu erzwingen:
+Set the environment variable `CACHE_OPTION` to prevent using cached intermediate images. 
 
 ----
 CACHE_OPTION=--no-cache make image
 ----
-
-Zum Publizieren der Images wird das Ziel `publish`
-verwendet:
-
-----
-make publish
-----
-
-== Wartung & Pflege
-
-=== Aufbau des `Dockerfiles`
-
-Zentrales Element des Repositorys ist das `Dockerfile`. Es wird ein zweistufiges
-Verfahren verwendet, ohne dass ein Zwischenimage persistiert wird. Das erste
-Image erstellt die notwendigen Lua-Bibliotheken für den Zugriff auf SQLite und
-die Unit-Tests. Das zweite Image kopiert die Bibliotheken an geeignete Stellen
-im Dateisystem. Außerdem werden im zweiten Image alle benötigten Tools
-installiert. Die Reihenfolge ist so aufgebaut, dass die stabilsten Komponenten
-zuerst installiert werden, um vom Caching zu profitieren. Dies ist auch der
-Grund, weswegen die Installation der zusätzlichen Pakete von TeXLive in
-unterschiedliche Schritte aufgeteilt ist: Die schwergewichtigen Pakete wie
-Schriftarten werden zuerst installiert. Danach folgen die "kleinen" Pakete. So
-muss, wenn ein einzelnes Paket nachinstalliert wird, nur ein schnell zu
-erstellender Layer mit kleinen Downloads ersetzt werden.
-
-=== Wartungsarbeiten
-
-* Wenn ein neues TeXLive-Paket verwendet werden soll, muss es in einen der
-  `tlmgr install` Aufrufe aufgenommen werden.
-
-* Einmal jährlich (ca. Mai) wird das Jahresrelease von TeXLive
-  herausgegeben. TeXLive verwendet rollierende Releases, sodass Releases mit
-  geringem Aufwand umzusetzen sind. Im vorliegenden Dockerfile wird die
-  Distribution ohne die Jahreszahl in den Pfadnamen installiert. Lediglich wenn
-  es z.B. bei Lua einen Versionswechsel gibt (Wie beim Übergang von 2018 auf
-  2019, bei dem LuaTeX auf Lua 5.3 angehoben wurde), müssen ggf. die
-  eingebundenen Bibliotheken angepasst werden.

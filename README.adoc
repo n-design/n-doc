@@ -3,31 +3,26 @@
 
 = n-doc: Creating CC Documentation with LaTeX
 
-NOTE: This project is currently reorganized and all content is translated to
-English. Not all files have been translated and there might be some
-organizational errors.
+n-doc is a platform for creating Common Criteria documentation. This repository
+is the official distribution of n-doc. It contains sample documents, LaTeX
+macros, Lua programs and everything else you need to write your own developer
+documentation. The documents here are the developer documentation for "Mauve VPN
+Client", a fictional TOE serving as a template for the n-doc process. Follow the
+links to see the resulting PDFs!
 
-This repository contains the developer documentation for the CC evaluation of
-the Mauve VPN Client, a fictional TOE serving as a template for the
-n-doc process. The developer documentation consists sample documents:
-
-* Security Target (ASE)
-
-* Functional Specification (ADV_FSP)
-
-* TOE Design Specification (ADV_TDS)
-
-* Test Coverage (ATE_COV)
-
-* Security Architecture (ADV_ARC)
-
-* Life Cycle (ALC)
-
-* Reference List (Reflist)
+* link:https://mauvecorp.com/assets/ase.pdf[Security Target] (ASE)
+* link:https://mauvecorp.com/assets/adv_fsp.pdf[Functional Specification] (ADV_FSP)
+* link:https://mauvecorp.com/assets/adv_tds.pdf[TOE Design Specification] (ADV_TDS)
+* link:https://mauvecorp.com/assets/ate_cov.pdf[Test Coverage] (ATE_COV)
+* link:https://mauvecorp.com/assets/adv_arc.pdf[Security Architecture] (ADV_ARC)
+* link:https://mauvecorp.com/assets/alc.pdf[Life Cycle] (ALC)
+* link:https://mauvecorp.com/assets/reflist.pdf[Reference List] (Reflist)
+* link:https://mauvecorp.com/assets/mauvecorp_vpn_client.db[TOE database file]
 
 Those documents provide an outline that can be used when adapting the sample
 documents for your own purposes. Especially ASE, ADV_FSP and ADV_TDS contain
-enough text to show the interaction between documents and database.
+enough text to show the interaction between documents and database. Clone the
+repository, build the documents and start changing them for your own TOE!
 
 In 2021 the link:https://www.ccusersforum.org[Common Criteria Users Forum] has
 invited us to present n-doc at the 20th CCUF Workshop
@@ -57,7 +52,7 @@ subdirectory with the same name.
 The optional parameter `-j` controls the number of threads  (jobs) that GNU Make
 starts in parallel. Use the number of cores of your CPU. The more, the faster.
 
-WARNING: Without a number after `-j` GNU Make uses all available resources of
+NOTE: Without a number after `-j` GNU Make uses all available resources of
 the host system. This might lead to a complete standstill.
 
 
@@ -69,7 +64,7 @@ specific to that document type reside in that directory. Elements shared between
 documents are in the `common` directory. Lua programs are in `lua`. The
 `engine` subdirectory contains the resources needed to create the Docker image
 containing TeX Live and all other tools. See the separate documentation in
-link:engine/README.adoc[README.adoc] for details.
+link:engine/README.adoc[engine/README.adoc] for details.
 
 The documents are modularized. There is a main document that incorporates the
 other parts. This main document must have the same name as the directory it
@@ -126,7 +121,7 @@ The following shell scripts support the build management:
 
 | `scripts/renamereleases.sh` | _Not to be called by the user._ Adds the version number to the file name. Is called from the  `Makefile`.
 
-| `scripts/create_release_archive.sh` | _Not to be called by the user._ Creates an archive with the documents in `deliverables`. Is called from the  `Makefile`.
+| `scripts/create_release_archive.sh` | _Not to be called by the user._ Creates an archive with the documents in `deliverables`. Is called from the `Makefile`.
 
 |===
 
