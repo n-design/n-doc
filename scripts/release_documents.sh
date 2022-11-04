@@ -28,6 +28,12 @@ function sedi () {
     sed --version >/dev/null 2>&1 && sed -i -- "$@" || sed -i "" "$@"
 }
 
+function get_document_type() {
+    ccdoc=$1
+    version=$(grep "${ccdoc};" "${RELEASE_DB}" | cut -d ';' -f4)
+    echo $version
+}
+
 function get_version() {
     ccdoc=$1
     version=$(grep "${ccdoc};" "${RELEASE_DB}" | cut -d ';' -f2)
@@ -47,6 +53,8 @@ function set_version() {
     version_to_set=$2
     date_to_set=${3:-$(date "+%d.%m.%Y")}
     sedi "s/${key};.*/${key};${version_to_set};${date_to_set}/" "$RELEASE_DB"
+    filetype=$(get_document_type ${key})
+    sedi "s/${key};.*/${key};${version_to_set};${date_to_set};${filetype}/" "$RELEASE_DB"
 }
 
 function usage() {
@@ -72,7 +80,7 @@ function unique_documents() {
 function processCmdLine() {
     while [ -n "$1" ]; do
         case $1 in 
-            --all) get_all_documents; shift;;
+            --all) get_all_documents; shift;; 
 	    --assume-yes) require_user_confirmation=false; shift;;
             --remote) remote=$2; shift; shift;;
             --local) local=true; shift;;
