@@ -3,7 +3,7 @@ documents = {}
 cmn = require "common"
 
 documents.table_definitions = {
-   [[CREATE TABLE releases ( `document` TEXT, `version` TEXT, `date` TEXT, PRIMARY KEY(`document`) )]],
+   [[CREATE TABLE releases ( `document` TEXT, `version` TEXT, `date` TEXT, `type` TEXT, PRIMARY KEY(`document`) )]],
 }
 
 function documents.all_table_definitions()
@@ -16,7 +16,7 @@ function documents.all_table_definitions()
 end
 
 documents.populate_info = {
-   {st=[[INSERT INTO releases VALUES (:document, :version, :date)]], csv="releases.csv"},
+   {st=[[INSERT INTO releases VALUES (:document, :version, :date, :type)]], csv="releases.csv"},
 }
 
 function documents.populate()
@@ -30,7 +30,8 @@ end
 
 documents.querysets = {
     {name="docversion", st=[[SELECT version FROM releases WHERE document=?]], resultitem = "version"},
-    {name="docdate", st=[[SELECT date FROM releases WHERE document=?]], resultitem = "date"}
+    {name="docdate", st=[[SELECT date FROM releases WHERE document=?]], resultitem = "date"},
+    {name="doctype", st=[[SELECT type FROM releases WHERE document=?]], resultitem = "type"}
 }
 
 function documents.queries()
@@ -48,6 +49,10 @@ end
 
 function documents.getDocumentVersion(key)
    return cmn.get_by_query_key("docversion", key)
+end
+
+function documents.getDocumentType(key)
+   return cmn.get_by_query_key("doctype", key)
 end
 
 function documents.get_version_number_for_reflist(version)

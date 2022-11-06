@@ -18,6 +18,16 @@ function test_documents.test_date()
    lu.assertEquals(documents.getDocumentDate(theDoc), "\\today")
 end
 
+function test_documents.test_type_pdf()
+   theDoc="adv_fsp"
+   lu.assertEquals(documents.getDocumentType(theDoc), "pdf")
+end
+
+function test_documents.test_type_csv()
+   theDoc="db"
+   lu.assertEquals(documents.getDocumentType(theDoc), "db")
+end
+
 function test_documents.test_versions()
    lu.assertEquals(documents.get_version_number_for_reflist("1.0"), "1.0")
    lu.assertEquals(documents.get_version_number_for_reflist("1.1-SNAPSHOT"), "1.0")
