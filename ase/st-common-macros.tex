@@ -38,6 +38,7 @@
 \newcommand{\objsource}[1]{\directlua{getObjectiveSource('#1')}}
 
 \newcommand{\sfrsubsection}[1]{\index{\sfrplain{\directlua{toLower('#1')}}@\sfr{\directlua{toLower('#1')}}|textbf}%
+  \belowpdfbookmark{\directlua{getSfr('#1')}}{\directlua{toLower('#1')}}
   \label{\directlua{toLower('#1')}}%
   \hypertarget{\directlua{toLower('#1')}}%
   {\minisec{{\normalsize\sfrplain{#1}}\nopagebreak\\{\small\sfrtext{#1}}}%
