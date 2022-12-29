@@ -38,7 +38,7 @@
 \newcommand{\objsource}[1]{\directlua{getObjectiveSource('#1')}}
 
 \newcommand{\sfrsubsection}[1]{\index{\sfrplain{\directlua{toLower('#1')}}@\sfr{\directlua{toLower('#1')}}|textbf}%
-  \belowpdfbookmark{\directlua{getSfr('#1')}}{\directlua{toLower('#1')}}
+  \belowpdfbookmark{\directlua{getSfr('#1')}}{\directlua{toLower('#1')}}%
   \label{\directlua{toLower('#1')}}%
   \hypertarget{\directlua{toLower('#1')}}%
   {\minisec{{\normalsize\sfrplain{#1}}\nopagebreak\\{\small\sfrtext{#1}}}%
@@ -46,10 +46,12 @@
 
 \newcommand{\objectivesubsection}[2][ppformat]{\hypertarget{\directlua{toLower('#2')}}%
   {\minisec{{\normalsize\csname #1\endcsname{\obj{#2}} {}}}%
+    \belowpdfbookmark{\directlua{getObjective('#2')}}{\directlua{toLower('#2')}}%
     \label{\directlua{toLower('#2')}}}}
 
 \newcommand{\spdsubsection}[1]{\hypertarget{\directlua{toLower('#1')}}%
   {\minisec{{\normalsize\spd{#1}} {}}%
+    \belowpdfbookmark{\directlua{getSpd('#1')}}{\directlua{toLower('#1')}}%
     \label{\directlua{toLower('#1')}}}}
 
 
