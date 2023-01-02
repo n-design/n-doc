@@ -4,10 +4,10 @@
 
 \lslan{} is a logical interface to the IT products in the LAN. It is accessible
 via the physical interface \intf{PS.LAN}. The interface comprises the protocols
-listed in \tableref{tab:ls.lan.protocols-ports} together with their port
-numbers. \figureref{fig:tsfi.ls.lan.protocols} depicts the protocols that
+listed in \autoref{tab:ls.lan.protocols-ports} together with their port
+numbers. \autoref{fig:tsfi.ls.lan.protocols} depicts the protocols that
 contribute to the security aspects of the TSFI (see also the introductory
-remarks in \chapterref{tsfi.ls}.
+remarks in \autoref{tsfi.ls}.
 
 \begin{description}
 \item[Ethernet] for the data link layer,
@@ -18,7 +18,7 @@ remarks in \chapterref{tsfi.ls}.
 \item[HTTP\_Mgmt] HTTP for access to the management interface.
 \end{description}
 
-\tableref{tab:ls.lan.protocols-ports} lists protocols and their ports in more
+\autoref{tab:ls.lan.protocols-ports} lists protocols and their ports in more
 detail. Figure~\vref{fig:tsfi.ls.lan.protocols} shows the protocols of interface
 \lslan{} in relation to each other and to the TCP/IP layer model.
 
@@ -180,7 +180,7 @@ kernel provides the protocol implementation.
 
 \lslantls{} is used to secure the communications to other IP products in the
 LAN. TLS provides confidentiality and integrity to the connections. An overview
-of the TLS connections of the TOE in listed in \tableref{tab:tlsconnections}.
+of the TLS connections of the TOE in listed in \autoref{tab:tlsconnections}.
 
 \calledenforcingsfr{ls.lan.tls}
 
@@ -192,7 +192,7 @@ of the TLS connections of the TOE in listed in \tableref{tab:tlsconnections}.
 
 The implementation of TLS fulfills the requirements from \rfc[c]{5246}. The
 description of the TLS implementation and all TLS connections of the TOE are
-documented in \sectref{sf.tls}.
+documented in \autoref{sf.tls}.
 
 \tsfiactions{tsfi.ls.lan.tls}
 
