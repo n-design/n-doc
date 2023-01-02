@@ -55,7 +55,7 @@
 
 \newcommand{\generatesfrtable}[1]{%
   \noindent{}\ndoc@modulesfrtable{}
-  \tableref{tab:#1.sfr}. \ndoc@themoduleis{} \getModuleStatus{#1}. \par{}
+  \autoref{tab:#1.sfr}. \ndoc@themoduleis{} \getModuleStatus{#1}. \par{}
   \captionsetup[table]{list=no}
   \begin{table}[htb]
     \centering
@@ -81,7 +81,7 @@
   \end{longtable}
 }
 
-\newcommand{\generatesfrsubsystable}[1]{\ndoc@subsystemsfrtable{} \tableref{tab:#1.sfr.enf}, \tableref{tab:#1.sfr.sup}. \par
+\newcommand{\generatesfrsubsystable}[1]{\ndoc@subsystemsfrtable{} \autoref{tab:#1.sfr.enf}, \autoref{tab:#1.sfr.sup}. \par
   \captionsetup[table]{list=no}
   \begin{table}[p]
     \centering
@@ -98,7 +98,7 @@
   \captionsetup[table]{list=yes}
 }
 
-\newcommand{\generatebundletable}[1]{\ndoc@bundlesformodules{} \tableref{tab:#1.bundles}
+\newcommand{\generatebundletable}[1]{\ndoc@bundlesformodules{} \autoref{tab:#1.bundles}
   \captionsetup[table]{list=no}
   \begin{table}[htb]
     \centering

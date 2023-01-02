@@ -46,15 +46,6 @@
 % Macro for file names
 \newcommand{\filename}[1]{{\narrowfilefont #1}}
 
-% Links to figures, tables, sections, chapters, appendices
-% Most translations are read from the translation package's dictionary
-\newcommand{\figureref}[1]{\hyperref[#1]{\GetTranslation{Figure}~\ref*{#1}}}
-\newcommand{\tableref}[1]{\hyperref[#1]{\GetTranslation{Table}~\ref*{#1}}}
-\newcommand{\listref}[1]{\hyperref[#1]{\GetTranslation{Listing}~\ref*{#1}}}
-\newcommand{\sectref}[1]{\hyperref[#1]{\GetTranslation{Section}~\ref*{#1}}}
-\newcommand{\chapterref}[1]{\hyperref[#1]{\GetTranslation{Chapter}~\ref*{#1}}}
-\newcommand{\appendixref}[1]{\hyperref[#1]{\GetTranslation{Appendix}~\ref*{#1}}}
-
 % Macros for headlines. Creates a hypertext anchor in addition to the \label
 
 % These versions of the command can be called with a star "*", so that headlines

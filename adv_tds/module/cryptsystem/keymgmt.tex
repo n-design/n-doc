@@ -31,22 +31,22 @@ Keys are destroyed by overwriting the data with pseudo-random numbers. Module
 \moduleinterfaceprovided{int.cryptsystem.keymgmt.createkey}
 
 This interface is used to create a key pair (see
-\sectref{prc.cryptsystem.keymgmt.genkey}).
+\autoref{prc.cryptsystem.keymgmt.genkey}).
 
 \moduleinterfaceprovided{int.cryptsystem.keymgmt.destroykey}
 
-This interface is used to destroy a key (see \sectref{prc.cryptsystem.keymgmt.destroykey}).
+This interface is used to destroy a key (see \autoref{prc.cryptsystem.keymgmt.destroykey}).
 
 \moduleinterfacerequired{int.cryptsystem.rng.creaternd}
 
 The interface \tdslink[fq]{int.selfprotect.memory.cleanup} is required for
-generating random numbers (see \sectref{prc.cryptsystem.keymgmt.genkey})
+generating random numbers (see \autoref{prc.cryptsystem.keymgmt.genkey})
 
 \moduleinterfacerequired{int.selfprotect.memory.cleanup}
 
 The interface \tdslink[fq]{int.selfprotect.memory.cleanup} is required for
 securely erasing the memory during key deletion (see
-\sectref{prc.cryptsystem.keymgmt.destroykey}).
+\autoref{prc.cryptsystem.keymgmt.destroykey}).
 
 
 
