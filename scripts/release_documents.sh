@@ -43,7 +43,7 @@ function get_version() {
 function get_next_version() {
     current=$1
     let minorversion=${current##*.}
-    majorversion=${current%%.*}
+    majorversion=${current%.*}
     let minorversion++
     echo ${majorversion}.${minorversion}-SNAPSHOT
 }
