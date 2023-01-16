@@ -9,12 +9,13 @@ function _release-documents_completions()
   COMPREPLY=($(compgen -W "--all --assume-yes --print-table --help --dry-run $(list_documents)" -- "${COMP_WORDS[$COMP_CWORD]}"))
 }
 
-function _remove-document_completions()
+function _list_documents_completions()
 {
   COMPREPLY=($(compgen -W "$(list_documents)" -- "${COMP_WORDS[$COMP_CWORD]}"))
 }
 
 complete -F _release-documents_completions release_documents.sh
-complete -F _remove-document_completions remove_document.sh
+complete -F _list_documents_completions remove_document.sh
+complete -F _list_documents_completions ndoc.sh
 
 
