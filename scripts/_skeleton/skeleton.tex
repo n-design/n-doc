@@ -1,0 +1,49 @@
+\documentclass[a4paper]{scrreprt}
+
+\newcommand{\thisdocument}{skeleton}
+\newcommand{\documenttitle}{A New Document}
+
+\input{../common/common-preamble}
+
+\setcounter{secnumdepth}{4}
+\typearea{11}
+\sloppy
+
+\begin{document}
+\selectlanguage{english}
+
+\input{../common/titlepage}
+
+\cleardoublepage{}
+
+\tableofcontents
+
+\cleardoublepage{}
+
+\listoftables
+
+\cleardoublepage{}
+
+\listoffigures{}
+
+\cleardoublepage{}
+
+\hrefchapter{intro}{Introduction}
+
+This document contains the information for the assurance component…
+
+\cleardoublepage{}
+
+\appendix
+
+\cleardoublepage
+
+\input{../common/bibliographies/printbibliographies}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "skeleton"
+%%% TeX-engine: luatex
+%%% End:
