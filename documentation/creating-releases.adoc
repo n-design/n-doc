@@ -78,16 +78,18 @@ to be inclusded in the release. The script takes the following arguments.
 [cols="1,3"]
 |===
 | --dry-run       | Don't make acutal changes
+| --package <pkg> | Release all documents in package <pkg>. Packages are defined in `config/packages`.
 | --all           | Release all documents
 | --remote <name> | Push changes to remote repo <name>. Default: origin
 | --local         | Create a local release, do not push changes
 | --assume-yes    | Do not ask for confirmation. DANGEROUS! For use in scripted environment only.
 |===
 
-A typical would look like this:
+Typical calls look like this:
 
 ----
-./scripts/release_documents.sh --dry-run ase adv_tds
+./scripts/release_documents.sh ase adv_tds
+./scripts/release_documents.sh --package ADV --local
 ----
 
 This call creates a release of the Security Target ASE and the Design

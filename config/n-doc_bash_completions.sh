@@ -6,7 +6,7 @@ function list_documents() {
 
 function _release-documents_completions()
 {
-  COMPREPLY=($(compgen -W "--all --assume-yes --print-table --help --dry-run $(list_documents)" -- "${COMP_WORDS[$COMP_CWORD]}"))
+  COMPREPLY=($(compgen -W "--all --assume-yes --package --print-table --help --dry-run $(list_documents)" -- "${COMP_WORDS[$COMP_CWORD]}"))
 }
 
 function _list_documents_completions()

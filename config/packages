@@ -1,0 +1,5 @@
+# define your own release packages here
+
+CC_PACKAGE[ADV]="ase adv_arc adv_fsp adv_tds reflist"
+CC_PACKAGE[ATE]="ate_cov reflist"
+CC_PACKAGE[ALC]="alc reflist"
