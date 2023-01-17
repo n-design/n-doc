@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+#set -x
+
 # Script for automating releases of CC-documents
 # Updates versions of given documents in a fashion
 # similar to Apache Maven. 
@@ -16,10 +18,12 @@
 # set to dry=echo for debugging/development
 dry=${DRYRUN:-''}
 RELEASE_DB=common/db/releases.csv
+PACKAGE_FILE=config/packages
 require_user_confirmation=true
 mainbranch=main
 remote=origin
 
+declare -A CC_PACKAGE
 declare -A alldocs
 
 # Cross platform compatibility for use under macOS (BSD)
@@ -58,6 +62,7 @@ function set_version() {
 }
 
 function usage() {
+    if [ -n "$1" ]; then echo $1; fi
     echo "Usage: $0 [--assume-yes] [--dry-run] [--local] [--remote <name>] (--all|<document>...)"
     exit 1
 }
@@ -68,18 +73,27 @@ function get_all_documents() {
     done
 }
 
-function unique_documents() {
-    if [ -z "${alldocs[$1]}" ]; then
-	alldocs[$1]=$1;
+function add_document() {
+    grep "^${1};" ${RELEASE_DB} >/dev/null || usage "Document $1 not found. Aborting"
+    alldocs[$1]=$1;
+}
+
+function expand_package() {
+    if [ -f $PACKAGE_FILE ]; then
+        source $PACKAGE_FILE
+        local the_package=$1
+        for i in ${CC_PACKAGE[$the_package]}; do
+            add_document $i
+        done
     else
-	echo "\"$1\" occurs multiple times. Aborting."
-	usage
+        usage "Packages file not found. Aborting."
     fi
 }
 
 function processCmdLine() {
     while [ -n "$1" ]; do
-        case $1 in 
+        case $1 in
+            --package) expand_package $2; shift; shift;;
             --all) get_all_documents; shift;; 
 	    --assume-yes) require_user_confirmation=false; shift;;
             --remote) remote=$2; shift; shift;;
@@ -87,7 +101,7 @@ function processCmdLine() {
 	    --help) usage && exit 0;;
 	    --dry-run) dry="echo"; shift;;
 	    -*) usage && exit 0;;
-            *) unique_documents $1; shift;;
+            *) add_document $1; shift;;
         esac
     done
     if [ "${#alldocs[@]}" -eq 0 ]; then
@@ -107,16 +121,6 @@ if [[ -z "$dry" && $(git rev-parse --abbrev-ref HEAD) != "$mainbranch" ]]; then
     exit 3
 fi
 
-
-# Check if all documents exist before processing
-# Abort if any document is missing.
-for doc in "${alldocs[@]}"; do
-    grep "^$doc;" ${RELEASE_DB} >/dev/null
-    if [ $? -ne 0 ]; then
-	echo "Document ${doc^^} not found. Aborting."
-	usage
-    fi
-done    
 
 last_release=$(git tag --list | grep Release/ | cut -f 2 -d '/' | sort -n | tail -1)
 this_release=$(printf "%02d" $(expr ${last_release:-0} + 1))
