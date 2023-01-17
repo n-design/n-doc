@@ -58,7 +58,7 @@ the host system. This might lead to a complete standstill.
 
 == Working on the docments / Structure of the repository
 
-Each developer document has its own subdirectory. The subdirectories have the
+Each document has its own subdirectory. The subdirectories have the
 same name as the document type: `ase`, `adv_tds` etc. All files that are
 specific to that document type reside in that directory. Elements shared between
 documents are in the `common` directory. Lua programs are in `lua`. The
@@ -66,9 +66,26 @@ documents are in the `common` directory. Lua programs are in `lua`. The
 containing TeX Live and all other tools. See the separate documentation in
 link:engine/README.adoc[engine/README.adoc] for details.
 
-The documents are modularized. There is a main document that incorporates the
-other parts. This main document must have the same name as the directory it
-resides in, e.g. `adv_tds/adv_tds.tex`.
+The documents are usually modularized. There is a main document that includes
+the other parts during compile time. This main document must have the same name
+as the directory it resides in, e.g. `adv_tds/adv_tds.tex`.
+
+To _add_ a document use the script `scripts/add_document.sh` and provide the type
+of the new document as an argument on the command line,
+e.g.
+
+----
+scripts/add_document.sh ate_fun
+----
+
+This generates an empty (but compileable) document from a template.
+
+To _remove_ a document use the script `scripts/remove_document.sh` and provide
+the type of the document as an argument on the command line, e.g.:
+
+----
+scripts/remove_document.sh ate_fun`
+----
 
 == Build-Management
 
@@ -116,6 +133,14 @@ The following shell scripts support the build management:
 [cols="1,4", options="header"]
 |===
 | Script | Purpose
+
+| `scripts/add_document.sh` | Adds a new document to the repository. The new
+document is created from the template in the `scripts/_skeleton` directory. The
+script also adds the new document to the Makefile, so it will be included in
+future builds.
+
+| `scripts/remove_document.sh` | Removes a document from the repository. The
+  directory is deleted and the document removed from the Makefile.
 
 | `scripts/release_documents.sh` | Creates a document release. Raises the version number and tags the repository.
 
@@ -195,4 +220,11 @@ freely edited. This `_body` file is ignored by git so that there are no merge
 conflicts that result from experiments. The make goal `make mwe` creates
 `_body` files for all MWE-types.
 
+== Command Line Completion
 
+n-doc provides command line completion if you use GNU bash as your shell. Add
+----
+source <path-to-repo>/config/n-doc_bash_completions.sh
+----
+
+to your `~/.bashrc` or `~/.bash_profile`.
