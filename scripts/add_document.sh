@@ -28,5 +28,8 @@ popd >/dev/null
 sedi "/^LUA_DIR/a ${the_doc^^}_DIR := ${the_doc}" Makefile
 sedi "/^PDF_DIRS/ s/$/ \$(${the_doc^^}_DIR)/" Makefile
 
+# Add the document to .gitignore
+sedi "/^# Target files/a ${the_doc}.pdf" .gitignore
+
 # Add the document to the releases database table
 echo "$the_doc;1.0-SNAPSHOT;\\today;pdf" >>common/db/releases.csv
