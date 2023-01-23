@@ -23,5 +23,8 @@ rm -rf "$the_doc"
 sedi "/^${the_doc^^}_DIR/d" Makefile
 sedi "s/\s\$(${the_doc^^}_DIR)//" Makefile
 
+# remove version from .gitignore
+sedi "/${the_doc}\.pdf/d" .gitignore
+
 # remove version from database
 sedi "/$the_doc;/d" common/db/releases.csv
