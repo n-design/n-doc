@@ -1,0 +1,14 @@
+n-doc Versions
+==============
+
+4.7.0 (16.03.2023)
+-----------------
+
+* Update to frozen TeX Live 2022
+
+4.6.2 (10.03.2022)
+------------------
+
+* Update PlantUML
+* Update to OpenJDK 17
+
