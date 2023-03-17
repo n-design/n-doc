@@ -1,4 +1,4 @@
-ARG baseimage=ubuntu:20.04
+ARG baseimage=ubuntu:22.04
 
 FROM ${baseimage} as buildbase
 LABEL maintainer="alexander.krumeich@n-design.de"
@@ -14,6 +14,7 @@ RUN apt-get install -y \
     sqlite3 \
     libsqlite3-0 \
     libsqlite3-dev \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl http://luarocks.github.io/luarocks/releases/luarocks-3.7.0.tar.gz | tar xz
@@ -53,6 +54,8 @@ ADD l.sh /usr/local/bin
 ENV PATH=/usr/local/texlive/bin/x86_64-linux:$PATH
 
 WORKDIR /data
+
+RUN git config --system --add safe.directory *
 
 VOLUME ["/data"]
 
