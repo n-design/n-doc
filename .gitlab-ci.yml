@@ -1,0 +1,9 @@
+build-job:
+  image: ndesign/n-doc:4.9.0
+  stage: build
+  script:
+    - mkdir -p .git/hooks
+    - make -j4 delivery
+  artifacts:
+    paths:
+      - "deliverables/"
