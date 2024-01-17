@@ -1,0 +1,111 @@
+= Installing the n-doc Tool Chain
+
+This section explains how to install trhe tools to build documents with n-doc. If you use the
+Docker image, none of this applies, because all tools are already installed in
+the image. Still want to install the tools? Read on!
+
+== Installation on Windows
+
+Sorry, no experience there. Use the Docker image. It works very well.
+
+== Installation on Linux (Ubuntu)
+
+=== Install TeX Live
+
+Install the full TeX Live distribtuion. Follow the instructions on link:https://www.tug.org/texlive/acquire-netinstall.html[CTAN] to install TeX Live. Install the `Full` scheme.
+
+=== Install basic Tools
+
+We need Lua and its development libraries in version 5.3 to compile some tools. Furthermore, we require an sqlite3 installation together with the source files:
+
+----
+sudo apt install lua5.3 liblua5.3-dev luarocks sqlite3 libsqlite3-0 libsqlite3-dev make git python3-pygments make
+----
+
+=== Install Lua Packages
+
+Once `luarocks` is installed, we can use it to install the Lua libraries required for n-doc.
+
+----
+sudo luarocks install lsqlite3
+sudo luarocks install ftcsv
+sudo luarocks install luaunit
+----
+
+Read on to learn how to run the integration test.
+
+== Installation on macOS
+
+=== Install TeX Live
+
+Install MacTeX, which is the easiest way to get TeX Live on macOS: https://tug.org/mactex/mactex-download.html
+
+=== Install basic Tools
+
+First of all, use `xcode-select --install` to install the XCode command line utilities.
+
+Some components are installed with a package manager. Install (e.g. link:https://brew.sh/[Homebrew]). This document assumes homebrew is installed.
+
+We need Lua, SQLite and the Lua package manager `luarocks`` to compile some tools. We also need Python Pygments for code highlighting. Use `brew` to install these tools.
+
+----
+brew install lua@5.3 sqlite3 luarocks pygments
+----
+
+Make sure that the resulting binaries are visible in your `$PATH` environment variable. Follow the instructions at the end of the `brew` output.
+
+=== Install Lua Packages
+
+Once `luarocks` is installed, we can use it to install the Lua libraries required for n-doc.
+
+----
+sudo luarocks install lsqlite3
+sudo luarocks install ftcsv
+sudo luarocks install luaunit
+----
+
+== Run the integration test
+
+Check if everything was installed correctly by running a small integration
+test. This test starts an in-memory database, creates a table, adds values and
+finally prints the values to the console:
+
+----
+$ texlua test_luatex_sqlite.lua
+1 : Hello World
+2 : Hello Lua
+3 : Hello Sqlite3
+----
+
+Now run the same integration test, but this time as a LaTeX document
+
+----
+$ lualatex --shell-escape test_luatex_sqlite
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)
+ system commands enabled.
+(./test_luatex_sqlite.tex
+LaTeX2e <2021-06-01> patch level 1
+ L3 programming layer <2021-07-12>
+(/usr/local/texlive/2021/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2021/texmf-dist/tex/latex/base/size10.clo))
+(/usr/local/texlive/texmf-local/tex/latex/local/luapackageloader/luapackageload
+er.sty (/usr/local/texlive/2021/texmf-dist/tex/generic/iftex/ifluatex.sty
+(/usr/local/texlive/2021/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/local/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-luatex.def)
+No file test_luatex_sqlite.aux.
+(/usr/local/texlive/2021/texmf-dist/tex/latex/base/ts1cmr.fd) [1{/usr/local/tex
+live/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(./test_luatex_sqlite.aux))
+ 406 words of node memory still in use:
+   3 hlist, 1 vlist, 1 rule, 2 glue, 3 kern, 1 glyph, 4 attribute, 48 glue_spec
+, 4 attribute_list, 1 write nodes
+   avail lists: 2:23,3:4,4:2,5:23,6:2,7:122,9:18
+</usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.
+otf>
+Output written on test_luatex_sqlite.pdf (1 page, 4420 bytes).
+Transcript written on test_luatex_sqlite.log.
+----
+
+The resulting PDF-file contains the same `Hello` statements as above.
+

@@ -1,7 +1,6 @@
 = Using Lua in n-doc
 
-This document explains how the Lua Interpreter in LuaTeX is used during the
-n-doc typesetting process.
+This document explains how the Lua Interpreter in LuaTeX is used during the n-doc typesetting process. If you read German, you might want to read the article in link:https://archiv.dante.de/DTK/PDF/komoedie_2020_3.pdf[Die TeXnische Komödie 02/2020].
 
 == Architecture of the Lua components if the platform
 
@@ -53,7 +52,7 @@ called by `bridge_cc_core.tex`. Functions in this module call the database, the
 table generator and other modules. 
 
 `lua/cc_core.lua`:: Contains the code for accessing the database. The module
-comprises the tables definitions, the provisioning and the queries. There should
+comprises the table definitions, the provisioning and the queries. There should
 not be any business logic in here, just database access.
 
 `lua/test_bridge_cc_core.lua`:: This module contains integration tests for the business
@@ -63,130 +62,3 @@ generated LaTeX code.
 `lua/test_cc_core.lua`:: This module contain the unit tests for the accessing
 the database. These tests are unit tests, because they test for correct Lua data
 structures.
-
-== Infrastruktur
-
-Different components work together when executing Lua code. This section
-explains which programs must be installed to build the documents. If you use the
-Docker image, none of this applies, because all tools are already installed in
-the image. LuaTeX contains a fully fledged Lua 5.3 interpreter. However, we need
-additional libraries:
-
-* `libsqlite3` for accessing SQLite
-* `ftcsv` to parse CSV files
-* `luaunit` to run Lua unit tests.
-
-These libraries are installed using the `luarocks` package manager. It loads
-source packages, compiles and installs them. Because of version conflicts with
-the luarocks installations provided by the Linux distributions, it is
-recommended to install luarocks from source.
-
-Follow these steps to install the tool chain:
-
-
-=== Install the necessary Linux Packages (Ubuntu)
-
-We need Lua and its development libraries in version 5.3:
-
-----
-sudo apt install lua5.3 liblua5.3-dev
-----
-
-Furthermore, we require an sqlite3 installation together with the source files:
-
-----
-sudo apt install sqlite3 libsqlite3-0 libsqlite3-dev
-----
-
-=== Install luarocks
-
-
-----
-wget http://luarocks.github.io/luarocks/releases/luarocks-3.7.0.tar.gz
-tar xzvf luarocks-3.7.0.tar.gz 
-cd luarocks-3.7.0/
-./configure 
-make build
-sudo make install
-----
-
-=== Install libsqlite3, ftcsv, luaunit
-
-----
-sudo luarocks install lsqlite3
-sudo luarocks install ftcsv
-sudo luarocks install luaunit
-----
-
-
-Check if everything was installed correctly by running a small integration
-test. This test starts an in-memory database, creates a table, adds values and
-finally prints the values to the console:
-
-----
-$ texlua test_luatex_sqlite.lua
-1 : Hello World
-2 : Hello Lua
-3 : Hello Sqlite3
-----
-
-Now run the same integration test, but this time as a LaTeX document
-
-----
-$ lualatex --shell-escape test_luatex_sqlite
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)
- system commands enabled.
-(./test_luatex_sqlite.tex
-LaTeX2e <2021-06-01> patch level 1
- L3 programming layer <2021-07-12>
-(/usr/local/texlive/2021/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
-(/usr/local/texlive/2021/texmf-dist/tex/latex/base/size10.clo))
-(/usr/local/texlive/texmf-local/tex/latex/local/luapackageloader/luapackageload
-er.sty (/usr/local/texlive/2021/texmf-dist/tex/generic/iftex/ifluatex.sty
-(/usr/local/texlive/2021/texmf-dist/tex/generic/iftex/iftex.sty)))
-(/usr/local/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-luatex.def)
-No file test_luatex_sqlite.aux.
-(/usr/local/texlive/2021/texmf-dist/tex/latex/base/ts1cmr.fd) [1{/usr/local/tex
-live/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./test_luatex_sqlite.aux))
- 406 words of node memory still in use:
-   3 hlist, 1 vlist, 1 rule, 2 glue, 3 kern, 1 glyph, 4 attribute, 48 glue_spec
-, 4 attribute_list, 1 write nodes
-   avail lists: 2:23,3:4,4:2,5:23,6:2,7:122,9:18
-</usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.
-otf>
-Output written on test_luatex_sqlite.pdf (1 page, 4420 bytes).
-Transcript written on test_luatex_sqlite.log.
-----
-
-The resulting PDF-file contains the same `Hello` statements as above.
-
-=== Installation on macOS
-
-The components that are installed with a package manager in Linux can also be installed with a package manager on macOS (e.g. link:https://brew.sh/[Homebrew]):
-
-----
-brew install lua
-----
-
-It is recommended to install a custom SQLite3 because the stock SQLite3 on macOS
-lacks the header files. You need a compiler for that. Use either the XCode
-command line utilities or install a tool chain via brew. Explaining this is out
-of scope for this manual.
-
-Once you have a C compiler running, download and compile SQLite3 (choose a newer version : 
-
-----
-curl -O https://sqlite.org/2021/sqlite-autoconf-3360000.tar.gz
-tar xzvf sqlite-autoconf-3360000.tar
-cd sqlite-autoconf-3360000
-./configure; make
-sudo make install
-----
-
-From then on, follow the instructions for Linux.
-
-=== Installation on Windows
-
-Sorry, no experience there. Use the Docker image. It works very well.
