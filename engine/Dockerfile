@@ -4,25 +4,14 @@ FROM ${baseimage} as buildbase
 LABEL maintainer="alexander.krumeich@n-design.de"
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get -y upgrade
-RUN apt-get install -y \
-    curl \
-    unzip \
-    make \
+RUN apt-get update && apt-get -y upgrade && apt-get install -y \
     lua5.3 \
     liblua5.3-dev \
-    sqlite3 \
-    libsqlite3-0 \
     libsqlite3-dev \
-    git \
+    luarocks \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl http://luarocks.github.io/luarocks/releases/luarocks-3.7.0.tar.gz | tar xz
-
-WORKDIR /luarocks-3.7.0
-
-RUN ./configure && make build && make install && \
-    luarocks install lsqlite3 && \
+RUN luarocks install lsqlite3 && \
     luarocks install luaunit && \
     luarocks install ftcsv
 
@@ -36,8 +25,8 @@ WORKDIR /install-tl
 COPY texlive.profile-$TARGETARCH-linux /install-tl/texlive.profile
 ENV PATH=/usr/local/texlive/bin/x86_64-linux:/usr/local/texlive/bin/aarch64-linux:$PATH
 
-COPY --from=buildbase /luarocks-3.7.0/lua_modules/lib/lua/5.3/ /usr/local/lib/lua/5.3/
-COPY --from=buildbase /luarocks-3.7.0/lua_modules/share/lua/5.3/ /usr/local/share/lua/5.3
+COPY --from=buildbase /usr/local/lib/lua/5.3/lsqlite3.so /usr/local/lib/lua/5.3/
+COPY --from=buildbase /usr/local/share/lua/5.3/ /usr/local/share/lua/5.3
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y make sqlite3 git graphviz curl python3-pygments
