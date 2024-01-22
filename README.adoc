@@ -6,7 +6,7 @@
 n-doc is a platform for creating Common Criteria documentation. This repository
 is the official distribution of n-doc. It contains sample documents, LaTeX
 macros, Lua programs and everything else you need to write your own developer
-documentation. The documents here are the developer documentation for "Mauve VPN
+documentation. The sample documents here are the developer documentation for "Mauve VPN
 Client", a fictional TOE serving as a template for the n-doc process. Follow the
 links to see the resulting PDFs!
 
@@ -17,7 +17,7 @@ links to see the resulting PDFs!
 * link:https://mauvecorp.com/assets/adv_arc.pdf[Security Architecture] (ADV_ARC)
 * link:https://mauvecorp.com/assets/alc.pdf[Life Cycle] (ALC)
 * link:https://mauvecorp.com/assets/reflist.pdf[Reference List] (Reflist)
-* link:https://mauvecorp.com/assets/mauvecorp_vpn_client.db[TOE database file]
+* link:https://mauvecorp.com/assets/mauvecorp_vpn_client.db[TOE database file] (use link:https://sqlitebrowser.org[SQLite Browser] to view the file)
 
 Those documents provide an outline that can be used when adapting the sample
 documents for your own purposes. Especially ASE, ADV_FSP and ADV_TDS contain
@@ -29,6 +29,11 @@ invited us to present n-doc at the 20th CCUF Workshop
 (see link:https://github.com/n-design/n-doc/files/8854636/CCUF_presentation_n-doc_AlexanderKrumeich.pdf[presentation
 slides] and link:https://www.youtube.com/watch?v=ltZikycGoAs[recording]).
 
+In 2022 we have presented n-doc at the International Common Criteria Conference, check out the link:https://www.youtube.com/watch?v=pw3v7QOmaHI&t=3815s[recording of the presentation].
+
+== Installation
+
+The easiest way to use n-doc is via the Docker image. Read the next section on how to use it. If you want to install the toolchain yourself, check out the link:INSTALL.adoc[Installation instructions].
 
 == Compiling the documents
 
@@ -66,7 +71,7 @@ documents are in the `common` directory. Lua programs are in `lua`. The
 containing TeX Live and all other tools. See the separate documentation in
 link:engine/README.adoc[engine/README.adoc] for details.
 
-The documents are usually modularized. There is a main document that includes
+Most of the documents are modularized. There is a main document that includes
 the other parts during compile time. This main document must have the same name
 as the directory it resides in, e.g. `adv_tds/adv_tds.tex`.
 
@@ -84,7 +89,7 @@ To _remove_ a document use the script `scripts/remove_document.sh` and provide
 the type of the document as an argument on the command line, e.g.:
 
 ----
-scripts/remove_document.sh ate_fun`
+scripts/remove_document.sh ate_fun
 ----
 
 == Build-Management
@@ -173,7 +178,7 @@ and it is a matter of personal taste which one is used.
 
 === Patch Workflow
 
-Not all editors have access to the central git servers that host this document
+In some environments not all editors have access to the central git servers that host this document
 repository. For external editors, who cannot directly push their changes to the
 upstream repo, there is a patch workflow that is implemented by shell scripts.
 
@@ -198,7 +203,7 @@ applied to the repository. A feature branch is created, the script derives the
 branch name from the name of the patch file. The script can optionally be called
 with the `-b` switch followed by a branch name.
 
-It makes no sense to check commit the patch files. Files with the extension
+It is not advisable to commit the patch files. Files with the extension
 `*.patch` are ignored in the `.gitignore` file.
 
 
