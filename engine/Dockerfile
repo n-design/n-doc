@@ -13,7 +13,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y \
     liblua5.3-dev \
     libsqlite3-dev \
     luarocks \
-    && rm -rf /var/lib/apt/lists/*
+    && apt autoremove --purge && apt clean && rm -rf /var/lib/apt/lists/*
 
 RUN luarocks install lsqlite3 && \
     luarocks install luaunit && \
@@ -31,7 +31,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH=/usr/local/texlive/bin/x86_64-linux:/usr/local/texlive/bin/aarch64-linux:$PATH
 ENV TEXMFCACHE=./.texmfcache
 
-RUN apt-get update && apt-get install -y make sqlite3 git graphviz curl python3-pygments
+RUN apt-get update && apt-get install -y make sqlite3 git graphviz curl python3-pygments \
+    && apt autoremove --purge && apt clean && rm -rf /var/lib/apt/lists/*
 
 COPY --from=buildbase /usr/local/lib/lua/5.3/lsqlite3.so /usr/local/lib/lua/5.3/
 COPY --from=buildbase /usr/local/share/lua/5.3/ /usr/local/share/lua/5.3
