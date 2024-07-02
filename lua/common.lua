@@ -1,5 +1,17 @@
 common = {}
 
+function common.split(key, sep)
+   local sep, fields = sep or ".", {}
+   local pattern = string.format("([^%s]+)", sep)
+   string.gsub(key, pattern, function(c) fields[#fields+1] = c end)
+   return fields
+end
+
+function common.split_at_dot(key)
+   local label = common.split(key, ".")
+   return label[1], label[2], label[3], label[4]
+end
+
 function common.replaceUnderscore(key)
    local result = string.gsub(key, "_", "\\_")
    return result

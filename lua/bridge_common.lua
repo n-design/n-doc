@@ -11,18 +11,6 @@ function bridge_common.init(db_path)
    end
 end
 
-function string:split(sep)
-   local sep, fields = sep or ".", {}
-   local pattern = string.format("([^%s]+)", sep)
-   self:gsub(pattern, function(c) fields[#fields+1] = c end)
-   return fields
-end
-
-function string:split_at_dot()
-   local label = self:split()
-   return label[1], label[2]
-end
-
 function bridge_common.toLower(key, tex)
    tex.sprint(string.lower(key))
 end
