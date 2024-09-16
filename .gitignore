@@ -55,6 +55,7 @@ deliverables/
 *.toc
 *.xdy
 .texmfcache/
+*SAVE-ERROR
 
 # Emacs specific files
 \#*
