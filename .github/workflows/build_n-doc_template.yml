@@ -38,7 +38,7 @@ jobs:
       run: tar czf MauveCorp_VPN-Client.tar.gz deliverables/*
         
     - name: Upload documents
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: "CC Documents for MauveCorp VPN Client"
         path: MauveCorp_VPN-Client.tar.gz
