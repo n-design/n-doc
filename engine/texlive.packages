@@ -80,6 +80,7 @@ mfirstuc
 minibox
 minted
 multirow
+ninecolors
 nimbus15
 noindentafter
 oberdiek
@@ -100,6 +101,7 @@ substr
 textcase
 tocloft
 tools
+tabularray
 threeparttable
 threeparttablex
 tracklang
