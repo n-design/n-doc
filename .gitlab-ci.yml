@@ -1,5 +1,5 @@
 build-job:
-  image: ndesign/n-doc:4.11.0
+  image: ndesign/n-doc:4.12.0
   stage: build
   script:
     - mkdir -p .git/hooks
