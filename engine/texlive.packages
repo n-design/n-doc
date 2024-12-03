@@ -32,6 +32,8 @@ etoolbox
 fancybox
 fancyvrb
 float
+floatbytocbasic
+floatrowbytocbasic
 fontspec
 framed
 fvextra
@@ -64,6 +66,7 @@ letltxmacro
 lineno
 listings
 logreq
+lscapeenhanced
 ltablex
 ltxcmds
 luacode
@@ -94,8 +97,11 @@ refcount
 relsize
 rerunfilecheck
 roboto
+scrhack
 selnolig
+setspaceenhanced
 splitindex
+standardsectioning
 stringenc
 substr
 textcase
