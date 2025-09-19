@@ -4,7 +4,7 @@ ARG baseimage=ubuntu:22.04
 # It's used to install three Lua libraries required 
 # for n-doc. 
 
-FROM ${baseimage} as buildbase
+FROM ${baseimage} AS buildbase
 LABEL maintainer="alexander.krumeich@n-design.de"
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -15,13 +15,24 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y \
     luarocks \
     && apt autoremove --purge && apt clean && rm -rf /var/lib/apt/lists/*
 
-RUN luarocks install lsqlite3 && \
-    luarocks install luaunit && \
+RUN luarocks install luaunit && \
     luarocks install ftcsv
+
+# Install lsqlite3 manually, since the luarocks server
+# now requires no-robot authentication via JavaScript
+# see https://lua.sqlite.org/home/info/4a118ffd0cea06f91fee5754b8a1b5ce4ba6699f
+#
+# That means for now we have to install lsqlite3 manually
+# from the rock file added to the image
+COPY lsqlite3_v096.zip /
+RUN unzip lsqlite3_v096.zip
+WORKDIR lsqlite3_v096
+RUN luarocks make lsqlite3-0.9.6-1.rockspec
+
 
 # This is the n-doc image proper. 
 
-FROM ${baseimage} as ndocbase
+FROM ${baseimage} AS ndocbase
 
 ARG TARGETPLATFORM
 ARG TARGETARCH
